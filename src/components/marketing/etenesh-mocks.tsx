@@ -1,5 +1,13 @@
 import { PlayIcon, SendIcon } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 // Drawn previews of the Telegram updates and the course shop. They sit where
@@ -26,12 +34,12 @@ const MESSAGES = [
 
 export function TelegramChat({ className }: { className?: string }) {
   return (
-    <div
+    <Card
       aria-label="Example Telegram updates from the Etenesh bot"
-      className={cn(FRAME, "flex w-[340px] flex-col", className)}
+      className={cn(FRAME, "w-[340px] gap-0 border-0 py-0", className)}
       role="img"
     >
-      <div className="border-line flex items-center gap-2.5 border-b px-4 py-3">
+      <CardHeader className="border-line flex items-center gap-2.5 border-b px-4 py-3 [.border-b]:pb-3">
         <span className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-full text-[13px] font-medium">
           E
         </span>
@@ -41,30 +49,33 @@ export function TelegramChat({ className }: { className?: string }) {
           </span>
           <span className="text-subtle text-[11px] leading-[14px]">bot</span>
         </span>
-      </div>
-      <ul className="flex flex-col gap-2 bg-(--panel) px-3 py-4">
-        {MESSAGES.map((message) => (
-          <li
-            className="bg-card ring-line max-w-[260px] rounded-[12px] rounded-bl-[4px] px-3 py-2 ring-1 ring-inset"
-            key={message.text}
-          >
-            <p className="text-foreground text-[12.5px] leading-[18px]">
-              {message.text}
-            </p>
-            <p className="text-subtle mt-1 text-right text-[10px] leading-3">
-              {message.time}
-            </p>
+      </CardHeader>
+      <CardContent className="px-0">
+        <ul className="flex flex-col gap-2 bg-(--panel) px-3 py-4">
+          {MESSAGES.map((message) => (
+            <li key={message.text}>
+              <Card className="max-w-[260px] gap-1 rounded-[12px] rounded-bl-[4px] px-3 py-2 shadow-none">
+                <p className="text-foreground text-[12.5px] leading-[18px]">
+                  {message.text}
+                </p>
+                <p className="text-subtle text-right text-[10px] leading-3">
+                  {message.time}
+                </p>
+              </Card>
+            </li>
+          ))}
+          <li className="self-end">
+            <Badge className="bg-primary text-primary-foreground rounded-[12px] rounded-br-[4px] px-3 py-2 text-[12.5px] leading-[18px] font-normal">
+              /status
+            </Badge>
           </li>
-        ))}
-        <li className="bg-primary text-primary-foreground self-end rounded-[12px] rounded-br-[4px] px-3 py-2 text-[12.5px] leading-[18px]">
-          /status
-        </li>
-      </ul>
-      <div className="border-line flex items-center justify-between border-t px-4 py-2.5">
+        </ul>
+      </CardContent>
+      <CardFooter className="border-line flex items-center justify-between border-t px-4 py-2.5 [.border-t]:pt-2.5">
         <span className="text-subtle text-[12px] leading-4">Message</span>
         <SendIcon aria-hidden="true" className="text-primary size-4" />
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 }
 
@@ -98,7 +109,7 @@ export function CourseCard({
   course: CourseCardData;
 }) {
   return (
-    <div className={cn(FRAME, "flex w-[260px] flex-col", className)}>
+    <Card className={cn(FRAME, "w-[260px] gap-0 border-0 py-0", className)}>
       <div
         className={cn(
           "relative flex h-[140px] items-center justify-center bg-gradient-to-br",
@@ -109,22 +120,22 @@ export function CourseCard({
           <PlayIcon aria-hidden="true" className="size-4 text-black" />
         </span>
       </div>
-      <div className="flex flex-col gap-1 px-4 pt-3.5 pb-4">
+      <CardContent className="flex flex-col gap-1 px-4 pt-3.5">
         <p className="text-foreground text-[14px] leading-5 font-medium">
           {course.title}
         </p>
         <p className="text-muted-foreground text-[12px] leading-4">
           {course.lessons}
         </p>
-        <div className="mt-3 flex items-center justify-between">
-          <span className="text-foreground text-[16px] leading-5 font-medium">
-            {course.price}
-          </span>
-          <span className="bg-primary text-primary-foreground rounded-md px-2.5 py-1.5 text-[12px] leading-4 font-medium">
-            Buy on Telegram
-          </span>
-        </div>
-      </div>
-    </div>
+      </CardContent>
+      <CardFooter className="flex items-center justify-between px-4 pt-3 pb-4">
+        <span className="text-foreground text-[16px] leading-5 font-medium">
+          {course.price}
+        </span>
+        <Button asChild className="h-7 px-2.5 text-[12px]" size="sm">
+          <span>Buy on Telegram</span>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

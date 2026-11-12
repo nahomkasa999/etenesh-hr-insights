@@ -1,0 +1,439 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Dark mode follows the system unless <html data-theme="light|dark"> pins it. */
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+}
+
+/* Fallbacks match DEFAULT_THEME_TOKENS (src/theme/tokens.ts); the layout
+   overrides the ten theme keys at runtime from Site settings. */
+:root {
+  --radius: 0.5rem;
+  --background: #f5f5f4;
+  --foreground: #161616;
+  --primary: #161616;
+  --primary-foreground: #ffffff;
+  --muted: #f7f7f6;
+  --muted-foreground: #5c5c5c;
+  --accent: #f0f0ef;
+  --accent-foreground: #161616;
+  --border: #e4e4e3;
+  --ring: #161616;
+  /* Bordful 1.0 surfaces and status colors (Paper design tokens). */
+  --card: #ffffff;
+  --card-foreground: #161616;
+  --popover: #ffffff;
+  --popover-foreground: #161616;
+  --secondary: #f0f0ef;
+  --secondary-foreground: #161616;
+  --surface: #ffffff;
+  --surface-sub: #f7f7f6;
+  --surface-faint: #fafaf9;
+  --selected: #f7f7f6;
+  --tag: #f0f0ef;
+  --logo-tile: #eaeae8;
+  --line: rgb(0 0 0 / 7%);
+  --line-strong: rgb(0 0 0 / 10%);
+  --text-subtle: #6b6b6b;
+  --featured: #1760c2;
+  --new: #127136;
+  --closing: #9e4908;
+  --destructive: #c62828;
+  --input: rgb(0 0 0 / 10%);
+  color-scheme: light;
+}
+
+/* Two-class selectors outrank the Site settings :root override, so the
+   Paper dark palette wins in dark mode. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0e0e0e;
+    --foreground: #ededed;
+    --card: #171717;
+    --card-foreground: #ededed;
+    --popover: #171717;
+    --popover-foreground: #ededed;
+    --primary: #ededed;
+    --primary-foreground: #121212;
+    --secondary: rgb(255 255 255 / 5%);
+    --secondary-foreground: #ededed;
+    --muted: #1f1f1f;
+    --muted-foreground: #a0a0a0;
+    --accent: rgb(255 255 255 / 5%);
+    --accent-foreground: #ededed;
+    --border: rgb(255 255 255 / 8%);
+    --input: rgb(255 255 255 / 8%);
+    --ring: #ededed;
+    --surface: #171717;
+    --surface-sub: #1f1f1f;
+    --surface-faint: #1f1f1f;
+    --selected: #1c1c1c;
+    --tag: rgb(255 255 255 / 5%);
+    --logo-tile: rgb(255 255 255 / 5%);
+    --line: rgb(255 255 255 / 6%);
+    --line-strong: rgb(255 255 255 / 8%);
+    --text-subtle: #8f8f8f;
+    --featured: #5aa7ff;
+    --new: #4cc38a;
+    --closing: #f1a10d;
+    --destructive: #f87171;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --background: #0e0e0e;
+  --foreground: #ededed;
+  --card: #171717;
+  --card-foreground: #ededed;
+  --popover: #171717;
+  --popover-foreground: #ededed;
+  --primary: #ededed;
+  --primary-foreground: #121212;
+  --secondary: rgb(255 255 255 / 5%);
+  --secondary-foreground: #ededed;
+  --muted: #1f1f1f;
+  --muted-foreground: #a0a0a0;
+  --accent: rgb(255 255 255 / 5%);
+  --accent-foreground: #ededed;
+  --border: rgb(255 255 255 / 8%);
+  --input: rgb(255 255 255 / 8%);
+  --ring: #ededed;
+  --surface: #171717;
+  --surface-sub: #1f1f1f;
+  --surface-faint: #1f1f1f;
+  --selected: #1c1c1c;
+  --tag: rgb(255 255 255 / 5%);
+  --logo-tile: rgb(255 255 255 / 5%);
+  --line: rgb(255 255 255 / 6%);
+  --line-strong: rgb(255 255 255 / 8%);
+  --text-subtle: #8f8f8f;
+  --featured: #5aa7ff;
+  --new: #4cc38a;
+  --closing: #f1a10d;
+  --destructive: #f87171;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --container-board: 68.75rem;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-sub: var(--surface-sub);
+  --color-selected: var(--selected);
+  --color-tag: var(--tag);
+  --color-logo-tile: var(--logo-tile);
+  --color-surface-faint: var(--surface-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-subtle: var(--text-subtle);
+  --color-featured: var(--featured);
+  --color-new: var(--new);
+  --color-closing: var(--closing);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    color: var(--foreground);
+    background: var(--background);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Visible focus for keyboard users on every link, button and disclosure. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Dark bands (footer) invert the focus ring, since --ring is dark. */
+.bordful-inverse :focus-visible {
+  outline-color: var(--background);
+}
+
+/* Job description type from the Paper job page: 16/20 body (17/28 from md),
+   small uppercase section labels. Layered so utilities can still override. */
+@layer components {
+  .bordful-prose {
+    /* Imported descriptions glue words with no-break spaces (U+00A0,
+       U+202F) and carry long URLs; let them break so a phone page never
+       scrolls sideways. */
+    min-width: 0;
+    overflow-wrap: anywhere;
+    @apply max-w-none text-[16px] text-foreground leading-5 md:text-[17px] md:text-foreground/83 md:leading-7 md:dark:text-muted-foreground;
+
+    /* Payload's RichText wraps the blocks in a div; edges are on either level. */
+    > :first-child,
+    > .payload-richtext > :first-child {
+      @apply mt-0;
+    }
+    > :last-child,
+    > .payload-richtext > :last-child {
+      @apply mb-0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply mt-5 mb-2 font-medium font-mono text-[11px] text-subtle uppercase leading-[14px] tracking-[0.04em] md:mt-9 md:mb-2.5 md:font-sans md:text-[13px] md:leading-4 md:tracking-[0.02em];
+    }
+
+    p {
+      @apply mb-5 md:mb-6;
+    }
+    ul,
+    ol {
+      @apply mb-5 md:mb-9;
+    }
+    /* A lead-in line sits on its list, like a Paper section label. */
+    p:has(+ ul),
+    p:has(+ ol) {
+      @apply mb-2 md:mb-2.5;
+    }
+
+    /* Paper list items: 15/18 secondary text on phones, body text from md. */
+    li {
+      @apply text-[15px] text-muted-foreground leading-[18px] md:text-[17px] md:text-inherit md:leading-7;
+    }
+
+    /* Paper bullets: a subtle "•", 10px (12px from md) from the text. */
+    ul {
+      @apply list-none space-y-2 pl-0 md:space-y-2.5;
+    }
+    ul > li {
+      @apply relative pl-[15px] md:pl-[18px];
+    }
+    ul > li::before {
+      @apply absolute left-0 text-[14px] text-subtle content-['•'] md:text-[17px];
+    }
+
+    /* Paper steps: the number sits in a 24px ring, 14px from the text. */
+    ol {
+      @apply list-none space-y-3.5 pl-0 [counter-reset:bordful-step];
+    }
+    ol > li {
+      @apply relative min-h-6 pl-[38px] [counter-increment:bordful-step];
+    }
+    ol > li::before {
+      @apply absolute -top-[3px] left-0 flex size-6 items-center justify-center rounded-full font-medium text-[12px] text-muted-foreground leading-[14px] ring-1 ring-line-strong ring-inset content-[counter(bordful-step)] md:top-0.5;
+    }
+
+    ul ul,
+    ol ol,
+    ul ol,
+    ol ul {
+      @apply mt-2 mb-2 md:mt-2.5 md:mb-2.5;
+    }
+
+    a {
+      @apply text-foreground underline decoration-line-strong underline-offset-2;
+    }
+    a:hover {
+      @apply decoration-current;
+    }
+
+    strong {
+      @apply font-medium text-foreground;
+    }
+
+    pre {
+      @apply mb-6 overflow-x-auto rounded-lg bg-surface-sub p-4 text-[13px];
+    }
+    code {
+      @apply rounded bg-tag px-1.5 py-0.5 font-mono text-[0.875em] text-foreground;
+    }
+    pre code {
+      @apply bg-transparent p-0;
+    }
+
+    blockquote {
+      @apply my-6 border-line-strong border-l-2 pl-4 text-muted-foreground;
+    }
+
+    table {
+      @apply mb-6 w-full border-collapse text-[14px];
+    }
+    th,
+    td {
+      @apply border border-line px-3 py-2 text-left;
+    }
+    th {
+      @apply bg-surface-sub font-medium text-foreground;
+    }
+  }
+}
+
+.career-hero {
+  color: #fff;
+  scroll-margin-top: 2rem;
+  background:
+    radial-gradient(ellipse at 92% 100%, #126a62 0%, transparent 48%),
+    linear-gradient(119deg, #102743, #093d6c 78%, #084b64);
+}
+
+.career-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  gap: clamp(2rem, 7vw, 8rem);
+  align-items: center;
+  max-width: 74rem;
+  padding: clamp(2.25rem, 5vw, 4.25rem) clamp(1.25rem, 4vw, 3.25rem);
+  margin-inline: auto;
+}
+
+.career-eyebrow {
+  margin-bottom: 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 650;
+  color: #b8ebcf;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.career-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 4.8rem);
+  font-weight: 680;
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+}
+
+.career-hero-copy > p:not(.career-eyebrow) {
+  max-width: 31rem;
+  margin-top: 1rem;
+  font-size: clamp(0.94rem, 2vw, 1.1rem);
+  line-height: 1.6;
+  color: #e0ecf6;
+}
+
+.career-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.career-hero-actions a {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 630;
+  color: #fff;
+  border: 1px solid #a9c8de;
+  border-radius: 0.6rem;
+}
+
+.career-hero-actions a:first-child {
+  color: #123b2c;
+  background: #b7ebcf;
+  border-color: #b7ebcf;
+}
+
+.career-hero-actions a:hover {
+  box-shadow: 0 0 0 2px #c4e4f5;
+}
+
+.career-brand-card {
+  display: grid;
+  justify-items: center;
+  padding: 1rem 0.7rem 1.2rem;
+  color: #13263c;
+  text-align: center;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2.8rem #0b20394d;
+}
+
+.career-brand-card img {
+  width: 10.5rem;
+  height: auto;
+}
+.career-brand-card p {
+  font-size: 0.89rem;
+  font-weight: 700;
+}
+.career-brand-card a {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: #0756a2;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media (max-width: 44rem) {
+  .career-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .career-brand-card {
+    grid-template-columns: auto 1fr;
+    column-gap: 0.6rem;
+    align-items: end;
+    justify-items: start;
+    width: fit-content;
+    padding: 0.55rem 0.9rem;
+    text-align: left;
+  }
+  .career-brand-card img {
+    grid-row: span 3;
+    align-self: center;
+    width: 3.3rem;
+  }
+  .career-brand-card a {
+    align-self: start;
+    margin-top: 0.15rem;
+  }
+}

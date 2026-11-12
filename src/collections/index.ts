@@ -1,0 +1,15 @@
+import { AlertSubscribers } from "./alert-subscribers";
+import { CareerGuides } from "./career-guides";
+import { Companies } from "./companies";
+import { Jobs } from "./jobs";
+import { Media } from "./media";
+import { Users } from "./users";
+
+export const collections = [
+  Users,
+  Media,
+  Companies,
+  Jobs,
+  CareerGuides,
+  AlertSubscribers,
+];

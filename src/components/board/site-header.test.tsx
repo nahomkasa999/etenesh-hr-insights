@@ -72,10 +72,12 @@ test("marks the active nav link with aria-current", () => {
   ).toBe(false);
 });
 
-test("shows configured social profiles without an RSS link", () => {
+test("always offers RSS and any configured social profile with a label", () => {
   renderHeader();
 
-  expect(screen.queryByRole("link", { name: "RSS feed" })).toBeNull();
+  expect(
+    screen.getByRole("link", { name: "RSS feed" }).getAttribute("href")
+  ).toBe("/feed.xml");
   expect(
     screen
       .getByRole("link", { name: "GitHub (opens in new tab)" })

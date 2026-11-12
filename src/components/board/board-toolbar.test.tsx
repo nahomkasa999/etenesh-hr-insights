@@ -16,6 +16,7 @@ const OPTIONS = { defaultPerPage: 10 };
 function toolbar(search: string, total: number) {
   return (
     <BoardToolbar
+      marketing={false}
       options={OPTIONS}
       query={parseBoardQuery(new URLSearchParams(search), OPTIONS)}
       showControls
@@ -55,6 +56,7 @@ test("renders the title as the H2 and accepts a custom title", () => {
 
   render(
     <BoardToolbar
+      marketing={false}
       options={OPTIONS}
       query={parseBoardQuery(new URLSearchParams(""), OPTIONS)}
       showControls={false}
@@ -117,6 +119,7 @@ test("the sort menu uses the short labels and marks the current sort", () => {
 test("hides the menus when controls are off", () => {
   render(
     <BoardToolbar
+      marketing={false}
       options={OPTIONS}
       query={parseBoardQuery(new URLSearchParams(""), OPTIONS)}
       showControls={false}
@@ -143,6 +146,7 @@ function withFacets(search: string) {
   return (
     <BoardToolbar
       facets={FACETS}
+      marketing={false}
       options={OPTIONS}
       query={parseBoardQuery(new URLSearchParams(search), OPTIONS)}
       showControls

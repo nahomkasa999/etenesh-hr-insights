@@ -16,6 +16,7 @@ const OPTIONS = { defaultPerPage: 10 };
 function renderPagination(page: number, totalPages: number) {
   render(
     <BoardPagination
+      marketing={false}
       options={OPTIONS}
       page={page}
       query={{ ...parseBoardQuery(new URLSearchParams(""), OPTIONS), page }}

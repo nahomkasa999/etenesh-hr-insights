@@ -53,10 +53,12 @@ test("renders facet columns as real links", () => {
   expect(screen.getByRole("navigation", { name: "Employers" })).toBeTruthy();
 });
 
-test("shows Create alert only when enabled and omits RSS", () => {
+test("shows Create alert only when alerts are enabled; RSS is always linked", () => {
   const { unmount } = renderFooter({ showAlert: false });
   expect(screen.queryByRole("link", { name: "Create alert" })).toBeNull();
-  expect(screen.queryByRole("link", { name: "RSS" })).toBeNull();
+  expect(screen.getByRole("link", { name: "RSS" }).getAttribute("href")).toBe(
+    "/feed.xml"
+  );
   unmount();
 
   renderFooter({ showAlert: true });

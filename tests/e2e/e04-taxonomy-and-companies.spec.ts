@@ -68,7 +68,7 @@ test.describe("E4 taxonomy-and-companies", { tag: ["@E4"] }, () => {
     expect(await redirectTo(request, "/jobs/type/full-time/page/1")).toBe(
       "/jobs/type/full-time"
     );
-    expect(await redirectTo(request, "/jobs/page/1")).toBe("/");
+    expect(await redirectTo(request, "/jobs/page/1")).toBe("/jobs");
 
     await page.goto("/companies");
     await expect(

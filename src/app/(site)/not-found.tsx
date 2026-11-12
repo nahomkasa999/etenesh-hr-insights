@@ -68,7 +68,7 @@ export default async function NotFound() {
         {latest.length === 0 ? (
           <Link
             className="bg-primary text-primary-foreground hover:bg-primary/90 mt-2 inline-flex h-7 items-center rounded-lg px-2.5 text-[13px] font-medium"
-            href="/"
+            href="/jobs"
           >
             Latest jobs
           </Link>

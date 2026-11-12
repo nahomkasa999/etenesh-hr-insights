@@ -176,7 +176,7 @@ export async function HrDashboard({
         </CardHeader>
       </Card>
       <Button asChild className="h-11 w-fit text-sm" variant="outline">
-        <Link href="/">
+        <Link href="/jobs">
           View public job board
           <ArrowUpRight aria-hidden="true" />
         </Link>

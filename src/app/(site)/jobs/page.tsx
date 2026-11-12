@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 
 import { BoardHome } from "@/components/board/board-home";
 import { BoardShell } from "@/components/board/board-shell";
-import { TaxonomyIndex } from "@/components/board/taxonomy-index";
 import { MARKETING_DESCRIPTION } from "@/components/marketing/site";
 import { isMarketingEnabled } from "@/config/flags";
 import { resolveServerUrl } from "@/config/server-url";
@@ -23,26 +22,18 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function JobsPage() {
-  if (isMarketingEnabled()) {
-    const settings = await getSiteSettings();
-    const options = { defaultPerPage: settings.board.jobsPerPage };
-
-    return (
-      <BoardShell
-        fullBleed
-        search={{
-          options,
-          query: parseBoardQuery(new URLSearchParams(""), options),
-        }}
-      >
-        <BoardHome />
-      </BoardShell>
-    );
-  }
+  const settings = await getSiteSettings();
+  const options = { defaultPerPage: settings.board.jobsPerPage };
 
   return (
-    <BoardShell>
-      <TaxonomyIndex kind="location" />
+    <BoardShell
+      fullBleed
+      search={{
+        options,
+        query: parseBoardQuery(new URLSearchParams(""), options),
+      }}
+    >
+      <BoardHome />
     </BoardShell>
   );
 }

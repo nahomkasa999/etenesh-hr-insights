@@ -33,7 +33,6 @@ afterEach(() => {
 function renderToolbar() {
   render(
     <BoardToolbar
-      marketing={false}
       options={OPTIONS}
       query={parseBoardQuery(new URLSearchParams(""), OPTIONS)}
       showControls

@@ -138,11 +138,11 @@ test.describe("E6 bordfeed-connect", { tag: ["@E6"] }, () => {
     await expect(page.getByTestId("board-empty")).toBeVisible();
 
     await setShowAttribution(page, false);
-    await page.goto("/");
+    await page.goto("/jobs");
     await expect(page.getByTestId("bordfeed-credit")).toHaveCount(0);
 
     await setShowAttribution(page, true);
-    await page.goto("/");
+    await page.goto("/jobs");
     await expect(page.getByTestId("bordfeed-credit")).toHaveCount(1);
   });
 });

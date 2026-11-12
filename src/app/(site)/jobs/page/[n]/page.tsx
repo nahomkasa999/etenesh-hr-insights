@@ -32,7 +32,7 @@ export default async function BoardPageNumber({
 
   const marketing = isMarketingEnabled();
   if (page === 1) {
-    permanentRedirect(buildBoardPagePath(marketing, 1));
+    permanentRedirect(buildBoardPagePath(1));
   }
 
   const [settings, cards] = await Promise.all([

@@ -20,7 +20,7 @@ export function PracticeApplication({
       <div className="bg-card mx-auto max-w-lg rounded-2xl border p-7 md:p-10">
         <Link
           className="inline-flex min-h-11 items-center gap-2 text-sm font-medium underline underline-offset-4"
-          href={job?.href ?? "/"}
+          href={job?.href ?? "/jobs"}
         >
           <ArrowLeft aria-hidden="true" size={18} />
           {job ? "Back to job" : "Back to jobs"}

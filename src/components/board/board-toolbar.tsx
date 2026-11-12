@@ -107,7 +107,6 @@ function LinkMenu({
 export function BoardToolbar({
   className,
   facets,
-  marketing,
   options,
   query,
   saveSearch,
@@ -118,7 +117,6 @@ export function BoardToolbar({
 }: {
   className?: string;
   facets?: BoardFacets;
-  marketing: boolean;
   options: BoardQueryOptions;
   query: BoardQuery;
   // The current filter URL and a suggested name, when it can be saved.
@@ -131,7 +129,7 @@ export function BoardToolbar({
   const perPage = perPageChoices(options.defaultPerPage);
   const groups =
     showControls && facets
-      ? buildFilterGroups({ facets, marketing, options, query })
+      ? buildFilterGroups({ facets, options, query })
       : null;
 
   return (
@@ -147,11 +145,7 @@ export function BoardToolbar({
         <div className="-mx-4 flex min-w-0 basis-full [scrollbar-width:none] items-center gap-1.5 overflow-x-auto px-4 lg:mx-0 lg:shrink-0 lg:basis-auto lg:overflow-visible lg:px-0">
           <FilterChips
             footer={{
-              currentHref: boardStateHref(
-                { ...query, page: 1 },
-                options,
-                marketing
-              ),
+              currentHref: boardStateHref({ ...query, page: 1 }, options),
               total,
             }}
             groups={groups}
@@ -163,11 +157,7 @@ export function BoardToolbar({
                 FOCUS
               )}
               data-testid="filter-clear"
-              href={boardStateHref(
-                clearBoardFilters(query),
-                options,
-                marketing
-              )}
+              href={boardStateHref(clearBoardFilters(query), options)}
             >
               Clear
             </Link>
@@ -201,8 +191,7 @@ export function BoardToolbar({
                 active: query.perPage === choice,
                 href: boardStateHref(
                   { ...query, page: 1, perPage: choice },
-                  options,
-                  marketing
+                  options
                 ),
                 key: String(choice),
                 label: String(choice),
@@ -215,8 +204,7 @@ export function BoardToolbar({
                 active: query.sort === sort.id,
                 href: boardStateHref(
                   { ...query, page: 1, sort: sort.id },
-                  options,
-                  marketing
+                  options
                 ),
                 key: sort.id,
                 label: sort.label,

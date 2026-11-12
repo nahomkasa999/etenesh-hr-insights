@@ -6,8 +6,7 @@ import { getPayload } from "payload";
 import { AlertsForm } from "@/components/alerts/alerts-form";
 import { ExampleEmail } from "@/components/alerts/example-email";
 import { BoardShell } from "@/components/board/board-shell";
-import { isMarketingEnabled } from "@/config/flags";
-import { boardHomePath } from "@/config/nav";
+import { BOARD_HOME_PATH } from "@/config/nav";
 import { alertsReady } from "@/lib/alerts/config";
 import { parseAlertQueryFromSearchParams } from "@/lib/alerts/query";
 import { loadBoardPool } from "@/lib/board/pool";
@@ -61,7 +60,7 @@ export default async function AlertsPage({
         example={
           <ExampleEmail jobs={pool} now={Date.now()} siteName={settings.name} />
         }
-        jobsHref={boardHomePath(isMarketingEnabled())}
+        jobsHref={BOARD_HOME_PATH}
         query={query}
       />
     </BoardShell>

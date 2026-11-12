@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { type JSX, useEffect, useState } from "react";
 
 import { isActiveItem } from "@/components/board/nav-active";
-import type { NavItem } from "@/config/nav";
+import { BOARD_HOME_PATH, type NavItem } from "@/config/nav";
 import { useTranslation } from "@/custom/etenesh/language-provider";
 
 const ICON_PROPS = {
@@ -80,11 +80,9 @@ function useIsNotFound(pathname: string): boolean {
 
 export function TabBar({
   alertsEnabled,
-  homeHref,
   showCourses = false,
 }: {
   alertsEnabled: boolean;
-  homeHref: string;
   showCourses?: boolean;
 }) {
   const pathname = usePathname();
@@ -93,10 +91,9 @@ export function TabBar({
 
   const tabs: Tab[] = [
     {
-      href: homeHref,
+      href: BOARD_HOME_PATH,
       id: "jobs",
       label: "Jobs",
-      matchPrefixes: homeHref === "/" ? ["/jobs"] : [],
     },
     { href: "/saved", id: "saved", label: "Saved" },
   ];

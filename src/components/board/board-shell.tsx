@@ -9,7 +9,7 @@ import { SiteHeader } from "@/components/board/site-header";
 import { MAIN_CONTENT_ID, SkipLink } from "@/components/skip-link";
 import { bordfulConfig } from "@/config";
 import { isMarketingEnabled } from "@/config/flags";
-import { boardHomePath, getNav } from "@/config/nav";
+import { BOARD_HOME_PATH, getNav } from "@/config/nav";
 import { customSlots } from "@/custom";
 import { eteneshBrand } from "@/custom/etenesh/brand";
 import { getLanguage } from "@/custom/etenesh/language-server";
@@ -22,8 +22,8 @@ export async function BoardShell({
   children,
   fullBleed = false,
   hidePostCta = false,
-  intro,
   search,
+  showBoardControls = true,
 }: {
   children: ReactNode;
   fullBleed?: boolean;
@@ -31,8 +31,8 @@ export async function BoardShell({
   hidePostCta?: boolean;
   // Board listings pass their query so a header search keeps the filters,
   // and the search shows as a row under the brand bar on phones.
-  intro?: ReactNode;
   search?: { options: BoardQueryOptions; query: BoardQuery };
+  showBoardControls?: boolean;
 }): Promise<JSX.Element> {
   const [settings, connection, pool, language] = await Promise.all([
     getSiteSettings(),
@@ -73,24 +73,27 @@ export async function BoardShell({
         <SiteHeader
           bordfulMark={marketing}
           cta={nav.cta}
-          homeHref={boardHomePath(marketing)}
+          homeHref={marketing ? BOARD_HOME_PATH : "/"}
           logoUrl={logoUrl}
           name={settings.name}
           navItems={nav.header}
-          search={listingSearch ? undefined : searchForm}
+          search={!showBoardControls || listingSearch ? undefined : searchForm}
           searchHotkey={listingSearch}
           searchOnPhone={!listingSearch && search !== undefined}
           social={social}
-          views={{
-            allCount: pool.length,
-            allHref: boardHomePath(marketing),
-            remoteCount,
-            remoteHref: buildTaxonomyArchivePath("location", "remote"),
-          }}
+          views={
+            showBoardControls
+              ? {
+                  allCount: pool.length,
+                  allHref: BOARD_HOME_PATH,
+                  remoteCount,
+                  remoteHref: buildTaxonomyArchivePath("location", "remote"),
+                }
+              : undefined
+          }
         />
       )}
       <main className="flex-1" id={MAIN_CONTENT_ID}>
-        {intro}
         {listingSearch ? (
           <div
             className="border-line border-b px-4 py-4 lg:px-6"

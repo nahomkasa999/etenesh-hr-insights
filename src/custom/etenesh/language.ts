@@ -14,6 +14,7 @@ const translations = {
   "Back to courses": ["ወደ ኮርሶች ተመለስ", "Gara koorsootaatti deebi’i"],
   "Back to job": ["ወደ ሥራው ተመለስ", "Gara hojii sanaatti deebi’i"],
   "Back to jobs": ["ወደ ሥራዎች ተመለስ", "Gara hojiiwwaniitti deebi’i"],
+  "Browse jobs": ["ሥራዎችን ይመልከቱ", "Hojiiwwan ilaali"],
   "Browse jobs in Ethiopia and learn how to write a stronger CV, prepare for interviews, and apply with confidence.":
     [
       "በኢትዮጵያ ያሉ ሥራዎችን ይፈልጉ። የተሻለ ሲቪ ማዘጋጀት፣ ለቃለ መጠይቅ መዘጋጀት እና ለሥራ ማመልከት ይማሩ።",

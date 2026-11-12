@@ -8,15 +8,14 @@ import {
 
 export function boardStateHref(
   query: BoardQuery,
-  options: BoardQueryOptions,
-  marketing: boolean
+  options: BoardQueryOptions
 ): string {
   if (
     !boardQueryHasFilters(query) &&
     query.sort === "newest" &&
     query.perPage === options.defaultPerPage
   ) {
-    return buildBoardPagePath(marketing, query.page);
+    return buildBoardPagePath(query.page);
   }
 
   const qs = serializeBoardQuery(query, options).toString();

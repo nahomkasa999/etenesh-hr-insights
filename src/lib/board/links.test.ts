@@ -5,7 +5,7 @@ import { parseBoardQuery } from "./query";
 
 const options = { defaultPerPage: 20 };
 
-test("boardStateHref points an empty query at the fork home", () => {
+test("boardStateHref points an empty query at the job board", () => {
   const query = parseBoardQuery(new URLSearchParams(""), options);
-  expect(boardStateHref(query, options, false)).toBe("/");
+  expect(boardStateHref(query, options)).toBe("/jobs");
 });

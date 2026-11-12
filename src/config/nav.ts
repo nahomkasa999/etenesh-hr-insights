@@ -11,9 +11,7 @@ export interface FooterColumn {
   title: string;
 }
 
-export function boardHomePath(marketing: boolean): string {
-  return marketing ? "/jobs" : "/";
-}
+export const BOARD_HOME_PATH = "/jobs";
 
 const POST_JOB: NavItem = { href: "/post", id: "post", label: "Post a job" };
 
@@ -100,7 +98,7 @@ export function getNav({
   }
 
   const header: NavItem[] = [
-    { href: "/", id: "jobs", label: "Jobs", matchPrefixes: ["/jobs"] },
+    { href: BOARD_HOME_PATH, id: "jobs", label: "Jobs" },
     { href: "/blog", id: "blog", label: "Career guides" },
     { href: "/courses", id: "courses", label: "Courses" },
     { href: "/companies", id: "companies", label: "Companies" },
@@ -110,7 +108,6 @@ export function getNav({
     header.push(ALERTS);
   }
 
-  // Taxonomy browsing lives on the /jobs hub in board-only mode.
   return {
     cta,
     footer: [{ href: "/feed.xml", id: "feed", label: "RSS" }],
@@ -118,7 +115,7 @@ export function getNav({
       {
         id: "jobs",
         items: [
-          { href: "/", id: "all-jobs", label: "All jobs" },
+          { href: BOARD_HOME_PATH, id: "all-jobs", label: "All jobs" },
           { href: "/jobs/types", id: "job-types", label: "Job types" },
           { href: "/jobs/locations", id: "locations", label: "Locations" },
           { href: "/jobs/levels", id: "levels", label: "Levels" },

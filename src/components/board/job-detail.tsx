@@ -411,7 +411,6 @@ export function JobPosting({
         category={fields.includes("categories") ? categoryCrumb(job) : null}
         companyName={job.companyName}
         location={fields.includes("location") ? locationCrumb(job) : null}
-        marketing={marketing}
         title={job.title}
       />
       <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">

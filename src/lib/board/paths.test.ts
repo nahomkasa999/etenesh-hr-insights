@@ -10,10 +10,9 @@ import {
 } from "./paths";
 
 test("builds board, job, and taxonomy paths", () => {
-  expect(buildBoardPagePath(false, 1)).toBe("/");
-  expect(buildBoardPagePath(true, 1)).toBe("/jobs");
-  expect(buildBoardPagePath(false, 2)).toBe("/jobs/page/2");
-  expect(buildBoardPagePath(true, 3)).toBe("/jobs/page/3");
+  expect(buildBoardPagePath(1)).toBe("/jobs");
+  expect(buildBoardPagePath(2)).toBe("/jobs/page/2");
+  expect(buildBoardPagePath(3)).toBe("/jobs/page/3");
   expect(buildJobPath("example-role")).toBe("/jobs/example-role");
   expect(buildTaxonomyArchivePath("type", "full-time")).toBe(
     "/jobs/type/full-time"

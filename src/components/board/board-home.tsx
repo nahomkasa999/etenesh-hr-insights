@@ -4,11 +4,7 @@ import { loadBoardPool } from "@/lib/board/pool";
 import { parseBoardQuery } from "@/lib/board/query";
 import { getSiteSettings } from "@/lib/read";
 
-export async function BoardHome({
-  headingLevel = "h1",
-}: {
-  headingLevel?: "h1" | "h2";
-} = {}) {
+export async function BoardHome() {
   const [settings, cards] = await Promise.all([
     getSiteSettings(),
     loadBoardPool(),
@@ -21,7 +17,6 @@ export async function BoardHome({
       alertsEnabled={settings.alerts.enabled}
       cards={cards}
       heading={settings.board.title}
-      headingLevel={headingLevel}
       headingTestId="board-hero"
       intro={settings.board.description}
       layout="app"

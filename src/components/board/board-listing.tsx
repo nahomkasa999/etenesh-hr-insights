@@ -314,7 +314,6 @@ export function BoardListing({
   const updated = heroStats(cards, now).lastUpdated;
   const groups = buildFilterGroups({
     facets: view.facets,
-    marketing,
     options,
     query,
   });
@@ -340,10 +339,9 @@ export function BoardListing({
   // no room in the layout.
   const rail = showFilters ? (
     <div className="border-line lg:border-r">
-      <BoardRail marketing={marketing} options={options} query={query} />
+      <BoardRail options={options} query={query} />
       <BoardFilters
         facets={view.facets}
-        marketing={marketing}
         options={options}
         query={query}
         total={view.matchCount}
@@ -387,11 +385,7 @@ export function BoardListing({
             <Link
               className="text-muted-foreground hover:text-foreground text-[13px] underline underline-offset-4"
               data-testid="board-empty-clear"
-              href={boardStateHref(
-                clearBoardFilters(query),
-                options,
-                marketing
-              )}
+              href={boardStateHref(clearBoardFilters(query), options)}
             >
               Clear filters
             </Link>
@@ -401,7 +395,6 @@ export function BoardListing({
       <BoardPagination
         archiveKind={archiveKind}
         archiveValue={archiveValue}
-        marketing={marketing}
         options={options}
         page={view.page}
         query={query}
@@ -418,13 +411,12 @@ export function BoardListing({
       <BoardToolbar
         className={cn(app && (showFilters ? "lg:pl-[232px]" : "lg:pl-4"))}
         facets={showFilters ? view.facets : undefined}
-        marketing={marketing}
         options={options}
         query={query}
         saveSearch={
           showControls
             ? {
-                href: boardStateHref({ ...query, page: 1 }, options, marketing),
+                href: boardStateHref({ ...query, page: 1 }, options),
                 name: searchName,
               }
             : null

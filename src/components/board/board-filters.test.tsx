@@ -36,14 +36,7 @@ function queryWith(overrides: Partial<BoardQuery>): BoardQuery {
 }
 
 function renderFilters(query: BoardQuery, facets: BoardFacets = FACETS) {
-  render(
-    <BoardFilters
-      facets={facets}
-      marketing={false}
-      options={OPTIONS}
-      query={query}
-    />
-  );
+  render(<BoardFilters facets={facets} options={OPTIONS} query={query} />);
 }
 
 // The sheet is a native popover, so jsdom reports it as hidden;, so jsdom reports it as hidden;
@@ -82,14 +75,13 @@ test("the phone sheet has a reset link only when filters are active", () => {
     screen
       .getByRole("link", { hidden: true, name: "Reset" })
       .getAttribute("href")
-  ).toBe("/");
+  ).toBe("/jobs");
 });
 
 test("the sheet's show button counts the matching jobs", () => {
   render(
     <BoardFilters
       facets={FACETS}
-      marketing={false}
       options={OPTIONS}
       query={queryWith({})}
       total={18}
@@ -151,7 +143,7 @@ function renderChips(query: BoardQuery, facets: BoardFacets = FACETS) {
     <FilterChips
       groups={buildFilterGroups({
         facets,
-        marketing: false,
+
         options: OPTIONS,
         query,
       })}
@@ -164,7 +156,7 @@ test("the desktop chips carry the filter test ids, once each", () => {
 
   const option = screen.getByTestId("filter-type-full-time");
   expect(option.getAttribute("aria-current")).toBe("true");
-  expect(option.getAttribute("href")).toBe("/");
+  expect(option.getAttribute("href")).toBe("/jobs");
   expect(screen.getByTestId("filter-chip-type")).toBeTruthy();
 });
 
@@ -188,5 +180,5 @@ test("an active category with no jobs left can still be cleared", () => {
 
   const option = screen.getByTestId("filter-category-ops");
   expect(option.getAttribute("aria-current")).toBe("true");
-  expect(option.getAttribute("href")).toBe("/");
+  expect(option.getAttribute("href")).toBe("/jobs");
 });

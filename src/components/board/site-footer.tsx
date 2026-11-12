@@ -1,8 +1,7 @@
 import { FooterView } from "@/components/board/footer-view";
 import type { SocialProfiles } from "@/components/board/social-links";
 import { TabBar } from "@/components/board/tab-bar";
-import { isMarketingEnabled } from "@/config/flags";
-import { boardHomePath, type FooterColumn } from "@/config/nav";
+import type { FooterColumn } from "@/config/nav";
 import { companiesFromPool } from "@/lib/board/companies";
 import { BOARD_POOL_LIMIT } from "@/lib/board/constants";
 import { buildBoardFacets } from "@/lib/board/filter";
@@ -170,11 +169,7 @@ export async function SiteFooter({
         // uses it; Paper shows it under the logo when no tagline is set.
         tagline={tagline || data?.settings.board.description || ""}
       />
-      <TabBar
-        alertsEnabled={alertsEnabled}
-        homeHref={boardHomePath(isMarketingEnabled())}
-        showCourses={!bordfulMark}
-      />
+      <TabBar alertsEnabled={alertsEnabled} showCourses={!bordfulMark} />
     </>
   );
 }

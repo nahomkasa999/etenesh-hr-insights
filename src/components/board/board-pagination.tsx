@@ -14,7 +14,6 @@ function pageHref(
   nextPage: number,
   query: BoardQuery,
   options: BoardQueryOptions,
-  marketing: boolean,
   archiveKind: TaxonomyKind | undefined,
   archiveValue: string | undefined,
   archiveSearch: string
@@ -24,14 +23,13 @@ function pageHref(
     return archiveSearch ? `${path}?${archiveSearch}` : path;
   }
 
-  return boardStateHref({ ...query, page: nextPage }, options, marketing);
+  return boardStateHref({ ...query, page: nextPage }, options);
 }
 
 export function BoardPagination({
   archiveKind,
   archiveSearch = "",
   archiveValue,
-  marketing,
   options,
   page,
   query,
@@ -41,7 +39,6 @@ export function BoardPagination({
   // An archive's refining filters (its chips), kept across its pages.
   archiveSearch?: string;
   archiveValue?: string;
-  marketing: boolean;
   options: BoardQueryOptions;
   page: number;
   query: BoardQuery;
@@ -52,15 +49,7 @@ export function BoardPagination({
   }
 
   const hrefOf = (target: number) =>
-    pageHref(
-      target,
-      query,
-      options,
-      marketing,
-      archiveKind,
-      archiveValue,
-      archiveSearch
-    );
+    pageHref(target, query, options, archiveKind, archiveValue, archiveSearch);
 
   return (
     <nav

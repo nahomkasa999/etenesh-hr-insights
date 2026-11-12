@@ -1,4 +1,4 @@
-import { boardHomePath } from "@/config/nav";
+import { BOARD_HOME_PATH } from "@/config/nav";
 
 const PUBLIC_SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const PATH_PAGE_RE = /^[1-9]\d*$/u;
@@ -25,9 +25,9 @@ export function buildCompanyPath(slug: string): string {
   return `/companies/${slug}`;
 }
 
-export function buildBoardPagePath(marketing: boolean, page: number): string {
+export function buildBoardPagePath(page: number): string {
   if (page <= 1) {
-    return boardHomePath(marketing);
+    return BOARD_HOME_PATH;
   }
 
   return `/jobs/page/${page}`;

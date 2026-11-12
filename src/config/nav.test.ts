@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { boardHomePath, getNav } from "./nav";
+import { BOARD_HOME_PATH, getNav } from "./nav";
 
 const BOARD_FEEDS = {
   id: "feeds",
@@ -22,7 +22,7 @@ test("fork nav with both features off", () => {
       {
         id: "jobs",
         items: [
-          { href: "/", id: "all-jobs", label: "All jobs" },
+          { href: "/jobs", id: "all-jobs", label: "All jobs" },
           { href: "/jobs/types", id: "job-types", label: "Job types" },
           { href: "/jobs/locations", id: "locations", label: "Locations" },
           { href: "/jobs/levels", id: "levels", label: "Levels" },
@@ -34,7 +34,7 @@ test("fork nav with both features off", () => {
       BOARD_FEEDS,
     ],
     header: [
-      { href: "/", id: "jobs", label: "Jobs", matchPrefixes: ["/jobs"] },
+      { href: "/jobs", id: "jobs", label: "Jobs" },
       { href: "/blog", id: "blog", label: "Career guides" },
       { href: "/courses", id: "courses", label: "Courses" },
       { href: "/companies", id: "companies", label: "Companies" },
@@ -51,7 +51,7 @@ test("post a job is the cta, not a header link, when enabled", () => {
 
   expect(nav.cta).toEqual({ href: "/post", id: "post", label: "Post a job" });
   expect(nav.header).toEqual([
-    { href: "/", id: "jobs", label: "Jobs", matchPrefixes: ["/jobs"] },
+    { href: "/jobs", id: "jobs", label: "Jobs" },
     { href: "/blog", id: "blog", label: "Career guides" },
     { href: "/courses", id: "courses", label: "Courses" },
     { href: "/companies", id: "companies", label: "Companies" },
@@ -149,7 +149,6 @@ test("marketing header ends with job alerts when alerts are enabled", () => {
   });
 });
 
-test("board home path follows the mode", () => {
-  expect(boardHomePath(false)).toBe("/");
-  expect(boardHomePath(true)).toBe("/jobs");
+test("the job board uses /jobs", () => {
+  expect(BOARD_HOME_PATH).toBe("/jobs");
 });

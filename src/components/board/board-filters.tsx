@@ -84,17 +84,15 @@ export function visibleOptions(group: FacetGroup): FacetOption[] {
 
 export function buildFilterGroups({
   facets,
-  marketing,
   options,
   query,
 }: {
   facets: BoardFacets;
-  marketing: boolean;
   options: BoardQueryOptions;
   query: BoardQuery;
 }): FacetGroup[] {
   const hrefFor = (next: BoardQuery) =>
-    boardStateHref({ ...next, page: 1 }, options, marketing);
+    boardStateHref({ ...next, page: 1 }, options);
   const typeCounts = new Map(
     facets.types.map((facet) => [facet.value, facet.count])
   );
@@ -369,18 +367,16 @@ function resultsLabel(total: number): string {
 // toolbar chips do this job and the sheet stays hidden.
 export function BoardFilters({
   facets,
-  marketing,
   options,
   query,
   total,
 }: {
   facets: BoardFacets;
-  marketing: boolean;
   options: BoardQueryOptions;
   query: BoardQuery;
   total?: number;
 }) {
-  const groups = buildFilterGroups({ facets, marketing, options, query });
+  const groups = buildFilterGroups({ facets, options, query });
   const hasFilters = boardQueryHasFilters(query);
 
   return (
@@ -398,11 +394,7 @@ export function BoardFilters({
           {hasFilters ? (
             <Link
               className={cn("text-muted-foreground text-[15px]", ROW_FOCUS)}
-              href={boardStateHref(
-                clearBoardFilters(query),
-                options,
-                marketing
-              )}
+              href={boardStateHref(clearBoardFilters(query), options)}
             >
               Reset
             </Link>
@@ -699,11 +691,9 @@ export function FilterChips({
 }
 
 export function SortLinks({
-  marketing,
   options,
   query,
 }: {
-  marketing: boolean;
   options: BoardQueryOptions;
   query: BoardQuery;
 }) {
@@ -721,11 +711,7 @@ export function SortLinks({
           <Link
             aria-current={active ? "true" : undefined}
             data-active={active ? "true" : undefined}
-            href={boardStateHref(
-              { ...query, page: 1, sort: sort.id },
-              options,
-              marketing
-            )}
+            href={boardStateHref({ ...query, page: 1, sort: sort.id }, options)}
             key={sort.id}
           >
             {sort.label}

@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import { BoardShell } from "@/components/board/board-shell";
 import { SavedJobsView } from "@/components/board/saved-jobs-view";
 import { Crumbs, PageFrame } from "@/components/board/taxonomy-hub";
-import { isMarketingEnabled } from "@/config/flags";
-import { boardHomePath } from "@/config/nav";
+import { BOARD_HOME_PATH } from "@/config/nav";
 import { loadBoardPool } from "@/lib/board/pool";
 import type { BoardSearchParams } from "@/lib/board/query";
 import { getSiteSettings } from "@/lib/read";
@@ -27,7 +26,7 @@ export default async function SavedPage({
     getSiteSettings(),
     loadBoardPool(),
   ]);
-  const boardHref = boardHomePath(isMarketingEnabled());
+  const boardHref = BOARD_HOME_PATH;
 
   return (
     <BoardShell fullBleed>

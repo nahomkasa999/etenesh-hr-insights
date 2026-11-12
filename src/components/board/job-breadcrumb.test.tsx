@@ -11,8 +11,8 @@ afterEach(() => {
   cleanup();
 });
 
-test("marketing mode starts the trail at Jobs, as Paper does", () => {
-  render(<JobBreadcrumb marketing title="Backend Engineer" />);
+test("the breadcrumb starts at the job board", () => {
+  render(<JobBreadcrumb title="Backend Engineer" />);
 
   expect(screen.queryByRole("link", { name: "Home" })).toBeNull();
   expect(screen.getByRole("link", { name: "Jobs" }).getAttribute("href")).toBe(
@@ -20,17 +20,8 @@ test("marketing mode starts the trail at Jobs, as Paper does", () => {
   );
 });
 
-test("board mode has no duplicate Home crumb", () => {
-  render(<JobBreadcrumb marketing={false} title="Backend Engineer" />);
-
-  expect(screen.queryByRole("link", { name: "Home" })).toBeNull();
-  expect(screen.getByRole("link", { name: "Jobs" }).getAttribute("href")).toBe(
-    "/"
-  );
-});
-
 test("the last crumb is the current page and carries the full title", () => {
-  render(<JobBreadcrumb marketing title="Backend Engineer" />);
+  render(<JobBreadcrumb title="Backend Engineer" />);
 
   const current = screen.getByText("Backend Engineer");
   expect(current.getAttribute("aria-current")).toBe("page");
@@ -42,7 +33,6 @@ test("renders trailing actions next to the back link", () => {
   render(
     <JobBreadcrumb
       actions={<button type="button">Save job</button>}
-      marketing={false}
       title="Backend Engineer"
     />
   );
@@ -51,9 +41,7 @@ test("renders trailing actions next to the back link", () => {
 });
 
 test("names the company in the last crumb when it is known", () => {
-  render(
-    <JobBreadcrumb companyName="Acme" marketing title="Backend Engineer" />
-  );
+  render(<JobBreadcrumb companyName="Acme" title="Backend Engineer" />);
 
   expect(screen.getByText("Backend Engineer at Acme")).toBeTruthy();
   expect(screen.getByText("Acme")).toBeTruthy();
@@ -70,7 +58,6 @@ test("links the category and location crumbs when given", () => {
       category={{ href: "/jobs/search?categories=design", label: "Design" }}
       companyName="Acme"
       location={{ href: "/jobs/location/remote", label: "Remote" }}
-      marketing
       title="Backend Engineer"
     />
   );

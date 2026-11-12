@@ -27,12 +27,16 @@ async function expectOneHeading(page: Page, url: string): Promise<void> {
 }
 
 test.describe("E10 marketing-flag", { tag: ["@E10"] }, () => {
-  test("fork serves the board and marketing serves the site", async ({
+  test("the fork and upstream demo serve the board at /jobs", async ({
     page,
     request,
   }) => {
     test.setTimeout(120_000);
     await page.goto("/");
+    await expect(page.getByTestId("career-home")).toBeVisible();
+    await expect(page.getByTestId("job-list")).toHaveCount(0);
+    await page.getByRole("link", { exact: true, name: "Browse jobs" }).click();
+    await expect(page).toHaveURL("/jobs");
     await expect(page.getByTestId("job-list")).toBeVisible();
     await expect(page.getByTestId("marketing-home")).toHaveCount(0);
 

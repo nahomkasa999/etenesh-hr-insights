@@ -90,11 +90,23 @@ function PreviewDescription({
 }) {
   if (description.loading || description.error) {
     return (
-      <p className="text-muted-foreground text-[14px]">
-        {description.loading
-          ? "Loading job details…"
-          : "Job details are unavailable right now."}
-      </p>
+      <div aria-busy={description.loading} aria-live="polite">
+        <h3 className="text-foreground text-[15px] leading-5 font-medium">
+          About the role
+        </h3>
+        {description.loading ? (
+          <div className="mt-3 flex flex-col gap-3" role="status">
+            <span className="sr-only">Loading job details</span>
+            <div className="bg-surface-sub h-4 w-full animate-pulse rounded" />
+            <div className="bg-surface-sub h-4 w-11/12 animate-pulse rounded" />
+            <div className="bg-surface-sub h-4 w-4/5 animate-pulse rounded" />
+          </div>
+        ) : (
+          <p className="text-muted-foreground mt-3 text-[14px]">
+            Job details are unavailable right now.
+          </p>
+        )}
+      </div>
     );
   }
   if (!description.value) {

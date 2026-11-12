@@ -40,7 +40,20 @@ const translations = {
     "እነዚህ የማሳያ ዋጋዎች ናቸው። ስለ ምዝገባ ኢተነሽን በቴሌግራም ያነጋግሩ።",
     "Gatiin kun gatii fakkeenyaa ti. Waa’ee galmee Etenesh Telegram irratti gaafadhu.",
   ],
+  "Explore open roles by company, location, or type of work.": [
+    "ክፍት ሥራዎችን በኩባንያ፣ በቦታ ወይም በሥራ ዓይነት ይፈልጉ።",
+    "Hojiiwwan banaa dhaabbata, bakka ykn gosa hojiitiin barbaadi.",
+  ],
+  "Explore resources": ["መርጃዎችን ይመልከቱ", "Qabeenyawwan ilaali"],
   "Find your next role.": ["ቀጣዩን ሥራዎን ያግኙ።", "Hojii itti aanu barbaadi."],
+  "Follow structured lessons and practice at your own pace.": [
+    "የተደራጁ ትምህርቶችን ይከተሉ፣ በራስዎ ፍጥነት ይለማመዱ።",
+    "Barnoota qindaa’e hordofi, saffisa keetiin shaakali.",
+  ],
+  "Get practical advice on CVs, applications, and interviews.": [
+    "ስለ ሲቪ፣ ማመልከቻ እና ቃለ መጠይቅ ተግባራዊ ምክር ያግኙ።",
+    "Waa’ee CV, iyyataa fi af-gaaffii gorsa hojii irra oolu argadhu.",
+  ],
   "Get ready for it.": ["ለእሱም ይዘጋጁ።", "Isaaf qophaa’i."],
   "Get step-by-step help with your job search, CV, and interviews.": [
     "ሥራ ለመፈለግ፣ ሲቪ ለማዘጋጀት እና ለቃለ መጠይቅ ለመዘጋጀት ደረጃ በደረጃ ይማሩ።",
@@ -60,6 +73,10 @@ const translations = {
   ],
   "Preview course": ["ኮርሱን በቅድሚያ ይመልከቱ", "Koorsii dursee ilaali"],
   "Read career guides": ["የሙያ መመሪያዎችን ያንብቡ", "Qajeelfamoota ogummaa dubbisi"],
+  "Ready to find your next role?": [
+    "ቀጣዩን ሥራዎን ለማግኘት ዝግጁ ነዎት?",
+    "Hojii itti aanu barbaaduuf qophoofteettaa?",
+  ],
   "Remote-first": ["በዋናነት ከርቀት", "Dursa hojii fagoo"],
   "Sample email": ["የምሳሌ ኢሜይል", "Imeelii fakkeenyaa"],
   "Sample name": ["የምሳሌ ስም", "Maqaa fakkeenyaa"],
@@ -81,6 +98,10 @@ const translations = {
     ],
   "Watch on YouTube": ["በዩቲዩብ ይመልከቱ", "YouTube irratti ilaali"],
   "Watch the introduction": ["መግቢያውን ይመልከቱ", "Seensa ilaali"],
+  "What would you like to do next?": [
+    "ቀጥሎ ምን ማድረግ ይፈልጋሉ?",
+    "Itti aansuun maal gochuu barbaadda?",
+  ],
   "Your sample application stayed in this browser tab.": [
     "የምሳሌ ማመልከቻዎ በዚህ የአሳሽ ትር ውስጥ ብቻ ነው።",
     "Iyyanni fakkeenyaa kee tabii biraawzarii kana keessa qofa ture.",

@@ -3,16 +3,9 @@ import { z } from "zod";
 
 import { htmlToLexical } from "@/lib/bordfeed/html-to-lexical";
 
+import { EDUCATION_LEVELS } from "./vocab";
+
 // The JSON shape HR pastes (or Claude writes) to post jobs in bulk.
-const EDUCATION = [
-  "None",
-  "Grade 10",
-  "Grade 12",
-  "TVET Certificate",
-  "Diploma",
-  "Bachelor's degree",
-  "Master's degree",
-] as const;
 
 export const importedJobSchema = z.object({
   about: z.string().nullish(),
@@ -31,7 +24,7 @@ export const importedJobSchema = z.object({
   company: z.string().min(2),
   criteria: z
     .object({
-      education: z.enum(EDUCATION).default("None"),
+      education: z.enum(EDUCATION_LEVELS).default("None"),
       fieldOfStudy: z.array(z.string()).default([]),
       languages: z.array(z.string()).default([]),
       minYearsExperience: z.number().int().nonnegative().default(0),
@@ -136,6 +129,14 @@ export async function importJobs(
         company,
         companyName: job.company,
         countryCode: "ET",
+        criteria: {
+          education: job.criteria.education ?? "None",
+          minYearsExperience: job.criteria.minYearsExperience ?? 0,
+          requiredSkills: rows(job.criteria.requiredSkills ?? []),
+          screeningQuestions: job.screeningQuestions.map((question) => ({
+            question,
+          })),
+        },
         description: htmlToLexical(jobDescriptionHtml(job)),
         employmentType: job.employmentType,
         featured: options.featuredTitles?.includes(job.title) ?? false,

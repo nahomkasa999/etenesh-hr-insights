@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { geistMono, geistSans } from "@/theme/fonts";
 
-const MARK = "/etenesh/mark.png";
+const MARK = "/etenesh/logo.webp";
 
 // Login page logo: the Etenesh mark, the name and one line on what the
 // admin is for.
@@ -10,7 +10,7 @@ export function EteneshLogo() {
   return (
     <div className="et-login-brand">
       {/* biome-ignore lint/performance/noImgElement: a static 48px mark */}
-      <img alt="" className="et-login-mark" height={48} src={MARK} width={48} />
+      <img alt="" className="et-login-mark" height={72} src={MARK} width={86} />
       <p className="et-login-name">Etenesh HR</p>
       <p className="et-login-lead">
         Sign in to post jobs and review applicants.
@@ -26,7 +26,7 @@ export function EteneshIcon() {
     <img
       alt="Etenesh HR"
       className="et-icon"
-      height={24}
+      height={20}
       src={MARK}
       width={24}
     />
@@ -39,11 +39,11 @@ export function EteneshNavBrand() {
     <div className="et-nav-brand">
       <a className="et-nav-brand-link" href="/admin">
         {/* biome-ignore lint/performance/noImgElement: a static 24px mark */}
-        <img alt="" className="et-icon" height={24} src={MARK} width={24} />
+        <img alt="" className="et-icon" height={20} src={MARK} width={24} />
         <span>Etenesh HR</span>
       </a>
-      <a className="et-nav-site" href="/" rel="noopener" target="_blank">
-        View site ↗
+      <a className="et-nav-site" href="/dashboard">
+        ← HR dashboard
       </a>
     </div>
   );

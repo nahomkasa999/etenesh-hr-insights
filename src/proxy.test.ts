@@ -96,7 +96,7 @@ test("bordful.com rewrites /favicon.ico to the Etenesh mark", () => {
     expect(response.status).toBe(200);
     expect(response.headers.get("location")).toBeNull();
     expect(rewrite).not.toBeNull();
-    expect(new URL(rewrite ?? "").pathname).toBe("/etenesh/mark.png");
+    expect(new URL(rewrite ?? "").pathname).toBe("/etenesh/logo.webp");
   });
 });
 

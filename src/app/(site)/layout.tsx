@@ -31,7 +31,9 @@ export default async function SiteLayout({
 }) {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   const settings = await getSiteSettings();
-  const css = tokensToCssVariables(resolveThemeTokens(settings.theme));
+  const css = tokensToCssVariables(resolveThemeTokens(settings.theme), {
+    colors: false,
+  });
 
   return (
     <html className={FONT_VARIABLE_CLASSES} lang="en" suppressHydrationWarning>

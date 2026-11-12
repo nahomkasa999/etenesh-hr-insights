@@ -1,0 +1,17 @@
+/* The HR dashboard never prints text smaller than 14px: Tailwind's text-xs
+   becomes the same size as text-sm on every dashboard page and popup. */
+.etenesh-dashboard {
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.25rem;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* shadcn components expect every border to default to the theme border
+   color, as shadcn's own base layer sets it. Bordful's globals do not. */
+@layer base {
+  .etenesh-dashboard *,
+  .etenesh-dashboard ::before,
+  .etenesh-dashboard ::after {
+    border-color: var(--border);
+  }
+}

@@ -5,7 +5,7 @@ export const BRAND = {
     "Ethiopian jobs from trusted employers, application updates on Telegram, and short career courses.",
   fullName: "Etenesh HR Insights",
   jobsUrl: "/jobs",
-  logo: "/etenesh/mark.png",
+  logo: "/etenesh/logo.webp",
   name: "Etenesh HR",
   signInUrl: "/admin",
   tiktokUrl: "https://www.tiktok.com/@etenesh.asres",

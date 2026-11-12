@@ -10,7 +10,7 @@
   --card: #ffffff;
   --card-foreground: #111111;
   --surface: #ffffff;
-  --primary: #111111;
+  --primary: #0077e6;
   --primary-foreground: #ffffff;
   --muted: #f7f7f6;
   --muted-foreground: #5c5c5c;
@@ -50,8 +50,8 @@
     --card: #111111;
     --card-foreground: #ededed;
     --surface: #111111;
-    --primary: #ededed;
-    --primary-foreground: #111111;
+    --primary: #0091ff;
+    --primary-foreground: #050709;
     --muted: #1f1f1f;
     --muted-foreground: #a0a0a0;
     --accent: rgb(255 255 255 / 5%);
@@ -85,8 +85,8 @@
   --card: #111111;
   --card-foreground: #ededed;
   --surface: #111111;
-  --primary: #ededed;
-  --primary-foreground: #111111;
+  --primary: #0091ff;
+  --primary-foreground: #050709;
   --muted: #1f1f1f;
   --muted-foreground: #a0a0a0;
   --accent: rgb(255 255 255 / 5%);
@@ -121,8 +121,8 @@
   --card: #111111;
   --card-foreground: #ededed;
   --surface: #111111;
-  --primary: #ededed;
-  --primary-foreground: #111111;
+  --primary: #0091ff;
+  --primary-foreground: #050709;
   --muted: #1f1f1f;
   --muted-foreground: #a0a0a0;
   --accent: rgb(255 255 255 / 5%);

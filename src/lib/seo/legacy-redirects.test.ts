@@ -17,12 +17,12 @@ test("retired marketing URLs redirect with 301", () => {
     },
     { destination: "/faq", source: "/help", statusCode: 301 },
     {
-      destination: "/marketing/icon.svg",
+      destination: "/etenesh/logo.webp",
       source: "/icon.png",
       statusCode: 301,
     },
     {
-      destination: "/marketing/apple-icon.png",
+      destination: "/etenesh/logo.webp",
       source: "/apple-icon.png",
       statusCode: 301,
     },
@@ -34,9 +34,9 @@ test("retired marketing URLs redirect with 301", () => {
   ]);
 });
 
-test("legacy redirects only apply when marketing is on", () => {
-  expect(legacyRedirectsFor({})).toEqual([]);
+test("legacy redirects apply unless the landing page is turned off", () => {
   expect(legacyRedirectsFor({ BORDFUL_MARKETING: "false" })).toEqual([]);
+  expect(legacyRedirectsFor({})).toEqual([...legacyRedirects]);
   expect(legacyRedirectsFor({ BORDFUL_MARKETING: "true" })).toEqual([
     ...legacyRedirects,
   ]);

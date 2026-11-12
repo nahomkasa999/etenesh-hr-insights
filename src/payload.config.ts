@@ -52,7 +52,7 @@ export default buildConfig({
     },
     importMap: { baseDir: path.resolve(dirname) },
     meta: {
-      icons: [{ rel: "icon", type: "image/png", url: "/etenesh/mark.png" }],
+      icons: [{ rel: "icon", type: "image/png", url: "/etenesh/logo.webp" }],
       titleSuffix: " | Etenesh HR",
     },
     theme: "light",

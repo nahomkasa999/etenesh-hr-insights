@@ -3,6 +3,11 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useState } from "react";
 
+import { appliesHere } from "@/components/apply/applies-here";
+import {
+  PreviewApplyAction,
+  PreviewApplySection,
+} from "@/components/apply/preview-apply";
 import { jobStatuses, StatusPill } from "@/components/board/job-row";
 import { HINT_CLASS } from "@/components/board/rail-styles";
 import { useJobList } from "@/components/board/saved-jobs";
@@ -339,6 +344,11 @@ export function JobPreview({
   const onSave = useCallback(() => toggle(job.slug), [job.slug, toggle]);
   const onApply = useCallback(() => add(job.slug), [add, job.slug]);
   const href = buildJobPath(job.slug);
+  const [applying, setApplying] = useState(false);
+  const openForm = useCallback(() => setApplying(true), []);
+  // A different job starts with the form closed.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: reset when the job changes
+  useEffect(() => setApplying(false), [job.id]);
   const facts = previewFacts(job, now);
   const statuses = jobStatuses(job, now);
   const posted = job.publishedAt
@@ -471,6 +481,9 @@ export function JobPreview({
             <PreviewSide alert={alert} onSelect={onSelect} similar={similar} />
           ) : null}
         </div>
+        {applying && appliesHere(job) ? (
+          <PreviewApplySection job={job} />
+        ) : null}
       </div>
       <div className="bg-card border-line flex shrink-0 items-center justify-between gap-3 border-t py-3.5 pr-5 pl-9">
         <p className="text-muted-foreground flex min-w-0 items-center gap-2 text-[13px] leading-[18px]">
@@ -497,31 +510,12 @@ export function JobPreview({
           >
             {isSaved ? "Saved" : "Save"}
           </button>
-          {job.applyHref ? (
-            <a
-              className={cn(
-                "bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-[38px] items-center rounded-[8px] px-[18px] text-[14px] leading-[18px] font-medium",
-                FOCUS
-              )}
-              data-testid="job-preview-apply"
-              href={job.applyHref}
-              onClick={onApply}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {job.companyName ? `Apply at ${job.companyName} ↗` : "Apply ↗"}
-            </a>
-          ) : (
-            <Link
-              className={cn(
-                "bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-[38px] items-center rounded-[8px] px-[18px] text-[14px] leading-[18px] font-medium",
-                FOCUS
-              )}
-              href={href}
-            >
-              View job
-            </Link>
-          )}
+          <PreviewApplyAction
+            href={href}
+            job={job}
+            onApplied={onApply}
+            onOpenForm={openForm}
+          />
         </div>
       </div>
     </section>

@@ -62,18 +62,19 @@ export type SupportedTimezones =
   | 'Pacific/Fiji';
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "LexicalNodes_8BE33630".
+ * via the `definition` "LexicalNodes_E5A2EB81".
  */
-export type LexicalNodes_8BE33630 =
+export type LexicalNodes_E5A2EB81 =
   | SerializedTextNode
   | SerializedTabNode
   | SerializedLineBreakNode
-  | SerializedParagraphNode<LexicalNodes_8BE33630>
+  | SerializedParagraphNode<LexicalNodes_E5A2EB81>
   | SerializedHorizontalRuleNode
   | SerializedUploadNode<'media'>
-  | SerializedQuoteNode<LexicalNodes_8BE33630>
+  | SerializedQuoteNode<LexicalNodes_E5A2EB81>
   | SerializedRelationshipNode<
       | 'jobs'
+      | 'applications'
       | 'companies'
       | 'users'
       | 'alert-subscribers'
@@ -83,11 +84,11 @@ export type LexicalNodes_8BE33630 =
       | 'payload-preferences'
       | 'payload-migrations'
     >
-  | SerializedAutoLinkNode<LexicalNodes_8BE33630, LexicalLinkFields>
-  | SerializedLinkNode<LexicalNodes_8BE33630, LexicalLinkFields>
-  | SerializedListNode<LexicalNodes_8BE33630>
-  | SerializedListItemNode<LexicalNodes_8BE33630>
-  | SerializedHeadingNode<LexicalNodes_8BE33630>;
+  | SerializedAutoLinkNode<LexicalNodes_E5A2EB81, LexicalLinkFields>
+  | SerializedLinkNode<LexicalNodes_E5A2EB81, LexicalLinkFields>
+  | SerializedListNode<LexicalNodes_E5A2EB81>
+  | SerializedListItemNode<LexicalNodes_E5A2EB81>
+  | SerializedHeadingNode<LexicalNodes_E5A2EB81>;
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "LexicalNodes_3DE324E4".
@@ -108,6 +109,7 @@ export interface Config {
   blocks: {};
   collections: {
     jobs: Job;
+    applications: Application;
     companies: Company;
     users: User;
     media: Media;
@@ -122,6 +124,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     jobs: JobsSelect<false> | JobsSelect<true>;
+    applications: ApplicationsSelect<false> | ApplicationsSelect<true>;
     companies: CompaniesSelect<false> | CompaniesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -208,7 +211,7 @@ export interface Job {
    * A short plain-text summary of the role. Board search matches it.
    */
   summary?: string | null;
-  description?: LexicalRichText<LexicalNodes_8BE33630> | null;
+  description?: LexicalRichText<LexicalNodes_E5A2EB81> | null;
   applyUrl?: string | null;
   applyEmail?: string | null;
   applyMethod?: string | null;
@@ -266,6 +269,30 @@ export interface Job {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Who can apply. People below the minimum years or education cannot submit.
+   */
+  criteria?: {
+    minYearsExperience?: number | null;
+    education?:
+      | ('None' | 'Grade 10' | 'Grade 12' | 'TVET Certificate' | 'Diploma' | "Bachelor's degree" | "Master's degree")
+      | null;
+    /**
+     * Applicants tick the ones they have. Used to rank them.
+     */
+    requiredSkills?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    screeningQuestions?:
+      | {
+          question: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   featured?: boolean | null;
   publishedAt?: string | null;
   validThrough?: string | null;
@@ -301,7 +328,7 @@ export interface Company {
   careersUrl?: string | null;
   linkedinUrl?: string | null;
   twitterUrl?: string | null;
-  description?: LexicalRichText<LexicalNodes_8BE33630> | null;
+  description?: LexicalRichText<LexicalNodes_E5A2EB81> | null;
   industry?: string | null;
   location?: string | null;
   headcount?: number | null;
@@ -418,6 +445,84 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "applications".
+ */
+export interface Application {
+  id: number;
+  reference: string;
+  job: number | Job;
+  jobTitle?: string | null;
+  companyName?: string | null;
+  status: 'submitted' | 'under_review' | 'shortlisted' | 'interview' | 'offer' | 'hired' | 'on_hold' | 'rejected';
+  fullName: string;
+  email: string;
+  phone: string;
+  city?: string | null;
+  yearsExperience?: number | null;
+  education?:
+    | ('None' | 'Grade 10' | 'Grade 12' | 'TVET Certificate' | 'Diploma' | "Bachelor's degree" | "Master's degree")
+    | null;
+  skills?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  answers?:
+    | {
+        question: string;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  coverNote?: string | null;
+  matchScore?: number | null;
+  matchMet?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  matchMissed?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  cvName?: string | null;
+  cvType?: string | null;
+  cvSize?: number | null;
+  cvData?: string | null;
+  notes?:
+    | {
+        text: string;
+        author?: string | null;
+        at?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  history?:
+    | {
+        status?: string | null;
+        by?: string | null;
+        at?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  telegramChatId?: string | null;
+  createdBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
+  updatedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -584,6 +689,10 @@ export interface PayloadLockedDocument {
         value: number | Job;
       } | null)
     | ({
+        relationTo: 'applications';
+        value: number | Application;
+      } | null)
+    | ({
         relationTo: 'companies';
         value: number | Company;
       } | null)
@@ -713,6 +822,24 @@ export interface JobsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
+  criteria?:
+    | T
+    | {
+        minYearsExperience?: T;
+        education?: T;
+        requiredSkills?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+        screeningQuestions?:
+          | T
+          | {
+              question?: T;
+              id?: T;
+            };
+      };
   featured?: T;
   publishedAt?: T;
   validThrough?: T;
@@ -726,6 +853,75 @@ export interface JobsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "applications_select".
+ */
+export interface ApplicationsSelect<T extends boolean = true> {
+  reference?: T;
+  job?: T;
+  jobTitle?: T;
+  companyName?: T;
+  status?: T;
+  fullName?: T;
+  email?: T;
+  phone?: T;
+  city?: T;
+  yearsExperience?: T;
+  education?: T;
+  skills?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  answers?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  coverNote?: T;
+  matchScore?: T;
+  matchMet?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  matchMissed?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  cvName?: T;
+  cvType?: T;
+  cvSize?: T;
+  cvData?: T;
+  notes?:
+    | T
+    | {
+        text?: T;
+        author?: T;
+        at?: T;
+        id?: T;
+      };
+  history?:
+    | T
+    | {
+        status?: T;
+        by?: T;
+        at?: T;
+        id?: T;
+      };
+  telegramChatId?: T;
+  createdBy?: T;
+  updatedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1291,7 +1487,7 @@ export interface CollectionsWidget {
 export interface CollectionQueryWidget {
   data?: {
     title?: string | null;
-    relatedCollection: 'jobs' | 'companies' | 'users' | 'media';
+    relatedCollection: 'jobs' | 'applications' | 'companies' | 'users' | 'media';
     where?:
       | {
           [k: string]: unknown;
@@ -1313,7 +1509,7 @@ export interface CollectionQueryWidget {
  */
 export interface ActivityWidget {
   data?: {
-    excludedCollections?: ('jobs' | 'companies' | 'users' | 'media')[] | null;
+    excludedCollections?: ('jobs' | 'applications' | 'companies' | 'users' | 'media')[] | null;
   };
   width: 'small' | 'medium' | 'large' | 'x-large' | 'full';
 }

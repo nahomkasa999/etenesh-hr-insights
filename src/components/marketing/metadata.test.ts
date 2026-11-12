@@ -20,23 +20,23 @@ test("marketing layout metadata is the Etenesh HR card when the flag is on", () 
   });
   expect(metadata.description).toBe(MARKETING_DESCRIPTION);
   expect(metadata.icons).toEqual({
-    apple: "/etenesh/icon-512.png",
-    icon: "/etenesh/mark.png",
+    apple: "/etenesh/logo.webp",
+    icon: "/etenesh/logo.webp",
   });
   expect(metadata.openGraph).toMatchObject({
     images: [
       {
         alt: "Etenesh HR Insights: jobs in Ethiopia",
-        height: 512,
-        url: "/etenesh/icon-512.png",
-        width: 512,
+        height: 577,
+        url: "/etenesh/logo.webp",
+        width: 692,
       },
     ],
     siteName: "Etenesh HR Insights",
   });
   expect(metadata.twitter).toMatchObject({
     card: "summary_large_image",
-    images: ["/etenesh/icon-512.png"],
+    images: ["/etenesh/logo.webp"],
     title: "Etenesh HR Insights: jobs in Ethiopia",
   });
   expect(metadata.metadataBase).toBeInstanceOf(URL);

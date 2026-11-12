@@ -1,0 +1,776 @@
+{
+  "applicants": [
+    {
+      "jobTitle": "Junior Accountant",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Meron Alemu",
+      "email": "meron.alemu1@example.com",
+      "phone": "0911 234 567",
+      "city": "Addis Ababa",
+      "yearsExperience": 3,
+      "education": "Bachelor's degree",
+      "skills": ["Peachtree", "Excel", "VAT reporting"],
+      "answers": [
+        "I prepared monthly VAT returns for two small trading companies over the last three years, reconciling purchase and sales invoices before each filing.",
+        "Yes, I can start in Kirkos within one month. I am finishing my notice period now."
+      ],
+      "coverNote": "I would like to bring my VAT and Peachtree experience to Abay Agro's finance team.",
+      "daysAgo": 2,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Junior Accountant",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Dawit Tadesse",
+      "email": "dawit.tadesse2@example.com",
+      "phone": "0922 345 678",
+      "city": "Addis Ababa",
+      "yearsExperience": 4,
+      "education": "Bachelor's degree",
+      "skills": ["Excel", "Peachtree"],
+      "answers": [
+        "I prepared VAT returns for a construction supplier and checked input VAT against supplier receipts every month.",
+        "I can start in Kirkos within a month. My current employer requires 30 days notice."
+      ],
+      "coverNote": "",
+      "daysAgo": 27,
+      "status": "shortlisted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Junior Accountant",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Abel Worku",
+      "email": "abel.worku3@example.com",
+      "phone": "0912 456 789",
+      "city": "Addis Ababa",
+      "yearsExperience": 6,
+      "education": "Master's degree",
+      "skills": ["Peachtree", "Excel", "VAT reporting"],
+      "answers": [
+        "For six years I prepared monthly VAT returns for an edible oil processor and handled the annual reconciliation with the tax office.",
+        "I can start in Kirkos within one month, though I would need a short handover at my current company."
+      ],
+      "coverNote": "I have spent six years in agro-processing finance and would like to help Abay Agro tighten its VAT compliance.",
+      "daysAgo": 33,
+      "status": "interview",
+      "note": "Strong VAT background; confirm which Peachtree version he used at his previous employer during the interview."
+    },
+    {
+      "jobTitle": "Junior Accountant",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Bethlehem Abera",
+      "email": "bethlehem.abera4@example.com",
+      "phone": "0933 567 890",
+      "city": "Bahir Dar",
+      "yearsExperience": 2,
+      "education": "Bachelor's degree",
+      "skills": ["Excel"],
+      "answers": [
+        "I helped prepare monthly VAT returns for a hotel in Bahir Dar, working from supplier invoices in Excel.",
+        "Yes, I can start in Kirkos within a month if I receive a relocation arrangement."
+      ],
+      "coverNote": "I am ready to move from Bahir Dar to Addis Ababa for the right role.",
+      "daysAgo": 9,
+      "status": "under_review",
+      "note": ""
+    },
+    {
+      "jobTitle": "Store Keeper",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Chala Gemechu",
+      "email": "chala.gemechu5@example.com",
+      "phone": "0944 678 901",
+      "city": "Adama",
+      "yearsExperience": 1,
+      "education": "TVET Certificate",
+      "skills": ["Stock control"],
+      "answers": [
+        "I worked for one year at a cooperative warehouse in Adama, where I kept stock cards and handled goods receipts and dispatch notes.",
+        "Yes, I am comfortable with shifts and can work most weekends."
+      ],
+      "coverNote": "",
+      "daysAgo": 12,
+      "status": "under_review",
+      "note": ""
+    },
+    {
+      "jobTitle": "Sales Representative",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Eyob Fikadu",
+      "email": "eyob.fikadu6@example.com",
+      "phone": "0911 789 012",
+      "city": "Addis Ababa",
+      "yearsExperience": 2,
+      "education": "Diploma",
+      "skills": ["Sales negotiation", "Smartphone reporting"],
+      "answers": [
+        "In my last job I beat my monthly target by about 15 percent for two quarters by visiting new wholesalers every week.",
+        "Yes, I have my own motorbike and a valid driving licence."
+      ],
+      "coverNote": "I sold seed and fertilizer for a regional distributor and I enjoy visiting farmers in the field.",
+      "daysAgo": 4,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Sales Representative",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Rahel Tsegaye",
+      "email": "rahel.tsegaye7@example.com",
+      "phone": "0922 890 123",
+      "city": "Adama",
+      "yearsExperience": 3,
+      "education": "Bachelor's degree",
+      "skills": [
+        "Sales negotiation",
+        "Customer follow-up",
+        "Smartphone reporting"
+      ],
+      "answers": [
+        "I exceeded my quarterly target by 22 percent last year after I started a follow-up calendar for every client.",
+        "I do not have a driving licence yet, but I use public transport well and I am willing to take the company motorbike course."
+      ],
+      "coverNote": "I have a degree in marketing and I want to grow my career in field sales.",
+      "daysAgo": 22,
+      "status": "shortlisted",
+      "note": "Good sales record; check references with her Adama distributor before the next round."
+    },
+    {
+      "jobTitle": "Sales Representative",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Biniyam Getachew",
+      "email": "biniyam.getachew8@example.com",
+      "phone": "0955 901 234",
+      "city": "Addis Ababa",
+      "yearsExperience": 1,
+      "education": "Diploma",
+      "skills": ["Customer follow-up"],
+      "answers": [
+        "In the second half of last year I was the top seller for new shop accounts, opening about 30 shops for my previous company.",
+        "I have a driving licence but no car, so I would use company transport for field visits."
+      ],
+      "coverNote": "",
+      "daysAgo": 1,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Sales Representative",
+      "company": "Abay Agro Processing PLC",
+      "fullName": "Hiwot Berhanu",
+      "email": "hiwot.berhanu9@example.com",
+      "phone": "0966 012 345",
+      "city": "Addis Ababa",
+      "yearsExperience": 4,
+      "education": "Diploma",
+      "skills": [
+        "Sales negotiation",
+        "Customer follow-up",
+        "Smartphone reporting"
+      ],
+      "answers": [
+        "I met my annual target for two years in a row by negotiating volume discounts with supermarket owners in Bole and Kirkos.",
+        "Yes, I have a valid driving licence and I drive my own small car to visit clients."
+      ],
+      "coverNote": "I have four years in FMCG sales and I know the Addis retail market well.",
+      "daysAgo": 16,
+      "status": "interview",
+      "note": ""
+    },
+    {
+      "jobTitle": "Branch Manager",
+      "company": "Selam Microfinance S.C.",
+      "fullName": "Tamrat Asfaw",
+      "email": "tamrat.asfaw10@example.com",
+      "phone": "0912 123 456",
+      "city": "Hawassa",
+      "yearsExperience": 7,
+      "education": "Bachelor's degree",
+      "skills": ["Credit appraisal", "Portfolio management", "Team leadership"],
+      "answers": [
+        "At my last branch the portfolio at risk rose to 9 percent, so I restructured loans for 40 borrowers and set weekly collection reviews, bringing it down to 3 percent within a year.",
+        "Yes, I am willing to relocate to Hawassa and my family is already in the region."
+      ],
+      "coverNote": "",
+      "daysAgo": 41,
+      "status": "hired",
+      "note": "Hired: start date 1 December 2026, subject to reference check."
+    },
+    {
+      "jobTitle": "Cashier",
+      "company": "Tigist Savings & Credit Share Company",
+      "fullName": "Selamawit Haile",
+      "email": "selamawit.haile11@example.com",
+      "phone": "0923 234 568",
+      "city": "Addis Ababa",
+      "yearsExperience": 1,
+      "education": "Diploma",
+      "skills": ["Cash handling", "Customer service"],
+      "answers": [
+        "At my last supermarket job I counted the drawer at the end of each shift and reported any shortage to my supervisor the same day with the till receipts.",
+        "Yes, I can work Saturday mornings."
+      ],
+      "coverNote": "I am a careful and friendly person who enjoys working with the public.",
+      "daysAgo": 3,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Cashier",
+      "company": "Tigist Savings & Credit Share Company",
+      "fullName": "Jemal Ahmed",
+      "email": "jemal.ahmed12@example.com",
+      "phone": "0934 345 679",
+      "city": "Dire Dawa",
+      "yearsExperience": 0,
+      "education": "Diploma",
+      "skills": ["Cash handling"],
+      "answers": [
+        "I have only used a cash box at my family's shop, and when a shortage happened I recounted twice and wrote it in the book.",
+        "I can work Saturday mornings if I am given notice in advance."
+      ],
+      "coverNote": "",
+      "daysAgo": 25,
+      "status": "rejected",
+      "note": "Rejected: failed the cash count test in the practical assessment."
+    },
+    {
+      "jobTitle": "Cashier",
+      "company": "Tigist Savings & Credit Share Company",
+      "fullName": "Ruth Assefa",
+      "email": "ruth.assefa13@example.com",
+      "phone": "0945 456 780",
+      "city": "Addis Ababa",
+      "yearsExperience": 2,
+      "education": "Diploma",
+      "skills": ["Cash handling", "Core banking system", "Customer service"],
+      "answers": [
+        "I worked as a teller at a savings cooperative, and when I was short I checked each transaction against the journal before reporting it.",
+        "Yes, Saturday mornings are fine for me."
+      ],
+      "coverNote": "I used a core banking system for two years and I am quick at balancing accounts.",
+      "daysAgo": 8,
+      "status": "under_review",
+      "note": ""
+    },
+    {
+      "jobTitle": "Cashier",
+      "company": "Tigist Savings & Credit Share Company",
+      "fullName": "Fasil Mengistu",
+      "email": "fasil.mengistu14@example.com",
+      "phone": "0956 567 891",
+      "city": "Addis Ababa",
+      "yearsExperience": 0,
+      "education": "Diploma",
+      "skills": ["Customer service", "Cash handling"],
+      "answers": [
+        "I worked at a parking payment booth where I collected fees in cash and balanced my shift every night.",
+        "Yes, I can work Saturday mornings most weeks."
+      ],
+      "coverNote": "",
+      "daysAgo": 19,
+      "status": "on_hold",
+      "note": "On hold until the branch decides whether to open a second cash desk."
+    },
+    {
+      "jobTitle": "Front Office Receptionist",
+      "company": "Tana Hills Hotel PLC",
+      "fullName": "Workinesh Abate",
+      "email": "workinesh.abate15@example.com",
+      "phone": "0967 678 902",
+      "city": "Bahir Dar",
+      "yearsExperience": 1,
+      "education": "Diploma",
+      "skills": ["Reservations", "Customer service"],
+      "answers": [
+        "Yes, I am available for night shifts, and I have worked two night shifts a week at a guest house for the past year.",
+        "I would listen to the guest first, apologize clearly, and offer an alternative room or a discount if the room is not ready."
+      ],
+      "coverNote": "",
+      "daysAgo": 6,
+      "status": "under_review",
+      "note": ""
+    },
+    {
+      "jobTitle": "Food and Beverage Intern",
+      "company": "Tana Hills Hotel PLC",
+      "fullName": "Yonas Teshome",
+      "email": "yonas.teshome16@example.com",
+      "phone": "0911 789 013",
+      "city": "Bahir Dar",
+      "yearsExperience": 0,
+      "education": "Diploma",
+      "skills": ["Table service", "Teamwork"],
+      "answers": [
+        "I would like to learn food service and restaurant operations, so I would start on the restaurant floor and then move to the bar.",
+        "Yes, I can commit to six months starting in February 2027."
+      ],
+      "coverNote": "",
+      "daysAgo": 0,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Dispatch and Logistics Officer",
+      "company": "Sheba Logistics Share Company",
+      "fullName": "Kidist Bogale",
+      "email": "kidist.bogale17@example.com",
+      "phone": "0922 890 124",
+      "city": "Addis Ababa",
+      "yearsExperience": 3,
+      "education": "Diploma",
+      "skills": ["Dispatch planning", "Excel", "Fleet tracking"],
+      "answers": [
+        "When a driver did not arrive, I reassigned the load to another truck within an hour and called the customer before they noticed the delay.",
+        "Yes, I can start early morning shifts at the Akaki hub."
+      ],
+      "coverNote": "I have coordinated truck schedules for a flour mill and I want to keep deliveries on time.",
+      "daysAgo": 11,
+      "status": "shortlisted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Dispatch and Logistics Officer",
+      "company": "Sheba Logistics Share Company",
+      "fullName": "Mulugeta Yimer",
+      "email": "mulugeta.yimer18@example.com",
+      "phone": "0933 901 235",
+      "city": "Addis Ababa",
+      "yearsExperience": 5,
+      "education": "Diploma",
+      "skills": ["Dispatch planning", "Fleet tracking"],
+      "answers": [
+        "On one late delivery I rebuilt the route for three trucks in a spreadsheet, and the customer accepted a two hour delay.",
+        "Yes, I can do early mornings. I have worked that shift for most of my career."
+      ],
+      "coverNote": "",
+      "daysAgo": 36,
+      "status": "interview",
+      "note": "Interview panel scheduled; he wants the Akaki hub shift pattern confirmed first."
+    },
+    {
+      "jobTitle": "Truck Driver",
+      "company": "Sheba Logistics Share Company",
+      "fullName": "Abdi Hussien",
+      "email": "abdi.hussien19@example.com",
+      "phone": "0944 012 346",
+      "city": "Dire Dawa",
+      "yearsExperience": 4,
+      "education": "Grade 12",
+      "skills": ["Heavy vehicle driving", "Route planning"],
+      "answers": [
+        "I hold a heavy vehicle licence and I have driven trucks for four years, mostly on the Dire Dawa to Addis route.",
+        "Yes, I am comfortable with trips of three to five days."
+      ],
+      "coverNote": "I know the Djibouti and Addis routes well and I have a clean driving record for four years.",
+      "daysAgo": 15,
+      "status": "under_review",
+      "note": ""
+    },
+    {
+      "jobTitle": "Staff Nurse",
+      "company": "Hakim Medical Centre PLC",
+      "fullName": "Almaz Tilahun",
+      "email": "almaz.tilahun20@example.com",
+      "phone": "0955 123 457",
+      "city": "Gondar",
+      "yearsExperience": 2,
+      "education": "Bachelor's degree",
+      "skills": [
+        "Patient care",
+        "Medication administration",
+        "Infection control"
+      ],
+      "answers": [
+        "My nursing licence number is ETH-RN-20485 and it expires in March 2028.",
+        "Yes, I am willing to work night shifts and public holidays."
+      ],
+      "coverNote": "I have worked on medical wards and I am keen to support patients in the Gondar area.",
+      "daysAgo": 1,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Staff Nurse",
+      "company": "Hakim Medical Centre PLC",
+      "fullName": "Getachew Demisse",
+      "email": "getachew.demisse21@example.com",
+      "phone": "0966 234 568",
+      "city": "Addis Ababa",
+      "yearsExperience": 0,
+      "education": "Bachelor's degree",
+      "skills": ["Patient care"],
+      "answers": [
+        "I graduated last year and my licence application is still pending with the regulator.",
+        "Yes, I can work night shifts and public holidays."
+      ],
+      "coverNote": "",
+      "daysAgo": 24,
+      "status": "rejected",
+      "note": "Rejected: no nursing licence on file and no licence number was provided."
+    },
+    {
+      "jobTitle": "Staff Nurse",
+      "company": "Hakim Medical Centre PLC",
+      "fullName": "Hirut Admasu",
+      "email": "hirut.admasu22@example.com",
+      "phone": "0912 345 679",
+      "city": "Gondar",
+      "yearsExperience": 1,
+      "education": "Bachelor's degree",
+      "skills": ["Patient care", "Infection control"],
+      "answers": [
+        "My nursing licence number is ETH-RN-31007 and it is valid until June 2028.",
+        "Yes, I can work nights and holidays on rotation."
+      ],
+      "coverNote": "",
+      "daysAgo": 5,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Staff Nurse",
+      "company": "Hakim Medical Centre PLC",
+      "fullName": "Tewodros Kebede",
+      "email": "tewodros.kebede23@example.com",
+      "phone": "0923 456 780",
+      "city": "Gondar",
+      "yearsExperience": 3,
+      "education": "Master's degree",
+      "skills": ["Medication administration", "Infection control"],
+      "answers": [
+        "My nursing licence number is ETH-RN-18822, valid until November 2027.",
+        "Yes, I am willing to work night shifts and public holidays."
+      ],
+      "coverNote": "I completed a master's in nursing leadership and I want to lead a ward team at Hakim.",
+      "daysAgo": 30,
+      "status": "offer",
+      "note": "Offer sent; salary placed on grade 4 of the hospital scale."
+    },
+    {
+      "jobTitle": "Medical Laboratory Technologist",
+      "company": "Hakim Medical Centre PLC",
+      "fullName": "Frehiwot Negash",
+      "email": "frehiwot.negash24@example.com",
+      "phone": "0934 567 891",
+      "city": "Addis Ababa",
+      "yearsExperience": 4,
+      "education": "Bachelor's degree",
+      "skills": ["Haematology", "Clinical chemistry", "Quality control"],
+      "answers": [
+        "I have operated a haematology analyser and a chemistry analyser daily, and I ran QC each morning using Westgard rules.",
+        "Yes, I am registered with the Ethiopian Medical Laboratory Professionals Association and my registration is current."
+      ],
+      "coverNote": "I have run haematology and chemistry analysers daily and I want to join a larger laboratory.",
+      "daysAgo": 13,
+      "status": "interview",
+      "note": ""
+    },
+    {
+      "jobTitle": "Medical Laboratory Technologist",
+      "company": "Hakim Medical Centre PLC",
+      "fullName": "Nahom Lemma",
+      "email": "nahom.lemma25@example.com",
+      "phone": "0945 678 902",
+      "city": "Addis Ababa",
+      "yearsExperience": 1,
+      "education": "Bachelor's degree",
+      "skills": ["Haematology", "Quality control"],
+      "answers": [
+        "During my internship I worked on a haematology analyser and logged QC results every morning before patient samples were run.",
+        "I am registered with the association and my renewal is paid for this year."
+      ],
+      "coverNote": "",
+      "daysAgo": 7,
+      "status": "under_review",
+      "note": ""
+    },
+    {
+      "jobTitle": "English Teacher",
+      "company": "Lalibela Learning Academy PLC",
+      "fullName": "Berhane Gebregziabher",
+      "email": "berhane.gebregziabher26@example.com",
+      "phone": "0956 789 013",
+      "city": "Mekelle",
+      "yearsExperience": 2,
+      "education": "Bachelor's degree",
+      "skills": ["Lesson planning", "English language teaching"],
+      "answers": [
+        "I taught a reading comprehension unit to grade 10 students using short role plays, and their test scores rose by about 12 points.",
+        "Yes, I can start teaching in January 2027."
+      ],
+      "coverNote": "I teach English to grade 9 and 10 learners and I am looking for a larger academy.",
+      "daysAgo": 10,
+      "status": "shortlisted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Civil Engineer",
+      "company": "Ankober Construction PLC",
+      "fullName": "Girma Tessema",
+      "email": "girma.tessema27@example.com",
+      "phone": "0967 890 124",
+      "city": "Addis Ababa",
+      "yearsExperience": 5,
+      "education": "Bachelor's degree",
+      "skills": ["AutoCAD", "Site supervision", "Concrete works"],
+      "answers": [
+        "I supervised a six storey residential block in Bole and a school extension in Sululta, where I was responsible for rebar inspections and concrete pours.",
+        "Yes, I hold a current professional registration from the Ethiopian Construction Authority."
+      ],
+      "coverNote": "I supervised concrete work on two apartment blocks and I am ready to lead a larger site.",
+      "daysAgo": 38,
+      "status": "shortlisted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Monitoring and Evaluation Officer",
+      "company": "Gebeta Community Development Association",
+      "fullName": "Sisay Dagne",
+      "email": "sisay.dagne28@example.com",
+      "phone": "0911 901 235",
+      "city": "Hawassa",
+      "yearsExperience": 4,
+      "education": "Master's degree",
+      "skills": ["Monitoring and evaluation", "STATA or R", "Donor reporting"],
+      "answers": [
+        "I designed a results framework with 30 indicators for a nutrition project and used it to report to the donor every quarter.",
+        "Yes, I can travel to the project woredas for two weeks each month."
+      ],
+      "coverNote": "I have run M&E for three donor funded programs in Sidama and Gedeo.",
+      "daysAgo": 9,
+      "status": "under_review",
+      "note": ""
+    },
+    {
+      "jobTitle": "Data Clerk",
+      "company": "Meskerem Retail Trading PLC",
+      "fullName": "Lidya Mesfin",
+      "email": "lidya.mesfin29@example.com",
+      "phone": "0922 012 346",
+      "city": "Addis Ababa",
+      "yearsExperience": 1,
+      "education": "Diploma",
+      "skills": ["Data entry", "Excel"],
+      "answers": [
+        "My typing speed is about 45 words per minute, and I check each batch by re-keying a sample of 20 entries.",
+        "Yes, I have used Sage for a year at a small trading company."
+      ],
+      "coverNote": "",
+      "daysAgo": 2,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Data Clerk",
+      "company": "Meskerem Retail Trading PLC",
+      "fullName": "Amanuel Fekadu",
+      "email": "amanuel.fekadu30@example.com",
+      "phone": "0933 123 457",
+      "city": "Addis Ababa",
+      "yearsExperience": 0,
+      "education": "Diploma",
+      "skills": ["Data entry", "Excel", "ERP"],
+      "answers": [
+        "I type about 40 words per minute and I compare batch totals with the source sheet before I close it.",
+        "I used Odoo in a practice course at college and I am willing to learn SAP."
+      ],
+      "coverNote": "",
+      "daysAgo": 17,
+      "status": "on_hold",
+      "note": "On hold pending a training slot for the ERP module."
+    },
+    {
+      "jobTitle": "Audit Associate",
+      "company": "Wolde & Partners Accounting Firm",
+      "fullName": "Yohannes Gebreselassie",
+      "email": "yohannes.gebreselassie31@example.com",
+      "phone": "0944 234 568",
+      "city": "Addis Ababa",
+      "yearsExperience": 3,
+      "education": "Bachelor's degree",
+      "skills": ["Audit procedures", "IFRS", "Excel"],
+      "answers": [
+        "I tested revenue and payables for a trading group, using sample sizes of 25 to 40 items depending on the risk assessment.",
+        "I am registered for ACCA Part 2 and I will sit the next paper in March 2027."
+      ],
+      "coverNote": "I have worked on audit files for three mid-size companies and I want to join a firm that is growing.",
+      "daysAgo": 29,
+      "status": "offer",
+      "note": ""
+    },
+    {
+      "jobTitle": "Audit Associate",
+      "company": "Wolde & Partners Accounting Firm",
+      "fullName": "Mekdes Alemayehu",
+      "email": "mekdes.alemayehu32@example.com",
+      "phone": "0955 345 679",
+      "city": "Addis Ababa",
+      "yearsExperience": 2,
+      "education": "Master's degree",
+      "skills": ["Audit procedures", "Excel"],
+      "answers": [
+        "I tested inventory and cash, and for inventory I selected a sample of 30 items using a random number table.",
+        "I am registered with ICPAE for the foundation exams and I plan to sit the rest in 2027."
+      ],
+      "coverNote": "I finished my master's in accounting last year and I have two years in external audit.",
+      "daysAgo": 6,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Customer Service Representative",
+      "company": "Hibret Connect Services PLC",
+      "fullName": "Natnael Solomon",
+      "email": "natnael.solomon33@example.com",
+      "phone": "0966 456 780",
+      "city": "Addis Ababa",
+      "yearsExperience": 1,
+      "education": "Diploma",
+      "skills": ["Call handling", "Ticketing systems"],
+      "answers": [
+        "I would listen first, confirm the outage area, and tell the customer exactly when a technician will visit, then follow up by SMS.",
+        "Yes, I can work rotating shifts including Sundays."
+      ],
+      "coverNote": "",
+      "daysAgo": 0,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Customer Service Representative",
+      "company": "Hibret Connect Services PLC",
+      "fullName": "Saron Dejene",
+      "email": "saron.dejene34@example.com",
+      "phone": "0912 567 891",
+      "city": "Addis Ababa",
+      "yearsExperience": 2,
+      "education": "Diploma",
+      "skills": ["Call handling", "Basic troubleshooting", "Ticketing systems"],
+      "answers": [
+        "I would apologize for the outage, check the modem lights with the customer, and log a ticket with the reference number.",
+        "Yes, I am available for Sundays and rotating shifts."
+      ],
+      "coverNote": "",
+      "daysAgo": 3,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Customer Service Representative",
+      "company": "Hibret Connect Services PLC",
+      "fullName": "Kaleb Worku",
+      "email": "kaleb.worku35@example.com",
+      "phone": "0923 678 902",
+      "city": "Addis Ababa",
+      "yearsExperience": 0,
+      "education": "Diploma",
+      "skills": ["Call handling"],
+      "answers": [
+        "I would calm the customer by repeating the problem back to them and telling them exactly when I will call back.",
+        "Yes, I can work Sundays on a rotation."
+      ],
+      "coverNote": "",
+      "daysAgo": 21,
+      "status": "shortlisted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Customer Service Representative",
+      "company": "Hibret Connect Services PLC",
+      "fullName": "Bethel Adamu",
+      "email": "bethel.adamu36@example.com",
+      "phone": "0934 789 013",
+      "city": "Addis Ababa",
+      "yearsExperience": 3,
+      "education": "Diploma",
+      "skills": ["Ticketing systems", "Basic troubleshooting"],
+      "answers": [
+        "I would tell the customer that three days without internet is very frustrating, then escalate to the network team with a priority ticket.",
+        "Yes, I can work rotating shifts including Sundays."
+      ],
+      "coverNote": "",
+      "daysAgo": 18,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Junior Software Developer",
+      "company": "Nile Ridge Software Solutions PLC",
+      "fullName": "Robel Tekle",
+      "email": "robel.tekle37@example.com",
+      "phone": "0945 890 124",
+      "city": "Addis Ababa",
+      "yearsExperience": 1,
+      "education": "Bachelor's degree",
+      "skills": ["JavaScript", "React", "SQL"],
+      "answers": [
+        "I built a stock and sales app for a cooperative with React and a SQL database, with login and monthly reports, over about four months.",
+        "Yes, I can work from the office five days a week."
+      ],
+      "coverNote": "I built a small React app for a cooperative's stock and I want to learn from a larger team.",
+      "daysAgo": 12,
+      "status": "under_review",
+      "note": ""
+    },
+    {
+      "jobTitle": "Junior Software Developer",
+      "company": "Nile Ridge Software Solutions PLC",
+      "fullName": "Mahlet Yohannes",
+      "email": "mahlet.yohannes38@example.com",
+      "phone": "0956 901 235",
+      "city": "Addis Ababa",
+      "yearsExperience": 2,
+      "education": "Bachelor's degree",
+      "skills": ["JavaScript", "SQL"],
+      "answers": [
+        "I built a timesheet system for a school with JavaScript and SQL, and I wrote the queries for the monthly reports.",
+        "Yes, I can come to the office five days a week."
+      ],
+      "coverNote": "",
+      "daysAgo": 5,
+      "status": "submitted",
+      "note": ""
+    },
+    {
+      "jobTitle": "Junior Software Developer",
+      "company": "Nile Ridge Software Solutions PLC",
+      "fullName": "Ermias Alemneh",
+      "email": "ermias.alemneh39@example.com",
+      "phone": "0967 012 346",
+      "city": "Addis Ababa",
+      "yearsExperience": 1,
+      "education": "Bachelor's degree",
+      "skills": ["React", "JavaScript"],
+      "answers": [
+        "I built a React dashboard for a fintech client that showed weekly loan repayments, and I wrote tests for the main screens.",
+        "Yes, I can work from the office five days a week."
+      ],
+      "coverNote": "",
+      "daysAgo": 52,
+      "status": "rejected",
+      "note": ""
+    },
+    {
+      "jobTitle": "Junior Software Developer",
+      "company": "Nile Ridge Software Solutions PLC",
+      "fullName": "Liya Dessie",
+      "email": "liya.dessie40@example.com",
+      "phone": "0911 123 457",
+      "city": "Adama",
+      "yearsExperience": 1,
+      "education": "Bachelor's degree",
+      "skills": ["JavaScript", "React", "SQL"],
+      "answers": [
+        "My final year project was a booking website in React with a SQL backend, and it taught me how to write API tests.",
+        "Yes, I can work in the office five days a week and I can move to Addis Ababa next month."
+      ],
+      "coverNote": "I am a recent graduate who has built several small web projects and I want to work in Addis Ababa.",
+      "daysAgo": 1,
+      "status": "submitted",
+      "note": ""
+    }
+  ]
+}

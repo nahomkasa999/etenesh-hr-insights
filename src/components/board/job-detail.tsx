@@ -1,6 +1,7 @@
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
-
+import { appliesHere } from "@/components/apply/applies-here";
+import { ApplyNowButton, JobApplySection } from "@/components/apply/job-apply";
 import {
   JobApplyLink,
   JobSaveButton,
@@ -308,6 +309,12 @@ function ActionBar({
             <span className="sr-only"> to {job.title}</span>
           </JobApplyLink>
         ) : null}
+        {!applyHref && appliesHere(job) ? (
+          <ApplyNowButton
+            className="h-10 shrink-0 text-[14px] leading-[18px]"
+            testId="job-apply"
+          />
+        ) : null}
       </div>
     </div>
   );
@@ -432,6 +439,9 @@ export function JobPosting({
               {description ? <RichText data={description} /> : null}
             </div>
           </div>
+          {appliesHere(job) ? (
+            <JobApplySection jobId={job.id} slug={job.slug} title={job.title} />
+          ) : null}
           <ActionBar applyHref={applyHref} closes={closes} job={job} />
           {jsonLd ? (
             <script
@@ -466,6 +476,7 @@ export function JobPosting({
         </div>
       ) : null}
       <StickyApply
+        applyHere={appliesHere(job)}
         companyName={job.companyName}
         href={applyHref}
         slug={job.slug}

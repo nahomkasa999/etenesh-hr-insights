@@ -10,12 +10,12 @@ export const legacyRedirects = [
   { destination: "/docs/deploy", source: "/docs/quick-start", statusCode: 301 },
   { destination: "/faq", source: "/help", statusCode: 301 },
   {
-    destination: "/marketing/icon.svg",
+    destination: "/etenesh/logo.webp",
     source: "/icon.png",
     statusCode: 301,
   },
   {
-    destination: "/marketing/apple-icon.png",
+    destination: "/etenesh/logo.webp",
     source: "/apple-icon.png",
     statusCode: 301,
   },

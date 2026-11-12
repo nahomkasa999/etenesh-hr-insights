@@ -9,9 +9,9 @@ const title = "Etenesh HR Insights: jobs in Ethiopia";
 
 const image = {
   alt: title,
-  height: 512,
-  url: "/etenesh/icon-512.png",
-  width: 512,
+  height: 577,
+  url: "/etenesh/logo.webp",
+  width: 692,
 };
 
 export function marketingLayoutMetadata(enabled: boolean): Metadata {

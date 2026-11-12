@@ -19,15 +19,15 @@ export default function manifest(): MetadataRoute.Manifest {
     icons: [
       {
         purpose: "any",
-        sizes: "256x256",
-        src: "/etenesh/mark.png",
-        type: "image/png",
+        sizes: "692x577",
+        src: "/etenesh/logo.webp",
+        type: "image/webp",
       },
       {
         purpose: "any",
-        sizes: "512x512",
-        src: "/etenesh/icon-512.png",
-        type: "image/png",
+        sizes: "692x577",
+        src: "/etenesh/logo.webp",
+        type: "image/webp",
       },
     ],
     name: "Etenesh HR Insights",

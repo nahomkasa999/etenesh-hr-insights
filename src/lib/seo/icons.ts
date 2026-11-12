@@ -7,10 +7,10 @@ import type { Metadata } from "next";
 // Forks must not wear the Bordful mark. bordful.com gets icon links from
 // boardIcons (the (site) layout) and marketingLayoutMetadata (marketing
 // pages). /favicon.ico is rewritten to BORDFUL_ICON only when marketing is on.
-export const BORDFUL_ICON = "/etenesh/mark.png";
+export const BORDFUL_ICON = "/etenesh/logo.webp";
 
 export const BORDFUL_ICONS = {
-  apple: "/etenesh/icon-512.png",
+  apple: "/etenesh/logo.webp",
   icon: BORDFUL_ICON,
 } satisfies Metadata["icons"];
 

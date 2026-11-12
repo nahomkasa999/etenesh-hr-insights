@@ -12,11 +12,11 @@ import { MARKETING_HEADER_LINKS } from "./nav-links";
 
 export function MarketingLogo() {
   return (
-    <Link className="flex h-6 items-center gap-2 rounded-sm" href="/">
+    <Link className="flex h-5 items-center gap-2 rounded-sm" href="/">
       <MarketingImage
         alt=""
-        className="ring-line size-6 rounded-[6px] bg-white object-contain ring-1"
-        height={24}
+        className="h-5 w-auto object-contain"
+        height={20}
         src={BRAND.logo}
         width={24}
       />

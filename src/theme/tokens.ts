@@ -107,10 +107,15 @@ export function resolveThemeTokens(partial: unknown): ThemeTokens {
   };
 }
 
-export function tokensToCssVariables(tokens: ThemeTokens): string {
-  const parts = THEME_COLOR_KEYS.map(
-    (key) => `${COLOR_CSS[key]}:${tokens.colors[key]}`
-  );
+// Etenesh keeps its palette in globals.css, so pages pass colors: false and
+// only the radius and fonts come from Site settings.
+export function tokensToCssVariables(
+  tokens: ThemeTokens,
+  { colors = true }: { colors?: boolean } = {}
+): string {
+  const parts = colors
+    ? THEME_COLOR_KEYS.map((key) => `${COLOR_CSS[key]}:${tokens.colors[key]}`)
+    : [];
   parts.push(`--radius:${tokens.radius}rem`);
   parts.push(`--font-heading:${FONT_STACKS[tokens.fontHeading]}`);
   parts.push(`--font-body:${FONT_STACKS[tokens.fontBody]}`);

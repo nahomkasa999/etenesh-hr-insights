@@ -23,6 +23,7 @@ import {
 } from "@/lib/domain/job-vocab";
 import { toOptions } from "@/lib/domain/options";
 import { isReservedJobSlug } from "@/lib/domain/reserved-slugs";
+import { EDUCATION_LEVELS } from "@/lib/etenesh/vocab";
 import { emptyToNull } from "./shared/empty-to-null";
 import { owned } from "./shared/owned";
 import { relationId } from "./shared/relation-id";
@@ -315,6 +316,47 @@ export const Jobs: CollectionConfig = {
     owned(stringListField("languages", "Languages")),
     owned(stringListField("categories", "Categories")),
     owned(stringListField("skills", "Skills")),
+    {
+      admin: {
+        description:
+          "Who can apply. People below the minimum years or education cannot submit.",
+      },
+      fields: [
+        {
+          defaultValue: 0,
+          label: "Minimum years of experience",
+          min: 0,
+          name: "minYearsExperience",
+          type: "number",
+        },
+        {
+          defaultValue: "None",
+          label: "Minimum education",
+          name: "education",
+          options: EDUCATION_LEVELS.map((value) => ({ label: value, value })),
+          type: "select",
+        },
+        {
+          admin: {
+            description:
+              "Applicants tick the ones they have. Used to rank them.",
+          },
+          fields: [{ name: "value", required: true, type: "text" }],
+          label: "Skills to check",
+          name: "requiredSkills",
+          type: "array",
+        },
+        {
+          fields: [{ name: "question", required: true, type: "text" }],
+          label: "Questions for applicants",
+          name: "screeningQuestions",
+          type: "array",
+        },
+      ],
+      label: "Hiring criteria",
+      name: "criteria",
+      type: "group",
+    },
     {
       admin: { position: "sidebar" },
       defaultValue: false,

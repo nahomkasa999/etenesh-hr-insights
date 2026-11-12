@@ -1,5 +1,6 @@
 "use client";
 
+import { ApplyNowButton } from "@/components/apply/job-apply";
 import { JobApplyLink, JobSaveButton } from "@/components/board/job-actions";
 
 // Mobile only. Sticky, not fixed, and rendered last in the job wrapper: it pins while the
@@ -7,11 +8,13 @@ import { JobApplyLink, JobSaveButton } from "@/components/board/job-actions";
 // On md+ the letter's own action bar stays in view, so this bar is hidden there.
 // The phone tab bar is hidden on job pages, so the bar pins to the bottom.
 export function StickyApply({
+  applyHere = false,
   companyName,
   href,
   slug,
   title,
 }: {
+  applyHere?: boolean;
   companyName: string;
   href: string | null;
   slug: string;
@@ -36,6 +39,12 @@ export function StickyApply({
             <span className="truncate">Apply at {companyName}</span>
             <span className="sr-only"> to {title}</span>
           </JobApplyLink>
+        ) : null}
+        {!href && applyHere ? (
+          <ApplyNowButton
+            className="min-w-0 flex-1 text-[15px]"
+            testId="job-sticky-apply"
+          />
         ) : null}
       </div>
     </div>

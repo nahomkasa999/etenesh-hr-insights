@@ -29,10 +29,11 @@ export default async function GlobalNotFound() {
     );
   }
 
-  let css = tokensToCssVariables(resolveThemeTokens(null));
+  let css = tokensToCssVariables(resolveThemeTokens(null), { colors: false });
   try {
     css = tokensToCssVariables(
-      resolveThemeTokens((await getSiteSettings()).theme)
+      resolveThemeTokens((await getSiteSettings()).theme),
+      { colors: false }
     );
   } catch {
     // Settings unavailable: keep the default theme for the 404.

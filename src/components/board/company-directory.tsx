@@ -91,7 +91,7 @@ export function CompanyFilterTabs({
             className={cn(
               "h-6 rounded-md px-3 text-[13px] leading-4 transition-colors",
               active
-                ? "bg-card text-foreground font-medium shadow-[0_0_0_1px_var(--line),0_1px_2px_rgb(0_0_0/0.05)]"
+                ? "bg-card text-foreground font-medium shadow-xs"
                 : "text-muted-foreground hover:text-foreground"
             )}
             data-filter={value}

@@ -48,7 +48,6 @@ try {
         },
         name: eteneshBrand.name,
         tagline: eteneshBrand.tagline,
-        theme: eteneshBrand.theme,
       },
       overrideAccess: true,
       slug: "site-settings",

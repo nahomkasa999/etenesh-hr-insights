@@ -62,6 +62,7 @@ export const SiteSettings: GlobalConfig = {
     { defaultValue: "", name: "tagline", type: "text" },
     { name: "logo", relationTo: "media", type: "upload" },
     {
+      admin: { hidden: true },
       fields: [
         { fields: colorFields, name: "colors", type: "group" },
         {

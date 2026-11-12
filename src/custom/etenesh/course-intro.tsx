@@ -11,7 +11,7 @@ export function CourseIntro() {
 
   return (
     <section aria-label="Course introduction">
-      <div className="relative aspect-video overflow-hidden rounded-2xl bg-[#102743]">
+      <div className="bg-accent relative aspect-video overflow-hidden rounded-2xl">
         {playing ? (
           <iframe
             allow="autoplay; encrypted-media; picture-in-picture"
@@ -24,11 +24,11 @@ export function CourseIntro() {
           />
         ) : (
           <button
-            className="flex h-full w-full flex-col items-center justify-center gap-4 bg-[radial-gradient(ellipse_at_bottom_right,#126a62,transparent_70%)] px-5 text-center text-white hover:bg-[#143557] focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white"
+            className="bg-accent text-accent-foreground hover:bg-accent/70 focus-visible:outline-ring flex h-full w-full flex-col items-center justify-center gap-4 px-5 text-center focus-visible:outline-2 focus-visible:outline-offset-[-4px]"
             onClick={play}
             type="button"
           >
-            <span className="grid size-14 place-items-center rounded-full bg-[#b7ebcf] text-[#123b2c]">
+            <span className="bg-primary text-primary-foreground grid size-14 place-items-center rounded-full">
               <Play aria-hidden="true" className="size-6 fill-current" />
             </span>
             <span className="text-sm font-semibold">

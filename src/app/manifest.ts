@@ -13,7 +13,7 @@ export default function manifest(): MetadataRoute.Manifest {
   }
 
   return {
-    background_color: "#f5f5f4",
+    background_color: "#F8FAFC",
     description: MARKETING_DESCRIPTION,
     display: "standalone",
     icons: [
@@ -33,6 +33,6 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Bordful",
     short_name: "Bordful",
     start_url: "/",
-    theme_color: "#161616",
+    theme_color: "#0077E6",
   };
 }

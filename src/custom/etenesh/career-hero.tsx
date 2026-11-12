@@ -44,7 +44,9 @@ export function CareerHero() {
           >
             Etenesh on TikTok <ArrowUpRight aria-hidden="true" size={14} />
           </a>
-          <span className="mt-1 text-xs text-slate-600">Pitch preview</span>
+          <span className="text-muted-foreground mt-1 text-xs">
+            Pitch preview
+          </span>
         </div>
       </div>
     </section>

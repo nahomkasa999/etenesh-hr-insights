@@ -357,7 +357,7 @@ export function JobPreview({
   return (
     <section
       aria-labelledby={titleId}
-      className="bg-card ring-line flex min-h-0 flex-1 flex-col overflow-clip rounded-[14px] shadow-[0_1px_2px_rgb(0_0_0/0.04),0_28px_56px_-20px_rgb(0_0_0/0.16)] ring-1"
+      className="bg-card ring-line flex min-h-0 flex-1 flex-col overflow-clip rounded-[14px] shadow-xl ring-1"
       data-testid="job-preview"
     >
       <div className="border-line flex h-11 shrink-0 items-center justify-between border-b pr-4 pl-5">

@@ -1,7 +1,7 @@
 # Theme
 
-`src/theme/tokens.ts` is the one theme file. It holds the default colors, fonts, and corner radius.
+The website palette and its Tailwind mappings are in [`src/app/globals.css`](../app/globals.css). The Payload admin stylesheet uses the same CSS variables.
 
-Site Settings in the admin override those defaults. The public layout resolves the settings and writes them as CSS variables.
+The theme toggle follows the system by default. Visitors can pin light or dark mode in their browser.
 
-Dark mode follows the system and uses the fixed Bordful 1.0 dark palette in `src/app/globals.css`. Site Settings colors apply to light mode. Set `data-theme="light"` or `"dark"` on `<html>` to pin one.
+The Site Settings theme fields remain in the database for compatibility with Bordful's email rendering.

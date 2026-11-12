@@ -91,7 +91,7 @@ function DesktopCta() {
       </div>
       <Shot
         alt=""
-        className="absolute top-14 left-[53.33%] hidden h-[319px] w-[560px] rounded-[10px] shadow-[0_0_0_1px_rgb(255_255_255/10%)] lg:block"
+        className="absolute top-14 left-[53.33%] hidden h-[319px] w-[560px] rounded-[10px] shadow-xl lg:block"
         name="boardDark"
       />
     </section>

@@ -11,11 +11,11 @@ import { PhoneShot, Shot } from "./shots";
 // example listing.
 const JOB_POSTING_CODE = [
   "{",
-  '  "@type": "JobPosting",',
-  '  "title": "Senior Product Designer",',
-  '  "hiringOrganization": { "name": "Example Co" },',
-  '  "jobLocationType": "TELECOMMUTE",',
-  '  "baseSalary": { "minValue": 150000, "maxValue": 190000 }',
+  '"@type": "JobPosting",',
+  '"title": "Senior Product Designer",',
+  '"hiringOrganization": { "name": "Example Co" },',
+  '"jobLocationType": "TELECOMMUTE",',
+  '"baseSalary": { "minValue": 150000, "maxValue": 190000 }',
   "}",
 ].join("\n");
 
@@ -126,12 +126,12 @@ export function Bento() {
         <Card className="h-[440px]" {...CARDS.brand}>
           <Shot
             alt="The board in the light theme"
-            className="absolute top-[110px] left-4 h-[273px] w-[480px] rounded-lg shadow-[0_0_0_1px_var(--line),0_16px_32px_-12px_rgb(0_0_0/20%)] md:left-7 md:h-[319px] md:w-[560px]"
+            className="absolute top-[110px] left-4 h-[273px] w-[480px] rounded-lg shadow-xl md:left-7 md:h-[319px] md:w-[560px]"
             name="boardLight"
           />
           <Shot
             alt="The board with a dark theme"
-            className="absolute top-[200px] left-24 h-[273px] w-[480px] rounded-lg shadow-[0_0_0_1px_rgb(255_255_255/6%),0_24px_48px_-12px_rgb(0_0_0/45%)] md:left-[140px] md:h-[319px] md:w-[560px]"
+            className="absolute top-[200px] left-24 h-[273px] w-[480px] rounded-lg shadow-xl md:left-[140px] md:h-[319px] md:w-[560px]"
             name="boardDark"
           />
         </Card>

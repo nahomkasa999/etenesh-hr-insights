@@ -72,7 +72,7 @@ export function Hero() {
               reads, in place of the scaled-down desktop window. */}
           <a
             aria-label="Open the live demo board"
-            className="bg-card block overflow-hidden rounded-2xl shadow-[0_0_0_1px_var(--shot-ring),0_1px_2px_rgb(0_0_0/4%),0_28px_56px_-20px_var(--shot-shadow)] md:hidden"
+            className="bg-card block overflow-hidden rounded-2xl shadow-xl md:hidden"
             href="/jobs"
           >
             <ThemedImage
@@ -98,7 +98,7 @@ export function Hero() {
             <span className="size-2 rounded-full bg-(--window-dot)" />
             <span className="size-2 rounded-full bg-(--window-dot)" />
             <span className="size-2 rounded-full bg-(--window-dot)" />
-            <span className="bg-card ring-line absolute top-1.5 left-[450px] flex h-[18px] w-[220px] items-center justify-center rounded-[5px] ring-1 ring-inset dark:bg-white/6">
+            <span className="bg-card ring-line dark:bg-muted absolute top-1.5 left-[450px] flex h-[18px] w-[220px] items-center justify-center rounded-[5px] ring-1 ring-inset">
               <span className="text-subtle text-[10px] leading-3">
                 jobs.yourbrand.com
               </span>
@@ -111,7 +111,7 @@ export function Hero() {
         </div>
         <PhoneShot
           alt="A job page on a phone"
-          className="absolute top-[88px] left-[962px] hidden h-[448px] w-[220px] shadow-[0_30px_40px_rgb(0_0_0/28%)] lg:block dark:shadow-[0_30px_40px_rgb(0_0_0/50%)]"
+          className="absolute top-[88px] left-[962px] hidden h-[448px] w-[220px] shadow-xl lg:block"
           imageClassName="h-full object-cover object-top"
           name="mobileJob"
         />

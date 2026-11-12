@@ -218,7 +218,7 @@ export function SiteHeader({
             // biome-ignore lint/performance/noImgElement: site-logo is a native img at 20px
             <img
               alt=""
-              className="size-8 shrink-0 rounded-md bg-white object-contain"
+              className="bg-logo-background size-8 shrink-0 rounded-md object-contain"
               data-testid="site-logo"
               height={20}
               src={logoUrl}

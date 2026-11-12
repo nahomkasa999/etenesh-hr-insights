@@ -8,7 +8,6 @@ import { eteneshBrand } from "@/custom/etenesh/brand";
 import { getSiteSettings } from "@/lib/read";
 import { boardIcons } from "@/lib/seo/icons";
 import { FONT_VARIABLE_CLASSES } from "@/theme/fonts";
-import { resolveThemeTokens, tokensToCssVariables } from "@/theme/tokens";
 
 import "../globals.css";
 
@@ -35,14 +34,11 @@ export default async function SiteLayout({
   children: ReactNode;
 }) {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
-  const settings = await getSiteSettings();
-  const css = tokensToCssVariables(resolveThemeTokens(settings.theme));
 
   return (
     <html className={FONT_VARIABLE_CLASSES} lang="en" suppressHydrationWarning>
       <head>
         <ThemeScript nonce={nonce} />
-        <style nonce={nonce}>{`:root{${css}}`}</style>
       </head>
       <body className="antialiased">{children}</body>
     </html>

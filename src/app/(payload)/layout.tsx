@@ -10,6 +10,7 @@ import type { ServerFunctionClient } from "payload";
 import type { ReactNode } from "react";
 
 import { importMap } from "./admin/importMap.js";
+import "../globals.css";
 import "./custom.css";
 
 export const generateViewport = generatePayloadViewport;

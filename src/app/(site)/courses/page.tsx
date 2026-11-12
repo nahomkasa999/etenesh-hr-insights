@@ -17,7 +17,7 @@ export default function CoursesPage() {
           what you can do in an interview.
         </p>
         <article className="bg-card grid overflow-hidden rounded-2xl border md:grid-cols-[1fr_1.4fr]">
-          <div className="grid min-h-44 place-items-center bg-[#102743] bg-[radial-gradient(ellipse_at_bottom_right,#126a62,transparent_75%)] p-8 text-[#b7ebcf]">
+          <div className="bg-accent text-accent-foreground grid min-h-44 place-items-center p-8">
             <GraduationCap
               aria-hidden="true"
               className="size-24 stroke-[1.15]"

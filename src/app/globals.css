@@ -1,131 +1,121 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Dark mode follows the system unless <html data-theme="light|dark"> pins it. */
-@custom-variant dark {
-  @media (prefers-color-scheme: dark) {
-    &:where(:root:not([data-theme="light"]) *) {
-      @slot;
-    }
-  }
-  &:where([data-theme="dark"], [data-theme="dark"] *) {
-    @slot;
-  }
-}
+@custom-variant dark (&:is(.dark *, [data-theme="dark"] *));
 
-/* Fallbacks match DEFAULT_THEME_TOKENS (src/theme/tokens.ts); the layout
-   overrides the ten theme keys at runtime from Site settings. */
 :root {
-  --radius: 0.5rem;
-  --background: #f5f5f4;
-  --foreground: #161616;
-  --primary: #161616;
-  --primary-foreground: #ffffff;
-  --muted: #f7f7f6;
-  --muted-foreground: #5c5c5c;
-  --accent: #f0f0ef;
-  --accent-foreground: #161616;
-  --border: #e4e4e3;
-  --ring: #161616;
-  /* Bordful 1.0 surfaces and status colors (Paper design tokens). */
+  --background: #f8fafc;
+  --foreground: #090d14;
   --card: #ffffff;
-  --card-foreground: #161616;
+  --card-foreground: #090d14;
   --popover: #ffffff;
-  --popover-foreground: #161616;
-  --secondary: #f0f0ef;
-  --secondary-foreground: #161616;
-  --surface: #ffffff;
-  --surface-sub: #f7f7f6;
-  --surface-faint: #fafaf9;
-  --selected: #f7f7f6;
-  --tag: #f0f0ef;
-  --logo-tile: #eaeae8;
-  --line: rgb(0 0 0 / 7%);
-  --line-strong: rgb(0 0 0 / 10%);
-  --text-subtle: #6b6b6b;
-  --featured: #1760c2;
-  --new: #127136;
-  --closing: #9e4908;
-  --destructive: #c62828;
-  --input: rgb(0 0 0 / 10%);
+  --popover-foreground: #090d14;
+  --primary: #0077e6;
+  --primary-foreground: #ffffff;
+  --secondary: #43b02a;
+  --secondary-foreground: #ffffff;
+  --muted: #eff4f8;
+  --muted-foreground: #526173;
+  --accent: #e6f3ff;
+  --accent-foreground: #005bb5;
+  --destructive: #e11d48;
+  --destructive-foreground: #ffffff;
+  --border: #dce4ec;
+  --input: #dce4ec;
+  --ring: #0091ff;
+  --chart-1: #0077e6;
+  --chart-2: #56d117;
+  --chart-3: #00b4f0;
+  --chart-4: #248f24;
+  --chart-5: #004a99;
+  --sidebar: #f1f6fa;
+  --sidebar-foreground: #090d14;
+  --sidebar-primary: #0077e6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e6f3ff;
+  --sidebar-accent-foreground: #005bb5;
+  --sidebar-border: #dce4ec;
+  --sidebar-ring: #0091ff;
+  --shadow-opacity: 0.1;
+  --shadow-color: var(--foreground);
+  --site-shadow-2xs: 0 1px 2px 0px #090d140d;
+  --site-shadow-xs: 0 1px 3px 0px #090d1412;
+  --site-shadow-sm: 0 1px 3px 0px #090d141a, 0 1px 2px -1px #090d141a;
+  --site-shadow: 0 1px 3px 0px #090d141a, 0 1px 2px -1px #090d141a;
+  --site-shadow-md: 0 4px 6px -1px #090d141a, 0 2px 4px -2px #090d141a;
+  --site-shadow-lg: 0 10px 15px -3px #090d141a, 0 4px 6px -4px #090d141a;
+  --site-shadow-xl: 0 20px 25px -5px #090d141a, 0 8px 10px -6px #090d141a;
+  --site-shadow-2xl: 0 25px 50px -12px #090d1440;
+  --site-font-sans:
+    var(--loaded-jakarta, "Plus Jakarta Sans"), ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --site-font-serif:
+    var(--loaded-lora, Lora), ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+  --site-font-mono:
+    var(--loaded-jetbrains, "JetBrains Mono"), ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --logo-background: #ffffff;
+  --radius: 0.5rem;
+  --shadow-x: 0;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
   color-scheme: light;
 }
 
-/* Two-class selectors outrank the Site settings :root override, so the
-   Paper dark palette wins in dark mode. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --background: #0e0e0e;
-    --foreground: #ededed;
-    --card: #171717;
-    --card-foreground: #ededed;
-    --popover: #171717;
-    --popover-foreground: #ededed;
-    --primary: #ededed;
-    --primary-foreground: #121212;
-    --secondary: rgb(255 255 255 / 5%);
-    --secondary-foreground: #ededed;
-    --muted: #1f1f1f;
-    --muted-foreground: #a0a0a0;
-    --accent: rgb(255 255 255 / 5%);
-    --accent-foreground: #ededed;
-    --border: rgb(255 255 255 / 8%);
-    --input: rgb(255 255 255 / 8%);
-    --ring: #ededed;
-    --surface: #171717;
-    --surface-sub: #1f1f1f;
-    --surface-faint: #1f1f1f;
-    --selected: #1c1c1c;
-    --tag: rgb(255 255 255 / 5%);
-    --logo-tile: rgb(255 255 255 / 5%);
-    --line: rgb(255 255 255 / 6%);
-    --line-strong: rgb(255 255 255 / 8%);
-    --text-subtle: #8f8f8f;
-    --featured: #5aa7ff;
-    --new: #4cc38a;
-    --closing: #f1a10d;
-    --destructive: #f87171;
-    color-scheme: dark;
-  }
-}
-
+.dark,
 :root[data-theme="dark"] {
-  --background: #0e0e0e;
-  --foreground: #ededed;
-  --card: #171717;
-  --card-foreground: #ededed;
-  --popover: #171717;
-  --popover-foreground: #ededed;
-  --primary: #ededed;
-  --primary-foreground: #121212;
-  --secondary: rgb(255 255 255 / 5%);
-  --secondary-foreground: #ededed;
-  --muted: #1f1f1f;
-  --muted-foreground: #a0a0a0;
-  --accent: rgb(255 255 255 / 5%);
-  --accent-foreground: #ededed;
-  --border: rgb(255 255 255 / 8%);
-  --input: rgb(255 255 255 / 8%);
-  --ring: #ededed;
-  --surface: #171717;
-  --surface-sub: #1f1f1f;
-  --surface-faint: #1f1f1f;
-  --selected: #1c1c1c;
-  --tag: rgb(255 255 255 / 5%);
-  --logo-tile: rgb(255 255 255 / 5%);
-  --line: rgb(255 255 255 / 6%);
-  --line-strong: rgb(255 255 255 / 8%);
-  --text-subtle: #8f8f8f;
-  --featured: #5aa7ff;
-  --new: #4cc38a;
-  --closing: #f1a10d;
-  --destructive: #f87171;
+  --background: #050709;
+  --foreground: #f8fafc;
+  --card: #0c1117;
+  --card-foreground: #f8fafc;
+  --popover: #111822;
+  --popover-foreground: #f8fafc;
+  --primary: #0091ff;
+  --primary-foreground: #050709;
+  --secondary: #68e01b;
+  --secondary-foreground: #050709;
+  --muted: #141c26;
+  --muted-foreground: #94a3b8;
+  --accent: #0d2612;
+  --accent-foreground: #7bf02b;
+  --destructive: #f43f5e;
+  --destructive-foreground: #ffffff;
+  --border: #1c2633;
+  --input: #222e3d;
+  --ring: #0091ff;
+  --chart-1: #0091ff;
+  --chart-2: #68e01b;
+  --chart-3: #00c2ff;
+  --chart-4: #38b000;
+  --chart-5: #005bb5;
+  --sidebar: #090d12;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #0091ff;
+  --sidebar-primary-foreground: #050709;
+  --sidebar-accent: #141c26;
+  --sidebar-accent-foreground: #68e01b;
+  --sidebar-border: #1c2633;
+  --sidebar-ring: #0091ff;
+  --shadow-opacity: 0.25;
+  --shadow-color: #000000;
+  --site-shadow-2xs: 0 1px 2px 0px #00000033;
+  --site-shadow-xs: 0 1px 3px 0px #0000004d;
+  --site-shadow-sm: 0 1px 3px 0px #00000066, 0 1px 2px -1px #00000066;
+  --site-shadow: 0 1px 3px 0px #00000066, 0 1px 2px -1px #00000066;
+  --site-shadow-md: 0 4px 6px -1px #00000066, 0 2px 4px -2px #00000066;
+  --site-shadow-lg: 0 10px 15px -3px #00000066, 0 4px 6px -4px #00000066;
+  --site-shadow-xl: 0 20px 25px -5px #00000066, 0 8px 10px -6px #00000066;
+  --site-shadow-2xl: 0 25px 50px -12px #00000099;
   color-scheme: dark;
 }
 
 @theme inline {
   --container-board: 68.75rem;
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -141,23 +131,47 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-surface: var(--surface);
-  --color-surface-sub: var(--surface-sub);
-  --color-selected: var(--selected);
-  --color-tag: var(--tag);
-  --color-logo-tile: var(--logo-tile);
-  --color-surface-faint: var(--surface-faint);
-  --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --color-subtle: var(--text-subtle);
-  --color-featured: var(--featured);
-  --color-new: var(--new);
-  --color-closing: var(--closing);
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-surface: var(--card);
+  --color-surface-sub: var(--muted);
+  --color-surface-faint: var(--background);
+  --color-selected: var(--accent);
+  --color-tag: var(--muted);
+  --color-logo-tile: var(--sidebar);
+  --color-line: var(--border);
+  --color-line-strong: var(--input);
+  --color-subtle: var(--muted-foreground);
+  --color-featured: var(--primary);
+  --color-new: var(--chart-4);
+  --color-closing: var(--destructive);
+  --color-logo-background: var(--logo-background);
+  --font-sans: var(--site-font-sans);
+  --font-mono: var(--site-font-mono);
+  --font-serif: var(--site-font-serif);
+  --shadow-2xs: var(--site-shadow-2xs);
+  --shadow-xs: var(--site-shadow-xs);
+  --shadow-sm: var(--site-shadow-sm);
+  --shadow: var(--site-shadow);
+  --shadow-md: var(--site-shadow-md);
+  --shadow-lg: var(--site-shadow-lg);
+  --shadow-xl: var(--site-shadow-xl);
+  --shadow-2xl: var(--site-shadow-2xl);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -165,23 +179,15 @@
 }
 
 @layer base {
-  body {
-    font-family: var(--font-body);
-    color: var(--foreground);
-    background: var(--background);
+  * {
+    @apply border-border outline-ring/50;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-heading);
+  body {
+    @apply bg-background font-sans text-foreground;
   }
 }
 
-/* Visible focus for keyboard users on every link, button and disclosure. */
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible,
@@ -192,7 +198,6 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* Dark bands (footer) invert the focus ring, since --ring is dark. */
 .bordful-inverse :focus-visible {
   outline-color: var(--background);
 }
@@ -313,11 +318,9 @@ textarea:focus-visible {
 }
 
 .career-hero {
-  color: #fff;
+  color: var(--foreground);
   scroll-margin-top: 2rem;
-  background:
-    radial-gradient(ellipse at 92% 100%, #126a62 0%, transparent 48%),
-    linear-gradient(119deg, #102743, #093d6c 78%, #084b64);
+  background: linear-gradient(115deg, var(--accent), var(--background));
 }
 
 .career-hero-inner {
@@ -334,7 +337,7 @@ textarea:focus-visible {
   margin-bottom: 0.65rem;
   font-size: 0.78rem;
   font-weight: 650;
-  color: #b8ebcf;
+  color: var(--accent-foreground);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -351,7 +354,7 @@ textarea:focus-visible {
   margin-top: 1rem;
   font-size: clamp(0.94rem, 2vw, 1.1rem);
   line-height: 1.6;
-  color: #e0ecf6;
+  color: var(--muted-foreground);
 }
 
 .career-hero-actions {
@@ -368,35 +371,37 @@ textarea:focus-visible {
   padding: 0.65rem 1rem;
   font-size: 0.88rem;
   font-weight: 630;
-  color: #fff;
-  border: 1px solid #a9c8de;
+  color: var(--accent-foreground);
+  border: 1px solid var(--border);
   border-radius: 0.6rem;
 }
 
 .career-hero-actions a:first-child {
-  color: #123b2c;
-  background: #b7ebcf;
-  border-color: #b7ebcf;
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border-color: var(--primary);
 }
 
 .career-hero-actions a:hover {
-  box-shadow: 0 0 0 2px #c4e4f5;
+  box-shadow: 0 0 0 2px var(--ring);
 }
 
 .career-brand-card {
   display: grid;
   justify-items: center;
   padding: 1rem 0.7rem 1.2rem;
-  color: #13263c;
+  color: var(--card-foreground);
   text-align: center;
-  background: #fff;
+  background: var(--card);
   border-radius: 1rem;
-  box-shadow: 0 1rem 2.8rem #0b20394d;
+  box-shadow: var(--site-shadow-lg);
 }
 
 .career-brand-card img {
   width: 10.5rem;
   height: auto;
+  background: var(--logo-background);
+  border-radius: var(--radius);
 }
 .career-brand-card p {
   font-size: 0.89rem;
@@ -408,7 +413,7 @@ textarea:focus-visible {
   align-items: center;
   margin-top: 0.35rem;
   font-size: 0.8rem;
-  color: #0756a2;
+  color: var(--accent-foreground);
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }

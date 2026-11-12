@@ -127,7 +127,7 @@ export function PickRoleCard() {
   return (
     <section
       aria-labelledby="board-pick-title"
-      className="bg-card ring-line flex flex-col gap-3.5 rounded-[14px] p-5 shadow-[0_1px_2px_rgb(0_0_0/0.04),0_28px_56px_-20px_rgb(0_0_0/0.16)] ring-1"
+      className="bg-card ring-line flex flex-col gap-3.5 rounded-[14px] p-5 shadow-xl ring-1"
     >
       <h2
         className="text-foreground text-[16px] leading-[22px] font-medium"

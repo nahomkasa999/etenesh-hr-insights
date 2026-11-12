@@ -154,8 +154,8 @@ function handleBoardKey(
 // The board's list area: rail, list and right column, plus the job preview.
 // Rows stay real links, so without JS (or with Cmd/Ctrl/Shift-click, or
 // below xl) they open the job page. With JS on a wide screen a plain click,
-// or Enter on a focused row, opens the job in the right column instead; a
-// second Enter opens the full page. J/K move, S saves, Esc closes.
+// or Enter on a focused row, opens the job in the right column instead.
+// J/K move, S saves, Esc closes.
 export function BoardWorkspace({
   alertsEnabled = false,
   aside,
@@ -185,6 +185,7 @@ export function BoardWorkspace({
 }) {
   const listRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<string | null>(null);
+  const [applying, setApplying] = useState(false);
   const saved = useJobList("saved");
   const bySlug = useMemo(
     () => new Map(jobs.map((item) => [item.slug, item])),
@@ -193,6 +194,9 @@ export function BoardWorkspace({
   const current = selected ? (bySlug.get(selected) ?? null) : null;
   const isOpen = preview && current !== null;
   const openSlug = isOpen ? selected : null;
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: a different selected job closes the form
+  useEffect(() => setApplying(false), [openSlug]);
 
   // The selected row is styled through data-selected on its <li>.
   useEffect(() => {
@@ -217,17 +221,13 @@ export function BoardWorkspace({
       if (!(row && slug && bySlug.has(slug))) {
         return;
       }
-      // Keyboard Enter on the row already open goes to the full page.
-      if (event.detail === 0 && slug === openSlug) {
-        return;
-      }
       event.preventDefault();
       setSelected(slug);
       row.querySelector<HTMLElement>(ROW_LINK_SELECTOR)?.focus();
     }
     container.addEventListener("click", onClick);
     return () => container.removeEventListener("click", onClick);
-  }, [bySlug, openSlug, preview]);
+  }, [bySlug, preview]);
 
   const close = useCallback(() => {
     const row = rowFor(listRef.current, openSlug);
@@ -312,18 +312,19 @@ export function BoardWorkspace({
       {aside ? <div className={cn(isOpen && "xl:hidden")}>{aside}</div> : null}
       {isOpen && current ? (
         <div className="hidden py-2 pr-2 xl:block">
-          <div className="sticky top-2 flex h-[calc(100dvh-1rem)] flex-col">
+          <div className="sticky top-2 flex h-[calc(100dvh-7.5rem)] flex-col">
             <JobPreview
               alertsEnabled={alertsEnabled}
+              applying={applying}
               index={offset + index + 1}
               job={current}
               jobs={jobs}
-              key={current.slug}
               now={now}
               onClose={close}
               onNext={next ? onNext : null}
               onPrev={prev ? onPrev : null}
               onSelect={goTo}
+              onSetApplying={setApplying}
               total={total}
             />
           </div>

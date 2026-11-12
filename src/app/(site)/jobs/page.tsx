@@ -30,6 +30,7 @@ export default async function JobsPage() {
     return (
       <BoardShell
         fullBleed
+        hideFooter
         search={{
           options,
           query: parseBoardQuery(new URLSearchParams(""), options),
@@ -41,7 +42,7 @@ export default async function JobsPage() {
   }
 
   return (
-    <BoardShell>
+    <BoardShell hideFooter>
       <TaxonomyIndex kind="location" />
     </BoardShell>
   );

@@ -98,7 +98,7 @@ function ViewPills({ views }: { views: HeaderViews }) {
             className={cn(
               "rounded-[6px] px-2.5 py-1 text-[13px] leading-[18px] whitespace-nowrap transition-colors",
               on
-                ? "bg-card text-foreground ring-line font-medium shadow-xs ring-1"
+                ? "bg-primary/10 text-primary ring-primary/20 font-medium shadow-xs ring-1"
                 : "text-muted-foreground hover:text-foreground",
               FOCUS
             )}
@@ -288,7 +288,7 @@ export function SiteHeader({
             </ul>
           </nav>
           <div className="hidden 2xl:block">
-            <SocialLinks links={social} />
+            <SocialLinks links={social} showRss={false} />
           </div>
           <ThemeToggle />
           {alerts ? (

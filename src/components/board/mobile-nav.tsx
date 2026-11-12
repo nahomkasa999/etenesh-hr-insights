@@ -142,7 +142,7 @@ export function MobileNav({
               );
             })}
           </ul>
-          <SocialLinks className="mt-3 px-2" links={social} />
+          <SocialLinks className="mt-3 px-2" links={social} showRss={false} />
         </nav>
       </div>
     </div>

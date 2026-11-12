@@ -19,11 +19,13 @@ import { getSiteSettings } from "@/lib/read";
 export async function BoardShell({
   children,
   fullBleed = false,
+  hideFooter = false,
   hidePostCta = false,
   search,
 }: {
   children: ReactNode;
   fullBleed?: boolean;
+  hideFooter?: boolean;
   // Post pages already are the post flow, so the footer band is redundant.
   hidePostCta?: boolean;
   // Board listings pass their query so a header search keeps the filters,
@@ -86,22 +88,23 @@ export async function BoardShell({
           <div className="max-w-board mx-auto w-full px-4 py-8">{children}</div>
         )}
       </main>
-      {FooterSlot ? (
-        <FooterSlot />
-      ) : (
-        <SiteFooter
-          bordfulMark={marketing}
-          columns={nav.footerColumns}
-          durationDays={settings.postJob.durationDays}
-          logoUrl={settings.logoUrl}
-          name={settings.name}
-          priceLabel={settings.postJob.priceLabel}
-          showAttribution={false}
-          showCta={settings.postJob.enabled && !hidePostCta}
-          social={social}
-          tagline={settings.tagline}
-        />
-      )}
+      {!hideFooter &&
+        (FooterSlot ? (
+          <FooterSlot />
+        ) : (
+          <SiteFooter
+            bordfulMark={marketing}
+            columns={nav.footerColumns}
+            durationDays={settings.postJob.durationDays}
+            logoUrl={settings.logoUrl}
+            name={settings.name}
+            priceLabel={settings.postJob.priceLabel}
+            showAttribution={false}
+            showCta={settings.postJob.enabled && !hidePostCta}
+            social={social}
+            tagline={settings.tagline}
+          />
+        ))}
     </div>
   );
 }

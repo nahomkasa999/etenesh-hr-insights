@@ -10,6 +10,7 @@ import {
 } from "@testing-library/react";
 import { afterEach, beforeEach, expect, test, vi } from "vitest";
 
+import { htmlToLexical } from "@/lib/bordfeed/html-to-lexical";
 import type { JobListItem } from "@/lib/read/types";
 
 import { BoardWorkspace } from "./board-workspace";
@@ -112,6 +113,81 @@ test("a plain click previews the job instead of navigating", () => {
   expect(
     screen.getAllByTestId("job-row")[0]?.getAttribute("data-selected")
   ).toBe("true");
+});
+
+test("the preview shows full details and opens the application in place", async () => {
+  const manual = {
+    ...job("civil-engineer", "Civil Engineer"),
+    applyHref: null,
+  };
+  const description = htmlToLexical(
+    "<p>Design and supervise roads and bridges.</p><h3>Requirements</h3><p>Five years of construction experience.</p>"
+  );
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(() => Promise.resolve(Response.json({ description })))
+  );
+  render(
+    <BoardWorkspace
+      className="grid"
+      jobs={[manual]}
+      list={
+        <ul>
+          <JobRow job={manual} now={NOW} />
+        </ul>
+      }
+      now={NOW}
+      openClassName="open"
+      total={1}
+    />
+  );
+
+  fireEvent.click(screen.getByTestId("job-row-link"));
+  const preview = screen.getByTestId("job-preview");
+  expect(await within(preview).findByText("Requirements")).toBeTruthy();
+  expect(
+    within(preview).getByText("Five years of construction experience.")
+  ).toBeTruthy();
+  expect(within(preview).queryByText("Open full post ↗")).toBeNull();
+  expect(within(preview).queryByText("Read the full post")).toBeNull();
+
+  fireEvent.click(within(preview).getByRole("button", { name: "Apply now" }));
+  expect(screen.getByTestId("job-preview-apply-section")).toBeTruthy();
+  expect(screen.getByTestId("job-preview-form-pane")).toBeTruthy();
+  expect(screen.queryByTestId("job-preview-details")).toBeNull();
+  expect(
+    within(preview).getByRole("button", { name: "Close form" })
+  ).toBeTruthy();
+  fireEvent.click(within(preview).getByRole("button", { name: "Close form" }));
+  expect(screen.getByTestId("job-preview-details")).toBeTruthy();
+  expect(screen.queryByTestId("job-preview-form-pane")).toBeNull();
+});
+
+test("only the top bar and footer wheel gestures switch jobs", () => {
+  renderBoard();
+  const [first] = screen.getAllByTestId("job-row-link");
+  fireEvent.click(first as HTMLElement);
+
+  const preview = screen.getByTestId("job-preview");
+  expect(
+    within(preview).queryByRole("button", { name: "Next job (J)" })
+  ).toBeNull();
+  const details = screen.getByTestId("job-preview-details");
+  Object.defineProperties(details, {
+    clientHeight: { value: 500 },
+    scrollHeight: { value: 1000 },
+  });
+  details.scrollTop = 100;
+  fireEvent.wheel(details, { deltaY: 120 });
+  expect(screen.getByTestId("job-preview").textContent).toContain("Role A");
+
+  details.scrollTop = 500;
+  fireEvent.wheel(details, { deltaY: 120 });
+  expect(screen.getByTestId("job-preview").textContent).toContain("Role A");
+
+  fireEvent.wheel(screen.getByTestId("job-preview-topbar"), { deltaY: 120 });
+
+  expect(screen.getByTestId("job-preview").textContent).toContain("Role B");
 });
 
 test("Cmd-click and narrow screens keep the real link", () => {

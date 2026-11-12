@@ -122,7 +122,7 @@ function CompanyLogo({
     <span
       aria-hidden="true"
       className={cn(
-        "bg-tag text-muted-foreground lg:group-data-[selected=true]/row:bg-foreground lg:group-data-[selected=true]/row:text-background flex shrink-0 items-center justify-center overflow-hidden [grid-area:logo]",
+        "bg-primary/5 text-primary lg:group-data-[selected=true]/row:bg-primary lg:group-data-[selected=true]/row:text-primary-foreground flex shrink-0 items-center justify-center overflow-hidden [grid-area:logo]",
         variant === "archive"
           ? "size-10 rounded-[8px] text-[13px] leading-4 font-semibold lg:size-9"
           : "size-9 rounded-[9px] text-[14px] font-medium lg:size-7 lg:rounded-[7px] lg:text-[12px]"
@@ -163,7 +163,7 @@ const ARCHIVE_GRID =
 
 // The board's preview script marks the open row with data-selected.
 const ROW_SELECTED =
-  "group-data-[selected=true]/row:bg-card group-data-[selected=true]/row:ring-line group-data-[selected=true]/row:ring-1 group-data-[selected=true]/row:shadow-xs lg:group-data-[selected=true]/row:before:bg-foreground lg:before:absolute lg:before:top-[18px] lg:before:-left-2 lg:before:h-6 lg:before:w-[3px] lg:before:rounded-r-[3px]";
+  "group-data-[selected=true]/row:bg-primary/5 group-data-[selected=true]/row:ring-primary/25 group-data-[selected=true]/row:ring-1 group-data-[selected=true]/row:shadow-xs lg:group-data-[selected=true]/row:before:bg-primary lg:before:absolute lg:before:top-[18px] lg:before:-left-2 lg:before:h-6 lg:before:w-[3px] lg:before:rounded-r-[3px]";
 
 // The per-variant pieces of the row; the shared classes stay inline below.
 const ROW_STYLES: Record<

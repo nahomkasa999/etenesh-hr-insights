@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { appliesHere } from "@/components/apply/applies-here";
 import { ApplyForm } from "@/components/apply/apply-form";
 import { useJobList } from "@/components/board/saved-jobs";
@@ -16,20 +16,22 @@ const PRIMARY =
 // The Apply control in the preview footer. Outside links keep opening in a new
 // tab; our own jobs open the form inside the pane.
 export function PreviewApplyAction({
+  applying,
   href,
   job,
   onApplied,
-  onOpenForm,
+  onToggleForm,
 }: {
+  applying: boolean;
   href: string;
   job: JobListItem;
   onApplied: () => void;
-  onOpenForm: () => void;
+  onToggleForm: () => void;
 }) {
   if (job.applyHref) {
     return (
       <a
-        className={cn(PRIMARY, "h-[38px]", FOCUS)}
+        className={cn(PRIMARY, "h-11", FOCUS)}
         data-testid="job-preview-apply"
         href={job.applyHref}
         onClick={onApplied}
@@ -45,35 +47,28 @@ export function PreviewApplyAction({
       <button
         className={cn(PRIMARY, "h-11 px-5", FOCUS)}
         data-testid="job-preview-apply"
-        onClick={onOpenForm}
+        onClick={onToggleForm}
         type="button"
       >
-        Apply now
+        {applying ? "Close form" : "Apply now"}
       </button>
     );
   }
   return (
-    <Link className={cn(PRIMARY, "h-[38px]", FOCUS)} href={href}>
+    <Link className={cn(PRIMARY, "h-11", FOCUS)} href={href}>
       View job
     </Link>
   );
 }
 
 export function PreviewApplySection({ job }: { job: JobListItem }) {
-  const section = useRef<HTMLElement>(null);
   const { add } = useJobList("applied");
   const onDone = useCallback(() => add(job.slug), [add, job.slug]);
-
-  useEffect(() => {
-    section.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
 
   return (
     <section
       aria-label={`Apply for ${job.title}`}
-      className="border-line scroll-mt-2 border-t pt-6"
       data-testid="job-preview-apply-section"
-      ref={section}
     >
       <h3 className="text-foreground mb-4 text-xl leading-7 font-medium">
         Apply for this job

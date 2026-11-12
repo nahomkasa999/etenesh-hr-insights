@@ -8,7 +8,7 @@ export function railLinkClass(active: boolean): string {
   return cn(
     "flex h-[30px] shrink-0 items-center justify-between gap-2 rounded-[6px] px-2 text-[13px] leading-[18px] transition-colors",
     active
-      ? "bg-card text-foreground ring-line font-medium shadow-xs ring-1"
+      ? "bg-primary/10 text-primary ring-primary/20 font-medium shadow-xs ring-1"
       : "text-muted-foreground hover:bg-card/60 hover:text-foreground",
     RAIL_FOCUS
   );

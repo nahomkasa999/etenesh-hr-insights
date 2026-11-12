@@ -1,5 +1,5 @@
-// Fills a fresh database for the Etenesh demo: the first admin, the site
-// name, and the demo vacancies. Safe to run again; it skips what exists.
+// Adds the Etenesh demo data to a fresh or existing database. Safe to run
+// again; it skips jobs and applications that already exist.
 import config from "@payload-config";
 import { getPayload } from "payload";
 import applicants from "../src/lib/etenesh/demo-applicants.json" with {
@@ -44,59 +44,55 @@ await payload.updateGlobal({
   slug: "site-settings",
 });
 
-const jobs = await payload.count({ collection: "jobs", overrideAccess: true });
-if (jobs.totalDocs === 0) {
-  const parsed = importFileSchema.parse(demo);
-  const ids = await importJobs(payload, parsed.jobs, {
-    featuredTitles: FEATURED,
+const parsed = importFileSchema.parse(demo);
+let imported = 0;
+let updated = 0;
+for (const job of parsed.jobs) {
+  // biome-ignore lint/performance/noAwaitInLoops: each demo row is reconciled independently
+  const found = await payload.find({
+    collection: "jobs",
+    depth: 0,
+    limit: 1,
+    overrideAccess: true,
+    where: {
+      and: [
+        { title: { equals: job.title } },
+        { companyName: { equals: job.company } },
+      ],
+    },
   });
-  payload.logger.info(`Imported ${ids.length} demo jobs`);
-} else {
-  // Fill in hiring criteria on demo jobs that were imported before
-  // criteria existed. Jobs HR edited by hand keep their values.
-  const parsed = importFileSchema.parse(demo);
-  let updated = 0;
-  for (const job of parsed.jobs) {
-    // biome-ignore lint/performance/noAwaitInLoops: a few dozen demo rows
-    const found = await payload.find({
-      collection: "jobs",
-      depth: 0,
-      limit: 1,
-      overrideAccess: true,
-      where: {
-        and: [
-          { title: { equals: job.title } },
-          { companyName: { equals: job.company } },
-        ],
-      },
-    });
-    const existing = found.docs[0];
-    if (!existing || (existing.criteria?.screeningQuestions?.length ?? 0) > 0) {
-      continue;
-    }
-    await payload.update({
-      collection: "jobs",
-      data: {
-        criteria: {
-          education: job.criteria.education ?? "None",
-          minYearsExperience: job.criteria.minYearsExperience ?? 0,
-          requiredSkills: (job.criteria.requiredSkills ?? []).map((value) => ({
-            value,
-          })),
-          screeningQuestions: job.screeningQuestions.map((question) => ({
-            question,
-          })),
-        },
-      } as never,
-      id: existing.id,
-      overrideAccess: true,
-    });
-    updated += 1;
+  const [existing] = found.docs;
+  if (!existing) {
+    await importJobs(payload, [job], { featuredTitles: FEATURED });
+    imported += 1;
+    continue;
   }
-  payload.logger.info(
-    `Jobs already present (${jobs.totalDocs}); added criteria to ${updated}`
-  );
+  // Fill criteria on older demo jobs without changing jobs HR edited by hand.
+  if ((existing.criteria?.screeningQuestions?.length ?? 0) > 0) {
+    continue;
+  }
+  await payload.update({
+    collection: "jobs",
+    data: {
+      criteria: {
+        education: job.criteria.education ?? "None",
+        minYearsExperience: job.criteria.minYearsExperience ?? 0,
+        requiredSkills: (job.criteria.requiredSkills ?? []).map((value) => ({
+          value,
+        })),
+        screeningQuestions: job.screeningQuestions.map((question) => ({
+          question,
+        })),
+      },
+    } as never,
+    id: existing.id,
+    overrideAccess: true,
+  });
+  updated += 1;
 }
+payload.logger.info(
+  `Imported ${imported} demo jobs; added criteria to ${updated}`
+);
 
 const created = await seedDemoApplications(
   payload,

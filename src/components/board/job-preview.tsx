@@ -1,16 +1,18 @@
 "use client";
 
+import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
-import { useCallback, useEffect, useId, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 
-import { appliesHere } from "@/components/apply/applies-here";
 import {
   PreviewApplyAction,
   PreviewApplySection,
 } from "@/components/apply/preview-apply";
+import { dropBlankParagraphs } from "@/components/board/job-description";
 import { jobStatuses, StatusPill } from "@/components/board/job-row";
 import { HINT_CLASS } from "@/components/board/rail-styles";
 import { useJobList } from "@/components/board/saved-jobs";
+import { bulletLinesToLists } from "@/lib/board/bullet-lists";
 import { offersVisa } from "@/lib/board/filter";
 import {
   formatLocation,
@@ -20,6 +22,7 @@ import {
   SENIORITY_LABELS,
 } from "@/lib/board/format";
 import { buildJobPath } from "@/lib/board/paths";
+import { editorState } from "@/lib/board/plaintext";
 import {
   JOB_EMPLOYMENT_LABELS,
   JOB_WORKPLACE_LABELS,
@@ -29,86 +32,86 @@ import { cn } from "@/lib/utils";
 
 const FOCUS =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
-const EXCERPT_CHARS = 480;
 const SIMILAR_LIMIT = 3;
-const SENTENCE_END = /[.!?]\s/gu;
-
-// The JSON Feed carries each live job's plain-text description. One fetch
-// serves every preview on the page; jobs outside the feed show no excerpt.
-let feedTexts: Promise<Map<string, string>> | null = null;
-
-function loadFeedTexts(): Promise<Map<string, string>> {
-  if (feedTexts) {
-    return feedTexts;
-  }
-  feedTexts = fetch("/feed.json", { headers: { accept: "application/json" } })
-    .then((response) => (response.ok ? response.json() : { items: [] }))
-    .then((body: unknown) => {
-      const map = new Map<string, string>();
-      const items =
-        typeof body === "object" && body !== null && "items" in body
-          ? (body as { items: unknown }).items
-          : [];
-      if (!Array.isArray(items)) {
-        return map;
-      }
-      for (const item of items) {
-        const { content_text: text, url } = item as {
-          content_text?: unknown;
-          url?: unknown;
-        };
-        if (typeof url !== "string" || typeof text !== "string") {
-          continue;
-        }
-        const slug = url.split("/jobs/").pop();
-        if (slug) {
-          map.set(slug, text);
-        }
-      }
-      return map;
-    })
-    .catch(() => {
-      feedTexts = null;
-      return new Map<string, string>();
-    });
-  return feedTexts;
-}
-
-// The start of the description, cut at a sentence (or word) boundary.
-export function excerpt(text: string, max = EXCERPT_CHARS): string {
-  const clean = text.replace(/\s+/gu, " ").trim();
-  if (clean.length <= max) {
-    return clean;
-  }
-  const head = clean.slice(0, max);
-  let cut = -1;
-  for (const match of head.matchAll(SENTENCE_END)) {
-    cut = (match.index ?? 0) + 1;
-  }
-  if (cut > max / 2) {
-    return head.slice(0, cut);
-  }
-  const space = head.lastIndexOf(" ");
-  return `${head.slice(0, space > 0 ? space : max)}…`;
-}
-
-function useDescription(slug: string): string | null {
-  const [text, setText] = useState<{ slug: string; value: string } | null>(
-    null
-  );
+function useDescription(slug: string): {
+  error: boolean;
+  loading: boolean;
+  value: ReturnType<typeof editorState>;
+} {
+  const [result, setResult] = useState<{
+    slug: string;
+    value: unknown;
+    error: boolean;
+  } | null>(null);
   useEffect(() => {
-    let live = true;
-    loadFeedTexts().then((map) => {
-      if (live) {
-        setText({ slug, value: map.get(slug) ?? "" });
-      }
-    });
+    const controller = new AbortController();
+    fetch(`/api/job-preview/${encodeURIComponent(slug)}`, {
+      signal: controller.signal,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Could not load job details");
+        }
+        return response.json() as Promise<unknown>;
+      })
+      .then((body) => {
+        if (!controller.signal.aborted) {
+          const value =
+            body !== null && typeof body === "object" && "description" in body
+              ? body.description
+              : null;
+          setResult({ error: false, slug, value });
+        }
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setResult({ error: true, slug, value: null });
+        }
+      });
     return () => {
-      live = false;
+      controller.abort();
     };
   }, [slug]);
 
-  return text?.slug === slug && text.value ? excerpt(text.value) : null;
+  if (result?.slug !== slug) {
+    return { error: false, loading: true, value: null };
+  }
+  return {
+    error: result.error,
+    loading: false,
+    value: editorState(result.value),
+  };
+}
+
+function PreviewDescription({
+  description,
+}: {
+  description: ReturnType<typeof useDescription>;
+}) {
+  if (description.loading || description.error) {
+    return (
+      <p className="text-muted-foreground text-[14px]">
+        {description.loading
+          ? "Loading job details…"
+          : "Job details are unavailable right now."}
+      </p>
+    );
+  }
+  if (!description.value) {
+    return null;
+  }
+  return (
+    <div className="flex flex-col gap-1.5">
+      <h3 className="text-foreground text-[15px] leading-5 font-medium">
+        About the role
+      </h3>
+      <div className="bordful-prose text-muted-foreground text-[14px] leading-[22px]">
+        <RichText
+          data={dropBlankParagraphs(bulletLinesToLists(description.value))}
+        />
+      </div>
+    </div>
+  );
 }
 
 export interface PreviewFact {
@@ -224,7 +227,7 @@ function Logo({ job }: { job: JobListItem }) {
   return (
     <span
       aria-hidden="true"
-      className="bg-foreground text-background flex size-[52px] shrink-0 items-center justify-center overflow-hidden rounded-lg text-[20px] font-medium"
+      className="bg-primary/10 text-primary flex size-[52px] shrink-0 items-center justify-center overflow-hidden rounded-lg text-[20px] font-medium"
     >
       {job.companyLogoUrl ? (
         // biome-ignore lint/performance/noImgElement: a 52px company mark, served as-is
@@ -312,6 +315,7 @@ function PreviewSide({
 // The right-hand panel for the selected row ("Job open" in the design).
 export function JobPreview({
   alertsEnabled = false,
+  applying,
   index,
   job,
   jobs = [],
@@ -320,9 +324,11 @@ export function JobPreview({
   onNext,
   onPrev,
   onSelect,
+  onSetApplying,
   total,
 }: {
   alertsEnabled?: boolean;
+  applying: boolean;
   index: number;
   job: JobListItem;
   // The jobs on this page, for "Similar jobs".
@@ -332,9 +338,13 @@ export function JobPreview({
   onNext: (() => void) | null;
   onPrev: (() => void) | null;
   onSelect?: (job: JobListItem) => void;
+  onSetApplying: (applying: boolean) => void;
   total: number;
 }) {
   const titleId = useId();
+  const panelRef = useRef<HTMLElement>(null);
+  const detailsRef = useRef<HTMLDivElement>(null);
+  const lastWheelChange = useRef(0);
   const saved = useJobList("saved");
   const applied = useJobList("applied");
   const description = useDescription(job.slug);
@@ -344,11 +354,45 @@ export function JobPreview({
   const onSave = useCallback(() => toggle(job.slug), [job.slug, toggle]);
   const onApply = useCallback(() => add(job.slug), [add, job.slug]);
   const href = buildJobPath(job.slug);
-  const [applying, setApplying] = useState(false);
-  const openForm = useCallback(() => setApplying(true), []);
-  // A different job starts with the form closed.
-  // biome-ignore lint/correctness/useExhaustiveDependencies: reset when the job changes
-  useEffect(() => setApplying(false), [job.id]);
+  const toggleForm = useCallback(
+    () => onSetApplying(!applying),
+    [applying, onSetApplying]
+  );
+  // biome-ignore lint/correctness/useExhaustiveDependencies: selecting another job starts at its top
+  useEffect(() => {
+    if (detailsRef.current) {
+      detailsRef.current.scrollTop = 0;
+    }
+  }, [job.id, applying]);
+  useEffect(() => {
+    const element = panelRef.current;
+    if (!element || applying) {
+      return;
+    }
+    function onWheel(event: WheelEvent) {
+      if (
+        Math.abs(event.deltaY) < 4 ||
+        !(event.target instanceof Element) ||
+        !event.target.closest("[data-job-switch]")
+      ) {
+        return;
+      }
+      const forward = event.deltaY > 0;
+      const navigate = forward ? onNext : onPrev;
+      event.preventDefault();
+      if (!navigate) {
+        return;
+      }
+      const wheelAt = Date.now();
+      if (wheelAt - lastWheelChange.current < 700) {
+        return;
+      }
+      lastWheelChange.current = wheelAt;
+      navigate();
+    }
+    element.addEventListener("wheel", onWheel, { passive: false });
+    return () => element.removeEventListener("wheel", onWheel);
+  }, [applying, onNext, onPrev]);
   const facts = previewFacts(job, now);
   const statuses = jobStatuses(job, now);
   const posted = job.publishedAt
@@ -366,126 +410,113 @@ export function JobPreview({
 
   return (
     <section
-      aria-labelledby={titleId}
+      aria-label={applying ? `Apply for ${job.title}` : undefined}
+      aria-labelledby={applying ? undefined : titleId}
       className="bg-card ring-line flex min-h-0 flex-1 flex-col overflow-clip rounded-[14px] shadow-[0_1px_2px_rgb(0_0_0/0.04),0_28px_56px_-20px_rgb(0_0_0/0.16)] ring-1"
       data-testid="job-preview"
+      ref={panelRef}
     >
-      <div className="border-line flex h-11 shrink-0 items-center justify-between border-b pr-4 pl-5">
+      <div
+        className="border-line flex h-11 shrink-0 items-center justify-between border-b pr-4 pl-5"
+        data-job-switch
+        data-testid="job-preview-topbar"
+      >
         <div className="flex items-center gap-2.5">
           <p className="text-subtle text-[12px] leading-4 tabular-nums">
             {index} of {total}
           </p>
-          <div className="flex gap-0.5">
-            {onPrev ? (
-              <KeyButton label="Previous job (K)" onClick={onPrev}>
-                ↑
-              </KeyButton>
-            ) : null}
-            {onNext ? (
-              <KeyButton label="Next job (J)" onClick={onNext}>
-                ↓
-              </KeyButton>
-            ) : null}
-          </div>
+          <span className="text-subtle text-[12px] leading-4">
+            {applying ? "Application" : "Scroll here to switch jobs"}
+          </span>
         </div>
         <div className="flex items-center gap-1.5">
-          <Link
-            className={cn(
-              "text-subtle hover:text-foreground rounded-sm text-[12px] leading-4",
-              FOCUS
-            )}
-            data-testid="job-preview-open"
-            href={href}
-          >
-            Open full post ↗
-          </Link>
           <KeyButton label="Close preview (Esc)" onClick={onClose}>
             Esc
           </KeyButton>
         </div>
       </div>
-      <div className="flex min-h-0 grow flex-col gap-6 overflow-y-auto px-9 py-7">
-        <div className="flex items-center gap-4">
-          <Logo job={job} />
-          <div className="flex min-w-0 flex-col gap-1">
-            <h2
-              className="text-foreground text-[26px] leading-8 font-medium tracking-[-0.02em]"
-              id={titleId}
-            >
-              <Link className={cn("rounded-sm", FOCUS)} href={href}>
-                {job.title}
-              </Link>
-            </h2>
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <p className="text-muted-foreground text-[14px] leading-5">
-                {meta.join(" · ")}
-              </p>
-              {statuses.map((status) => (
-                <StatusPill key={status} status={status} />
-              ))}
+      <div className="flex min-h-0 grow overflow-hidden">
+        {applying ? (
+          <div
+            className="min-h-0 w-full overflow-y-auto overscroll-contain px-9 py-7"
+            data-testid="job-preview-form-pane"
+          >
+            <PreviewApplySection job={job} />
+          </div>
+        ) : (
+          <div
+            className="flex min-h-0 w-full flex-col gap-6 overflow-y-auto overscroll-contain px-9 py-7"
+            data-testid="job-preview-details"
+            ref={detailsRef}
+          >
+            <div className="flex items-center gap-4" data-job-switch>
+              <Logo job={job} />
+              <div className="flex min-w-0 flex-col gap-1">
+                <h2
+                  className="text-foreground text-[26px] leading-8 font-medium tracking-[-0.02em]"
+                  id={titleId}
+                >
+                  {job.title}
+                </h2>
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <p className="text-muted-foreground text-[14px] leading-5">
+                    {meta.join(" · ")}
+                  </p>
+                  {statuses.map((status) => (
+                    <StatusPill key={status} status={status} />
+                  ))}
+                </div>
+              </div>
+            </div>
+            {facts.length > 0 ? (
+              <dl className="bg-surface-sub ring-line flex flex-wrap rounded-[10px] ring-1 ring-inset">
+                {facts.map((fact) => (
+                  <div
+                    className="border-line flex min-w-28 grow basis-0 flex-col gap-1 border-r px-4 py-3 last:border-r-0"
+                    key={fact.label}
+                  >
+                    <dt className="text-subtle text-[12px] leading-4">
+                      {fact.label}
+                    </dt>
+                    <dd className="text-foreground text-[14px] leading-5 font-medium">
+                      {fact.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+            <div className="flex gap-10">
+              <div className="flex min-w-0 grow basis-0 flex-col gap-[18px]">
+                <PreviewDescription description={description} />
+                {job.categories.length > 0 ? (
+                  <ul className="flex flex-wrap gap-1.5">
+                    {job.categories.map((category) => (
+                      <li
+                        className="bg-tag text-muted-foreground rounded-[5px] px-1.5 py-0.5 text-[12px] leading-4 font-medium"
+                        key={category}
+                      >
+                        {category}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+              {hasSide ? (
+                <PreviewSide
+                  alert={alert}
+                  onSelect={onSelect}
+                  similar={similar}
+                />
+              ) : null}
             </div>
           </div>
-        </div>
-        {facts.length > 0 ? (
-          <dl className="bg-surface-sub ring-line flex flex-wrap rounded-[10px] ring-1 ring-inset">
-            {facts.map((fact) => (
-              <div
-                className="border-line flex min-w-28 grow basis-0 flex-col gap-1 border-r px-4 py-3 last:border-r-0"
-                key={fact.label}
-              >
-                <dt className="text-subtle text-[12px] leading-4">
-                  {fact.label}
-                </dt>
-                <dd className="text-foreground text-[14px] leading-5 font-medium">
-                  {fact.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        ) : null}
-        <div className="flex gap-10">
-          <div className="flex min-w-0 grow basis-0 flex-col gap-[18px]">
-            {description ? (
-              <div className="flex flex-col gap-1.5">
-                <h3 className="text-foreground text-[15px] leading-5 font-medium">
-                  About the role
-                </h3>
-                <p className="text-muted-foreground text-[14px] leading-[22px]">
-                  {description}
-                </p>
-                <Link
-                  className={cn(
-                    "text-foreground w-fit rounded-sm text-[13px] leading-[18px] underline underline-offset-4",
-                    FOCUS
-                  )}
-                  href={href}
-                >
-                  Read the full post
-                </Link>
-              </div>
-            ) : null}
-            {job.categories.length > 0 ? (
-              <ul className="flex flex-wrap gap-1.5">
-                {job.categories.map((category) => (
-                  <li
-                    className="bg-tag text-muted-foreground rounded-[5px] px-1.5 py-0.5 text-[12px] leading-4 font-medium"
-                    key={category}
-                  >
-                    {category}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
-          {hasSide ? (
-            <PreviewSide alert={alert} onSelect={onSelect} similar={similar} />
-          ) : null}
-        </div>
-        {applying && appliesHere(job) ? (
-          <PreviewApplySection job={job} />
-        ) : null}
+        )}
       </div>
-      <div className="bg-card border-line flex shrink-0 items-center justify-between gap-3 border-t py-3.5 pr-5 pl-9">
+      <div
+        className="bg-card border-line flex shrink-0 items-center justify-between gap-3 border-t py-3.5 pr-5 pl-9"
+        data-job-switch
+        data-testid="job-preview-footer"
+      >
         <p className="text-muted-foreground flex min-w-0 items-center gap-2 text-[13px] leading-[18px]">
           {closes ? (
             <>
@@ -501,7 +532,7 @@ export function JobPreview({
           <button
             aria-pressed={isSaved}
             className={cn(
-              "bg-card text-foreground ring-line-strong hover:bg-surface-sub inline-flex h-[38px] items-center rounded-[8px] px-4 text-[14px] leading-[18px] font-medium ring-1 ring-inset",
+              "bg-card text-foreground ring-line-strong hover:bg-surface-sub inline-flex h-11 items-center rounded-[8px] px-4 text-[14px] leading-[18px] font-medium ring-1 ring-inset",
               FOCUS
             )}
             data-testid="job-preview-save"
@@ -511,10 +542,11 @@ export function JobPreview({
             {isSaved ? "Saved" : "Save"}
           </button>
           <PreviewApplyAction
+            applying={applying}
             href={href}
             job={job}
             onApplied={onApply}
-            onOpenForm={openForm}
+            onToggleForm={toggleForm}
           />
         </div>
       </div>

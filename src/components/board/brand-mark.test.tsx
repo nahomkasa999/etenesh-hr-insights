@@ -14,9 +14,10 @@ test("a fork without a logo gets the generic mark", () => {
   expect(screen.queryByTestId("bordful-mark")).toBeNull();
 });
 
-test("bordful.com gets the Bordful mark, inverted in dark mode", () => {
+test("bordful.com gets the Etenesh mark on a white tile", () => {
   render(<BrandMark bordful />);
   const mark = screen.getByTestId("bordful-mark");
-  expect(mark.getAttribute("src")).toBe("/marketing/logos/bordful.svg");
-  expect(mark.className).toContain("dark:invert");
+  expect(mark.getAttribute("src")).toBe("/etenesh/mark.png");
+  expect(mark.className).toContain("bg-white");
+  expect(mark.className).not.toContain("dark:invert");
 });

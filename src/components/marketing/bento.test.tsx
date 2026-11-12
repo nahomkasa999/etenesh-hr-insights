@@ -11,13 +11,26 @@ afterEach(() => {
   cleanup();
 });
 
-const STAR_LINK = /Star on GitHub/u;
+const BROWSE_JOBS = /^Browse jobs/u;
+const SEE_COURSES = /^See courses/u;
+const NEXT_JOB = /Your next job is waiting/u;
 
 const TITLES = [
-  "Visitors come back on their own",
-  "Your colors, not ours",
-  "Found on Google from day one",
-  "Employers pay to post",
+  "Made for your phone",
+  "Clear, honest listings",
+  "Updates on Telegram",
+  "Employers get the right people",
+];
+
+const SECTORS = [
+  "Banking",
+  "NGOs",
+  "Health",
+  "IT & Software",
+  "Hospitality",
+  "Manufacturing",
+  "Logistics",
+  "Education",
 ];
 
 test("bento renders each card for phones and for desktop", () => {
@@ -28,24 +41,43 @@ test("bento renders each card for phones and for desktop", () => {
   }
 });
 
-test("the JobPosting sample wraps instead of clipping", () => {
+test("bento is the employers section and shows the Telegram preview", () => {
   const { container } = render(<Bento />);
-  const pre = container.querySelector("pre");
 
-  expect(pre?.className).toContain("whitespace-pre-wrap");
-  expect(pre?.className).not.toContain("overflow-x-auto");
+  expect(container.querySelector("#employers")).not.toBeNull();
+  expect(container.querySelector("pre")).toBeNull();
+  expect(
+    screen.getByRole("img", {
+      name: "Example Telegram updates from the Etenesh bot",
+    })
+  ).toBeTruthy();
+  expect(screen.getByText("/status")).toBeTruthy();
 });
 
-test("tech stack lists the same eight names as chips and as a grid", () => {
-  render(<TechStack />);
+test("tech stack lists the same eight sectors as chips and as a grid", () => {
+  const { container } = render(<TechStack />);
 
   expect(screen.getAllByRole("list")).toHaveLength(2);
-  expect(screen.getAllByText("Tailwind CSS")).toHaveLength(2);
+  for (const sector of SECTORS) {
+    expect(screen.getAllByText(sector)).toHaveLength(2);
+  }
+  // Only the desktop grid carries a lucide icon per sector.
+  expect(container.querySelectorAll("svg.lucide")).toHaveLength(8);
 });
 
 test("final CTA has a phone close and the desktop band", () => {
   render(<FinalCta />);
 
-  expect(screen.getByRole("link", { name: "Clone now" })).toBeTruthy();
-  expect(screen.getByRole("link", { name: STAR_LINK })).toBeTruthy();
+  const browse = screen.getAllByRole("link", { name: BROWSE_JOBS });
+  expect(browse).toHaveLength(2);
+  for (const link of browse) {
+    expect(link.getAttribute("href")).toBe("/jobs");
+  }
+
+  const courses = screen.getAllByRole("link", { name: SEE_COURSES });
+  expect(courses).toHaveLength(2);
+  for (const link of courses) {
+    expect(link.getAttribute("href")).toBe("/#courses");
+  }
+  expect(screen.getAllByRole("heading", { name: NEXT_JOB })).toHaveLength(2);
 });

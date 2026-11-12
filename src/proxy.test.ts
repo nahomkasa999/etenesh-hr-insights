@@ -88,7 +88,7 @@ test("only admin pages allow the code editor stylesheet", () => {
   }
 });
 
-test("bordful.com rewrites /favicon.ico to the Bordful mark", () => {
+test("bordful.com rewrites /favicon.ico to the Etenesh mark", () => {
   withMarketing("true", () => {
     const response = run("/favicon.ico");
     const rewrite = response.headers.get("x-middleware-rewrite");
@@ -96,7 +96,7 @@ test("bordful.com rewrites /favicon.ico to the Bordful mark", () => {
     expect(response.status).toBe(200);
     expect(response.headers.get("location")).toBeNull();
     expect(rewrite).not.toBeNull();
-    expect(new URL(rewrite ?? "").pathname).toBe("/marketing/icon.svg");
+    expect(new URL(rewrite ?? "").pathname).toBe("/etenesh/mark.png");
   });
 });
 

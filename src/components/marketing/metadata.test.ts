@@ -11,31 +11,33 @@ test("marketing layout metadata is empty when the flag is off", () => {
   expect(marketingLayoutMetadata(false)).toEqual({});
 });
 
-test("marketing layout metadata is the Bordful card when the flag is on", () => {
+test("marketing layout metadata is the Etenesh HR card when the flag is on", () => {
   const metadata = marketingLayoutMetadata(true);
 
   expect(metadata.title).toEqual({
-    default: "Bordful: open-source job board template",
-    template: "%s | Bordful",
+    default: "Etenesh HR Insights: jobs in Ethiopia",
+    template: "%s | Etenesh HR",
   });
   expect(metadata.description).toBe(MARKETING_DESCRIPTION);
   expect(metadata.icons).toEqual({
-    apple: "/marketing/apple-icon.png",
-    icon: "/marketing/icon.svg",
+    apple: "/etenesh/icon-512.png",
+    icon: "/etenesh/mark.png",
   });
   expect(metadata.openGraph).toMatchObject({
     images: [
       {
-        height: 630,
-        url: "/marketing/bordful-job-board-software.png",
-        width: 1200,
+        alt: "Etenesh HR Insights: jobs in Ethiopia",
+        height: 512,
+        url: "/etenesh/icon-512.png",
+        width: 512,
       },
     ],
-    siteName: "Bordful",
+    siteName: "Etenesh HR Insights",
   });
   expect(metadata.twitter).toMatchObject({
-    creator: "@bordful",
-    site: "@bordful",
+    card: "summary_large_image",
+    images: ["/etenesh/icon-512.png"],
+    title: "Etenesh HR Insights: jobs in Ethiopia",
   });
   expect(metadata.metadataBase).toBeInstanceOf(URL);
 });
@@ -45,7 +47,7 @@ test("the marketing home takes the same card with its own title", () => {
   const home = marketingHomeMetadata();
 
   expect(home.title).toEqual({
-    absolute: "Bordful: open-source job board template",
+    absolute: "Etenesh HR Insights: jobs in Ethiopia",
   });
   expect(home.description).toBe(MARKETING_DESCRIPTION);
   expect(home.icons).toEqual(layout.icons);

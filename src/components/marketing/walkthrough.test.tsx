@@ -12,9 +12,9 @@ afterEach(() => {
 const LABELS = [
   "Browse and filter",
   "Read a role",
-  "Come back with alerts",
-  "Take paid posts",
-  "Make it yours",
+  "Apply in minutes",
+  "Follow on Telegram",
+  "Learn with a course",
 ];
 
 test("walkthrough renders five tabs with one panel visible", () => {
@@ -36,7 +36,7 @@ test("walkthrough renders five tabs with one panel visible", () => {
 test("clicking a tab selects it and shows its panel", () => {
   render(<Walkthrough />);
 
-  const tab = screen.getByRole("tab", { name: "Make it yours" });
+  const tab = screen.getByRole("tab", { name: "Learn with a course" });
   fireEvent.click(tab);
 
   expect(tab.getAttribute("aria-selected")).toBe("true");
@@ -53,7 +53,7 @@ test("arrow keys move selection and focus, wrapping at the ends", () => {
   fireEvent.click(first);
   fireEvent.keyDown(first, { key: "ArrowUp" });
 
-  const last = screen.getByRole("tab", { name: "Make it yours" });
+  const last = screen.getByRole("tab", { name: "Learn with a course" });
   expect(last.getAttribute("aria-selected")).toBe("true");
   expect(document.activeElement).toBe(last);
 

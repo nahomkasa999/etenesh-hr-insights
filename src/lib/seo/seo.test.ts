@@ -249,8 +249,6 @@ test("fork sitemap skips sample jobs and orders companies by slug", () => {
     { url: "https://board.example/" },
     { url: "https://board.example/jobs" },
     { url: "https://board.example/companies" },
-    { url: "https://board.example/blog" },
-    { url: "https://board.example/courses" },
     { url: "https://board.example/jobs/type/contract" },
     { url: "https://board.example/jobs/type/full-time" },
     { url: "https://board.example/jobs/level/senior" },
@@ -305,12 +303,12 @@ test("marketing sitemap starts with the marketing pages", () => {
     "https://board.example/",
     "https://board.example/jobs",
     "https://board.example/companies",
-    "https://board.example/pricing",
-    "https://board.example/showcase",
-    "https://board.example/changelog",
     "https://board.example/about",
     "https://board.example/privacy",
     "https://board.example/terms",
+    "https://board.example/features",
+    "https://board.example/faq",
+    "https://board.example/docs",
   ]);
   expect(entries.some((entry) => entry.url.includes("sample-remote"))).toBe(
     false
@@ -324,9 +322,6 @@ test("marketing sitemap lists the docs, FAQ and features pages", () => {
     siteUrl,
   }).map((entry) => entry.url);
   expect(urls.slice(9)).toEqual([
-    "https://board.example/features",
-    "https://board.example/faq",
-    "https://board.example/docs",
     "https://board.example/docs/deploy",
     "https://board.example/docs/configuration",
     "https://board.example/docs/customization",
@@ -364,8 +359,6 @@ test("sitemap lists /post and /alerts only when those features are on", () => {
     "https://board.example/",
     "https://board.example/jobs",
     "https://board.example/companies",
-    "https://board.example/blog",
-    "https://board.example/courses",
     "https://board.example/alerts",
     "https://board.example/post",
   ]);

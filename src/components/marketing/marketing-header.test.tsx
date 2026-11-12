@@ -3,10 +3,12 @@
 import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, expect, test } from "vitest";
 
-import { DEPLOY_URL } from "./links";
 import { MarketingHeader } from "./marketing-header";
 import { MARKETING_HEADER_LINKS } from "./nav-links";
-import { GITHUB_URL } from "./site";
+
+const SIGN_IN = /^Sign in/u;
+const FIND_JOB = /^Find a job/u;
+const GITHUB = /GitHub/u;
 
 const MARKETING_HEADER_HREFS = MARKETING_HEADER_LINKS.map((link) => link.href);
 
@@ -36,24 +38,22 @@ test("mobile nav links use the same hrefs", () => {
   expect(hrefs).toEqual(MARKETING_HEADER_HREFS);
 });
 
-test("header deploy button opens the Vercel clone flow", () => {
+test("header has Sign in to the admin and Find a job to the board", () => {
   render(<MarketingHeader />);
 
-  const deploy = screen.getByRole("link", { name: "Deploy" });
-  expect(deploy.getAttribute("href")).toBe(DEPLOY_URL);
-  expect(deploy.getAttribute("target")).toBe("_blank");
-  expect(deploy.getAttribute("rel")).toBe("noopener noreferrer");
+  const signIn = screen.getAllByRole("link", { name: SIGN_IN });
+  expect(signIn.length).toBeGreaterThan(0);
+  for (const link of signIn) {
+    expect(link.getAttribute("href")).toBe("/admin");
+  }
+
+  const find = screen.getByRole("link", { name: FIND_JOB });
+  expect(find.getAttribute("href")).toBe("/jobs");
 });
 
-test("header shows one GitHub button per menu and no GitHub icon link", () => {
+test("header no longer shows the GitHub or Deploy buttons", () => {
   render(<MarketingHeader />);
 
-  const github = screen.getAllByRole("link", { name: "GitHub" });
-  expect(github.length).toBeGreaterThan(0);
-  for (const link of github) {
-    expect(link.getAttribute("href")).toBe(GITHUB_URL);
-  }
-  expect(
-    screen.queryAllByRole("link", { name: "GitHub, craftled/bordful" })
-  ).toHaveLength(0);
+  expect(screen.queryAllByRole("link", { name: GITHUB })).toHaveLength(0);
+  expect(screen.queryAllByRole("link", { name: "Deploy" })).toHaveLength(0);
 });

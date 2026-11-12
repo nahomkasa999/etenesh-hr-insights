@@ -21,9 +21,12 @@ function linkedPaths(
     postJobEnabled: features.postJob,
   });
 
+  // Same-page anchors like /#courses are sections of the home page, not
+  // pages of their own, so they stay out of the sitemap.
   return [...nav.header, ...nav.footer]
     .map((item) => item.href)
-    .filter((href) => href !== "/" && href !== "/jobs" && href !== "/feed.xml");
+    .filter((href) => href !== "/" && href !== "/jobs" && href !== "/feed.xml")
+    .filter((href) => !href.includes("#"));
 }
 
 // Post a job is a header button, not a nav href, so it is added on its own.

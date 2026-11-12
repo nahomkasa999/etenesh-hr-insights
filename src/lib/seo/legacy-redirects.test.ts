@@ -42,17 +42,12 @@ test("legacy redirects only apply when marketing is on", () => {
   ]);
 });
 
-test("the demo.bordful.com host rule stays in vercel.json", () => {
+test("vercel.json never sends Etenesh visitors to bordful.com", () => {
   const vercel = JSON.parse(readFileSync("vercel.json", "utf8")) as {
-    redirects: unknown;
+    redirects?: { destination: string }[];
   };
 
-  expect(vercel.redirects).toEqual([
-    {
-      destination: "https://bordful.com/jobs",
-      has: [{ type: "host", value: "demo.bordful.com" }],
-      source: "/:path*",
-      statusCode: 301,
-    },
-  ]);
+  for (const rule of vercel.redirects ?? []) {
+    expect(rule.destination).not.toContain("bordful.com");
+  }
 });

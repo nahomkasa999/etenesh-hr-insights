@@ -16,7 +16,7 @@ test("section pricing plan names are headings", () => {
     screen
       .getAllByRole("heading", { level: 3 })
       .map((heading) => heading.textContent)
-  ).toEqual(["Open Source", "Custom Setup"]);
+  ).toEqual(["Write a CV that gets read", "Interview ready in one week"]);
 });
 
 test("standalone pricing plan names are headings", () => {
@@ -26,5 +26,5 @@ test("standalone pricing plan names are headings", () => {
     screen
       .getAllByRole("heading", { level: 2 })
       .map((heading) => heading.textContent)
-  ).toEqual(["Open Source", "Custom Setup"]);
+  ).toEqual(["Write a CV that gets read", "Interview ready in one week"]);
 });

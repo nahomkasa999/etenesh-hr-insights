@@ -41,7 +41,7 @@ test.describe("E9 theme-rebrand", { tag: ["@E9"] }, () => {
     await updateGlobal(admin, "site-settings", { logo: id });
     await admin.dispose();
 
-    await page.goto("/jobs");
+    await page.goto("/");
     const html = await page.content();
     expect(html).toContain("--primary:#2563eb");
     expect(html).toContain("--radius:1rem");

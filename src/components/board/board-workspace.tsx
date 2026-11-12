@@ -160,7 +160,6 @@ export function BoardWorkspace({
   alertsEnabled = false,
   aside,
   className,
-  demoApply = false,
   jobs,
   list,
   now,
@@ -174,7 +173,6 @@ export function BoardWorkspace({
   alertsEnabled?: boolean;
   aside?: ReactNode;
   className: string;
-  demoApply?: boolean;
   jobs: JobListItem[];
   list: ReactNode;
   now: number;
@@ -317,7 +315,6 @@ export function BoardWorkspace({
           <div className="sticky top-2 flex h-[calc(100dvh-1rem)] flex-col">
             <JobPreview
               alertsEnabled={alertsEnabled}
-              demoApply={demoApply}
               index={offset + index + 1}
               job={current}
               jobs={jobs}

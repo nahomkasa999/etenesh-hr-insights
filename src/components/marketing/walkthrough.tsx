@@ -11,7 +11,8 @@ import {
 
 import { cn } from "@/lib/utils";
 
-import { PhoneShot, Shot, ThemedBoardShot, ThemedShot } from "./shots";
+import { COURSES, CourseCard, TelegramChat } from "./etenesh-mocks";
+import { PhoneShot, ThemedBoardShot, ThemedShot } from "./shots";
 
 interface Step {
   description: string;
@@ -25,13 +26,11 @@ interface Step {
 const PANEL_SHOT =
   "absolute top-6 left-6 w-[640px] md:top-10 md:left-10 md:w-[800px]";
 
-// Every line here is something the app does today: URL-driven filters, a page
-// per job with a pinned mobile Apply bar, Resend alerts and browser-local saved
-// jobs, the Stripe payment link with a listing duration, and Site settings.
+// What a job seeker does on Etenesh, one tab per step.
 const STEPS: readonly Step[] = [
   {
     description:
-      "Search, then filter by type, level, salary, language, remote and visa sponsorship. Every view has its own URL.",
+      "Search by title or company, then filter by city, job type and level.",
     id: "browse",
     label: "Browse and filter",
     shot: (
@@ -43,7 +42,7 @@ const STEPS: readonly Step[] = [
   },
   {
     description:
-      "Each job opens on its own page. On a phone, Apply stays pinned.",
+      "Each job has its own page with the salary, deadline and requirements. On a phone, Apply stays pinned.",
     id: "read",
     label: "Read a role",
     shot: (
@@ -56,9 +55,9 @@ const STEPS: readonly Step[] = [
   },
   {
     description:
-      "Visitors sign up for a daily or weekly email of new jobs, sent through Resend. Saved jobs stay in their browser.",
-    id: "alerts",
-    label: "Come back with alerts",
+      "Fill in your details, upload your CV and answer a few questions. You get a reference number right away.",
+    id: "apply",
+    label: "Apply in minutes",
     shot: (
       <div className="absolute top-6 left-6 flex items-start gap-6 md:top-10 md:left-16 md:gap-8">
         <PhoneShot
@@ -76,34 +75,28 @@ const STEPS: readonly Step[] = [
   },
   {
     description:
-      "Employers pay through your Stripe payment link. You publish the job and it expires after the days you set.",
-    id: "paid",
-    label: "Take paid posts",
+      "Connect to the Etenesh bot once. Every change to your application arrives as a Telegram message.",
+    id: "telegram",
+    label: "Follow on Telegram",
     shot: (
-      <ThemedBoardShot
-        alt="The board home with the job list"
-        className={PANEL_SHOT}
-      />
+      <TelegramChat className="absolute top-6 left-6 md:top-10 md:left-16" />
     ),
   },
   {
     description:
-      "Name, logo, colors, fonts and radius come from Site settings, in light and dark.",
-    id: "brand",
-    label: "Make it yours",
+      "Short video courses on CVs and interviews. Pay on Telegram and get your link the same day.",
+    id: "courses",
+    label: "Learn with a course",
     shot: (
-      <>
-        <Shot
-          alt="The board in the light theme"
-          className="absolute top-6 left-6 w-[560px] md:top-10 md:left-10 md:w-[640px]"
-          name="boardLight"
-        />
-        <Shot
-          alt="The board in the dark theme"
-          className="absolute top-24 left-28 w-[560px] md:top-[120px] md:left-[200px] md:w-[640px]"
-          name="boardDark"
-        />
-      </>
+      <div className="absolute top-6 left-6 flex items-start gap-6 md:top-10 md:left-16">
+        {COURSES.map((course, index) => (
+          <CourseCard
+            className={index === 1 ? "mt-8" : undefined}
+            course={course}
+            key={course.title}
+          />
+        ))}
+      </div>
     ),
   },
 ];
@@ -164,13 +157,13 @@ export function Walkthrough() {
       <div className="flex flex-col md:flex-row">
         <div className="flex flex-col gap-5 px-4 pt-10 pb-6 md:w-[300px] md:shrink-0 md:py-12 md:pr-8 md:pl-10">
           <p className="bg-tag text-muted-foreground flex h-5 items-center self-start rounded-sm px-[7px] text-[11px] leading-[14px] font-medium">
-            Product
+            For job seekers
           </p>
           <h2
             className="text-foreground text-[22px] leading-7 font-medium tracking-[-0.02em]"
             id={`${baseId}-heading`}
           >
-            Built for the people reading it
+            Built for the people applying
           </h2>
           <div
             aria-labelledby={`${baseId}-heading`}

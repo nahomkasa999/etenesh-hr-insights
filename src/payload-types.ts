@@ -62,21 +62,20 @@ export type SupportedTimezones =
   | 'Pacific/Fiji';
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "LexicalNodes_04A8F30D".
+ * via the `definition` "LexicalNodes_8BE33630".
  */
-export type LexicalNodes_04A8F30D =
+export type LexicalNodes_8BE33630 =
   | SerializedTextNode
   | SerializedTabNode
   | SerializedLineBreakNode
-  | SerializedParagraphNode<LexicalNodes_04A8F30D>
+  | SerializedParagraphNode<LexicalNodes_8BE33630>
   | SerializedHorizontalRuleNode
   | SerializedUploadNode<'media'>
-  | SerializedQuoteNode<LexicalNodes_04A8F30D>
+  | SerializedQuoteNode<LexicalNodes_8BE33630>
   | SerializedRelationshipNode<
-      | 'users'
-      | 'companies'
       | 'jobs'
-      | 'career-guides'
+      | 'companies'
+      | 'users'
       | 'alert-subscribers'
       | 'payload-kv'
       | 'payload-jobs'
@@ -84,11 +83,11 @@ export type LexicalNodes_04A8F30D =
       | 'payload-preferences'
       | 'payload-migrations'
     >
-  | SerializedAutoLinkNode<LexicalNodes_04A8F30D, LexicalLinkFields>
-  | SerializedLinkNode<LexicalNodes_04A8F30D, LexicalLinkFields>
-  | SerializedListNode<LexicalNodes_04A8F30D>
-  | SerializedListItemNode<LexicalNodes_04A8F30D>
-  | SerializedHeadingNode<LexicalNodes_04A8F30D>;
+  | SerializedAutoLinkNode<LexicalNodes_8BE33630, LexicalLinkFields>
+  | SerializedLinkNode<LexicalNodes_8BE33630, LexicalLinkFields>
+  | SerializedListNode<LexicalNodes_8BE33630>
+  | SerializedListItemNode<LexicalNodes_8BE33630>
+  | SerializedHeadingNode<LexicalNodes_8BE33630>;
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "LexicalNodes_3DE324E4".
@@ -108,11 +107,10 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    jobs: Job;
+    companies: Company;
     users: User;
     media: Media;
-    companies: Company;
-    jobs: Job;
-    'career-guides': CareerGuide;
     'alert-subscribers': AlertSubscriber;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
@@ -123,11 +121,10 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    jobs: JobsSelect<false> | JobsSelect<true>;
+    companies: CompaniesSelect<false> | CompaniesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    companies: CompaniesSelect<false> | CompaniesSelect<true>;
-    jobs: JobsSelect<false> | JobsSelect<true>;
-    'career-guides': CareerGuidesSelect<false> | CareerGuidesSelect<true>;
     'alert-subscribers': AlertSubscribersSelect<false> | AlertSubscribersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -196,139 +193,6 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  roles: ('admin' | 'editor')[];
-  updatedAt: string;
-  createdAt: string;
-  apiKey?: string | null;
-  apiKeyLast4?: string | null;
-  apiKeyIndex?: string | null;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  resetPasswordRequestedAt?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  prefix?: string | null;
-  _objectKey?: string | null;
-  createdBy?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
-  updatedBy?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  original?: {
-    filename?: string | null;
-    url?: string | null;
-    mimeType?: string | null;
-    filesize?: number | null;
-    width?: number | null;
-    height?: number | null;
-    prefix?: string | null;
-    _objectKey?: string | null;
-  };
-  focalX?: number | null;
-  focalY?: number | null;
-  variants?: {
-    thumb?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-      prefix?: string | null;
-      _objectKey?: string | null;
-    };
-    card?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-      prefix?: string | null;
-      _objectKey?: string | null;
-    };
-    og?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-      prefix?: string | null;
-      _objectKey?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "companies".
- */
-export interface Company {
-  id: number;
-  name: string;
-  slug: string;
-  logo?: (number | null) | Media;
-  logoUrl?: string | null;
-  domain?: string | null;
-  website?: string | null;
-  careersUrl?: string | null;
-  linkedinUrl?: string | null;
-  twitterUrl?: string | null;
-  description?: LexicalRichText<LexicalNodes_04A8F30D> | null;
-  industry?: string | null;
-  location?: string | null;
-  headcount?: number | null;
-  origin: 'manual' | 'paid' | 'bordfeed' | 'bordfeed_sample';
-  bordfeedCompanyId?: string | null;
-  createdBy?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
-  updatedBy?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "jobs".
  */
 export interface Job {
@@ -344,7 +208,7 @@ export interface Job {
    * A short plain-text summary of the role. Board search matches it.
    */
   summary?: string | null;
-  description?: LexicalRichText<LexicalNodes_04A8F30D> | null;
+  description?: LexicalRichText<LexicalNodes_8BE33630> | null;
   applyUrl?: string | null;
   applyEmail?: string | null;
   applyMethod?: string | null;
@@ -424,15 +288,25 @@ export interface Job {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "career-guides".
+ * via the `definition` "companies".
  */
-export interface CareerGuide {
+export interface Company {
   id: number;
-  title: string;
+  name: string;
   slug: string;
-  topic: string;
-  summary: string;
-  body: LexicalRichText<LexicalNodes_04A8F30D>;
+  logo?: (number | null) | Media;
+  logoUrl?: string | null;
+  domain?: string | null;
+  website?: string | null;
+  careersUrl?: string | null;
+  linkedinUrl?: string | null;
+  twitterUrl?: string | null;
+  description?: LexicalRichText<LexicalNodes_8BE33630> | null;
+  industry?: string | null;
+  location?: string | null;
+  headcount?: number | null;
+  origin: 'manual' | 'paid' | 'bordfeed' | 'bordfeed_sample';
+  bordfeedCompanyId?: string | null;
   createdBy?: {
     relationTo: 'users';
     value: number | User;
@@ -443,7 +317,107 @@ export interface CareerGuide {
   } | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  prefix?: string | null;
+  _objectKey?: string | null;
+  createdBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
+  updatedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  original?: {
+    filename?: string | null;
+    url?: string | null;
+    mimeType?: string | null;
+    filesize?: number | null;
+    width?: number | null;
+    height?: number | null;
+    prefix?: string | null;
+    _objectKey?: string | null;
+  };
+  focalX?: number | null;
+  focalY?: number | null;
+  variants?: {
+    thumb?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+      prefix?: string | null;
+      _objectKey?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+      prefix?: string | null;
+      _objectKey?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+      prefix?: string | null;
+      _objectKey?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  roles: ('admin' | 'editor')[];
+  updatedAt: string;
+  createdAt: string;
+  apiKey?: string | null;
+  apiKeyLast4?: string | null;
+  apiKeyIndex?: string | null;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -606,24 +580,20 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: number | Media;
+        relationTo: 'jobs';
+        value: number | Job;
       } | null)
     | ({
         relationTo: 'companies';
         value: number | Company;
       } | null)
     | ({
-        relationTo: 'jobs';
-        value: number | Job;
+        relationTo: 'users';
+        value: number | User;
       } | null)
     | ({
-        relationTo: 'career-guides';
-        value: number | CareerGuide;
+        relationTo: 'media';
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'alert-subscribers';
@@ -692,6 +662,95 @@ export interface PayloadLlmInstruction {
   } | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "jobs_select".
+ */
+export interface JobsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  company?: T;
+  companyName?: T;
+  companySlug?: T;
+  companyLogo?: T;
+  companyDomain?: T;
+  summary?: T;
+  description?: T;
+  applyUrl?: T;
+  applyEmail?: T;
+  applyMethod?: T;
+  employmentType?: T;
+  workplaceType?: T;
+  locationDisplay?: T;
+  locality?: T;
+  region?: T;
+  countryCode?: T;
+  remoteRegion?: T;
+  salaryMin?: T;
+  salaryMax?: T;
+  salaryCurrency?: T;
+  salaryMinUsd?: T;
+  salaryMaxUsd?: T;
+  careerLevel?: T;
+  seniority?: T;
+  visaSponsorship?: T;
+  languages?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  categories?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  skills?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  featured?: T;
+  publishedAt?: T;
+  validThrough?: T;
+  origin?: T;
+  bordfeedJobId?: T;
+  bordfeedDescriptionHash?: T;
+  sourceListingUrl?: T;
+  paymentReference?: T;
+  createdBy?: T;
+  updatedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "companies_select".
+ */
+export interface CompaniesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  logo?: T;
+  logoUrl?: T;
+  domain?: T;
+  website?: T;
+  careersUrl?: T;
+  linkedinUrl?: T;
+  twitterUrl?: T;
+  description?: T;
+  industry?: T;
+  location?: T;
+  headcount?: T;
+  origin?: T;
+  bordfeedCompanyId?: T;
+  createdBy?: T;
+  updatedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -793,111 +852,6 @@ export interface MediaSelect<T extends boolean = true> {
               _objectKey?: T;
             };
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "companies_select".
- */
-export interface CompaniesSelect<T extends boolean = true> {
-  name?: T;
-  slug?: T;
-  logo?: T;
-  logoUrl?: T;
-  domain?: T;
-  website?: T;
-  careersUrl?: T;
-  linkedinUrl?: T;
-  twitterUrl?: T;
-  description?: T;
-  industry?: T;
-  location?: T;
-  headcount?: T;
-  origin?: T;
-  bordfeedCompanyId?: T;
-  createdBy?: T;
-  updatedBy?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "jobs_select".
- */
-export interface JobsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  company?: T;
-  companyName?: T;
-  companySlug?: T;
-  companyLogo?: T;
-  companyDomain?: T;
-  summary?: T;
-  description?: T;
-  applyUrl?: T;
-  applyEmail?: T;
-  applyMethod?: T;
-  employmentType?: T;
-  workplaceType?: T;
-  locationDisplay?: T;
-  locality?: T;
-  region?: T;
-  countryCode?: T;
-  remoteRegion?: T;
-  salaryMin?: T;
-  salaryMax?: T;
-  salaryCurrency?: T;
-  salaryMinUsd?: T;
-  salaryMaxUsd?: T;
-  careerLevel?: T;
-  seniority?: T;
-  visaSponsorship?: T;
-  languages?:
-    | T
-    | {
-        value?: T;
-        id?: T;
-      };
-  categories?:
-    | T
-    | {
-        value?: T;
-        id?: T;
-      };
-  skills?:
-    | T
-    | {
-        value?: T;
-        id?: T;
-      };
-  featured?: T;
-  publishedAt?: T;
-  validThrough?: T;
-  origin?: T;
-  bordfeedJobId?: T;
-  bordfeedDescriptionHash?: T;
-  sourceListingUrl?: T;
-  paymentReference?: T;
-  createdBy?: T;
-  updatedBy?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "career-guides_select".
- */
-export interface CareerGuidesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  topic?: T;
-  summary?: T;
-  body?: T;
-  createdBy?: T;
-  updatedBy?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1337,7 +1291,7 @@ export interface CollectionsWidget {
 export interface CollectionQueryWidget {
   data?: {
     title?: string | null;
-    relatedCollection: 'users' | 'media' | 'companies' | 'jobs' | 'career-guides' | 'alert-subscribers';
+    relatedCollection: 'jobs' | 'companies' | 'users' | 'media';
     where?:
       | {
           [k: string]: unknown;
@@ -1359,7 +1313,7 @@ export interface CollectionQueryWidget {
  */
 export interface ActivityWidget {
   data?: {
-    excludedCollections?: ('users' | 'media' | 'companies' | 'jobs' | 'career-guides' | 'alert-subscribers')[] | null;
+    excludedCollections?: ('jobs' | 'companies' | 'users' | 'media')[] | null;
   };
   width: 'small' | 'medium' | 'large' | 'x-large' | 'full';
 }

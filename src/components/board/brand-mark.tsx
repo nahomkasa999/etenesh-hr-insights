@@ -1,6 +1,6 @@
 import { BriefcaseBusiness } from "lucide-react";
 
-const BORDFUL_MARK_SRC = "/marketing/logos/bordful.svg";
+const BORDFUL_MARK_SRC = "/etenesh/mark.png";
 
 // Shown when Site settings has no logo, so a fresh board still has a mark.
 // bordful.com (marketing mode) shows the Bordful mark, as Paper draws it.
@@ -10,7 +10,7 @@ export function BrandMark({ bordful = false }: { bordful?: boolean }) {
       // biome-ignore lint/performance/noImgElement: a 20px static mark
       <img
         alt=""
-        className="size-5 shrink-0 dark:invert"
+        className="ring-line size-5 shrink-0 rounded-[5px] bg-white object-contain ring-1"
         data-testid="bordful-mark"
         height={20}
         src={BORDFUL_MARK_SRC}

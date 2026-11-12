@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import { BordfeedCredit } from "@/components/board/bordfeed-credit";
@@ -8,7 +7,6 @@ import {
   type SocialProfiles,
 } from "@/components/board/social-links";
 import type { FooterColumn } from "@/config/nav";
-import { eteneshSocial } from "@/custom/etenesh/brand";
 
 const FOOTER_LINK_CLASS =
   "text-muted-foreground hover:text-foreground transition-colors";
@@ -47,7 +45,7 @@ export function FooterView({
 
   return (
     <footer
-      className="text-foreground border-line hidden border-t bg-[color-mix(in_srgb,var(--background)_97.5%,black)] md:block dark:bg-[color-mix(in_srgb,var(--background)_80%,black)]"
+      className="text-foreground border-line border-t bg-[color-mix(in_srgb,var(--background)_97.5%,black)] dark:bg-[color-mix(in_srgb,var(--background)_80%,black)]"
       data-testid="site-footer"
     >
       <div className="flex w-full flex-col gap-7 px-4 pt-10 pb-7">
@@ -71,11 +69,17 @@ export function FooterView({
             {tagline ? (
               <p className="text-subtle text-[13px] leading-5">{tagline}</p>
             ) : null}
-            {showAlert ? (
-              <Link className={FOOTER_BUTTON_CLASS} href="/alerts">
-                Create alert
-              </Link>
-            ) : null}
+            <div className="flex gap-1.5 pt-1">
+              {showAlert ? (
+                <Link className={FOOTER_BUTTON_CLASS} href="/alerts">
+                  Create alert
+                </Link>
+              ) : null}
+              {/* Plain anchor: feeds are route handlers, and next/link would prefetch them. */}
+              <a className={FOOTER_BUTTON_CLASS} href="/feed.xml">
+                RSS
+              </a>
+            </div>
             {hasSocial ? (
               <SocialLinks
                 className="pt-1"
@@ -119,16 +123,6 @@ export function FooterView({
                 }`
               : ` ${name}`}
           </p>
-          {bordfulMark ? null : (
-            <a
-              className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium"
-              href={eteneshSocial.tiktok}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Etenesh on TikTok <ArrowUpRight aria-hidden="true" size={14} />
-            </a>
-          )}
           {showAttribution ? <BordfeedCredit /> : null}
         </div>
       </div>

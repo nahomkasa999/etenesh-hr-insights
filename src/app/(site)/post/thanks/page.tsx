@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 
 import { BoardShell } from "@/components/board/board-shell";
 import { buildPostJobView } from "@/components/post/post-job-view";
-import { BOARD_HOME_PATH } from "@/config/nav";
+import { isMarketingEnabled } from "@/config/flags";
+import { boardHomePath } from "@/config/nav";
 import { getSiteSettings } from "@/lib/read";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -57,7 +58,7 @@ export default async function PostJobThanksPage() {
         </p>
         <a
           className="bg-card text-foreground border-line-strong inline-flex h-[34px] items-center rounded-lg border px-[14px] text-[13px] leading-4 font-medium"
-          href={BOARD_HOME_PATH}
+          href={boardHomePath(isMarketingEnabled())}
         >
           Back to the board
         </a>

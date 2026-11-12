@@ -19,7 +19,7 @@ const ROWS = [
 ] as const;
 
 async function search(page: Page, query: string): Promise<void> {
-  await page.goto("/jobs");
+  await page.goto("/");
   await page.getByTestId("board-search-input").fill(query);
   await page.getByTestId("board-search-submit").click();
   await page.waitForLoadState("domcontentloaded");

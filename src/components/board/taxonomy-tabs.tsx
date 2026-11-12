@@ -48,7 +48,7 @@ export function TaxonomyTabs({
               "shrink-0 rounded-full px-3 py-[7px] text-[13px] leading-4 font-medium ring-1 md:rounded-[6px] md:px-3 md:py-1 md:text-[13px] md:ring-0",
               compact ? null : "md:leading-[19px]",
               current
-                ? "bg-primary text-primary-foreground ring-primary md:bg-card md:text-foreground md:shadow-xs"
+                ? "bg-primary text-primary-foreground ring-primary md:bg-card md:text-foreground md:shadow-[0_0_0_1px_var(--line),0_1px_2px_rgb(0_0_0/0.05)]"
                 : "bg-card text-foreground ring-line-strong md:text-muted-foreground md:hover:text-foreground md:bg-transparent md:font-normal"
             )}
             data-testid="taxonomy-tab"

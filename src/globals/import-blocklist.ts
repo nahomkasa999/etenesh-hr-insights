@@ -21,6 +21,7 @@ export const ImportBlocklist: GlobalConfig = {
   admin: {
     description:
       "Bordfeed jobs that match any entry are not imported. Saving also unpublishes matching imported jobs. Manual and paid jobs are never affected.",
+    hidden: true,
   },
   authorship: false,
   fields: [

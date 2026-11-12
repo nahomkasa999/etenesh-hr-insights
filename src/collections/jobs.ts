@@ -202,14 +202,8 @@ export const Jobs: CollectionConfig = {
     update: isStaff,
   },
   admin: {
-    defaultColumns: [
-      "title",
-      "companyName",
-      "origin",
-      "_status",
-      "publishedAt",
-      "validThrough",
-    ],
+    defaultColumns: ["title", "companyName", "_status", "validThrough"],
+    group: "Hiring",
     useAsTitle: "title",
   },
   fields: [
@@ -233,7 +227,12 @@ export const Jobs: CollectionConfig = {
       relationTo: "companies",
       type: "relationship",
     }),
-    owned({ name: "companyName", required: true, type: "text" }),
+    owned({
+      label: "Company",
+      name: "companyName",
+      required: true,
+      type: "text",
+    }),
     owned({
       admin: { readOnly: true },
       index: true,
@@ -331,6 +330,7 @@ export const Jobs: CollectionConfig = {
     owned({
       admin: sidebarDate,
       index: true,
+      label: "Deadline",
       name: "validThrough",
       type: "date",
     }),

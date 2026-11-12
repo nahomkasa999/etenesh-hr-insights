@@ -13,6 +13,7 @@ import {
   TAXONOMY_INDEX_LABEL,
   TAXONOMY_INDEX_PATH,
 } from "@/components/board/taxonomy-tabs";
+import { isMarketingEnabled } from "@/config/flags";
 import { buildBoardFacets, filterBoard } from "@/lib/board/filter";
 import { formatRelativePosted, SENIORITY_LABELS } from "@/lib/board/format";
 import {
@@ -499,6 +500,7 @@ export async function TaxonomyArchive({
     notFound();
   }
 
+  const marketing = isMarketingEnabled();
   const options = { defaultPerPage: settings.board.jobsPerPage };
   const base = parseBoardQuery(new URLSearchParams(""), options);
   const slug = slugifyTaxonomyValue(value);
@@ -614,6 +616,7 @@ export async function TaxonomyArchive({
             archiveKind={kind}
             archiveSearch={refineSearch}
             archiveValue={value}
+            marketing={marketing}
             options={options}
             page={view.page}
             query={query}

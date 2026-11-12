@@ -3,29 +3,25 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 
+import { BRAND } from "./brand";
 import { KBD_ON_OUTLINE, KBD_ON_PRIMARY, Kbd } from "./kbd";
-import { DEPLOY_URL } from "./links";
 import { MarketingHotkeys } from "./marketing-hotkeys";
 import { MarketingImage } from "./marketing-image";
 import { MarketingNavLinks } from "./marketing-nav-links";
 import { MARKETING_HEADER_LINKS } from "./nav-links";
-import { GITHUB_URL } from "./site";
 
 export function MarketingLogo() {
   return (
-    <Link
-      className="flex h-5 w-20 items-center justify-center gap-1.5 rounded-sm"
-      href="/"
-    >
+    <Link className="flex h-6 items-center gap-2 rounded-sm" href="/">
       <MarketingImage
         alt=""
-        className="marketing-mono size-[19px]"
-        height={19}
-        src="/marketing/logos/bordful.svg"
-        width={19}
+        className="ring-line size-6 rounded-[6px] bg-white object-contain ring-1"
+        height={24}
+        src={BRAND.logo}
+        width={24}
       />
-      <span className="text-foreground text-[12.5px] leading-5 font-medium tracking-[-0.01em]">
-        Bordful
+      <span className="text-foreground text-[14px] leading-5 font-medium tracking-[-0.01em]">
+        {BRAND.name}
       </span>
     </Link>
   );
@@ -65,18 +61,18 @@ export function MarketingHeader() {
             className="hidden h-[30px] gap-[7px] rounded-lg px-2.5 shadow-xs lg:inline-flex"
             variant="outline"
           >
-            <a href={GITHUB_URL} rel="noopener noreferrer" target="_blank">
-              GitHub
-              <Kbd className={KBD_ON_OUTLINE}>G</Kbd>
+            <a href={BRAND.signInUrl}>
+              Sign in
+              <Kbd className={KBD_ON_OUTLINE}>S</Kbd>
             </a>
           </Button>
           <Button
             asChild
             className="h-9 gap-[7px] rounded-lg px-3.5 text-[14px] lg:h-[30px] lg:px-2.5 lg:text-[13px]"
           >
-            <a href={DEPLOY_URL} rel="noopener noreferrer" target="_blank">
-              Deploy
-              <Kbd className={KBD_ON_PRIMARY}>D</Kbd>
+            <a href={BRAND.jobsUrl}>
+              Find a job
+              <Kbd className={KBD_ON_PRIMARY}>J</Kbd>
             </a>
           </Button>
           <details className="relative lg:hidden">
@@ -91,16 +87,10 @@ export function MarketingHeader() {
               </nav>
               <div className="border-line mt-3 flex flex-col gap-2 border-t pt-4">
                 <Button asChild className="h-10 w-full" variant="outline">
-                  <Link href="/jobs">Live demo</Link>
+                  <Link href={BRAND.coursesUrl}>Courses</Link>
                 </Button>
                 <Button asChild className="h-10 w-full" variant="outline">
-                  <a
-                    href={GITHUB_URL}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    GitHub
-                  </a>
+                  <a href={BRAND.signInUrl}>Sign in</a>
                 </Button>
               </div>
             </div>

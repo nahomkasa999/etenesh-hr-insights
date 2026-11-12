@@ -195,7 +195,7 @@ function Tabs({
             className={cn(
               "h-[30px] rounded-full px-3 text-[13px] leading-4 tabular-nums transition-colors md:h-6 md:rounded-sm",
               active
-                ? "bg-primary text-primary-foreground md:bg-card md:text-foreground font-medium md:shadow-xs"
+                ? "bg-primary text-primary-foreground md:bg-card md:text-foreground font-medium md:shadow-[0_0_0_1px_var(--line),0_1px_2px_rgb(0_0_0/0.05)]"
                 : "bg-card text-foreground ring-line-strong hover:text-foreground md:text-muted-foreground ring-1 md:bg-transparent md:ring-0"
             )}
             data-tab={value}

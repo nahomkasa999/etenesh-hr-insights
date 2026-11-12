@@ -3,11 +3,9 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useState } from "react";
 
-import { JobApplyLink } from "@/components/board/job-actions";
 import { jobStatuses, StatusPill } from "@/components/board/job-row";
 import { HINT_CLASS } from "@/components/board/rail-styles";
 import { useJobList } from "@/components/board/saved-jobs";
-import { demoApplicationHref } from "@/lib/board/apply";
 import { offersVisa } from "@/lib/board/filter";
 import {
   formatLocation,
@@ -309,7 +307,6 @@ function PreviewSide({
 // The right-hand panel for the selected row ("Job open" in the design).
 export function JobPreview({
   alertsEnabled = false,
-  demoApply = false,
   index,
   job,
   jobs = [],
@@ -321,7 +318,6 @@ export function JobPreview({
   total,
 }: {
   alertsEnabled?: boolean;
-  demoApply?: boolean;
   index: number;
   job: JobListItem;
   // The jobs on this page, for "Similar jobs".
@@ -335,11 +331,13 @@ export function JobPreview({
 }) {
   const titleId = useId();
   const saved = useJobList("saved");
+  const applied = useJobList("applied");
   const description = useDescription(job.slug);
   const isSaved = saved.has(job.slug);
   const { toggle } = saved;
+  const { add } = applied;
   const onSave = useCallback(() => toggle(job.slug), [job.slug, toggle]);
-  const applyHref = demoApply ? demoApplicationHref(job.slug) : job.applyHref;
+  const onApply = useCallback(() => add(job.slug), [add, job.slug]);
   const href = buildJobPath(job.slug);
   const facts = previewFacts(job, now);
   const statuses = jobStatuses(job, now);
@@ -359,7 +357,7 @@ export function JobPreview({
   return (
     <section
       aria-labelledby={titleId}
-      className="bg-card ring-line flex min-h-0 flex-1 flex-col overflow-clip rounded-[14px] shadow-xl ring-1"
+      className="bg-card ring-line flex min-h-0 flex-1 flex-col overflow-clip rounded-[14px] shadow-[0_1px_2px_rgb(0_0_0/0.04),0_28px_56px_-20px_rgb(0_0_0/0.16)] ring-1"
       data-testid="job-preview"
     >
       <div className="border-line flex h-11 shrink-0 items-center justify-between border-b pr-4 pl-5">
@@ -499,19 +497,20 @@ export function JobPreview({
           >
             {isSaved ? "Saved" : "Save"}
           </button>
-          {applyHref ? (
-            <JobApplyLink
+          {job.applyHref ? (
+            <a
               className={cn(
                 "bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-[38px] items-center rounded-[8px] px-[18px] text-[14px] leading-[18px] font-medium",
                 FOCUS
               )}
-              demo={demoApply}
-              href={applyHref}
-              slug={job.slug}
-              testId="job-preview-apply"
+              data-testid="job-preview-apply"
+              href={job.applyHref}
+              onClick={onApply}
+              rel="noopener noreferrer"
+              target="_blank"
             >
-              {demoApply ? "Apply" : `Apply at ${job.companyName} ↗`}
-            </JobApplyLink>
+              {job.companyName ? `Apply at ${job.companyName} ↗` : "Apply ↗"}
+            </a>
           ) : (
             <Link
               className={cn(

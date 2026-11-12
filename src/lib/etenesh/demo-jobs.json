@@ -1,0 +1,1111 @@
+{
+  "jobs": [
+    {
+      "title": "Junior Accountant",
+      "company": "Abay Agro Processing PLC",
+      "category": "Accounting & Finance",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Kirkos",
+      "careerLevel": "Junior",
+      "salaryMin": 18000,
+      "salaryMax": 24000,
+      "deadline": "2026-12-05",
+      "positions": 1,
+      "summary": "Support the monthly closing, payables and receivables, and VAT filings for our head office. You will work closely with the Finance Manager and plant accountants.",
+      "about": "Abay Agro Processing PLC produces edible oil and pulses for domestic and export markets. We run a head office in Addis Ababa and a processing plant in Adama.",
+      "responsibilities": [
+        "Record daily sales, purchases and bank transactions in the accounting system",
+        "Prepare supplier payment schedules and reconcile supplier statements",
+        "Support monthly closing and bank reconciliations",
+        "Prepare monthly VAT and withholding tax returns with supervision",
+        "Keep organized filing of invoices, receipts and payment vouchers"
+      ],
+      "requirements": [
+        "BA/BSc in Accounting or Finance",
+        "At least 2 years of experience in an accounting office",
+        "Good knowledge of Peachtree or similar accounting software",
+        "Working knowledge of Excel, including pivot tables and VLOOKUP",
+        "Strong attention to detail and good time management"
+      ],
+      "benefits": ["Transport allowance", "Annual performance bonus"],
+      "criteria": {
+        "minYearsExperience": 2,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Accounting", "Finance"],
+        "requiredSkills": ["Peachtree", "Excel", "VAT reporting"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "Have you prepared monthly VAT returns before? Please describe your experience.",
+        "Are you able to start work in Kirkos within one month?"
+      ]
+    },
+    {
+      "title": "Store Keeper",
+      "company": "Abay Agro Processing PLC",
+      "category": "Logistics & Driving",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Adama",
+      "area": null,
+      "careerLevel": "Entry",
+      "salaryMin": 10000,
+      "salaryMax": 13000,
+      "deadline": "2026-12-10",
+      "positions": 2,
+      "summary": "Manage the raw material and finished goods store at our Adama plant. You will keep accurate stock records and make sure goods are issued and received correctly.",
+      "about": "Abay Agro Processing PLC produces edible oil and pulses for domestic and export markets. We run a head office in Addis Ababa and a processing plant in Adama.",
+      "responsibilities": [
+        "Receive raw materials and check them against purchase orders",
+        "Maintain bin cards and the stock ledger for all store items",
+        "Issue materials to production on approved requisitions",
+        "Conduct monthly physical stock counts and report differences",
+        "Keep the store clean, safe and organized"
+      ],
+      "requirements": [
+        "Diploma or TVET Certificate in Logistics, Accounting or Business Management",
+        "At least 1 year of store keeping experience in a factory is an advantage",
+        "Basic computer skills, including Excel",
+        "Honest, careful and able to lift up to 25 kg"
+      ],
+      "benefits": ["Meals at the factory canteen", "Transport from Adama town"],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "TVET Certificate",
+        "fieldOfStudy": ["Logistics", "Business Management"],
+        "requiredSkills": ["Excel", "Stock control"],
+        "languages": ["Amharic", "Afaan Oromo"],
+        "mustBeIn": "Adama"
+      },
+      "screeningQuestions": [
+        "Have you worked in a store or warehouse before? What did you manage?",
+        "Are you comfortable working in shifts, including some weekends?"
+      ]
+    },
+    {
+      "title": "Sales Representative",
+      "company": "Abay Agro Processing PLC",
+      "category": "Sales & Marketing",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Bole",
+      "careerLevel": "Entry",
+      "salaryMin": 12000,
+      "salaryMax": 16000,
+      "deadline": "2026-12-15",
+      "positions": 3,
+      "summary": "Visit retail shops, supermarkets and wholesalers in Bole and Yeka to sell our edible oil and pulse products. You will meet monthly sales targets and build long-term customer relationships.",
+      "about": "Abay Agro Processing PLC produces edible oil and pulses for domestic and export markets. We run a head office in Addis Ababa and a processing plant in Adama.",
+      "responsibilities": [
+        "Visit assigned retail outlets and wholesalers every week",
+        "Take orders and follow up on delivery and payment",
+        "Achieve monthly sales targets for your territory",
+        "Collect market feedback on prices and competitor products",
+        "Submit daily sales reports through the mobile app"
+      ],
+      "requirements": [
+        "Diploma or BA/BSc in Marketing, Business Administration or a related field",
+        "Previous sales experience in FMCG is an advantage",
+        "Own smartphone and valid driving licence is an advantage",
+        "Confident communicator with a positive attitude"
+      ],
+      "benefits": [
+        "Commission on sales above target",
+        "Mobile phone airtime allowance"
+      ],
+      "criteria": {
+        "minYearsExperience": 1,
+        "education": "Diploma",
+        "fieldOfStudy": ["Marketing", "Business Administration"],
+        "requiredSkills": [
+          "Sales negotiation",
+          "Customer follow-up",
+          "Smartphone reporting"
+        ],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "Describe a time you met or exceeded a sales target.",
+        "Do you have a valid driving licence or your own transport?"
+      ]
+    },
+    {
+      "title": "Branch Manager",
+      "company": "Selam Microfinance S.C.",
+      "category": "Banking & Insurance",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Hawassa",
+      "area": null,
+      "careerLevel": "Manager",
+      "salaryMin": 55000,
+      "salaryMax": 85000,
+      "deadline": "2026-12-20",
+      "positions": 1,
+      "summary": "Lead the Hawassa branch to grow its loan portfolio while keeping arrears low. You will supervise loan officers and cashiers and report directly to the Regional Director.",
+      "about": "Selam Microfinance S.C. provides savings, micro-loans and business training to small traders, farmers and women entrepreneurs across Southern Ethiopia.",
+      "responsibilities": [
+        "Lead, coach and set targets for the branch loan officers",
+        "Approve loans within the delegated authority matrix",
+        "Monitor portfolio quality and manage overdue accounts",
+        "Ensure branch compliance with NBE microfinance directives",
+        "Prepare monthly branch performance and budget reports",
+        "Recruit and train new staff in coordination with HR"
+      ],
+      "requirements": [
+        "BA/BSc in Accounting, Banking, Economics or Management",
+        "At least 5 years of microfinance or banking experience, 2 in a supervisory role",
+        "Strong understanding of credit risk and loan appraisal",
+        "Fluent in Amharic and English, with Sidamu Afoo as an advantage"
+      ],
+      "benefits": [
+        "Housing allowance",
+        "Health insurance for employee and family",
+        "Annual leave of 22 working days"
+      ],
+      "criteria": {
+        "minYearsExperience": 5,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Accounting", "Banking", "Economics", "Management"],
+        "requiredSkills": [
+          "Credit appraisal",
+          "Portfolio management",
+          "Team leadership"
+        ],
+        "languages": ["Amharic", "English", "Sidamu Afoo"],
+        "mustBeIn": "Hawassa"
+      },
+      "screeningQuestions": [
+        "What was your branch's portfolio at risk in your last role, and what did you do about it?",
+        "Are you willing to relocate to Hawassa if selected?"
+      ]
+    },
+    {
+      "title": "Cashier",
+      "company": "Tigist Savings & Credit Share Company",
+      "category": "Banking & Insurance",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Kirkos",
+      "careerLevel": "Entry",
+      "salaryMin": 9000,
+      "salaryMax": 14000,
+      "deadline": "2026-12-08",
+      "positions": 2,
+      "summary": "Handle daily cash deposits, withdrawals and loan repayments at our Kirkos head branch. Accuracy and honesty are essential because you will handle customer cash every day.",
+      "about": "Tigist Savings & Credit Share Company is a member-owned savings and credit cooperative serving salaried workers and traders in central Addis Ababa.",
+      "responsibilities": [
+        "Process cash deposits, withdrawals and loan repayments",
+        "Balance your cash drawer at the end of each day",
+        "Issue receipts and update member passbooks",
+        "Report any cash shortages or irregularities to the Branch Manager",
+        "Explain savings products to members clearly and politely"
+      ],
+      "requirements": [
+        "Grade 12 complete, with a Diploma in Accounting or Banking preferred",
+        "Cash handling experience of at least 1 year is an advantage",
+        "Good speed and accuracy with numbers",
+        "Clear record with no history of cash irregularities"
+      ],
+      "benefits": ["Lunch allowance", "Staff savings bonus"],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "Diploma",
+        "fieldOfStudy": ["Accounting", "Banking"],
+        "requiredSkills": [
+          "Cash handling",
+          "Core banking system",
+          "Customer service"
+        ],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "Have you ever worked with a cash drawer? How do you handle a shortage at closing?",
+        "Can you work Saturday mornings?"
+      ]
+    },
+    {
+      "title": "Front Office Receptionist",
+      "company": "Tana Hills Hotel PLC",
+      "category": "Hospitality & Tourism",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Bahir Dar",
+      "area": null,
+      "careerLevel": "Entry",
+      "salaryMin": 11000,
+      "salaryMax": 15000,
+      "deadline": "2026-12-12",
+      "positions": 2,
+      "summary": "Welcome guests, manage check-in and check-out, and answer calls at our 80-room hotel overlooking Lake Tana. You will work in rotating shifts including nights.",
+      "about": "Tana Hills Hotel PLC is a 4-star hotel with 80 rooms, a conference hall and a restaurant, located in Bahir Dar near Lake Tana.",
+      "responsibilities": [
+        "Greet guests and complete check-in and check-out procedures",
+        "Manage room reservations in the hotel software",
+        "Handle guest complaints and escalate when needed",
+        "Answer telephone and email enquiries in English and Amharic",
+        "Prepare daily front desk reports for the Front Office Manager"
+      ],
+      "requirements": [
+        "Diploma in Hotel Management, Tourism or Business Administration",
+        "Good spoken English and Amharic",
+        "Experience in a hotel front desk is an advantage",
+        "Neat appearance and friendly manner"
+      ],
+      "benefits": [
+        "Free meals during shifts",
+        "Accommodation for staff living more than 15 km away"
+      ],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "Diploma",
+        "fieldOfStudy": [
+          "Hotel Management",
+          "Tourism",
+          "Business Administration"
+        ],
+        "requiredSkills": ["Hotel PMS", "Reservations", "Customer service"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Bahir Dar"
+      },
+      "screeningQuestions": [
+        "Are you available for night shifts?",
+        "How would you calm a guest who is unhappy about a room they were given?"
+      ]
+    },
+    {
+      "title": "Food and Beverage Intern",
+      "company": "Tana Hills Hotel PLC",
+      "category": "Hospitality & Tourism",
+      "employmentType": "internship",
+      "workplaceType": "onsite",
+      "city": "Bahir Dar",
+      "area": null,
+      "careerLevel": "Internship",
+      "salaryMin": null,
+      "salaryMax": null,
+      "deadline": "2027-01-10",
+      "positions": 4,
+      "summary": "A six-month internship in our restaurant and banquet team. You will learn table service, bar basics and event setup under the supervision of the F&B Supervisor.",
+      "about": "Tana Hills Hotel PLC is a 4-star hotel with 80 rooms, a conference hall and a restaurant, located in Bahir Dar near Lake Tana.",
+      "responsibilities": [
+        "Take orders and serve guests in the main restaurant",
+        "Support banquet setup for conferences and weddings",
+        "Learn basic cocktail and coffee preparation",
+        "Keep service stations clean and stocked",
+        "Complete a weekly learning log for your supervisor"
+      ],
+      "requirements": [
+        "Currently enrolled in or recently completed a Diploma or BA/BSc in Hotel Management or Tourism",
+        "Good communication skills in English and Amharic",
+        "Willing to work weekends and public holidays",
+        "Punctual and eager to learn"
+      ],
+      "benefits": [
+        "Meals during internship",
+        "Certificate of completion",
+        "Possible full-time offer after internship"
+      ],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "Diploma",
+        "fieldOfStudy": ["Hotel Management", "Tourism"],
+        "requiredSkills": ["Table service", "Teamwork"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Bahir Dar"
+      },
+      "screeningQuestions": [
+        "Which hotel or restaurant department would you most like to learn, and why?",
+        "Can you commit to six months of internship starting in February 2027?"
+      ]
+    },
+    {
+      "title": "Senior Software Developer",
+      "company": "Nile Ridge Software Solutions PLC",
+      "category": "IT & Software",
+      "employmentType": "full-time",
+      "workplaceType": "hybrid",
+      "city": "Addis Ababa",
+      "area": "Bole",
+      "careerLevel": "Senior",
+      "salaryMin": 80000,
+      "salaryMax": 110000,
+      "deadline": "2026-12-18",
+      "positions": 1,
+      "summary": "Design and build web and mobile applications for banks and NGOs using React and Node.js. You will lead a small team and review code for quality and security.",
+      "about": "Nile Ridge Software Solutions PLC builds digital banking, reporting and HR platforms for clients in Ethiopia and East Africa. Our team of 40 works in a hybrid model.",
+      "responsibilities": [
+        "Design and develop features for web and mobile products",
+        "Lead code reviews and mentor junior developers",
+        "Design REST APIs and database schemas in PostgreSQL",
+        "Work with product owners to refine requirements",
+        "Set up automated testing and deployment pipelines",
+        "Investigate and fix production issues"
+      ],
+      "requirements": [
+        "BSc in Computer Science, Software Engineering or a related field",
+        "At least 5 years of professional software development experience",
+        "Strong skills in JavaScript or TypeScript, React and Node.js",
+        "Experience with Git, Docker and cloud deployment",
+        "Good English for written documentation"
+      ],
+      "benefits": [
+        "Hybrid work with three office days per week",
+        "Laptop and training budget",
+        "Private health insurance"
+      ],
+      "criteria": {
+        "minYearsExperience": 5,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Computer Science", "Software Engineering"],
+        "requiredSkills": ["React", "Node.js", "PostgreSQL", "Docker"],
+        "languages": ["English", "Amharic"],
+        "mustBeIn": null
+      },
+      "screeningQuestions": [
+        "Link a project or repository you are proud of and describe your part in it.",
+        "How do you approach a code review when you disagree with the author?"
+      ]
+    },
+    {
+      "title": "Junior Software Developer",
+      "company": "Nile Ridge Software Solutions PLC",
+      "category": "IT & Software",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Kirkos",
+      "careerLevel": "Junior",
+      "salaryMin": 25000,
+      "salaryMax": 35000,
+      "deadline": "2026-12-18",
+      "positions": 2,
+      "summary": "Build and maintain features for our HR and payroll products. You will work under the guidance of senior developers and grow your skills in full-stack development.",
+      "about": "Nile Ridge Software Solutions PLC builds digital banking, reporting and HR platforms for clients in Ethiopia and East Africa. Our team of 40 works in a hybrid model.",
+      "responsibilities": [
+        "Build user interface components in React",
+        "Write API endpoints and unit tests in Node.js",
+        "Fix bugs reported by the support team",
+        "Take part in daily stand-ups and sprint planning",
+        "Document the code and features you build"
+      ],
+      "requirements": [
+        "BSc in Computer Science or Software Engineering, or a recent graduate with strong projects",
+        "1 to 2 years of experience with JavaScript",
+        "Basic knowledge of SQL databases",
+        "Eagerness to learn and accept feedback"
+      ],
+      "benefits": [
+        "Training budget for certifications",
+        "Private health insurance"
+      ],
+      "criteria": {
+        "minYearsExperience": 1,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Computer Science", "Software Engineering"],
+        "requiredSkills": ["JavaScript", "React", "SQL"],
+        "languages": ["English", "Amharic"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "What is the most complex small project you have built, and what did you learn from it?",
+        "Are you comfortable working in the office five days a week?"
+      ]
+    },
+    {
+      "title": "Software Engineering Intern",
+      "company": "Nile Ridge Software Solutions PLC",
+      "category": "IT & Software",
+      "employmentType": "internship",
+      "workplaceType": "remote",
+      "city": "Addis Ababa",
+      "area": null,
+      "careerLevel": "Internship",
+      "salaryMin": null,
+      "salaryMax": null,
+      "deadline": "2027-01-15",
+      "positions": 3,
+      "summary": "A three-month remote internship for final-year students or recent graduates. You will work on small features and bug fixes with support from a mentor.",
+      "about": "Nile Ridge Software Solutions PLC builds digital banking, reporting and HR platforms for clients in Ethiopia and East Africa. Our team of 40 works in a hybrid model.",
+      "responsibilities": [
+        "Fix small bugs and write tests under mentor supervision",
+        "Update documentation for internal tools",
+        "Join weekly demo sessions and present your work",
+        "Learn Git workflows and code review practices"
+      ],
+      "requirements": [
+        "Final-year student or recent graduate in Computer Science or Software Engineering",
+        "Basic knowledge of JavaScript or Python",
+        "Reliable internet connection for remote work",
+        "Able to work at least 30 hours per week"
+      ],
+      "benefits": ["Monthly stipend", "Reference letter on completion"],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Computer Science", "Software Engineering"],
+        "requiredSkills": ["JavaScript", "Git"],
+        "languages": ["English", "Amharic"],
+        "mustBeIn": null
+      },
+      "screeningQuestions": [
+        "Share a small project from your coursework or GitHub.",
+        "What is your expected internship start date?"
+      ]
+    },
+    {
+      "title": "Dispatch and Logistics Officer",
+      "company": "Sheba Logistics Share Company",
+      "category": "Logistics & Driving",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Akaki Kaliti",
+      "careerLevel": "Junior",
+      "salaryMin": null,
+      "salaryMax": null,
+      "deadline": "2026-12-22",
+      "positions": 1,
+      "summary": "Plan daily truck dispatch and track deliveries for our Akaki Kaliti hub. You will coordinate drivers, warehouse staff and customers to keep shipments on time.",
+      "about": "Sheba Logistics Share Company operates trucks and a regional warehouse network moving FMCG and agricultural goods between Addis Ababa, Dire Dawa and Hawassa.",
+      "responsibilities": [
+        "Plan daily truck loading and dispatch schedules",
+        "Track deliveries and update the transport system",
+        "Coordinate with drivers on routes and delays",
+        "Prepare waybills, delivery notes and trip reports",
+        "Handle customer queries about shipment status"
+      ],
+      "requirements": [
+        "Diploma in Logistics, Transport Management or Supply Chain",
+        "At least 2 years of dispatch or fleet coordination experience",
+        "Good Excel skills and comfort with tracking software",
+        "Strong phone communication in Amharic and English"
+      ],
+      "benefits": ["Transport allowance", "Overtime pay"],
+      "criteria": {
+        "minYearsExperience": 2,
+        "education": "Diploma",
+        "fieldOfStudy": ["Logistics", "Transport Management", "Supply Chain"],
+        "requiredSkills": ["Dispatch planning", "Excel", "Fleet tracking"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "Describe how you handled a late delivery or a driver who did not arrive.",
+        "Are you able to work early morning shifts at the Akaki hub?"
+      ]
+    },
+    {
+      "title": "Truck Driver",
+      "company": "Sheba Logistics Share Company",
+      "category": "Logistics & Driving",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Dire Dawa",
+      "area": null,
+      "careerLevel": "Entry",
+      "salaryMin": 9500,
+      "salaryMax": 12000,
+      "deadline": "2026-12-03",
+      "positions": 4,
+      "summary": "Drive our 10-tonne trucks on regional routes between Dire Dawa, Addis Ababa and Djibouti border towns. You will keep the vehicle clean and report any faults on each trip.",
+      "about": "Sheba Logistics Share Company operates trucks and a regional warehouse network moving FMCG and agricultural goods between Addis Ababa, Dire Dawa and Hawassa.",
+      "responsibilities": [
+        "Drive assigned trucks safely on long-distance routes",
+        "Complete a pre-trip vehicle inspection before each journey",
+        "Load and offload cargo with the warehouse team",
+        "Record fuel use and trip mileage in the logbook",
+        "Report accidents or breakdowns immediately"
+      ],
+      "requirements": [
+        "Grade 10 complete, with a valid heavy vehicle driving licence (Grade 3 or higher)",
+        "At least 3 years of heavy truck driving experience",
+        "Clean driving record with no major violations",
+        "Ability to be away from home for several days at a time"
+      ],
+      "benefits": ["Per diem for trips", "Health insurance"],
+      "criteria": {
+        "minYearsExperience": 3,
+        "education": "Grade 10",
+        "fieldOfStudy": [],
+        "requiredSkills": [
+          "Heavy vehicle driving",
+          "Vehicle inspection",
+          "Route planning"
+        ],
+        "languages": ["Amharic", "Afar"],
+        "mustBeIn": "Dire Dawa"
+      },
+      "screeningQuestions": [
+        "What class of driving licence do you hold, and how many years have you driven trucks?",
+        "Are you comfortable with trips of three to five days?"
+      ]
+    },
+    {
+      "title": "Staff Nurse",
+      "company": "Hakim Medical Centre PLC",
+      "category": "Health",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Gondar",
+      "area": null,
+      "careerLevel": "Entry",
+      "salaryMin": 13000,
+      "salaryMax": 17000,
+      "deadline": "2026-12-09",
+      "positions": 3,
+      "summary": "Provide nursing care to inpatients and outpatients in our general ward and emergency unit. You will work in shifts and support doctors during consultations and procedures.",
+      "about": "Hakim Medical Centre PLC is a 60-bed private hospital in Gondar offering inpatient, outpatient, maternity and laboratory services.",
+      "responsibilities": [
+        "Give patient care, including vital signs and medication administration",
+        "Assist doctors during ward rounds and minor procedures",
+        "Record patient notes accurately in the hospital system",
+        "Educate patients and families on discharge care",
+        "Follow infection prevention and safety protocols"
+      ],
+      "requirements": [
+        "BSc or Diploma in Nursing, with valid professional license",
+        "Registered with the Ethiopian Nurses Association or equivalent",
+        "Experience in a hospital ward is an advantage",
+        "Compassionate and calm under pressure"
+      ],
+      "benefits": ["Night shift allowance", "Free meals during duty"],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Nursing"],
+        "requiredSkills": [
+          "Patient care",
+          "Medication administration",
+          "Infection control"
+        ],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Gondar"
+      },
+      "screeningQuestions": [
+        "Do you hold a current nursing licence? Please state its number and expiry date.",
+        "Are you willing to work night shifts and public holidays?"
+      ]
+    },
+    {
+      "title": "Medical Laboratory Technologist",
+      "company": "Hakim Medical Centre PLC",
+      "category": "Health",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Yeka",
+      "careerLevel": "Junior",
+      "salaryMin": 18000,
+      "salaryMax": 24000,
+      "deadline": "2026-12-14",
+      "positions": 1,
+      "summary": "Run routine and urgent tests in our hospital laboratory, including haematology, chemistry and microbiology. You will report results accurately and on time to clinical teams.",
+      "about": "Hakim Medical Centre PLC is a 60-bed private hospital in Gondar offering inpatient, outpatient, maternity and laboratory services. Our Yeka branch offers outpatient diagnostics.",
+      "responsibilities": [
+        "Perform blood counts, chemistry and urine analysis",
+        "Prepare and stain microbiology samples",
+        "Check quality control logs for analysers each day",
+        "Validate and release test results in the LIS",
+        "Keep sample handling and waste disposal records"
+      ],
+      "requirements": [
+        "BSc in Medical Laboratory Science or Diploma in Medical Laboratory Technology",
+        "At least 1 year of hospital laboratory experience",
+        "Familiarity with haematology and chemistry analysers",
+        "Attention to detail and strict adherence to safety rules"
+      ],
+      "benefits": [
+        "Health insurance for employee",
+        "Continuing education support"
+      ],
+      "criteria": {
+        "minYearsExperience": 1,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Medical Laboratory Science"],
+        "requiredSkills": [
+          "Haematology",
+          "Clinical chemistry",
+          "Quality control"
+        ],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "Which analysers have you operated, and how did you run daily quality control?",
+        "Are you registered with the Ethiopian Medical Laboratory Professionals Association?"
+      ]
+    },
+    {
+      "title": "English Teacher",
+      "company": "Lalibela Learning Academy PLC",
+      "category": "Education",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Mekelle",
+      "area": null,
+      "careerLevel": "Junior",
+      "salaryMin": 14000,
+      "salaryMax": 18000,
+      "deadline": "2026-12-28",
+      "positions": 2,
+      "summary": "Teach English to students from Grade 6 to Grade 10 in our private secondary school. You will prepare lesson plans and help students prepare for national exams.",
+      "about": "Lalibela Learning Academy PLC runs a private K-12 school and language centre in Mekelle, with around 900 students and a focus on English and science.",
+      "responsibilities": [
+        "Plan and deliver English lessons for assigned grades",
+        "Prepare lesson plans and weekly assessments",
+        "Mark homework and give constructive feedback",
+        "Support students preparing for Grade 10 national exams",
+        "Take part in parent-teacher meetings and school events"
+      ],
+      "requirements": [
+        "BA/BSc in English, Education or a related field",
+        "Teaching certificate or at least 1 year of classroom teaching experience",
+        "Clear spoken English and good writing skills",
+        "Patient and creative in the classroom"
+      ],
+      "benefits": [
+        "Professional development training each term",
+        "Staff children tuition discount"
+      ],
+      "criteria": {
+        "minYearsExperience": 1,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["English", "Education"],
+        "requiredSkills": [
+          "Lesson planning",
+          "English language teaching",
+          "Classroom management"
+        ],
+        "languages": ["English", "Tigrinya", "Amharic"],
+        "mustBeIn": "Mekelle"
+      },
+      "screeningQuestions": [
+        "Describe a lesson you taught that worked particularly well.",
+        "Can you start teaching in January 2027?"
+      ]
+    },
+    {
+      "title": "Admissions Officer",
+      "company": "Lalibela Learning Academy PLC",
+      "category": "Education",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Jimma",
+      "area": null,
+      "careerLevel": "Entry",
+      "salaryMin": null,
+      "salaryMax": null,
+      "deadline": "2027-01-05",
+      "positions": 1,
+      "summary": "Manage student enquiries, applications and enrolment for our Jimma campus. You will guide families through the registration process and keep admissions records up to date.",
+      "about": "Lalibela Learning Academy PLC runs a private K-12 school and language centre in Mekelle, and opened a Jimma campus in 2024.",
+      "responsibilities": [
+        "Respond to student and parent enquiries by phone, email and in person",
+        "Process applications and check required documents",
+        "Schedule entrance tests and interviews",
+        "Maintain the student admissions database",
+        "Prepare weekly admissions reports for the Campus Director"
+      ],
+      "requirements": [
+        "Diploma or BA/BSc in Business Administration, Marketing or a related field",
+        "Good computer skills, including Word and Excel",
+        "Warm and professional phone manner",
+        "Knowledge of Jimma town and surrounding areas is an advantage"
+      ],
+      "benefits": [
+        "Transport allowance",
+        "Performance bonus at enrolment targets"
+      ],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "Diploma",
+        "fieldOfStudy": ["Business Administration", "Marketing"],
+        "requiredSkills": [
+          "Admissions processing",
+          "Excel",
+          "Customer communication"
+        ],
+        "languages": ["Afaan Oromo", "Amharic", "English"],
+        "mustBeIn": "Jimma"
+      },
+      "screeningQuestions": [
+        "How would you handle an angry parent whose child was not accepted?",
+        "Do you speak Afaan Oromo well enough to explain forms to families?"
+      ]
+    },
+    {
+      "title": "Civil Engineer",
+      "company": "Ankober Construction PLC",
+      "category": "Engineering & Construction",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Lideta",
+      "careerLevel": "Mid",
+      "salaryMin": 35000,
+      "salaryMax": 50000,
+      "deadline": "2026-12-16",
+      "positions": 1,
+      "summary": "Supervise structural works on residential and commercial building projects in Addis Ababa. You will check quality against drawings and manage subcontractors on site.",
+      "about": "Ankober Construction PLC is a contractor specialising in residential apartments, commercial buildings and road works across Addis Ababa and Oromia.",
+      "responsibilities": [
+        "Supervise foundation, concrete and steel reinforcement works",
+        "Check site works against structural drawings and specifications",
+        "Prepare daily site reports and progress photos",
+        "Manage subcontractor schedules and material requests",
+        "Ensure site safety rules are followed by all workers"
+      ],
+      "requirements": [
+        "BSc in Civil Engineering",
+        "At least 3 years of building construction experience",
+        "Knowledge of AutoCAD and basic structural design",
+        "Valid professional registration with the Ethiopian Construction Authority"
+      ],
+      "benefits": ["Site allowance", "Medical insurance"],
+      "criteria": {
+        "minYearsExperience": 3,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Civil Engineering"],
+        "requiredSkills": ["AutoCAD", "Site supervision", "Concrete works"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "List two residential or commercial projects you supervised and your role on each.",
+        "Do you hold a current professional registration with the Ethiopian Construction Authority?"
+      ]
+    },
+    {
+      "title": "Marketing Officer",
+      "company": "Meskerem Retail Trading PLC",
+      "category": "Sales & Marketing",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Bole",
+      "careerLevel": "Junior",
+      "salaryMin": 20000,
+      "salaryMax": 26000,
+      "deadline": "2026-12-11",
+      "positions": 1,
+      "summary": "Plan and run marketing campaigns for our household brands in supermarkets and on social media. You will work with the brand team and our creative agency.",
+      "about": "Meskerem Retail Trading PLC distributes fast-moving household and personal care products across eastern and central Ethiopia through a network of regional depots.",
+      "responsibilities": [
+        "Plan monthly promotional campaigns and in-store activations",
+        "Write and schedule social media posts for Facebook and Instagram",
+        "Coordinate with the creative agency on artwork and videos",
+        "Track campaign results and prepare monthly reports",
+        "Support trade marketing activities with distributors"
+      ],
+      "requirements": [
+        "BA/BSc in Marketing, Mass Communication or Business",
+        "At least 2 years of marketing or brand experience",
+        "Good Amharic and English writing skills",
+        "Basic skills in Canva and Meta Business Suite"
+      ],
+      "benefits": [
+        "Mobile phone allowance",
+        "Staff discount on company products"
+      ],
+      "criteria": {
+        "minYearsExperience": 2,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Marketing", "Mass Communication", "Business"],
+        "requiredSkills": ["Campaign planning", "Social media", "Canva"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "Share an example of a social media campaign you ran and its results.",
+        "Which local languages can you use in marketing content?"
+      ]
+    },
+    {
+      "title": "Data Clerk",
+      "company": "Meskerem Retail Trading PLC",
+      "category": "Administration & HR",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Kirkos",
+      "careerLevel": "Entry",
+      "salaryMin": 10000,
+      "salaryMax": 13000,
+      "deadline": "2026-12-19",
+      "positions": 1,
+      "summary": "Enter and check sales, stock and distributor data at our Kirkos head office. You will keep the master data clean so reports are accurate for management.",
+      "about": "Meskerem Retail Trading PLC distributes fast-moving household and personal care products across eastern and central Ethiopia through a network of regional depots.",
+      "responsibilities": [
+        "Enter daily sales and stock transfer data into the ERP system",
+        "Check data for errors and follow up with depots",
+        "Maintain customer and product master records",
+        "Prepare weekly data quality reports",
+        "Archive source documents in an organized way"
+      ],
+      "requirements": [
+        "Diploma in Computer Science, Information Systems or Accounting",
+        "Fast and accurate typing in Amharic and English",
+        "Good Excel skills, including filters and lookups",
+        "Experience with an ERP system is an advantage"
+      ],
+      "benefits": ["Lunch allowance", "Annual leave of 16 working days"],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "Diploma",
+        "fieldOfStudy": [
+          "Computer Science",
+          "Information Systems",
+          "Accounting"
+        ],
+        "requiredSkills": ["Data entry", "Excel", "ERP"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "What is your typing speed, and how do you check your own entries for errors?",
+        "Have you used an ERP system such as SAP, Odoo or Sage before?"
+      ]
+    },
+    {
+      "title": "Customer Service Representative",
+      "company": "Hibret Connect Services PLC",
+      "category": "Customer Service",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Bole",
+      "careerLevel": "Entry",
+      "salaryMin": 10000,
+      "salaryMax": 13000,
+      "deadline": "2026-12-30",
+      "positions": 6,
+      "summary": "Answer calls and chats from mobile internet and fixed broadband customers. You will solve common technical issues, register complaints and handle billing enquiries.",
+      "about": "Hibret Connect Services PLC provides outsourced customer care, technical helpdesk and billing support for internet and telecom service providers in Ethiopia.",
+      "responsibilities": [
+        "Answer inbound calls and chat messages from customers",
+        "Troubleshoot basic connectivity and device settings issues",
+        "Log all complaints and follow them up until resolved",
+        "Explain bills, packages and top-up options clearly",
+        "Meet average handling time and quality score targets"
+      ],
+      "requirements": [
+        "Diploma or Grade 12 with strong communication skills",
+        "Good spoken Amharic and English",
+        "Comfortable using a computer and ticketing system",
+        "Able to work rotating shifts, including weekends"
+      ],
+      "benefits": ["Shift allowance", "Health insurance"],
+      "criteria": {
+        "minYearsExperience": 0,
+        "education": "Diploma",
+        "fieldOfStudy": [],
+        "requiredSkills": [
+          "Call handling",
+          "Ticketing systems",
+          "Basic troubleshooting"
+        ],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "How would you calm a customer who has been without internet for three days?",
+        "Are you available for rotating shifts including Sundays?"
+      ]
+    },
+    {
+      "title": "Audit Associate",
+      "company": "Wolde & Partners Accounting Firm",
+      "category": "Accounting & Finance",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Bole",
+      "careerLevel": "Junior",
+      "salaryMin": 22000,
+      "salaryMax": 28000,
+      "deadline": "2026-12-07",
+      "positions": 2,
+      "summary": "Join our audit team to test client financial statements for banks, NGOs and manufacturers. You will prepare working papers and assist senior auditors on engagements.",
+      "about": "Wolde & Partners is an independent accounting and audit firm in Addis Ababa serving private companies, NGOs and donor-funded projects.",
+      "responsibilities": [
+        "Perform audit procedures on assigned client accounts",
+        "Prepare working papers and audit evidence files",
+        "Test revenue, payables and fixed assets samples",
+        "Draft sections of audit reports under supervision",
+        "Track time and budget on each engagement"
+      ],
+      "requirements": [
+        "BA/BSc in Accounting or Finance",
+        "At least 2 years of audit or external accounting experience",
+        "Working knowledge of IFRS and Ethiopian accounting standards",
+        "Willing to travel to client sites across the city"
+      ],
+      "benefits": [
+        "Professional exam support (ACCA or ICPAE)",
+        "Transport allowance"
+      ],
+      "criteria": {
+        "minYearsExperience": 2,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Accounting", "Finance"],
+        "requiredSkills": ["Audit procedures", "IFRS", "Excel"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "Which audit areas have you tested, and what sample sizes did you use?",
+        "Are you registered for ACCA or ICPAE exams, or willing to register?"
+      ]
+    },
+    {
+      "title": "Monitoring and Evaluation Officer",
+      "company": "Gebeta Community Development Association",
+      "category": "NGO & Development",
+      "employmentType": "full-time",
+      "workplaceType": "hybrid",
+      "city": "Hawassa",
+      "area": null,
+      "careerLevel": "Mid",
+      "salaryMin": 30000,
+      "salaryMax": 40000,
+      "deadline": "2026-12-25",
+      "positions": 1,
+      "summary": "Lead monitoring and evaluation for our water, sanitation and livelihoods programme in the Sidama region. You will design data collection tools, analyse results and report to donors.",
+      "about": "Gebeta Community Development Association is a non-governmental organisation working on water, nutrition and livelihoods programmes in the Sidama and Southern Nations regions.",
+      "responsibilities": [
+        "Design and maintain the programme M&E framework and indicators",
+        "Develop data collection tools and train field enumerators",
+        "Analyse survey data and produce quarterly progress reports",
+        "Prepare donor reports in line with logframes",
+        "Support learning reviews and beneficiary feedback sessions"
+      ],
+      "requirements": [
+        "BSc or MSc in Statistics, Economics, Development Studies or a related field",
+        "At least 3 years of M&E experience in a development project",
+        "Strong skills in SPSS, STATA or R, and Excel",
+        "Willing to travel to project woredas two weeks per month"
+      ],
+      "benefits": ["Field allowance", "Staff pension scheme"],
+      "criteria": {
+        "minYearsExperience": 3,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": ["Statistics", "Economics", "Development Studies"],
+        "requiredSkills": [
+          "Monitoring and evaluation",
+          "STATA or R",
+          "Donor reporting"
+        ],
+        "languages": ["Amharic", "English", "Sidamu Afoo"],
+        "mustBeIn": null
+      },
+      "screeningQuestions": [
+        "Describe an M&E framework you designed and how you used it.",
+        "Are you able to travel to project woredas for two weeks each month?"
+      ]
+    },
+    {
+      "title": "Human Resources Officer",
+      "company": "Gebeta Community Development Association",
+      "category": "Administration & HR",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Addis Ababa",
+      "area": "Yeka",
+      "careerLevel": "Junior",
+      "salaryMin": 20000,
+      "salaryMax": 26000,
+      "deadline": "2026-12-20",
+      "positions": 1,
+      "summary": "Support recruitment, staff records, payroll inputs and performance processes at our Addis Ababa office. You will work with the HR Manager on day-to-day people matters.",
+      "about": "Gebeta Community Development Association is a non-governmental organisation working on water, nutrition and livelihoods programmes in the Sidama and Southern Nations regions.",
+      "responsibilities": [
+        "Post vacancies and coordinate shortlisting and interviews",
+        "Maintain staff files and leave records",
+        "Prepare monthly payroll inputs and attendance reports",
+        "Support the annual performance appraisal cycle",
+        "Answer staff questions on policies and benefits"
+      ],
+      "requirements": [
+        "BA/BSc in Human Resource Management, Psychology or Management",
+        "At least 2 years of HR administration experience, NGO experience preferred",
+        "Knowledge of Ethiopian labour proclamation",
+        "Discreet and organised with confidential records"
+      ],
+      "benefits": ["Pension contributions", "Annual leave of 20 working days"],
+      "criteria": {
+        "minYearsExperience": 2,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": [
+          "Human Resource Management",
+          "Psychology",
+          "Management"
+        ],
+        "requiredSkills": ["Recruitment", "Payroll inputs", "Labour law"],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Addis Ababa"
+      },
+      "screeningQuestions": [
+        "Which parts of the HR cycle have you managed end to end?",
+        "How familiar are you with the Ethiopian Labour Proclamation?"
+      ]
+    },
+    {
+      "title": "Production Engineer",
+      "company": "Gojjam Textile Manufacturing PLC",
+      "category": "Engineering & Construction",
+      "employmentType": "full-time",
+      "workplaceType": "onsite",
+      "city": "Bahir Dar",
+      "area": null,
+      "careerLevel": "Mid",
+      "salaryMin": 28000,
+      "salaryMax": 38000,
+      "deadline": "2026-12-17",
+      "positions": 1,
+      "summary": "Improve weaving and spinning line efficiency at our Bahir Dar textile mill. You will analyse machine downtime, lead maintenance planning and train operators.",
+      "about": "Gojjam Textile Manufacturing PLC produces cotton yarn, woven fabric and school uniforms for domestic and regional markets from its mill in Bahir Dar.",
+      "responsibilities": [
+        "Monitor line efficiency and machine downtime each shift",
+        "Lead root cause analysis for quality and breakdown issues",
+        "Plan preventive maintenance with the maintenance team",
+        "Train operators on new machine settings and safety rules",
+        "Track production KPIs and present monthly results"
+      ],
+      "requirements": [
+        "BSc in Textile Engineering, Mechanical Engineering or Industrial Engineering",
+        "At least 3 years of experience in a textile or manufacturing plant",
+        "Knowledge of lean tools such as 5S and kaizen",
+        "Good Excel and reporting skills"
+      ],
+      "benefits": ["Factory housing support", "Annual performance bonus"],
+      "criteria": {
+        "minYearsExperience": 3,
+        "education": "Bachelor's degree",
+        "fieldOfStudy": [
+          "Textile Engineering",
+          "Mechanical Engineering",
+          "Industrial Engineering"
+        ],
+        "requiredSkills": [
+          "Lean manufacturing",
+          "Root cause analysis",
+          "Preventive maintenance"
+        ],
+        "languages": ["Amharic", "English"],
+        "mustBeIn": "Bahir Dar"
+      },
+      "screeningQuestions": [
+        "Describe a production problem you solved and the measurable result.",
+        "Are you willing to live in a factory housing area near Bahir Dar?"
+      ]
+    }
+  ]
+}

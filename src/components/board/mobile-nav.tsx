@@ -10,10 +10,6 @@ import {
   type SocialProfiles,
 } from "@/components/board/social-links";
 import type { NavItem } from "@/config/nav";
-import {
-  LanguageSelect,
-  useTranslation,
-} from "@/custom/etenesh/language-provider";
 
 // Tailwind's md breakpoint.
 const MD_BREAKPOINT_PX = 768;
@@ -27,7 +23,6 @@ export function MobileNav({
 }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const t = useTranslation();
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -107,33 +102,33 @@ export function MobileNav({
       <button
         aria-controls={panelId}
         aria-expanded={open}
-        aria-label={t("Menu")}
-        className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex size-11 items-center justify-center rounded-md"
+        aria-label="Menu"
+        className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex size-[30px] items-center justify-center rounded-md"
         onClick={toggle}
         ref={buttonRef}
         type="button"
       >
         {open ? (
-          <X aria-hidden="true" className="size-5" />
+          <X aria-hidden="true" className="size-[18px]" />
         ) : (
-          <Menu aria-hidden="true" className="size-5" />
+          <Menu aria-hidden="true" className="size-[18px]" />
         )}
       </button>
       <div
-        className="border-line bg-background absolute inset-x-0 top-full z-30 border-b shadow-sm"
+        className="border-line bg-background absolute inset-x-0 top-[46px] z-30 border-b shadow-sm"
         hidden={!open}
         id={panelId}
         ref={panelRef}
       >
-        <nav aria-label="Mobile" className="px-4 py-4">
-          <ul className="flex flex-col gap-1.5">
+        <nav aria-label="Mobile" className="px-4 py-3">
+          <ul className="flex flex-col">
             {items.map((item) => {
               const active = isActiveItem(pathname, item);
               return (
                 <li key={item.id}>
                   <Link
                     aria-current={active ? "page" : undefined}
-                    className={`flex min-h-12 items-center rounded-lg px-3 py-3 text-base font-medium ${
+                    className={`block rounded-md px-2 py-2 text-[14px] ${
                       active
                         ? "bg-selected text-foreground"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -141,14 +136,13 @@ export function MobileNav({
                     href={item.href}
                     onClick={close}
                   >
-                    {t(item.label)}
+                    {item.label}
                   </Link>
                 </li>
               );
             })}
           </ul>
-          <LanguageSelect className="bg-card text-foreground mt-3 min-h-11 w-full rounded-lg border px-3 text-base" />
-          <SocialLinks className="mt-3 px-2" links={social} showRss={false} />
+          <SocialLinks className="mt-3 px-2" links={social} />
         </nav>
       </div>
     </div>

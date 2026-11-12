@@ -29,7 +29,3 @@ export function jobApplyHref(job: {
 
   return `mailto:${email}`;
 }
-
-export function demoApplicationHref(slug: string): string {
-  return `/demo/apply?${new URLSearchParams({ job: slug })}`;
-}

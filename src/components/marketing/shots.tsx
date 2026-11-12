@@ -190,7 +190,7 @@ export function PhoneShot({
   return (
     <div
       className={cn(
-        "bg-card ring-line-strong shrink-0 rounded-[30px] p-[5px] shadow-xl ring-1",
+        "bg-card ring-line-strong shrink-0 rounded-[30px] p-[5px] shadow-[0_24px_30px_rgb(0_0_0/25%)] ring-1",
         className
       )}
     >

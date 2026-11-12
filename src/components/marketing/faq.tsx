@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -6,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { Section } from "./section";
 import { SectionHeader } from "./section-header";
-import { GITHUB_URL } from "./site";
 
 // "short" is the tighter wording the home section uses.
 export const questions: {
@@ -18,51 +16,30 @@ export const questions: {
 }[] = [
   {
     answer:
-      "An open-source job board template on Next.js, Payload and Postgres. Deploy it and you get a board with real sample jobs.",
-    question: "What is Bordful?",
+      "An Ethiopian job board and HR service. Browse real vacancies, apply with your CV and follow your application on Telegram.",
+    question: "What is Etenesh HR Insights?",
+    short: "What is Etenesh HR?",
   },
   {
     answer:
-      "Yes. The template is MIT licensed and free for personal and commercial projects. You pay your host, and any service you choose to turn on.",
-    question: "Is it free?",
-    short: "Is it really free?",
+      "Yes. Applying for jobs is always free. You only pay if you choose to buy a course.",
+    question: "Is it free to apply?",
   },
   {
     answer:
-      "Bordfeed supplies the sample jobs on a fresh board and, after you connect, a feed of jobs for your board. You can skip the connection and publish your own jobs. Bordfeed sells its own plans.",
-    question: "What is Bordfeed and do I need it?",
-    short: "Do I need Bordfeed?",
+      "After you apply, tap Get updates on Telegram. Our bot sends you a message each time your application moves forward. Send /status to see where it is.",
+    question: "How do I follow my application?",
   },
   {
     answer:
-      "Yes. Editors add jobs in the Payload admin. You can also turn on Post a Job and send employers to a Stripe payment link. A listing stays up for the number of days you set, 30 by default.",
-    question: "Can I post my own jobs?",
+      "Each employer sets minimum requirements, like years of experience or a degree. If you do not meet them, we tell you before you start, so you do not waste your time.",
+    question: "Why can I not apply for some jobs?",
+    short: "Why can I not apply for a job?",
   },
   {
-    answer: (
-      <>
-        Pull the latest code from{" "}
-        <a
-          className="text-primary underline-offset-4 hover:underline"
-          href={GITHUB_URL}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          GitHub
-        </a>{" "}
-        and run the database migrations. Your jobs stay in Postgres. Read the{" "}
-        <Link
-          className="text-primary underline-offset-4 hover:underline"
-          href="/changelog"
-        >
-          changelog
-        </Link>{" "}
-        before you deploy.
-      </>
-    ),
-    question: "How do I update a fork?",
-    short: "How do I update my fork?",
-    text: "Pull the latest code from GitHub and run the database migrations. Your jobs stay in Postgres. Read the changelog before you deploy.",
+    answer:
+      "Tap Buy on Telegram, pay the price shown and send us the payment screenshot. Our team checks it and sends your course link the same day.",
+    question: "How do I pay for a course?",
   },
 ];
 
@@ -179,7 +156,7 @@ function QuestionList({
 export function Faq({ variant = "section" }: { variant?: "section" | "page" }) {
   if (variant === "page") {
     return (
-      <Section className="md:py-[72px]">
+      <Section className="md:py-[72px]" id="faq">
         <Container className="flex flex-col gap-6 md:items-center md:gap-8">
           <SectionHeader
             className="gap-2.5 md:items-center md:text-center md:[&>h2]:text-[28px] md:[&>h2]:leading-[34px] md:[&>h2]:tracking-[-0.03em] [&>p]:hidden md:[&>p]:block md:[&>p]:text-[15px] md:[&>p]:leading-[23px]"

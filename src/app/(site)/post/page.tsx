@@ -7,7 +7,8 @@ import {
   buildPostJobView,
   postJobPageDescription,
 } from "@/components/post/post-job-view";
-import { BOARD_HOME_PATH } from "@/config/nav";
+import { isMarketingEnabled } from "@/config/flags";
+import { boardHomePath } from "@/config/nav";
 import { getSiteSettings } from "@/lib/read";
 
 async function loadView() {
@@ -35,7 +36,7 @@ export default async function Page() {
 
   return (
     <BoardShell fullBleed>
-      <PostJobPage jobsHref={BOARD_HOME_PATH} view={view} />
+      <PostJobPage jobsHref={boardHomePath(isMarketingEnabled())} view={view} />
     </BoardShell>
   );
 }

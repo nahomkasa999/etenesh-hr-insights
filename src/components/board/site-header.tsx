@@ -8,16 +8,13 @@ import { BOARD_SEARCH_INPUT_ID } from "@/components/board/board-search-form";
 import { BrandMark } from "@/components/board/brand-mark";
 import { MobileNav } from "@/components/board/mobile-nav";
 import { isActiveItem } from "@/components/board/nav-active";
+import { useJobList } from "@/components/board/saved-jobs";
 import {
   SocialLinks,
   type SocialProfiles,
 } from "@/components/board/social-links";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import type { NavItem } from "@/config/nav";
-import {
-  LanguageSelect,
-  useTranslation,
-} from "@/custom/etenesh/language-provider";
 import { cn } from "@/lib/utils";
 
 export const SAVED_PATH = "/saved";
@@ -61,9 +58,11 @@ function activeView(pathname: string, views: HeaderViews): ViewId | null {
   return null;
 }
 
+// All / Remote / Saved. Saved counts the browser-local list, so it shows
+// after hydration only.
 function ViewPills({ views }: { views: HeaderViews }) {
   const pathname = usePathname();
-  const t = useTranslation();
+  const saved = useJobList("saved");
   const active = activeView(pathname, views);
   const pills: {
     count: number | null;
@@ -79,7 +78,7 @@ function ViewPills({ views }: { views: HeaderViews }) {
       label: "Remote",
     },
     {
-      count: null,
+      count: saved.slugs.length > 0 ? saved.slugs.length : null,
       href: SAVED_PATH,
       id: "saved",
       label: "Saved",
@@ -106,7 +105,7 @@ function ViewPills({ views }: { views: HeaderViews }) {
             href={pill.href}
             key={pill.id}
           >
-            {t(pill.label)}
+            {pill.label}
             {pill.count === null ? null : (
               <>
                 {" "}
@@ -173,7 +172,6 @@ export function SiteHeader({
   name,
   navItems,
   search,
-  searchHotkey = false,
   searchOnPhone = false,
   social,
   views,
@@ -188,15 +186,13 @@ export function SiteHeader({
   // The board search form. Rendered once; it moves between the phone row and
   // the desktop bar with CSS only.
   search?: ReactNode;
-  searchHotkey?: boolean;
   // Board pages show the search as a row under the brand bar on phones.
   searchOnPhone?: boolean;
   social: SocialProfiles;
   views?: HeaderViews;
 }) {
   const pathname = usePathname();
-  const t = useTranslation();
-  useSearchHotkey(Boolean(search) || searchHotkey);
+  useSearchHotkey(Boolean(search));
   // From xl the view pills replace the Jobs link; job alerts become a button.
   const alerts = navItems.find((item) => item.id === "alerts") ?? null;
   const links = navItems.filter((item) => item.id !== "alerts");
@@ -222,7 +218,7 @@ export function SiteHeader({
             // biome-ignore lint/performance/noImgElement: site-logo is a native img at 20px
             <img
               alt=""
-              className="bg-logo-background size-8 shrink-0 rounded-md object-contain"
+              className="h-5 w-auto"
               data-testid="site-logo"
               height={20}
               src={logoUrl}
@@ -268,7 +264,7 @@ export function SiteHeader({
                       )}
                       href={item.href}
                     >
-                      {t(item.label)}
+                      {item.label}
                     </Link>
                   </li>
                 );
@@ -292,9 +288,8 @@ export function SiteHeader({
             </ul>
           </nav>
           <div className="hidden 2xl:block">
-            <SocialLinks links={social} showRss={false} />
+            <SocialLinks links={social} />
           </div>
-          <LanguageSelect className="bg-card text-foreground hidden min-h-8 rounded-md border px-2 text-sm md:block" />
           <ThemeToggle />
           {alerts ? (
             <Link

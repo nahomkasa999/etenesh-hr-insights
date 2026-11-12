@@ -4,41 +4,39 @@ import { Container } from "./container";
 import { Section } from "./section";
 import { SectionHeader } from "./section-header";
 
-// The real path from the deploy button to a paying board: the Vercel clone
-// provisions Postgres, a fresh install shows the Bordfeed sample feed, Site
-// settings carry the brand, and Post a Job is a Stripe payment link.
+// The path a job seeker takes, from the board to an offer.
 const STEPS = [
   {
-    body: "One click to Vercel. Postgres and the admin come with it.",
-    title: "Deploy",
-    when: "Minute 0",
+    body: "Search by title or company. Filter by city, job type and level.",
+    title: "Find a job",
+    when: "Step 1",
   },
   {
-    body: "Sample jobs from Bordfeed fill it, so it never looks empty.",
-    title: "Board is live",
-    when: "Minute 2",
+    body: "Fill in your details, upload your CV and answer a few questions.",
+    title: "Apply",
+    when: "Step 2",
   },
   {
-    body: "Logo, colors and fonts in Site settings. Turn on alerts with Resend.",
-    title: "Make it yours",
-    when: "Day 1",
+    body: "Our HR team reviews your application. Telegram tells you the result.",
+    title: "Get reviewed",
+    when: "Step 3",
   },
   {
-    body: "Connect your Bordfeed feed, or add a Stripe link and take paid posts.",
-    title: "Open for business",
-    when: "Week 1",
+    body: "Shortlisted? You get the interview time, then the offer, on Telegram.",
+    title: "Interview and offer",
+    when: "Step 4",
   },
 ] as const;
 
 export function Timeline() {
   return (
-    <Section>
+    <Section className="scroll-mt-14" id="how-it-works">
       <Container className="flex flex-col gap-5 md:gap-9">
         <SectionHeader
           eyebrow="How it works"
           phone="mono"
-          title="From zero to a live board."
-          titleMuted="Before your coffee cools."
+          title="From vacancy to job offer."
+          titleMuted="One clear step at a time."
         />
         {/* Phones get Paper's numbered rows; from md up, the four-column
             timeline with a progress rule over each step. */}

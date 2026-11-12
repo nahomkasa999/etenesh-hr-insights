@@ -12,7 +12,7 @@ function itemClass(active: boolean): string {
   return cn(
     "flex h-7 items-center rounded-md px-2 text-[13px] leading-[19px]",
     active
-      ? "bg-card text-foreground font-medium shadow-xs"
+      ? "bg-card text-foreground font-medium shadow-[0_0_0_1px_rgb(0_0_0/6%),0_1px_2px_rgb(0_0_0/5%)] dark:shadow-[0_0_0_1px_rgb(255_255_255/8%)]"
       : "text-muted-foreground hover:text-foreground"
   );
 }

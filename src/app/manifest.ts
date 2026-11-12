@@ -13,26 +13,26 @@ export default function manifest(): MetadataRoute.Manifest {
   }
 
   return {
-    background_color: "#F8FAFC",
+    background_color: "#f5f5f4",
     description: MARKETING_DESCRIPTION,
     display: "standalone",
     icons: [
       {
         purpose: "any",
-        sizes: "any",
-        src: "/marketing/icon.svg",
-        type: "image/svg+xml",
+        sizes: "256x256",
+        src: "/etenesh/mark.png",
+        type: "image/png",
       },
       {
         purpose: "any",
-        sizes: "180x180",
-        src: "/marketing/apple-icon.png",
+        sizes: "512x512",
+        src: "/etenesh/icon-512.png",
         type: "image/png",
       },
     ],
-    name: "Bordful",
-    short_name: "Bordful",
+    name: "Etenesh HR Insights",
+    short_name: "Etenesh HR",
     start_url: "/",
-    theme_color: "#0077E6",
+    theme_color: "#0077e6",
   };
 }

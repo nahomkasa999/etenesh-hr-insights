@@ -35,7 +35,7 @@ export const Users: CollectionConfig = {
     read: usersRead,
     update: usersUpdate,
   },
-  admin: { useAsTitle: "email" },
+  admin: { group: "Settings", useAsTitle: "email" },
   auth: {
     cookies: { sameSite: "Lax", secure: true },
     lockTime: 600_000,

@@ -1,5 +1,5 @@
 export const MARKETING_DESCRIPTION =
-  "Open-source job board template built with Next.js, Payload, and Postgres. Deploy to Vercel and launch with real jobs from Bordfeed.";
+  "Ethiopian jobs from trusted employers. Apply with your CV, follow your application on Telegram, and learn with short career courses.";
 
 export const GITHUB_URL = "https://github.com/craftled/bordful";
 

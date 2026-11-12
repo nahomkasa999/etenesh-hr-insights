@@ -28,12 +28,6 @@ function apply(preference: ThemePreference): void {
   } else {
     root.dataset.theme = preference;
   }
-  root.classList.toggle(
-    "dark",
-    preference === "dark" ||
-      (preference === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-  );
   try {
     if (preference === "system") {
       window.localStorage.removeItem(THEME_STORAGE_KEY);

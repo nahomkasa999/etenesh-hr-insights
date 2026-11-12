@@ -60,10 +60,12 @@ function CategoryLink({
 // digest card. Its counts cover the whole board, like the header pills; the
 // toolbar chips (and the phone sheet) narrow the current list.
 export async function BoardRail({
+  marketing,
   options,
   query,
   view = null,
 }: {
+  marketing: boolean;
   options: BoardQueryOptions;
   query: BoardQuery;
   // Set on the saved and applied lists, which are not board queries.
@@ -76,7 +78,7 @@ export async function BoardRail({
   const facets = buildBoardFacets(pool);
   const base = clearBoardFilters({ ...query, sort: "newest" });
   const hrefFor = (next: BoardQuery) =>
-    boardStateHref({ ...next, page: 1 }, options);
+    boardStateHref({ ...next, page: 1 }, options, marketing);
   const latestActive = view === null && !boardQueryHasFilters(query);
   const featuredActive =
     view === null &&

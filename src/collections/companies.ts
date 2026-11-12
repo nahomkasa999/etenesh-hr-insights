@@ -89,7 +89,7 @@ export const Companies: CollectionConfig = {
     read: anyone,
     update: isStaff,
   },
-  admin: { useAsTitle: "name" },
+  admin: { group: "Hiring", useAsTitle: "name" },
   fields: [
     owned({ name: "name", required: true, type: "text" }),
     owned({

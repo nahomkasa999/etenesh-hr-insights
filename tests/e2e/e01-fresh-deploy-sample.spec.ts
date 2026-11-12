@@ -11,7 +11,7 @@ test.describe("E1 fresh-deploy-sample", { tag: ["@E1"] }, () => {
     page,
   }) => {
     test.setTimeout(120_000);
-    await page.goto("/jobs");
+    await page.goto("/");
     const samples = page.locator(
       '[data-testid="job-row"][data-origin="bordfeed_sample"]'
     );

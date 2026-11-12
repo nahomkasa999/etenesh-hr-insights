@@ -15,7 +15,7 @@ export const AlertSubscribers: CollectionConfig = {
     read: isAdmin,
     update: isAdmin,
   },
-  admin: { useAsTitle: "email" },
+  admin: { hidden: true, useAsTitle: "email" },
   authorship: false,
   fields: [
     { index: true, name: "email", required: true, type: "email", unique: true },

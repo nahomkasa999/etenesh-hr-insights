@@ -22,7 +22,7 @@ test.describe("E7 post-a-job", { tag: ["@E7"] }, () => {
       },
     });
 
-    await page.goto("/jobs");
+    await page.goto("/");
     await expect(page.getByTestId("site-nav")).toContainText("Post a job");
     await page.goto("/post");
     await expect(page.getByTestId("post-job-cta")).toHaveAttribute(

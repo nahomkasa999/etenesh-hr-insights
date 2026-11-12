@@ -19,7 +19,6 @@ export function buildCsp({
   admin = false,
   extraScriptOrigins = [],
   extraConnectOrigins = [],
-  frameOrigin,
 }: {
   nonce: string;
   isDev: boolean;
@@ -27,7 +26,6 @@ export function buildCsp({
   admin?: boolean;
   extraScriptOrigins?: string[];
   extraConnectOrigins?: string[];
-  frameOrigin?: string;
 }): string {
   if (nonce.length === 0 || !BASE64_NONCE.test(nonce)) {
     throw new Error("CSP nonce must be base64");
@@ -35,10 +33,6 @@ export function buildCsp({
 
   for (const origin of [...extraScriptOrigins, ...extraConnectOrigins]) {
     assertHttpsOrigin(origin);
-  }
-
-  if (frameOrigin) {
-    assertHttpsOrigin(frameOrigin);
   }
 
   const scriptSrc = [
@@ -69,7 +63,7 @@ export function buildCsp({
     "img-src 'self' blob: data: https://*.public.blob.vercel-storage.com https://bordfeed.com https://*.bordfeed.com",
     "font-src 'self' data:",
     `connect-src ${connectSrc}`,
-    `frame-src ${frameOrigin ?? "'none'"}`,
+    "frame-src 'none'",
     "frame-ancestors 'none'",
     "object-src 'none'",
     "base-uri 'self'",

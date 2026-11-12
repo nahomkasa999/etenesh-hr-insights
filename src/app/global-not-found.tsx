@@ -6,7 +6,9 @@ import { MarketingNotFound } from "@/app/(marketing)/not-found";
 import BoardNotFound from "@/app/(site)/not-found";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { isMarketingEnabled } from "@/config/flags";
+import { getSiteSettings } from "@/lib/read";
 import { FONT_VARIABLE_CLASSES } from "@/theme/fonts";
+import { resolveThemeTokens, tokensToCssVariables } from "@/theme/tokens";
 
 import "./globals.css";
 
@@ -27,10 +29,20 @@ export default async function GlobalNotFound() {
     );
   }
 
+  let css = tokensToCssVariables(resolveThemeTokens(null));
+  try {
+    css = tokensToCssVariables(
+      resolveThemeTokens((await getSiteSettings()).theme)
+    );
+  } catch {
+    // Settings unavailable: keep the default theme for the 404.
+  }
+
   return (
     <html className={FONT_VARIABLE_CLASSES} lang="en" suppressHydrationWarning>
       <head>
         <ThemeScript nonce={nonce} />
+        <style nonce={nonce}>{`:root{${css}}`}</style>
       </head>
       <body className="antialiased">
         <BoardNotFound />

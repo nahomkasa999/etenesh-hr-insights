@@ -29,6 +29,7 @@ export const Media: CollectionConfig = {
     read: anyone,
     update: isStaff,
   },
+  admin: { group: "Settings" },
   fields: [{ name: "alt", required: true, type: "text" }],
   hooks: {
     afterChange: [revalidateSiteLogo],

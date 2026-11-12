@@ -84,15 +84,17 @@ export function visibleOptions(group: FacetGroup): FacetOption[] {
 
 export function buildFilterGroups({
   facets,
+  marketing,
   options,
   query,
 }: {
   facets: BoardFacets;
+  marketing: boolean;
   options: BoardQueryOptions;
   query: BoardQuery;
 }): FacetGroup[] {
   const hrefFor = (next: BoardQuery) =>
-    boardStateHref({ ...next, page: 1 }, options);
+    boardStateHref({ ...next, page: 1 }, options, marketing);
   const typeCounts = new Map(
     facets.types.map((facet) => [facet.value, facet.count])
   );
@@ -261,7 +263,9 @@ function Switch({ on, size }: { on: boolean; size: "lg" | "sm" }) {
           on && (size === "lg" ? "translate-x-[18px]" : "translate-x-2.5"),
           on && "bg-primary-foreground",
           !on &&
-            (size === "lg" ? "bg-card dark:bg-subtle shadow-xs" : "bg-subtle")
+            (size === "lg"
+              ? "dark:bg-subtle bg-white shadow-[0_1px_2px_rgb(0_0_0/0.2)]"
+              : "bg-subtle")
         )}
       />
     </span>
@@ -367,22 +371,24 @@ function resultsLabel(total: number): string {
 // toolbar chips do this job and the sheet stays hidden.
 export function BoardFilters({
   facets,
+  marketing,
   options,
   query,
   total,
 }: {
   facets: BoardFacets;
+  marketing: boolean;
   options: BoardQueryOptions;
   query: BoardQuery;
   total?: number;
 }) {
-  const groups = buildFilterGroups({ facets, options, query });
+  const groups = buildFilterGroups({ facets, marketing, options, query });
   const hasFilters = boardQueryHasFilters(query);
 
   return (
     <aside
       aria-label="Filters"
-      className="bg-card text-foreground ring-border backdrop:bg-foreground/30 fixed inset-x-0 top-auto bottom-0 m-0 max-h-[85dvh] w-full max-w-none overflow-y-auto overscroll-contain rounded-t-2xl border-0 p-0 shadow-xl ring-1 lg:hidden"
+      className="bg-card text-foreground fixed inset-x-0 top-auto bottom-0 m-0 max-h-[85dvh] w-full max-w-none overflow-y-auto overscroll-contain rounded-t-2xl border-0 p-0 shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_-16px_48px_rgb(0_0_0/0.16)] backdrop:bg-black/30 lg:hidden"
       id={FILTERS_SHEET_ID}
       popover="auto"
     >
@@ -394,7 +400,11 @@ export function BoardFilters({
           {hasFilters ? (
             <Link
               className={cn("text-muted-foreground text-[15px]", ROW_FOCUS)}
-              href={boardStateHref(clearBoardFilters(query), options)}
+              href={boardStateHref(
+                clearBoardFilters(query),
+                options,
+                marketing
+              )}
             >
               Reset
             </Link>
@@ -492,11 +502,11 @@ function ChipMenu({
         <Caret />
         <span
           aria-hidden="true"
-          className="bg-foreground/25 dark:bg-background/55 absolute inset-x-0 top-full z-20 hidden h-screen cursor-default group-open:block"
+          className="absolute inset-x-0 top-full z-20 hidden h-screen cursor-default bg-black/25 group-open:block dark:bg-black/55"
         />
       </summary>
       <div className="relative h-0">
-        <div className="bg-popover text-popover-foreground ring-line absolute top-0 left-0 z-30 mt-4 flex w-[300px] flex-col gap-3 rounded-[12px] p-3.5 shadow-xl ring-1">
+        <div className="bg-popover text-popover-foreground ring-line absolute top-0 left-0 z-30 mt-4 flex w-[300px] flex-col gap-3 rounded-[12px] p-3.5 shadow-[inset_0_1px_0_rgb(255_255_255/0.04),0_32px_64px_-16px_rgb(0_0_0/0.25)] ring-1 dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.04),0_32px_64px_-16px_rgb(0_0_0/0.75)]">
           <p className="text-foreground text-[13px] leading-[18px] font-medium">
             {group.title}
           </p>
@@ -691,9 +701,11 @@ export function FilterChips({
 }
 
 export function SortLinks({
+  marketing,
   options,
   query,
 }: {
+  marketing: boolean;
   options: BoardQueryOptions;
   query: BoardQuery;
 }) {
@@ -711,7 +723,11 @@ export function SortLinks({
           <Link
             aria-current={active ? "true" : undefined}
             data-active={active ? "true" : undefined}
-            href={boardStateHref({ ...query, page: 1, sort: sort.id }, options)}
+            href={boardStateHref(
+              { ...query, page: 1, sort: sort.id },
+              options,
+              marketing
+            )}
             key={sort.id}
           >
             {sort.label}

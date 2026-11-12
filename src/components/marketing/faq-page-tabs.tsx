@@ -51,7 +51,7 @@ function TabButton({
       className={cn(
         "px-3.5 py-1.5 text-[13px] leading-[18px] whitespace-nowrap max-md:rounded-full md:rounded-md md:px-2.5 md:py-1",
         active
-          ? "bg-primary text-primary-foreground md:bg-card md:text-foreground font-medium md:shadow-xs"
+          ? "bg-primary text-primary-foreground md:bg-card md:text-foreground font-medium md:shadow-[0_0_0_1px_rgb(0_0_0/6%),0_1px_2px_rgb(0_0_0/5%)]"
           : "text-muted-foreground hover:text-foreground max-md:bg-card max-md:text-foreground max-md:ring-line-strong max-md:ring-1 max-md:ring-inset"
       )}
       onClick={handleClick}

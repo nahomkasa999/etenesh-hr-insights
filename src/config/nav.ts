@@ -11,7 +11,9 @@ export interface FooterColumn {
   title: string;
 }
 
-export const BOARD_HOME_PATH = "/jobs";
+export function boardHomePath(marketing: boolean): string {
+  return marketing ? "/jobs" : "/";
+}
 
 const POST_JOB: NavItem = { href: "/post", id: "post", label: "Post a job" };
 
@@ -43,9 +45,8 @@ export function getNav({
     const header: NavItem[] = [
       { href: "/jobs", id: "jobs", label: "Jobs" },
       { href: "/companies", id: "companies", label: "Companies" },
-      { href: "/pricing", id: "pricing", label: "Pricing" },
-      { href: "/showcase", id: "showcase", label: "Showcase" },
-      { href: "/changelog", id: "changelog", label: "Changelog" },
+      { href: "/#courses", id: "courses", label: "Courses" },
+      { href: "/#how-it-works", id: "how", label: "How it works" },
     ];
 
     // The header renders this as the "Create alert" button (bell on phones).
@@ -79,8 +80,8 @@ export function getNav({
           id: "company",
           items: [
             { href: "/about", id: "about", label: "About" },
-            { href: "/pricing", id: "pricing", label: "Pricing" },
-            { href: "/changelog", id: "changelog", label: "Changelog" },
+            { href: "/#courses", id: "courses", label: "Courses" },
+            { href: "/#faq", id: "faq", label: "FAQ" },
           ],
           title: "Company",
         },
@@ -98,9 +99,7 @@ export function getNav({
   }
 
   const header: NavItem[] = [
-    { href: BOARD_HOME_PATH, id: "jobs", label: "Jobs" },
-    { href: "/blog", id: "blog", label: "Career guides" },
-    { href: "/courses", id: "courses", label: "Courses" },
+    { href: "/", id: "jobs", label: "Jobs", matchPrefixes: ["/jobs"] },
     { href: "/companies", id: "companies", label: "Companies" },
   ];
 
@@ -108,6 +107,7 @@ export function getNav({
     header.push(ALERTS);
   }
 
+  // Taxonomy browsing lives on the /jobs hub in board-only mode.
   return {
     cta,
     footer: [{ href: "/feed.xml", id: "feed", label: "RSS" }],
@@ -115,7 +115,7 @@ export function getNav({
       {
         id: "jobs",
         items: [
-          { href: BOARD_HOME_PATH, id: "all-jobs", label: "All jobs" },
+          { href: "/", id: "all-jobs", label: "All jobs" },
           { href: "/jobs/types", id: "job-types", label: "Job types" },
           { href: "/jobs/locations", id: "locations", label: "Locations" },
           { href: "/jobs/levels", id: "levels", label: "Levels" },

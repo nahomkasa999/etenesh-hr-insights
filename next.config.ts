@@ -61,8 +61,6 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  agentRules: false,
-  devIndicators: false,
   env: {
     BORDFUL_DOCS_UPDATED: JSON.stringify(docsUpdatedDates()),
   },

@@ -1,24 +1,29 @@
-import { JetBrains_Mono, Lora, Plus_Jakarta_Sans } from "next/font/google";
+import { Geist, Geist_Mono, IBM_Plex_Serif } from "next/font/google";
 
-export const jakartaSans = Plus_Jakarta_Sans({
+// Self-hosted at build time, so the CSP stays same-origin and no font
+// request leaves the server at runtime. Only Geist Sans, the default body
+// face, is preloaded: mono sets small labels and Plex Serif renders only when
+// a theme picks it, so neither should hold up first paint.
+export const geistSans = Geist({
   subsets: ["latin"],
-  variable: "--loaded-jakarta",
+  variable: "--font-geist-sans",
 });
 
-export const jetBrainsMono = JetBrains_Mono({
+export const geistMono = Geist_Mono({
   preload: false,
   subsets: ["latin"],
-  variable: "--loaded-jetbrains",
+  variable: "--font-geist-mono",
 });
 
-export const lora = Lora({
+export const ibmPlexSerif = IBM_Plex_Serif({
   preload: false,
   subsets: ["latin"],
-  variable: "--loaded-lora",
+  variable: "--font-ibm-plex-serif",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const FONT_VARIABLE_CLASSES = [
-  jakartaSans.variable,
-  jetBrainsMono.variable,
-  lora.variable,
+  geistSans.variable,
+  geistMono.variable,
+  ibmPlexSerif.variable,
 ].join(" ");

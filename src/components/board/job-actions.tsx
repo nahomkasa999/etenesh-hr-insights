@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { buildShareLinks } from "@/components/board/job-share";
@@ -67,28 +66,18 @@ export function JobSaveButton({
 export function JobApplyLink({
   children,
   className,
-  demo = false,
   href,
   slug,
   testId,
 }: {
   children: React.ReactNode;
   className: string;
-  demo?: boolean;
   href: string;
   slug: string;
   testId: string;
 }) {
   const { add } = useJobList("applied");
   const onClick = useCallback(() => add(slug), [add, slug]);
-
-  if (demo) {
-    return (
-      <Link className={className} data-testid={testId} href={href}>
-        {children}
-      </Link>
-    );
-  }
 
   return (
     <a

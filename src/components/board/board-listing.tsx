@@ -127,7 +127,7 @@ export function PickRoleCard() {
   return (
     <section
       aria-labelledby="board-pick-title"
-      className="bg-card ring-line flex flex-col gap-3.5 rounded-[14px] p-5 shadow-xl ring-1"
+      className="bg-card ring-line flex flex-col gap-3.5 rounded-[14px] p-5 shadow-[0_1px_2px_rgb(0_0_0/0.04),0_28px_56px_-20px_rgb(0_0_0/0.16)] ring-1"
     >
       <h2
         className="text-foreground text-[16px] leading-[22px] font-medium"
@@ -314,6 +314,7 @@ export function BoardListing({
   const updated = heroStats(cards, now).lastUpdated;
   const groups = buildFilterGroups({
     facets: view.facets,
+    marketing,
     options,
     query,
   });
@@ -339,9 +340,10 @@ export function BoardListing({
   // no room in the layout.
   const rail = showFilters ? (
     <div className="border-line lg:border-r">
-      <BoardRail options={options} query={query} />
+      <BoardRail marketing={marketing} options={options} query={query} />
       <BoardFilters
         facets={view.facets}
+        marketing={marketing}
         options={options}
         query={query}
         total={view.matchCount}
@@ -385,7 +387,11 @@ export function BoardListing({
             <Link
               className="text-muted-foreground hover:text-foreground text-[13px] underline underline-offset-4"
               data-testid="board-empty-clear"
-              href={boardStateHref(clearBoardFilters(query), options)}
+              href={boardStateHref(
+                clearBoardFilters(query),
+                options,
+                marketing
+              )}
             >
               Clear filters
             </Link>
@@ -395,6 +401,7 @@ export function BoardListing({
       <BoardPagination
         archiveKind={archiveKind}
         archiveValue={archiveValue}
+        marketing={marketing}
         options={options}
         page={view.page}
         query={query}
@@ -411,12 +418,13 @@ export function BoardListing({
       <BoardToolbar
         className={cn(app && (showFilters ? "lg:pl-[232px]" : "lg:pl-4"))}
         facets={showFilters ? view.facets : undefined}
+        marketing={marketing}
         options={options}
         query={query}
         saveSearch={
           showControls
             ? {
-                href: boardStateHref({ ...query, page: 1 }, options),
+                href: boardStateHref({ ...query, page: 1 }, options, marketing),
                 name: searchName,
               }
             : null
@@ -449,7 +457,6 @@ export function BoardListing({
               ? "xl:grid-cols-[216px_minmax(0,1fr)_400px]"
               : "xl:grid-cols-[minmax(0,1fr)_400px]")
         )}
-        demoApply={!marketing}
         jobs={view.docs}
         list={list}
         now={now}

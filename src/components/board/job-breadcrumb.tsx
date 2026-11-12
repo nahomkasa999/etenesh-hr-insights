@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { BOARD_HOME_PATH } from "@/config/nav";
+import { boardHomePath } from "@/config/nav";
 import { BOARD_SEARCH_PATH, buildTaxonomyArchivePath } from "@/lib/board/paths";
 import { taxonomyLabel, taxonomyValuesFor } from "@/lib/board/taxonomy";
 import type { JobListItem } from "@/lib/read/types";
@@ -57,14 +57,17 @@ export function JobBreadcrumb({
   category,
   companyName,
   location,
+  marketing,
   title,
 }: {
   actions?: ReactNode;
   category?: JobCrumb | null;
   companyName?: string;
   location?: JobCrumb | null;
+  marketing: boolean;
   title: string;
 }) {
+  const jobsHref = boardHomePath(marketing);
   const company = companyName?.trim() ?? "";
   const full = company ? `${title} at ${company}` : title;
 
@@ -76,7 +79,7 @@ export function JobBreadcrumb({
       >
         <ol className="flex min-w-0 items-center gap-2">
           <li className="shrink-0">
-            <Link className="hover:text-foreground" href={BOARD_HOME_PATH}>
+            <Link className="hover:text-foreground" href={jobsHref}>
               Jobs
             </Link>
           </li>
@@ -122,7 +125,7 @@ export function JobBreadcrumb({
       <div className="hidden shrink-0 items-center gap-1 sm:flex">
         <Link
           className="text-muted-foreground hover:text-foreground inline font-medium"
-          href={BOARD_HOME_PATH}
+          href={jobsHref}
         >
           <span aria-hidden="true">←</span>
           <span>&nbsp;All jobs</span>

@@ -2,12 +2,11 @@
 
 import { useEffect } from "react";
 
-import { DEPLOY_URL } from "./links";
-import { GITHUB_URL } from "./site";
+import { BRAND } from "./brand";
 
 const HOTKEYS: Record<string, string> = {
-  d: DEPLOY_URL,
-  g: GITHUB_URL,
+  j: BRAND.jobsUrl,
+  s: BRAND.signInUrl,
 };
 
 function isTyping(target: EventTarget | null): boolean {
@@ -23,8 +22,8 @@ function isTyping(target: EventTarget | null): boolean {
   );
 }
 
-// D opens the Vercel deploy flow and G the GitHub repo, as the hints on the
-// header and CTA buttons say. Keys typed into a field are left alone.
+// J opens the job board and S the sign-in page, as the hints on the header
+// and CTA buttons say. Keys typed into a field are left alone.
 export function MarketingHotkeys() {
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -43,7 +42,7 @@ export function MarketingHotkeys() {
       const url = HOTKEYS[event.key.toLowerCase()];
       if (url) {
         event.preventDefault();
-        window.open(url, "_blank", "noopener,noreferrer");
+        window.location.assign(url);
       }
     }
 

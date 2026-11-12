@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { MAIN_CONTENT_ID, SkipLink } from "@/components/skip-link";
 import { cn } from "@/lib/utils";
 
+import { marketingFontVariables } from "./fonts";
 import { MarketingFooter } from "./marketing-footer";
 import { MarketingHeader } from "./marketing-header";
 
@@ -22,6 +23,7 @@ export function MarketingShell({
   return (
     <div
       className={cn(
+        marketingFontVariables,
         "bordful-marketing bg-background text-foreground flex min-h-screen flex-col font-sans antialiased",
         className
       )}

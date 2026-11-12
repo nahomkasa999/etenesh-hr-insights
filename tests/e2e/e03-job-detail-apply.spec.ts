@@ -10,7 +10,7 @@ import {
 } from "./support/seed";
 
 test.describe("E3 job-detail-apply", { tag: ["@E3"] }, () => {
-  test("publishes JobPosting JSON-LD and opens the demo form", async ({
+  test("publishes JobPosting JSON-LD and opens the apply URL", async ({
     page,
     request,
   }) => {
@@ -74,20 +74,17 @@ test.describe("E3 job-detail-apply", { tag: ["@E3"] }, () => {
     expect(jsonLd.url?.endsWith(`/jobs/${slug}`)).toBe(true);
 
     const apply = page.getByTestId("job-apply");
-    await expect(apply).toHaveAttribute("href", `/demo/apply?job=${slug}`);
+    await expect(apply).toHaveAttribute("href", "https://apply.example/e3zq");
+    await expect(apply).toHaveAttribute("target", "_blank");
+    await expect(apply).toHaveAttribute("rel", "noopener noreferrer");
+    // page.route does not see a target=_blank popup. The context route does.
+    await page.context().route("https://apply.example/**", async (route) => {
+      await route.fulfill({ body: "ok", status: 200 });
+    });
+    const popupPromise = page.waitForEvent("popup");
     await apply.click();
-    await expect(
-      page.getByRole("heading", { name: "Apply for E3zq Backend Role" })
-    ).toBeVisible();
-    await page.getByLabel("Sample name").fill("Demo Applicant");
-    await page.getByLabel("Sample email").fill("demo@example.com");
-    await page.getByLabel("Sample note").fill("I am interested in this role.");
-    await page
-      .getByRole("button", { name: "Complete practice application" })
-      .click();
-    await expect(page.getByRole("status")).toContainText(
-      "Practice application complete"
-    );
+    const popup = await popupPromise;
+    await expect(popup).toHaveURL("https://apply.example/e3zq");
 
     const missing = await request.get(`/jobs/${docString(draft, "slug")}`);
     expect(missing.status()).toBe(404);

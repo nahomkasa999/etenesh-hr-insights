@@ -1,6 +1,5 @@
 import { SearchIcon } from "lucide-react";
 
-import { type Language, translate } from "@/custom/etenesh/language";
 import { BOARD_SEARCH_PATH } from "@/lib/board/paths";
 import {
   type BoardQuery,
@@ -48,30 +47,21 @@ export function searchPlaceholder(count?: number, long = false): string {
 export function BoardSearchForm({
   count,
   hidden = [],
-  language = "en",
   q = "",
 }: {
   count?: number;
   hidden?: SearchField[];
-  language?: Language;
   q?: string;
 }) {
-  const t = (text: string) => translate(language, text);
-  const shortPlaceholder = t("Search jobs");
-  const isEnglish = language === "en";
-  const desktopPlaceholder = isEnglish
-    ? searchPlaceholder(count, true)
-    : shortPlaceholder;
-
   return (
     <form
       action={BOARD_SEARCH_PATH}
-      className="bg-card ring-line-strong focus-within:ring-ring/40 relative flex h-12 w-full items-center rounded-[10px] ring-1 ring-inset lg:h-9 lg:rounded-[8px]"
+      className="bg-card ring-line-strong focus-within:ring-ring/40 relative flex h-10 w-full items-center rounded-[10px] ring-1 ring-inset lg:h-8 lg:rounded-[8px]"
       data-testid="board-search"
       method="get"
     >
       <button
-        aria-label={t("Search")}
+        aria-label="Search"
         className="text-subtle hover:text-foreground flex h-full w-10 shrink-0 items-center justify-center rounded-l-[10px] lg:w-8 lg:rounded-l-[8px]"
         data-testid="board-search-submit"
         type="submit"
@@ -79,7 +69,7 @@ export function BoardSearchForm({
         <SearchIcon aria-hidden="true" className="size-4 lg:size-3.5" />
       </button>
       <label className="sr-only" htmlFor={BOARD_SEARCH_INPUT_ID}>
-        {t("Search jobs by title or company")}
+        Search jobs by title or company
       </label>
       <input
         className="text-foreground placeholder:text-subtle peer h-full min-w-0 flex-1 bg-transparent pr-3 text-[15px] outline-none lg:pr-2 lg:text-[14px] lg:placeholder:text-transparent [&::-webkit-search-cancel-button]:hidden"
@@ -87,7 +77,7 @@ export function BoardSearchForm({
         defaultValue={q}
         id={BOARD_SEARCH_INPUT_ID}
         name="q"
-        placeholder={isEnglish ? searchPlaceholder(count) : shortPlaceholder}
+        placeholder={searchPlaceholder(count)}
         type="search"
       />
       {/* Paper: the short count on phones, the long hint in the desktop bar.
@@ -97,7 +87,7 @@ export function BoardSearchForm({
         aria-hidden="true"
         className="text-subtle pointer-events-none absolute inset-y-0 right-12 left-8 hidden items-center truncate text-[14px] leading-5 lg:peer-placeholder-shown:flex"
       >
-        {desktopPlaceholder}
+        {searchPlaceholder(count, true)}
       </span>
       <span
         aria-hidden="true"

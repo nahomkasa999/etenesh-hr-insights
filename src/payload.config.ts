@@ -38,12 +38,24 @@ export default buildConfig({
   admin: {
     avatar: "default",
     components: {
+      beforeNavLinks: ["/admin/components/etenesh-brand#EteneshNavBrand"],
+      graphics: {
+        Icon: "/admin/components/etenesh-brand#EteneshIcon",
+        Logo: "/admin/components/etenesh-brand#EteneshLogo",
+      },
+      providers: ["/admin/components/etenesh-brand#EteneshFonts"],
       views: {
-        dashboard: { Component: "/admin/components/hr-dashboard#HrDashboard" },
+        dashboard: {
+          Component: "/admin/components/etenesh-dashboard#EteneshDashboard",
+        },
       },
     },
     importMap: { baseDir: path.resolve(dirname) },
-    meta: { titleSuffix: " | Etenesh HR Insights" },
+    meta: {
+      icons: [{ rel: "icon", type: "image/png", url: "/etenesh/mark.png" }],
+      titleSuffix: " | Etenesh HR",
+    },
+    theme: "light",
     user: "users",
   },
   cli: { commands: { bordful: "./cli/bordful.js#bordfulCommand" } },
@@ -76,6 +88,7 @@ export default buildConfig({
       return;
     }
 
+    // Etenesh posts its own vacancies, so the Bordfeed sample feed stays off.
     await ensureInstallIdSafely(payload);
   },
   secret,

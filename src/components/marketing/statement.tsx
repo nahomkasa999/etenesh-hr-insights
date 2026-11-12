@@ -1,16 +1,18 @@
 import { Container } from "./container";
 import { Section } from "./section";
 
-// One sentence for what the board does, built from the feature list:
-// Bordfeed jobs, Resend alerts and Stripe paid posts.
+// One sentence for what Etenesh does for the people applying.
 const parts = [
-  { highlight: false, text: "Bordful" },
+  { highlight: false, text: "Etenesh" },
   { highlight: true, text: "lists" },
-  { highlight: false, text: "jobs from your feed," },
-  { highlight: true, text: "alerts" },
-  { highlight: false, text: "people when new ones land, and" },
-  { highlight: true, text: "charges" },
-  { highlight: false, text: "employers to post." },
+  {
+    highlight: false,
+    text: "real jobs, checks each application against what the employer",
+  },
+  { highlight: true, text: "asked for," },
+  { highlight: false, text: "and" },
+  { highlight: true, text: "updates" },
+  { highlight: false, text: "you on Telegram at every step." },
 ] as const;
 
 export function Statement() {

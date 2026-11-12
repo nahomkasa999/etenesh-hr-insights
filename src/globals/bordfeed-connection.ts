@@ -55,7 +55,7 @@ export const BordfeedConnection: GlobalConfig = {
     read: anyone,
     update: isAdmin,
   },
-  admin: {},
+  admin: { hidden: true },
   authorship: false,
   fields: [
     {

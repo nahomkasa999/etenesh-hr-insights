@@ -2,11 +2,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { Container } from "./container";
-import { KBD_ON_PRIMARY, Kbd } from "./kbd";
-import { DEPLOY_URL } from "./links";
 import { Section } from "./section";
 import { SectionHeader } from "./section-header";
-import { GITHUB_URL } from "./site";
 
 // The home section shows a shorter card: Paper's own lines, three features
 // and the deploy button on the free plan.
@@ -31,60 +28,64 @@ interface Plan {
   price: string;
 }
 
-const SETUP_URL = "https://buy.stripe.com/14A5kE3sN6D34HL6X2dnW0r";
+// Example courses until the course shop is built. Buying happens on
+// Telegram and the Etenesh team checks each payment by hand.
+const COURSE_URL = "/#courses";
 
 const plans: readonly Plan[] = [
   {
-    cta: "Clone now",
-    description: "For developers and hobbyists",
-    external: true,
+    cta: "Buy on Telegram",
+    description: "Six short videos on writing a CV employers read",
+    external: false,
     features: [
-      "Next.js codebase",
-      "Full job board features",
-      "Self-hosted solution",
-      "MIT license",
-      "Community support",
+      "6 short videos",
+      "CV template included",
+      "Watch on any phone",
+      "Yours to keep",
     ],
     home: {
-      badge: "Start here",
-      cta: "Deploy to Vercel",
+      badge: "Most popular",
+      cta: "Buy on Telegram",
       description:
-        "For developers and hobbyists. Self-host on your own accounts.",
-      features: ["Full job board features", "MIT license", "Community support"],
-      href: DEPLOY_URL,
-      unit: "forever",
+        "Six short videos on writing a CV that gets you called for interviews.",
+      features: [
+        "6 short videos",
+        "CV template included",
+        "Watch on any phone",
+      ],
+      href: COURSE_URL,
+      unit: "ETB",
     },
-    href: GITHUB_URL,
-    name: "Open Source",
-    price: "Free",
+    href: COURSE_URL,
+    name: "Write a CV that gets read",
+    price: "500",
   },
   {
-    cta: "Order setup",
-    description: "Let us handle everything for you",
-    external: true,
+    cta: "Buy on Telegram",
+    description: "Practice the questions Ethiopian employers ask",
+    external: false,
     features: [
-      "Full installation service",
-      "Custom domain setup",
-      "One-time payment",
-      "1-hour consultation",
-      "Community support",
+      "8 short videos",
+      "Common questions and answers",
+      "Watch on any phone",
+      "Yours to keep",
     ],
     highlight: true,
     home: {
-      cta: "Order setup",
+      cta: "Buy on Telegram",
       description:
-        "We install it, set your domain and walk you through it. Pay once.",
+        "Practice the questions Ethiopian employers ask, and how to answer them.",
       features: [
-        "Full installation",
-        "Custom domain setup",
-        "1-hour consultation",
+        "8 short videos",
+        "Common questions and answers",
+        "Watch on any phone",
       ],
-      href: SETUP_URL,
-      unit: "once",
+      href: COURSE_URL,
+      unit: "ETB",
     },
-    href: SETUP_URL,
-    name: "Custom Setup",
-    price: "$999",
+    href: COURSE_URL,
+    name: "Interview ready in one week",
+    price: "750",
   },
 ];
 
@@ -204,10 +205,7 @@ function HomePlanBody({ plan, primary }: { plan: Plan; primary: boolean }) {
         )}
         variant={primary ? "default" : "outline"}
       >
-        <a href={home.href} rel="noopener noreferrer" target="_blank">
-          {home.cta}
-          {primary ? <Kbd className={KBD_ON_PRIMARY}>D</Kbd> : null}
-        </a>
+        <a href={home.href}>{home.cta}</a>
       </Button>
     </>
   );
@@ -248,13 +246,13 @@ export function Pricing({
   // Home section: two flush cells, the free plan on the raised surface. On
   // a phone Paper stacks them as rounded cards, the free plan outlined.
   return (
-    <Section id="pricing" padding="flush">
+    <Section id="courses" padding="flush">
       <Container className="border-line pt-10 pb-5 md:border-b md:pt-16 md:pb-10">
         <SectionHeader
-          eyebrow="Pricing"
+          eyebrow="Courses"
           phone="mono"
-          title="Free to run."
-          titleMuted="Help if you want it."
+          title="Learn what employers want."
+          titleMuted="Pay on Telegram."
         />
       </Container>
       <div className="grid gap-5 px-4 md:grid-cols-2 md:gap-0 md:px-0">
@@ -274,8 +272,8 @@ export function Pricing({
       </div>
       <Container className="border-line pt-5 pb-10 md:border-t md:py-3.5">
         <p className="text-subtle text-[11px] leading-[14px]">
-          Payments by Stripe. Prices in USD, VAT may apply. Bordfeed has its own
-          plans.
+          Pay on Telegram. Our team checks your payment and sends your course
+          link the same day.
         </p>
       </Container>
     </Section>

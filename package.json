@@ -15,7 +15,7 @@
     "lint": "ultracite check",
     "lint:payload": "bun scripts/check-override-access.ts",
     "payload": "payload",
-    "seed:etenesh": "node --env-file-if-exists=.env --import tsx scripts/seed-etenesh.ts",
+    "seed:demo": "node --env-file-if-exists=.env --import tsx scripts/seed-demo.ts",
     "start": "next start",
     "test": "vitest run",
     "test:e2e": "playwright test",

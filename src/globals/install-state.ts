@@ -7,7 +7,7 @@ export const InstallState: GlobalConfig = {
     read: isAdmin,
     update: denyAll,
   },
-  admin: { hidden: false },
+  admin: { hidden: true },
   authorship: false,
   fields: [
     {

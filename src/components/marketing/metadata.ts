@@ -5,13 +5,13 @@ import { BORDFUL_ICONS } from "@/lib/seo/icons";
 
 import { MARKETING_DESCRIPTION } from "./site";
 
-const title = "Bordful: open-source job board template";
+const title = "Etenesh HR Insights: jobs in Ethiopia";
 
 const image = {
   alt: title,
-  height: 630,
-  url: "/marketing/bordful-job-board-software.png",
-  width: 1200,
+  height: 512,
+  url: "/etenesh/icon-512.png",
+  width: 512,
 };
 
 export function marketingLayoutMetadata(enabled: boolean): Metadata {
@@ -27,20 +27,18 @@ export function marketingLayoutMetadata(enabled: boolean): Metadata {
       description: MARKETING_DESCRIPTION,
       images: [image],
       locale: "en_US",
-      siteName: "Bordful",
+      siteName: "Etenesh HR Insights",
       title,
       type: "website",
     },
     title: {
       default: title,
-      template: "%s | Bordful",
+      template: "%s | Etenesh HR",
     },
     twitter: {
       card: "summary_large_image",
-      creator: "@bordful",
       description: MARKETING_DESCRIPTION,
       images: [image.url],
-      site: "@bordful",
       title,
     },
   };

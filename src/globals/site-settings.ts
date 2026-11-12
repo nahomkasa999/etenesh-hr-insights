@@ -57,12 +57,12 @@ export const SiteSettings: GlobalConfig = {
     readVersions: isAdmin,
     update: isAdmin,
   },
+  admin: { group: "Settings" },
   fields: [
     { defaultValue: "Job Board", name: "name", required: true, type: "text" },
     { defaultValue: "", name: "tagline", type: "text" },
     { name: "logo", relationTo: "media", type: "upload" },
     {
-      admin: { hidden: true },
       fields: [
         { fields: colorFields, name: "colors", type: "group" },
         {

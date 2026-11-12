@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 import { isMarketingEnabled } from "@/config/flags";
-import { courseIntroOrigin } from "@/custom/etenesh/courses";
 import { buildCsp } from "@/lib/csp/build-csp";
 import { createNonce } from "@/lib/csp/nonce";
 import { BORDFUL_ICON } from "@/lib/seo/icons";
@@ -97,13 +96,7 @@ export function proxy(request: NextRequest) {
 
   const nonce = createNonce();
   const isDev = process.env.NODE_ENV !== "production";
-  const admin = isAdminPath(pathname);
-  const csp = buildCsp({
-    admin,
-    frameOrigin: admin || isApiPath(pathname) ? undefined : courseIntroOrigin,
-    isDev,
-    nonce,
-  });
+  const csp = buildCsp({ admin: isAdminPath(pathname), isDev, nonce });
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);

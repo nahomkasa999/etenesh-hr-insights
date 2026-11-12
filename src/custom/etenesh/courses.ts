@@ -32,4 +32,64 @@ export const careerCourse = {
   videoId: "BaW_AA8SmY0",
 };
 
-export const careerCoursePath = `/courses/${careerCourse.slug}`;
+export const courses = [
+  { ...careerCourse, price: 990 },
+  {
+    audience:
+      "For applicants who want to tailor their documents to a specific vacancy.",
+    description:
+      "Build a readable CV and write a cover letter using evidence from your own experience.",
+    lessons: [
+      {
+        description:
+          "Identify the requirements your application needs to address.",
+        title: "Read the vacancy",
+      },
+      {
+        description:
+          "Describe your contribution and the result in each example.",
+        title: "Write experience bullets",
+      },
+      {
+        description:
+          "Use the checklist to connect your strongest examples to the role.",
+        title: "Draft and review a letter",
+      },
+    ],
+    price: 590,
+    slug: "cv-and-cover-letter",
+    title: "CV and Cover Letter",
+  },
+  {
+    audience: "For anyone preparing for a first or upcoming interview.",
+    description:
+      "Prepare examples, rehearse common questions, and plan what to ask the interviewer.",
+    lessons: [
+      {
+        description:
+          "Review the employer and choose examples that match the work.",
+        title: "Research the role",
+      },
+      {
+        description:
+          "Use the STAR method and a mock interview to make your examples clearer.",
+        title: "Practice structured answers",
+      },
+      {
+        description:
+          "Create a preparation checklist and draft your follow-up message.",
+        title: "Prepare for interview day",
+      },
+    ],
+    price: 790,
+    slug: "interview-preparation",
+    title: "Interview Preparation",
+  },
+];
+
+export function courseTelegramLink(title: string) {
+  const message = encodeURIComponent(
+    `Hi Etenesh, I'd like to ask about ${title}.`
+  );
+  return `https://t.me/eteneshinsights?text=${message}`;
+}

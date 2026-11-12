@@ -1,12 +1,13 @@
 "use client";
 
+import { GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type JSX, useEffect, useState } from "react";
 
 import { isActiveItem } from "@/components/board/nav-active";
-import { useJobList } from "@/components/board/saved-jobs";
 import type { NavItem } from "@/config/nav";
+import { useTranslation } from "@/custom/etenesh/language-provider";
 
 const ICON_PROPS = {
   "aria-hidden": true,
@@ -20,7 +21,7 @@ const ICON_PROPS = {
   viewBox: "0 0 20 20",
 } as const;
 
-type TabId = "alerts" | "companies" | "jobs" | "saved";
+type TabId = "alerts" | "companies" | "courses" | "jobs" | "saved";
 
 const TAB_ICONS: Record<TabId, JSX.Element> = {
   alerts: (
@@ -37,6 +38,7 @@ const TAB_ICONS: Record<TabId, JSX.Element> = {
       <rect height="14" width="7" x="10" y="3" />
     </svg>
   ),
+  courses: <GraduationCap aria-hidden="true" className="size-[22px]" />,
   jobs: (
     <svg {...ICON_PROPS}>
       <title>Jobs</title>
@@ -79,13 +81,14 @@ function useIsNotFound(pathname: string): boolean {
 export function TabBar({
   alertsEnabled,
   homeHref,
+  showCourses = false,
 }: {
   alertsEnabled: boolean;
   homeHref: string;
+  showCourses?: boolean;
 }) {
   const pathname = usePathname();
-  const saved = useJobList("saved");
-  const savedCount = saved.slugs.length;
+  const t = useTranslation();
   const notFound = useIsNotFound(pathname);
 
   const tabs: Tab[] = [
@@ -99,6 +102,9 @@ export function TabBar({
   ];
   if (alertsEnabled) {
     tabs.push({ href: "/alerts", id: "alerts", label: "Alerts" });
+  }
+  if (showCourses) {
+    tabs.push({ href: "/courses", id: "courses", label: "Courses" });
   }
   tabs.push({ href: "/companies", id: "companies", label: "Companies" });
 
@@ -124,20 +130,13 @@ export function TabBar({
               <li className="flex-1" key={tab.id}>
                 <Link
                   aria-current={active ? "page" : undefined}
-                  className={`flex flex-col items-center gap-1 text-[11px] leading-[14px] font-medium ${
+                  className={`flex flex-col items-center gap-1 text-xs leading-4 font-medium ${
                     active ? "text-foreground" : "text-subtle"
                   }`}
                   href={tab.href}
                 >
-                  <span className="relative flex">
-                    {TAB_ICONS[tab.id]}
-                    {tab.id === "saved" && savedCount > 0 ? (
-                      <span className="bg-primary text-primary-foreground absolute -top-1 left-3.5 min-w-4 rounded-full px-1 text-center text-[10px] leading-4 font-medium">
-                        {savedCount}
-                      </span>
-                    ) : null}
-                  </span>
-                  {tab.label}
+                  {TAB_ICONS[tab.id]}
+                  {t(tab.label)}
                 </Link>
               </li>
             );

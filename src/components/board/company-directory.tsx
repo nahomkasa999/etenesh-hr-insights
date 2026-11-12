@@ -11,6 +11,7 @@ import {
 
 import { CompanyCard } from "@/components/board/company-card";
 import { PageTitle } from "@/components/board/taxonomy-hub";
+import { useTranslation } from "@/custom/etenesh/language-provider";
 import type { CompanyIndexRow } from "@/lib/board/companies";
 import { cn } from "@/lib/utils";
 
@@ -70,6 +71,7 @@ export function CompanyFilterTabs({
   filters: readonly CompanyFilter[];
   onChange: (filter: CompanyFilter) => void;
 }) {
+  const t = useTranslation();
   const onClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       const value = event.currentTarget.dataset.filter as CompanyFilter;
@@ -81,7 +83,7 @@ export function CompanyFilterTabs({
     return null;
   }
   return (
-    <fieldset className="bg-tag m-0 flex w-fit min-w-0 shrink-0 gap-0.5 rounded-lg border-0 p-0.5">
+    <fieldset className="bg-tag m-0 flex w-fit min-w-0 shrink-0 flex-wrap gap-1.5 rounded-lg border-0 p-1.5">
       <legend className="sr-only">Filter companies</legend>
       {filters.map((value) => {
         const active = value === filter;
@@ -89,7 +91,7 @@ export function CompanyFilterTabs({
           <button
             aria-pressed={active}
             className={cn(
-              "h-6 rounded-md px-3 text-[13px] leading-4 transition-colors",
+              "min-h-11 rounded-md px-4 text-sm leading-5 transition-colors",
               active
                 ? "bg-card text-foreground font-medium shadow-xs"
                 : "text-muted-foreground hover:text-foreground"
@@ -100,7 +102,7 @@ export function CompanyFilterTabs({
             onClick={onClick}
             type="button"
           >
-            {FILTER_LABEL[value]}
+            {t(FILTER_LABEL[value])}
           </button>
         );
       })}
@@ -119,6 +121,7 @@ export function CompanyDirectory({
   subtitle: string;
   title: string;
 }) {
+  const t = useTranslation();
   const [term, setTerm] = useState("");
   const [filter, setFilter] = useState<CompanyFilter>("all");
   const [expanded, setExpanded] = useState(false);
@@ -138,7 +141,7 @@ export function CompanyDirectory({
   return (
     <div className="contents">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <PageTitle subtitle={subtitle}>{title}</PageTitle>
+        <PageTitle subtitle={subtitle}>{t(title)}</PageTitle>
         <CompanyFilterTabs
           filter={filter}
           filters={filters}
@@ -147,7 +150,7 @@ export function CompanyDirectory({
       </div>
       <div>
         <label className="sr-only" htmlFor={inputId}>
-          Search companies
+          {t("Search companies")}
         </label>
         <input
           autoComplete="off"
@@ -155,7 +158,7 @@ export function CompanyDirectory({
           data-testid="company-search"
           id={inputId}
           onChange={onChange}
-          placeholder="Search companies"
+          placeholder={t("Search companies")}
           type="search"
           value={term}
         />

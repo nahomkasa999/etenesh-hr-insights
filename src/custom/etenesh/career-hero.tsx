@@ -1,30 +1,31 @@
-import { ArrowDown, ArrowUpRight, BookOpen } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { eteneshBrand, eteneshSocial } from "./brand";
+import { eteneshBrand } from "./brand";
+import { getTranslation } from "./language-server";
 
-export function CareerHero() {
+export async function CareerHero() {
+  const t = await getTranslation();
   return (
     <section aria-labelledby="career-heading" className="career-hero">
       <div className="career-hero-inner">
         <div className="career-hero-copy">
-          <p className="career-eyebrow">Careers in Ethiopia</p>
+          <p className="career-eyebrow">{t("Careers in Ethiopia")}</p>
           <h1 id="career-heading">
-            Find your next role.
+            {t("Find your next role.")}
             <br />
-            Get ready for it.
+            {t("Get ready for it.")}
           </h1>
           <p>
-            Browse jobs in Ethiopia and learn how to write a stronger CV,
-            prepare for interviews, and apply with confidence.
+            {t(
+              "Browse jobs in Ethiopia and learn how to write a stronger CV, prepare for interviews, and apply with confidence."
+            )}
           </p>
           <div className="career-hero-actions">
-            <Link href="#latest-jobs">
-              Browse jobs <ArrowDown aria-hidden="true" size={17} />
-            </Link>
             <Link href="/blog">
-              <BookOpen aria-hidden="true" size={17} /> Read career guides
+              <BookOpen aria-hidden="true" size={17} />{" "}
+              {t("Read career guides")}
             </Link>
           </div>
         </div>
@@ -37,13 +38,6 @@ export function CareerHero() {
             width={180}
           />
           <p>Human Capital Solutions</p>
-          <a
-            href={eteneshSocial.tiktok}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Etenesh on TikTok <ArrowUpRight aria-hidden="true" size={14} />
-          </a>
           <span className="text-muted-foreground mt-1 text-xs">
             Pitch preview
           </span>

@@ -17,7 +17,7 @@ import { PostJobCard } from "@/components/board/post-job-card";
 import { RelativeTime } from "@/components/board/relative-time";
 import { SimilarJobs } from "@/components/board/similar-jobs";
 import { StickyApply } from "@/components/board/sticky-apply";
-import { httpUrl, jobApplyHref } from "@/lib/board/apply";
+import { demoApplicationHref, httpUrl, jobApplyHref } from "@/lib/board/apply";
 import { bulletLinesToLists } from "@/lib/board/bullet-lists";
 import { formatRelativePosted, formatShortDate } from "@/lib/board/format";
 import { buildCompanyPath } from "@/lib/board/paths";
@@ -197,7 +197,7 @@ function Letterhead({
 }) {
   const subline = companyLine(job.company, website);
   const nameClass =
-    "text-foreground text-[15px] leading-[18px] font-medium md:leading-5";
+    "text-foreground text-base leading-6 font-medium md:text-[15px] md:leading-5";
 
   return (
     <header className="flex flex-col gap-5">
@@ -248,7 +248,7 @@ function PostedLine({ job, now }: { job: JobDetail; now: number }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       {publishedAt && postedAgo ? (
-        <p className="text-subtle md:text-muted-foreground text-[13px] leading-4 md:text-[15px] md:leading-5">
+        <p className="text-subtle md:text-muted-foreground text-sm leading-5 md:text-[15px] md:leading-5">
           Posted{" "}
           {postedOn && postedOn !== postedAgo ? (
             <span className="hidden md:inline">{postedOn} · </span>
@@ -270,10 +270,12 @@ function PostedLine({ job, now }: { job: JobDetail; now: number }) {
 function ActionBar({
   applyHref,
   closes,
+  demo,
   job,
 }: {
   applyHref: string | null;
   closes: string;
+  demo: boolean;
   job: JobDetail;
 }) {
   return (
@@ -299,14 +301,12 @@ function ActionBar({
         {applyHref ? (
           <JobApplyLink
             className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-10 min-w-0 shrink-0 items-center justify-center rounded-lg px-5 text-[14px] leading-[18px] font-medium"
+            demo={demo}
             href={applyHref}
             slug={job.slug}
             testId="job-apply"
           >
-            {job.sourceListingUrl?.startsWith("https://ethiojobs.net/")
-              ? "Apply via Ethiojobs"
-              : `Apply at ${job.companyName}`}
-            <span aria-hidden="true">&nbsp;↗</span>
+            {demo ? "Apply" : `Apply at ${job.companyName} ↗`}
             <span className="sr-only"> to {job.title}</span>
           </JobApplyLink>
         ) : null}
@@ -384,7 +384,9 @@ export function JobPosting({
   shareUrl: string;
   similarJobs: readonly JobListItem[];
 }) {
-  const applyHref = jobApplyHref(job);
+  const applyHref = marketing
+    ? jobApplyHref(job)
+    : demoApplicationHref(job.slug);
   // Rows synced before list detection still render dash lines as lists.
   const description = dropBlankParagraphs(
     bulletLinesToLists(editorState(job.description))
@@ -406,14 +408,6 @@ export function JobPosting({
   return (
     <div className="-mt-6 flex flex-col gap-5 md:-mt-1 lg:-mx-0.5">
       <JobBreadcrumb
-        actions={
-          <JobSaveButton
-            className="md:hidden"
-            slug={job.slug}
-            testId="job-top-save"
-            variant="icon"
-          />
-        }
         category={fields.includes("categories") ? categoryCrumb(job) : null}
         companyName={job.companyName}
         location={fields.includes("location") ? locationCrumb(job) : null}
@@ -422,7 +416,7 @@ export function JobPosting({
       />
       <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
         <article className="md:bg-card md:ring-line min-w-0 md:overflow-clip md:rounded-2xl md:shadow-xl md:ring-1">
-          <div className="flex flex-col gap-5 md:gap-9 md:px-12 md:pt-14 md:pb-12 xl:px-[88px]">
+          <div className="flex flex-col gap-6 md:gap-9 md:px-12 md:pt-14 md:pb-12 xl:px-[88px]">
             <Letterhead
               companyHref={companyHref}
               job={job}
@@ -434,7 +428,12 @@ export function JobPosting({
               {description ? <RichText data={description} /> : null}
             </div>
           </div>
-          <ActionBar applyHref={applyHref} closes={closes} job={job} />
+          <ActionBar
+            applyHref={applyHref}
+            closes={closes}
+            demo={!marketing}
+            job={job}
+          />
           {jsonLd ? (
             <script
               // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is data and "<" is escaped
@@ -469,12 +468,10 @@ export function JobPosting({
       ) : null}
       <StickyApply
         companyName={job.companyName}
+        demo={!marketing}
         href={applyHref}
         slug={job.slug}
         title={job.title}
-        viaEthiojobs={job.sourceListingUrl?.startsWith(
-          "https://ethiojobs.net/"
-        )}
       />
     </div>
   );

@@ -1,3 +1,14 @@
+@layer theme, payload-default, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "../palette.css";
+@import "../theme.css";
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
+@source "../../admin/components/hr-dashboard.tsx";
+@source "../../components/ui";
+@custom-variant dark (&:is([data-theme="dark"] *));
+
 :root,
 :root[data-theme="dark"] {
   --color-bg: var(--background);

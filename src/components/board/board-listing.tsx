@@ -457,6 +457,7 @@ export function BoardListing({
               ? "xl:grid-cols-[216px_minmax(0,1fr)_400px]"
               : "xl:grid-cols-[minmax(0,1fr)_400px]")
         )}
+        demoApply={!marketing}
         jobs={view.docs}
         list={list}
         now={now}

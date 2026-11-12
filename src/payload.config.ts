@@ -38,7 +38,9 @@ export default buildConfig({
   admin: {
     avatar: "default",
     components: {
-      beforeDashboard: ["/admin/components/update-notice#UpdateNotice"],
+      views: {
+        dashboard: { Component: "/admin/components/hr-dashboard#HrDashboard" },
+      },
     },
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: " | Etenesh HR Insights" },

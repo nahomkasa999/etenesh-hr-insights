@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useState } from "react";
 
+import { JobApplyLink } from "@/components/board/job-actions";
 import { jobStatuses, StatusPill } from "@/components/board/job-row";
 import { HINT_CLASS } from "@/components/board/rail-styles";
 import { useJobList } from "@/components/board/saved-jobs";
+import { demoApplicationHref } from "@/lib/board/apply";
 import { offersVisa } from "@/lib/board/filter";
 import {
   formatLocation,
@@ -307,6 +309,7 @@ function PreviewSide({
 // The right-hand panel for the selected row ("Job open" in the design).
 export function JobPreview({
   alertsEnabled = false,
+  demoApply = false,
   index,
   job,
   jobs = [],
@@ -318,6 +321,7 @@ export function JobPreview({
   total,
 }: {
   alertsEnabled?: boolean;
+  demoApply?: boolean;
   index: number;
   job: JobListItem;
   // The jobs on this page, for "Similar jobs".
@@ -331,13 +335,11 @@ export function JobPreview({
 }) {
   const titleId = useId();
   const saved = useJobList("saved");
-  const applied = useJobList("applied");
   const description = useDescription(job.slug);
   const isSaved = saved.has(job.slug);
   const { toggle } = saved;
-  const { add } = applied;
   const onSave = useCallback(() => toggle(job.slug), [job.slug, toggle]);
-  const onApply = useCallback(() => add(job.slug), [add, job.slug]);
+  const applyHref = demoApply ? demoApplicationHref(job.slug) : job.applyHref;
   const href = buildJobPath(job.slug);
   const facts = previewFacts(job, now);
   const statuses = jobStatuses(job, now);
@@ -497,22 +499,19 @@ export function JobPreview({
           >
             {isSaved ? "Saved" : "Save"}
           </button>
-          {job.applyHref ? (
-            <a
+          {applyHref ? (
+            <JobApplyLink
               className={cn(
                 "bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-[38px] items-center rounded-[8px] px-[18px] text-[14px] leading-[18px] font-medium",
                 FOCUS
               )}
-              data-testid="job-preview-apply"
-              href={job.applyHref}
-              onClick={onApply}
-              rel="noopener noreferrer"
-              target="_blank"
+              demo={demoApply}
+              href={applyHref}
+              slug={job.slug}
+              testId="job-preview-apply"
             >
-              {job.applyHref.startsWith("https://ethiojobs.net/")
-                ? "Apply via Ethiojobs ↗"
-                : `Apply at ${job.companyName} ↗`}
-            </a>
+              {demoApply ? "Apply" : `Apply at ${job.companyName} ↗`}
+            </JobApplyLink>
           ) : (
             <Link
               className={cn(

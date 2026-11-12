@@ -1,13 +1,12 @@
 "use client";
 
+import { Bookmark } from "lucide-react";
 import { useCallback } from "react";
 
-import { HINT_CLASS } from "@/components/board/rail-styles";
 import { useJobList } from "@/components/board/saved-jobs";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// The row's "S Save" hint doubles as a button, so mouse users can save
-// without the keyboard. The saved state shows after hydration.
 export function RowSaveButton({
   slug,
   title,
@@ -21,19 +20,20 @@ export function RowSaveButton({
   const onClick = useCallback(() => toggle(slug), [slug, toggle]);
 
   return (
-    <button
+    <Button
       aria-label={on ? `Remove ${title} from saved jobs` : `Save ${title}`}
       aria-pressed={on}
-      className={cn(
-        HINT_CLASS,
-        "hover:text-foreground focus-visible:outline-ring relative z-10 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-1"
-      )}
+      className="relative z-10 size-11"
       data-testid="job-row-save"
       onClick={onClick}
+      size="icon"
       type="button"
+      variant="ghost"
     >
-      <kbd className="font-sans">S</kbd>
-      {on ? "Saved" : "Save"}
-    </button>
+      <Bookmark
+        aria-hidden="true"
+        className={cn("size-5", on && "fill-current")}
+      />
+    </Button>
   );
 }

@@ -5,6 +5,8 @@ import type { ReactNode } from "react";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { isMarketingEnabled } from "@/config/flags";
 import { eteneshBrand } from "@/custom/etenesh/brand";
+import { LanguageProvider } from "@/custom/etenesh/language-provider";
+import { getLanguage } from "@/custom/etenesh/language-server";
 import { getSiteSettings } from "@/lib/read";
 import { boardIcons } from "@/lib/seo/icons";
 import { FONT_VARIABLE_CLASSES } from "@/theme/fonts";
@@ -33,14 +35,24 @@ export default async function SiteLayout({
 }: {
   children: ReactNode;
 }) {
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const [requestHeaders, language] = await Promise.all([
+    headers(),
+    getLanguage(),
+  ]);
+  const nonce = requestHeaders.get("x-nonce") ?? undefined;
 
   return (
-    <html className={FONT_VARIABLE_CLASSES} lang="en" suppressHydrationWarning>
+    <html
+      className={FONT_VARIABLE_CLASSES}
+      lang={language}
+      suppressHydrationWarning
+    >
       <head>
         <ThemeScript nonce={nonce} />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <LanguageProvider language={language}>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

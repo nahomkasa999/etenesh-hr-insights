@@ -38,15 +38,13 @@ export default async function HomePage() {
   return (
     <BoardShell
       fullBleed
+      intro={<CareerHero />}
       search={{
         options,
         query: parseBoardQuery(new URLSearchParams(""), options),
       }}
     >
-      <CareerHero />
-      <div id="latest-jobs">
-        <BoardHome headingLevel="h2" />
-      </div>
+      <BoardHome headingLevel="h2" />
     </BoardShell>
   );
 }

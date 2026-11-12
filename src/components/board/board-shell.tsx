@@ -12,6 +12,7 @@ import { isMarketingEnabled } from "@/config/flags";
 import { boardHomePath, getNav } from "@/config/nav";
 import { customSlots } from "@/custom";
 import { eteneshBrand } from "@/custom/etenesh/brand";
+import { getLanguage } from "@/custom/etenesh/language-server";
 import { buildTaxonomyArchivePath } from "@/lib/board/paths";
 import { loadBoardPool } from "@/lib/board/pool";
 import type { BoardQuery, BoardQueryOptions } from "@/lib/board/query";
@@ -21,6 +22,7 @@ export async function BoardShell({
   children,
   fullBleed = false,
   hidePostCta = false,
+  intro,
   search,
 }: {
   children: ReactNode;
@@ -29,12 +31,14 @@ export async function BoardShell({
   hidePostCta?: boolean;
   // Board listings pass their query so a header search keeps the filters,
   // and the search shows as a row under the brand bar on phones.
+  intro?: ReactNode;
   search?: { options: BoardQueryOptions; query: BoardQuery };
 }): Promise<JSX.Element> {
-  const [settings, connection, pool] = await Promise.all([
+  const [settings, connection, pool, language] = await Promise.all([
     getSiteSettings(),
     getBordfeedConnectionPublic(),
     loadBoardPool(),
+    search ? getLanguage() : undefined,
   ]);
   const marketing = isMarketingEnabled();
   const logoUrl = settings.logoUrl ?? (marketing ? null : eteneshBrand.logo);
@@ -50,6 +54,16 @@ export async function BoardShell({
     (card) => card.workplaceType === "remote"
   ).length;
 
+  const listingSearch = !marketing && search !== undefined;
+  const searchForm = (
+    <BoardSearchForm
+      count={pool.length}
+      hidden={search ? searchHiddenFields(search.query, search.options) : []}
+      language={language}
+      q={search?.query.q ?? ""}
+    />
+  );
+
   return (
     <div className="bg-background text-foreground flex min-h-screen flex-col">
       <SkipLink />
@@ -63,16 +77,9 @@ export async function BoardShell({
           logoUrl={logoUrl}
           name={settings.name}
           navItems={nav.header}
-          search={
-            <BoardSearchForm
-              count={pool.length}
-              hidden={
-                search ? searchHiddenFields(search.query, search.options) : []
-              }
-              q={search?.query.q ?? ""}
-            />
-          }
-          searchOnPhone={search !== undefined}
+          search={listingSearch ? undefined : searchForm}
+          searchHotkey={listingSearch}
+          searchOnPhone={!listingSearch && search !== undefined}
           social={social}
           views={{
             allCount: pool.length,
@@ -83,6 +90,15 @@ export async function BoardShell({
         />
       )}
       <main className="flex-1" id={MAIN_CONTENT_ID}>
+        {intro}
+        {listingSearch ? (
+          <div
+            className="border-line border-b px-4 py-4 lg:px-6"
+            id="latest-jobs"
+          >
+            <div className="max-w-xl">{searchForm}</div>
+          </div>
+        ) : null}
         {fullBleed ? (
           children
         ) : (

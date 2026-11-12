@@ -173,6 +173,7 @@ export async function SiteFooter({
       <TabBar
         alertsEnabled={alertsEnabled}
         homeHref={boardHomePath(isMarketingEnabled())}
+        showCourses={!bordfulMark}
       />
     </>
   );

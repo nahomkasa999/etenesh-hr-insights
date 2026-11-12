@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { RowSaveButton } from "@/components/board/job-row-save";
-import { HINT_CLASS } from "@/components/board/rail-styles";
 import { RelativeTime } from "@/components/board/relative-time";
 import { customSlots } from "@/custom";
 import {
@@ -152,14 +151,14 @@ export type JobRowVariant = "archive" | "board";
 
 // One DOM tree, two grids. Phone: title and age on top, company line, then
 // salary with the status pill. Desktop: title with the pill, company line
-// below, the hover hints, then salary and age stacked on the right.
+// below, then Save beside salary and age.
 const ROW_GRID =
-  "grid grid-cols-[2.25rem_minmax(0,max-content)_minmax(0,1fr)_auto] gap-x-3 [grid-template-areas:'logo_title_title_time'_'logo_meta_meta_meta'_'logo_salary_badges_badges'] lg:h-[60px] lg:grid-cols-[2.125rem_minmax(0,max-content)_minmax(0,1fr)_auto_auto] lg:content-center lg:items-center lg:gap-x-1.5 lg:gap-y-0.5 lg:[grid-template-areas:'logo_title_badges_hints_salary'_'logo_meta_meta_hints_time']";
+  "grid grid-cols-[2.25rem_minmax(0,max-content)_minmax(0,1fr)_auto_auto] gap-x-2 [grid-template-areas:'logo_title_title_time_save'_'logo_meta_meta_meta_save'_'logo_salary_badges_badges_save'] lg:h-[60px] lg:grid-cols-[2.125rem_minmax(0,max-content)_minmax(0,1fr)_auto_auto] lg:content-center lg:items-center lg:gap-x-1.5 lg:gap-y-0.5 lg:[grid-template-areas:'logo_title_badges_save_salary'_'logo_meta_meta_save_time']";
 
 // Paper's archive rows: a 40px mark on phones (14px padding all round, lines
 // 3px apart), a 36px mark in a 72px row from lg up, 12px between the columns.
 const ARCHIVE_GRID =
-  "grid grid-cols-[2.5rem_minmax(0,max-content)_minmax(0,1fr)_auto] gap-x-3 [grid-template-areas:'logo_title_title_time'_'logo_meta_meta_meta'_'logo_salary_badges_badges'] lg:h-[72px] lg:grid-cols-[2.25rem_minmax(0,max-content)_minmax(0,1fr)_auto_auto] lg:content-center lg:items-center lg:gap-y-0.5 lg:[grid-template-areas:'logo_title_badges_hints_salary'_'logo_meta_meta_hints_time']";
+  "grid grid-cols-[2.5rem_minmax(0,max-content)_minmax(0,1fr)_auto_auto] gap-x-2 [grid-template-areas:'logo_title_title_time_save'_'logo_meta_meta_meta_save'_'logo_salary_badges_badges_save'] lg:h-[72px] lg:grid-cols-[2.25rem_minmax(0,max-content)_minmax(0,1fr)_auto_auto] lg:content-center lg:items-center lg:gap-y-0.5 lg:[grid-template-areas:'logo_title_badges_save_salary'_'logo_meta_meta_save_time']";
 
 // The board's preview script marks the open row with data-selected.
 const ROW_SELECTED =
@@ -180,28 +179,28 @@ const ROW_STYLES: Record<
   archive: {
     article: cn(
       ARCHIVE_GRID,
-      "hover:bg-surface-sub active:bg-surface-sub p-3.5 lg:px-4 lg:py-0"
+      "hover:bg-surface-sub active:bg-surface-sub p-4 lg:px-4 lg:py-0"
     ),
     // Paper's phone pill line is 17px (an inline-block pill); from lg up the
     // pill sits 8px after the title, centred on its 22px line.
     badges: "mt-[3px] max-lg:min-h-[17px] lg:-ml-1 lg:pb-[3px]",
-    meta: "mt-[3px] leading-4 lg:leading-[19px]",
-    salary: "mt-[3px] leading-4 lg:leading-[19px]",
+    meta: "mt-[3px] text-sm leading-5 lg:leading-[19px]",
+    salary: "mt-[3px] text-sm leading-5 lg:leading-[19px]",
     time: "leading-4 lg:leading-[17px]",
-    title: "leading-[18px] font-medium lg:leading-[22px]",
+    title: "text-base leading-6 font-medium lg:leading-[22px]",
   },
   board: {
     article: cn(
       ROW_GRID,
-      "hover:bg-card hover:ring-line active:bg-card rounded-[12px] px-2.5 py-3 hover:ring-1 lg:rounded-[10px] lg:px-3 lg:py-0"
+      "hover:bg-card hover:ring-line active:bg-card rounded-[12px] px-3 py-4 hover:ring-1 lg:rounded-[10px] lg:px-3 lg:py-0"
     ),
     badges: "mt-1 lg:ml-0 lg:pb-0.5",
-    meta: "lg:text-subtle mt-0.5 leading-[18px] lg:text-[12px] lg:leading-4",
+    meta: "lg:text-subtle mt-1 text-sm leading-5 lg:text-[12px] lg:leading-4",
     salary:
       "lg:text-muted-foreground lg:group-hover/row:text-foreground lg:group-data-[selected=true]/row:text-foreground mt-1 leading-[18px] lg:font-normal",
     time: "leading-5 lg:leading-4",
     title:
-      "leading-5 font-normal lg:text-[14px] lg:group-data-[selected=true]/row:font-medium",
+      "text-base leading-6 font-medium lg:text-[14px] lg:group-data-[selected=true]/row:font-medium",
   },
 };
 
@@ -321,12 +320,8 @@ export function JobRow({
             </span>
           ))}
         </p>
-        <div className="hidden items-center gap-1.5 pr-3.5 pl-1.5 [grid-area:hints] lg:group-focus-within/row:flex lg:group-hover/row:flex lg:group-data-[selected=true]/row:hidden!">
+        <div className="flex items-center justify-end [grid-area:save]">
           <RowSaveButton slug={job.slug} title={job.title} />
-          <span aria-hidden="true" className={HINT_CLASS}>
-            <kbd className="font-sans">↵</kbd>
-            Open
-          </span>
         </div>
         {salary ? (
           <p

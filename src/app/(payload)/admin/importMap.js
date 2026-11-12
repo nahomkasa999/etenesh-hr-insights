@@ -26,7 +26,7 @@ import { LLMInstructionsDescription as LLMInstructionsDescription_3817bf644402e6
 import { FixedToolbarFeatureClient as FixedToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { LLMInstructionsCell as LLMInstructionsCell_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 import { ColorField as ColorField_a2bf26ab898d427b9cba95e6bb1c5867 } from '../../../admin/components/color-field'
-import { UpdateNotice as UpdateNotice_40edb2e7b3eaf30b029c5d4aa8261ae8 } from '../../../admin/components/update-notice'
+import { HrDashboard as HrDashboard_8cb5d8f32571ba12b19538896a87e891 } from '../../../admin/components/hr-dashboard'
 import { WelcomeWidget as WelcomeWidget_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 import { CollectionCards as CollectionCards_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
 import { CollectionQueryWidget as CollectionQueryWidget_ab83ff7e88da8d3530831f296ec4756a } from '@payloadcms/ui/rsc'
@@ -67,7 +67,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#FixedToolbarFeatureClient": FixedToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/ui/rsc#LLMInstructionsCell": LLMInstructionsCell_ab83ff7e88da8d3530831f296ec4756a,
   "/admin/components/color-field#ColorField": ColorField_a2bf26ab898d427b9cba95e6bb1c5867,
-  "/admin/components/update-notice#UpdateNotice": UpdateNotice_40edb2e7b3eaf30b029c5d4aa8261ae8,
+  "/admin/components/hr-dashboard#HrDashboard": HrDashboard_8cb5d8f32571ba12b19538896a87e891,
   "@payloadcms/ui/rsc#WelcomeWidget": WelcomeWidget_ab83ff7e88da8d3530831f296ec4756a,
   "@payloadcms/ui/rsc#CollectionCards": CollectionCards_ab83ff7e88da8d3530831f296ec4756a,
   "@payloadcms/ui/rsc#CollectionQueryWidget": CollectionQueryWidget_ab83ff7e88da8d3530831f296ec4756a,

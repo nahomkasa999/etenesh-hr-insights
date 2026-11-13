@@ -69,17 +69,13 @@ export function FooterView({
             {tagline ? (
               <p className="text-subtle text-[13px] leading-5">{tagline}</p>
             ) : null}
-            <div className="flex gap-1.5 pt-1">
-              {showAlert ? (
+            {showAlert ? (
+              <div className="flex pt-1">
                 <Link className={FOOTER_BUTTON_CLASS} href="/alerts">
                   Create alert
                 </Link>
-              ) : null}
-              {/* Plain anchor: feeds are route handlers, and next/link would prefetch them. */}
-              <a className={FOOTER_BUTTON_CLASS} href="/feed.xml">
-                RSS
-              </a>
-            </div>
+              </div>
+            ) : null}
             {hasSocial ? (
               <SocialLinks
                 className="pt-1"

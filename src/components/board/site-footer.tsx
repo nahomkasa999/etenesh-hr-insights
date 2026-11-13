@@ -10,7 +10,6 @@ import { getSiteSettings, listPublishedJobs } from "@/lib/read";
 
 const FACET_LIMIT = 5;
 
-// These columns are replaced by the facet columns and the RSS button.
 const REPLACED_COLUMN_IDS = new Set(["feeds", "jobs"]);
 
 // Paper's footer keeps Privacy and Terms under Company, not a sixth column.
@@ -147,27 +146,25 @@ export async function SiteFooter({
   ].filter((column): column is FooterColumn => column !== null);
 
   return (
-    <>
-      <FooterView
-        bordfulMark={bordfulMark}
-        columns={footerColumns}
-        logoUrl={logoUrl}
-        name={name}
-        showAlert={alertsEnabled}
-        showAttribution={showAttribution}
-        social={social}
-        stats={
-          data
-            ? {
-                companies: companiesFromPool(items).length,
-                openRoles: data.pool.totalDocs,
-              }
-            : null
-        }
-        // The board description is the site's own blurb, as the RSS feed
-        // uses it; Paper shows it under the logo when no tagline is set.
-        tagline={tagline || data?.settings.board.description || ""}
-      />
-    </>
+    <FooterView
+      bordfulMark={bordfulMark}
+      columns={footerColumns}
+      logoUrl={logoUrl}
+      name={name}
+      showAlert={alertsEnabled}
+      showAttribution={showAttribution}
+      social={social}
+      stats={
+        data
+          ? {
+              companies: companiesFromPool(items).length,
+              openRoles: data.pool.totalDocs,
+            }
+          : null
+      }
+      // The board description is the site's own blurb, as the RSS feed
+      // uses it; Paper shows it under the logo when no tagline is set.
+      tagline={tagline || data?.settings.board.description || ""}
+    />
   );
 }

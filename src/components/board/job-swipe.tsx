@@ -254,7 +254,7 @@ export function JobSwipe({
         entry ? (
           <Link
             aria-hidden="true"
-            className="hidden"
+            className="pointer-events-none fixed bottom-0 left-0 size-px overflow-hidden opacity-0"
             href={buildJobPath(entry.slug)}
             key={entry.slug}
             prefetch

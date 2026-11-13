@@ -1,6 +1,6 @@
 import Link from "next/link";
-
 import { RowSaveButton } from "@/components/board/job-row-save";
+import { LinkPending } from "@/components/board/link-pending";
 import { HINT_CLASS } from "@/components/board/rail-styles";
 import { RelativeTime } from "@/components/board/relative-time";
 import { customSlots } from "@/custom";
@@ -275,6 +275,7 @@ export function JobRow({
             href={buildJobPath(job.slug)}
           >
             {job.title}
+            <LinkPending />
           </Link>
         </h2>
         {statuses.length > 0 || Extra ? (

@@ -62,19 +62,21 @@ export type SupportedTimezones =
   | 'Pacific/Fiji';
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "LexicalNodes_E5A2EB81".
+ * via the `definition` "LexicalNodes_2CAA8ECA".
  */
-export type LexicalNodes_E5A2EB81 =
+export type LexicalNodes_2CAA8ECA =
   | SerializedTextNode
   | SerializedTabNode
   | SerializedLineBreakNode
-  | SerializedParagraphNode<LexicalNodes_E5A2EB81>
+  | SerializedParagraphNode<LexicalNodes_2CAA8ECA>
   | SerializedHorizontalRuleNode
   | SerializedUploadNode<'media'>
-  | SerializedQuoteNode<LexicalNodes_E5A2EB81>
+  | SerializedQuoteNode<LexicalNodes_2CAA8ECA>
   | SerializedRelationshipNode<
       | 'jobs'
       | 'applications'
+      | 'candidates'
+      | 'candidate-documents'
       | 'companies'
       | 'users'
       | 'alert-subscribers'
@@ -84,11 +86,11 @@ export type LexicalNodes_E5A2EB81 =
       | 'payload-preferences'
       | 'payload-migrations'
     >
-  | SerializedAutoLinkNode<LexicalNodes_E5A2EB81, LexicalLinkFields>
-  | SerializedLinkNode<LexicalNodes_E5A2EB81, LexicalLinkFields>
-  | SerializedListNode<LexicalNodes_E5A2EB81>
-  | SerializedListItemNode<LexicalNodes_E5A2EB81>
-  | SerializedHeadingNode<LexicalNodes_E5A2EB81>;
+  | SerializedAutoLinkNode<LexicalNodes_2CAA8ECA, LexicalLinkFields>
+  | SerializedLinkNode<LexicalNodes_2CAA8ECA, LexicalLinkFields>
+  | SerializedListNode<LexicalNodes_2CAA8ECA>
+  | SerializedListItemNode<LexicalNodes_2CAA8ECA>
+  | SerializedHeadingNode<LexicalNodes_2CAA8ECA>;
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "LexicalNodes_3DE324E4".
@@ -110,6 +112,8 @@ export interface Config {
   collections: {
     jobs: Job;
     applications: Application;
+    candidates: Candidate;
+    'candidate-documents': CandidateDocument;
     companies: Company;
     users: User;
     media: Media;
@@ -125,6 +129,8 @@ export interface Config {
   collectionsSelect: {
     jobs: JobsSelect<false> | JobsSelect<true>;
     applications: ApplicationsSelect<false> | ApplicationsSelect<true>;
+    candidates: CandidatesSelect<false> | CandidatesSelect<true>;
+    'candidate-documents': CandidateDocumentsSelect<false> | CandidateDocumentsSelect<true>;
     companies: CompaniesSelect<false> | CompaniesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -211,7 +217,7 @@ export interface Job {
    * A short plain-text summary of the role. Board search matches it.
    */
   summary?: string | null;
-  description?: LexicalRichText<LexicalNodes_E5A2EB81> | null;
+  description?: LexicalRichText<LexicalNodes_2CAA8ECA> | null;
   applyUrl?: string | null;
   applyEmail?: string | null;
   applyMethod?: string | null;
@@ -328,7 +334,7 @@ export interface Company {
   careersUrl?: string | null;
   linkedinUrl?: string | null;
   twitterUrl?: string | null;
-  description?: LexicalRichText<LexicalNodes_E5A2EB81> | null;
+  description?: LexicalRichText<LexicalNodes_2CAA8ECA> | null;
   industry?: string | null;
   location?: string | null;
   headcount?: number | null;
@@ -512,7 +518,101 @@ export interface Application {
         id?: string | null;
       }[]
     | null;
+  /**
+   * The candidate account that sent it, when signed in.
+   */
+  candidate?: (number | null) | Candidate;
+  source?: ('form' | 'auto') | null;
   telegramChatId?: string | null;
+  createdBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
+  updatedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "candidates".
+ */
+export interface Candidate {
+  id: number;
+  authUserId: string;
+  email: string;
+  fullName?: string | null;
+  phone?: string | null;
+  city?: string | null;
+  headline?: string | null;
+  summary?: string | null;
+  yearsExperience?: number | null;
+  education?:
+    | ('None' | 'Grade 10' | 'Grade 12' | 'TVET Certificate' | 'Diploma' | "Bachelor's degree" | "Master's degree")
+    | null;
+  skills?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  preferredCategories?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  preferredLocations?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  preferredTypes?:
+    ('contract' | 'full-time' | 'internship' | 'other' | 'part-time' | 'per-diem' | 'temporary' | 'volunteer')[] | null;
+  preferredWorkplaces?: ('hybrid' | 'onsite' | 'remote')[] | null;
+  /**
+   * When on, Etenesh applies for matching jobs on the candidate's behalf.
+   */
+  autoApply?: boolean | null;
+  autoApplyMinScore?: number | null;
+  autoApplyDailyLimit?: number | null;
+  autoApplyNote?: string | null;
+  autoApplyLastRun?: string | null;
+  autoApplyLog?:
+    | {
+        at?: string | null;
+        jobTitle?: string | null;
+        outcome?: string | null;
+        detail?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  createdBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
+  updatedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "candidate-documents".
+ */
+export interface CandidateDocument {
+  id: number;
+  candidate: number | Candidate;
+  kind: 'cv' | 'cover_letter' | 'certificate' | 'id' | 'other';
+  name: string;
+  mimeType?: string | null;
+  size?: number | null;
+  data?: string | null;
   createdBy?: {
     relationTo: 'users';
     value: number | User;
@@ -691,6 +791,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'applications';
         value: number | Application;
+      } | null)
+    | ({
+        relationTo: 'candidates';
+        value: number | Candidate;
+      } | null)
+    | ({
+        relationTo: 'candidate-documents';
+        value: number | CandidateDocument;
       } | null)
     | ({
         relationTo: 'companies';
@@ -917,7 +1025,78 @@ export interface ApplicationsSelect<T extends boolean = true> {
         at?: T;
         id?: T;
       };
+  candidate?: T;
+  source?: T;
   telegramChatId?: T;
+  createdBy?: T;
+  updatedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "candidates_select".
+ */
+export interface CandidatesSelect<T extends boolean = true> {
+  authUserId?: T;
+  email?: T;
+  fullName?: T;
+  phone?: T;
+  city?: T;
+  headline?: T;
+  summary?: T;
+  yearsExperience?: T;
+  education?: T;
+  skills?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  preferredCategories?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  preferredLocations?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  preferredTypes?: T;
+  preferredWorkplaces?: T;
+  autoApply?: T;
+  autoApplyMinScore?: T;
+  autoApplyDailyLimit?: T;
+  autoApplyNote?: T;
+  autoApplyLastRun?: T;
+  autoApplyLog?:
+    | T
+    | {
+        at?: T;
+        jobTitle?: T;
+        outcome?: T;
+        detail?: T;
+        id?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "candidate-documents_select".
+ */
+export interface CandidateDocumentsSelect<T extends boolean = true> {
+  candidate?: T;
+  kind?: T;
+  name?: T;
+  mimeType?: T;
+  size?: T;
+  data?: T;
   createdBy?: T;
   updatedBy?: T;
   updatedAt?: T;
@@ -1487,7 +1666,7 @@ export interface CollectionsWidget {
 export interface CollectionQueryWidget {
   data?: {
     title?: string | null;
-    relatedCollection: 'jobs' | 'applications' | 'companies' | 'users' | 'media';
+    relatedCollection: 'jobs' | 'applications' | 'candidates' | 'candidate-documents' | 'companies' | 'users' | 'media';
     where?:
       | {
           [k: string]: unknown;
@@ -1509,7 +1688,8 @@ export interface CollectionQueryWidget {
  */
 export interface ActivityWidget {
   data?: {
-    excludedCollections?: ('jobs' | 'applications' | 'companies' | 'users' | 'media')[] | null;
+    excludedCollections?:
+      ('jobs' | 'applications' | 'candidates' | 'candidate-documents' | 'companies' | 'users' | 'media')[] | null;
   };
   width: 'small' | 'medium' | 'large' | 'x-large' | 'full';
 }

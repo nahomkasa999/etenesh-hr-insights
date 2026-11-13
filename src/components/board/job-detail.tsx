@@ -1,7 +1,7 @@
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
 import { appliesHere } from "@/components/apply/applies-here";
-import { ApplyNowButton, JobApplySection } from "@/components/apply/job-apply";
+import { ApplyNowButton, JobApplySwap } from "@/components/apply/job-apply";
 import {
   JobApplyLink,
   JobSaveButton,
@@ -408,6 +408,21 @@ export function JobPosting({
       ? formatShortDate(job.validThrough, now)
       : "";
 
+  const details = (
+    <div className="flex flex-col gap-5 md:gap-9 md:px-12 md:pt-14 md:pb-12 xl:px-[88px]">
+      <Letterhead
+        companyHref={companyHref}
+        job={job}
+        now={now}
+        website={website}
+      />
+      <JobFacts fields={fields} job={job} />
+      <div className="bordful-prose" data-testid="job-description">
+        {description ? <RichText data={description} /> : null}
+      </div>
+    </div>
+  );
+
   return (
     <div className="-mt-6 flex flex-col gap-5 md:-mt-1 lg:-mx-0.5">
       <JobBreadcrumb
@@ -427,21 +442,13 @@ export function JobPosting({
       />
       <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
         <article className="md:bg-card md:ring-line min-w-0 md:overflow-clip md:rounded-2xl md:shadow-[0_1px_2px_rgb(0_0_0/0.04),0_28px_56px_-20px_rgb(0_0_0/0.16)] md:ring-1 md:dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.04),0_32px_64px_-16px_rgb(0_0_0/0.75)]">
-          <div className="flex flex-col gap-5 md:gap-9 md:px-12 md:pt-14 md:pb-12 xl:px-[88px]">
-            <Letterhead
-              companyHref={companyHref}
-              job={job}
-              now={now}
-              website={website}
-            />
-            <JobFacts fields={fields} job={job} />
-            <div className="bordful-prose" data-testid="job-description">
-              {description ? <RichText data={description} /> : null}
-            </div>
-          </div>
           {appliesHere(job) ? (
-            <JobApplySection jobId={job.id} slug={job.slug} title={job.title} />
-          ) : null}
+            <JobApplySwap jobId={job.id} slug={job.slug} title={job.title}>
+              {details}
+            </JobApplySwap>
+          ) : (
+            details
+          )}
           <ActionBar applyHref={applyHref} closes={closes} job={job} />
           {jsonLd ? (
             <script

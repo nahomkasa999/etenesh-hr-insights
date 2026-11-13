@@ -182,6 +182,27 @@ export const Applications: CollectionConfig = {
       type: "array",
     },
     {
+      admin: {
+        description: "The candidate account that sent it, when signed in.",
+        readOnly: true,
+      },
+      index: true,
+      name: "candidate",
+      relationTo: "candidates",
+      type: "relationship",
+    },
+    {
+      admin: { readOnly: true },
+      defaultValue: "form",
+      index: true,
+      name: "source",
+      options: [
+        { label: "Apply form", value: "form" },
+        { label: "Auto apply", value: "auto" },
+      ],
+      type: "select",
+    },
+    {
       admin: { hidden: true },
       index: true,
       name: "telegramChatId",

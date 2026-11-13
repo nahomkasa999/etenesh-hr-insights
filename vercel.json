@@ -12,6 +12,10 @@
     {
       "path": "/api/cron/alerts",
       "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/auto-apply",
+      "schedule": "30 7 * * *"
     }
   ]
 }

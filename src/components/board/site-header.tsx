@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useEffect } from "react";
 
+import { AccountLink } from "@/components/account/account-link";
 import { BOARD_SEARCH_INPUT_ID } from "@/components/board/board-search-form";
 import { BrandMark } from "@/components/board/brand-mark";
 import { MobileNav } from "@/components/board/mobile-nav";
@@ -303,6 +304,7 @@ export function SiteHeader({
               <BellIcon />
             </Link>
           ) : null}
+          <AccountLink />
           {cta ? (
             <Link
               className={cn(

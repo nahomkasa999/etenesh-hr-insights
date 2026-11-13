@@ -36,6 +36,8 @@ export interface FormState {
   email: string;
   fullName: string;
   phone: string;
+  // The CV on the candidate's profile; used when no new file is chosen.
+  savedCv: { name: string; size: number } | null;
   skills: string[];
   yearsExperience: string;
 }
@@ -240,6 +242,16 @@ export function StepCheck({
   );
 }
 
+function cvLabel(state: FormState): string {
+  if (state.cv) {
+    return `${state.cv.name} (${formatFileSize(state.cv.size)})`;
+  }
+  if (state.savedCv) {
+    return `${state.savedCv.name} (from your profile)`;
+  }
+  return "No file";
+}
+
 export function StepDetails({
   errors,
   onChange,
@@ -331,8 +343,23 @@ export function StepDetails({
           variant="outline"
         >
           <Paperclip aria-hidden="true" className="size-4" />
-          {state.cv ? "Choose a different file" : "Choose CV file"}
+          {state.cv || state.savedCv
+            ? "Choose a different file"
+            : "Choose CV file"}
         </Button>
+        {!state.cv && state.savedCv ? (
+          <p
+            className="text-foreground flex items-center gap-2 text-sm leading-5 break-all"
+            data-testid="apply-cv-saved"
+          >
+            <CheckCircle2
+              aria-hidden="true"
+              className="size-4 shrink-0 text-green-600"
+            />
+            Using the CV on your profile: {state.savedCv.name} (
+            {formatFileSize(state.savedCv.size)})
+          </p>
+        ) : null}
         {state.cv ? (
           <p
             className="text-foreground flex items-center gap-2 text-sm leading-5 break-all"
@@ -506,14 +533,7 @@ export function StepReview({
         <ReviewRow label="Email" value={state.email} />
         <ReviewRow label="Phone" value={state.phone} />
         <ReviewRow label="City" value={state.city} />
-        <ReviewRow
-          label="CV"
-          value={
-            state.cv
-              ? `${state.cv.name} (${formatFileSize(state.cv.size)})`
-              : "No file"
-          }
-        />
+        <ReviewRow label="CV" value={cvLabel(state)} />
       </ReviewSection>
       <ReviewSection onGo={onGo} step={2} title="Questions">
         {job.questions.map((question, index) => (

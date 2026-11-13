@@ -27,6 +27,18 @@ export interface ApplyJob {
   title: string;
 }
 
+// A signed-in candidate's saved details, sent with the job to prefill the form.
+export interface ApplyProfile {
+  city: string;
+  cv: { name: string; size: number } | null;
+  education: string;
+  email: string;
+  fullName: string;
+  phone: string;
+  skills: string[];
+  yearsExperience: string;
+}
+
 export function toApplyJob(job: Job): ApplyJob {
   return {
     closesAt: job.validThrough ?? null,
@@ -122,10 +134,18 @@ async function nextReference(
 }
 
 // Checks the job, the criteria and the CV, then saves the application.
+export interface SubmitOptions {
+  // The signed-in candidate's profile, so the application shows on their
+  // account page.
+  candidateId?: number | null;
+  source?: "auto" | "form";
+}
+
 export async function submitApplication(
   payload: Payload,
   raw: unknown,
-  cv: CvFile | null
+  cv: CvFile | null,
+  options: SubmitOptions = {}
 ): Promise<ApplyResult> {
   const parsed = applicationInputSchema.safeParse(raw);
   const errors: Record<string, string> = {};
@@ -235,6 +255,7 @@ export async function submitApplication(
       await payload.create({
         collection: "applications",
         data: {
+          ...(options.candidateId ? { candidate: options.candidateId } : {}),
           answers: applyJob.questions.map((question, index) => ({
             answer: input.answers[index] ?? "",
             question,
@@ -257,6 +278,7 @@ export async function submitApplication(
           phone: input.phone,
           reference,
           skills: rows(input.skills.filter(Boolean)),
+          source: options.source ?? "form",
           status: "submitted",
           yearsExperience: input.yearsExperience,
         } as never,

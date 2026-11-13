@@ -163,6 +163,8 @@
 }
 
 @theme inline {
+  --animate-link-pending: link-pending 1.1s ease-in-out infinite;
+
   --container-board: 68.75rem;
 
   --color-chart-1: var(--chart-1);
@@ -215,6 +217,14 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  @keyframes link-pending {
+    0% {
+      left: -33%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
 }
 
 @layer base {
@@ -235,12 +245,13 @@
 }
 
 /* Visible focus for keyboard users on every link, button and disclosure. */
+/* A control whose wrapper draws the ring opts out with data-no-ring. */
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible,
-input:focus-visible,
+input:focus-visible:not([data-no-ring]),
 select:focus-visible,
-textarea:focus-visible {
+textarea:focus-visible:not([data-no-ring]) {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }

@@ -33,7 +33,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { ApplyJob } from "@/lib/etenesh/apply";
+import type { ApplyJob, ApplyProfile } from "@/lib/etenesh/apply";
 
 const CV_MAX_BYTES = 4 * 1024 * 1024;
 const CV_EXTENSIONS = [".pdf", ".doc", ".docx"];
@@ -64,7 +64,7 @@ type Load =
   | { kind: "loading" }
   | { kind: "closed" }
   | { kind: "error" }
-  | { kind: "ready"; job: ApplyJob };
+  | { kind: "ready"; job: LoadedJob };
 
 interface ServerReply {
   errors?: Errors;
@@ -129,7 +129,12 @@ function validateDetails(state: FormState): Errors {
   if (state.city.trim().length === 0) {
     errors.city = "Please type the city where you live.";
   }
-  const cvError = state.cv ? checkCv(state.cv) : "Please choose your CV file.";
+  let cvError: string | null = null;
+  if (state.cv) {
+    cvError = checkCv(state.cv);
+  } else if (!state.savedCv) {
+    cvError = "Please choose your CV file.";
+  }
   if (cvError) {
     errors.cv = cvError;
   }
@@ -164,6 +169,8 @@ function buildBody(state: FormState, job: ApplyJob): FormData {
   body.set("coverNote", state.coverNote.trim());
   if (state.cv) {
     body.set("cv", state.cv);
+  } else if (state.savedCv) {
+    body.set("useSavedCv", "1");
   }
   return body;
 }
@@ -177,9 +184,34 @@ const EMPTY_STATE: FormState = {
   email: "",
   fullName: "",
   phone: "",
+  savedCv: null,
   skills: [],
   yearsExperience: "",
 };
+
+type LoadedJob = ApplyJob & { me?: ApplyProfile | null };
+
+// A signed-in candidate's profile fills the form. Only skills the job lists
+// are ticked, since the form ticks from the job's own list.
+function initialState(job: LoadedJob): FormState {
+  const base = { ...EMPTY_STATE, answers: job.questions.map(() => "") };
+  const { me } = job;
+  if (!me) {
+    return base;
+  }
+  const have = new Set(me.skills.map((skill) => skill.trim().toLowerCase()));
+  return {
+    ...base,
+    city: me.city,
+    education: me.education,
+    email: me.email,
+    fullName: me.fullName,
+    phone: me.phone,
+    savedCv: me.cv,
+    skills: job.skills.filter((skill) => have.has(skill.trim().toLowerCase())),
+    yearsExperience: me.yearsExperience,
+  };
+}
 
 function useJob(jobId: string) {
   const [load, setLoad] = useState<Load>({ kind: "loading" });
@@ -197,7 +229,10 @@ function useJob(jobId: string) {
         if (response.status === 404) {
           setLoad({ kind: "closed" });
         } else if (response.ok) {
-          setLoad({ job: (await response.json()) as ApplyJob, kind: "ready" });
+          setLoad({
+            job: (await response.json()) as LoadedJob,
+            kind: "ready",
+          });
         } else {
           setLoad({ kind: "error" });
         }
@@ -295,8 +330,14 @@ function Success({ job, reference }: { job: ApplyJob; reference: string }) {
       </p>
       <p className="text-muted-foreground text-sm leading-5">
         We sent your application for {job.title} at {job.companyName} to our
-        team. Updates on Telegram are coming soon.
+        team.
       </p>
+      <a
+        className="text-foreground text-sm font-medium underline underline-offset-2"
+        href="/account/applications"
+      >
+        Track your applications
+      </a>
     </div>
   );
 }
@@ -352,7 +393,7 @@ function ApplyWizard({
   job,
   onDone,
 }: {
-  job: ApplyJob;
+  job: LoadedJob;
   onDone?: (reference: string) => void;
 }) {
   const [step, setStep] = useState(0);
@@ -360,10 +401,7 @@ function ApplyWizard({
   const [submitting, setSubmitting] = useState(false);
   const [banner, setBanner] = useState<Banner | null>(null);
   const [reference, setReference] = useState<string | null>(null);
-  const [state, setState] = useState<FormState>({
-    ...EMPTY_STATE,
-    answers: job.questions.map(() => ""),
-  });
+  const [state, setState] = useState<FormState>(() => initialState(job));
   const root = useRef<HTMLDivElement>(null);
 
   const scrollTop = useCallback(() => {
@@ -560,6 +598,26 @@ function ApplyWizard({
           value={(stepNumber / 4) * 100}
         />
       </div>
+
+      {job.me ? (
+        <p
+          className="bg-surface-sub text-muted-foreground rounded-lg px-3 py-2 text-sm leading-5"
+          data-testid="apply-signed-in"
+        >
+          Filled in from your profile. Check it and continue.
+        </p>
+      ) : (
+        <p className="text-muted-foreground text-sm leading-5">
+          Have an account?{" "}
+          <a
+            className="text-foreground font-medium underline underline-offset-2"
+            href={`/signin?next=${encodeURIComponent(`/jobs/${job.slug}#apply`)}`}
+          >
+            Sign in
+          </a>{" "}
+          to fill this in from your profile and track your application.
+        </p>
+      )}
 
       {banner ? (
         <Alert variant="destructive">

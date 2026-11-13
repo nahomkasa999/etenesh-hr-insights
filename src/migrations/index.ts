@@ -5,6 +5,7 @@ import * as migration_20261104_091214_job_search_fields from './20261104_091214_
 import * as migration_20261104_170559_import_blocklist from './20261104_170559_import_blocklist';
 import * as migration_20261106_090008_remove_bounced_status from './20261106_090008_remove_bounced_status';
 import * as migration_20261112_214631_etenesh_applications from './20261112_214631_etenesh_applications';
+import * as migration_20261113_003126_candidate_accounts from './20261113_003126_candidate_accounts';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261112_214631_etenesh_applications.up,
     down: migration_20261112_214631_etenesh_applications.down,
-    name: '20261112_214631_etenesh_applications'
+    name: '20261112_214631_etenesh_applications',
+  },
+  {
+    up: migration_20261113_003126_candidate_accounts.up,
+    down: migration_20261113_003126_candidate_accounts.down,
+    name: '20261113_003126_candidate_accounts'
   },
 ];

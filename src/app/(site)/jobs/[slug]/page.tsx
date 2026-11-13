@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { BoardShell } from "@/components/board/board-shell";
 import { JobPosting } from "@/components/board/job-detail";
+import { JobSwipe } from "@/components/board/job-swipe";
 import { isMarketingEnabled } from "@/config/flags";
 import { resolveServerUrl } from "@/config/server-url";
 import { buildJobPath, isPublicJobSlug } from "@/lib/board/paths";
@@ -92,19 +93,27 @@ export default async function JobPage({
 
   return (
     <BoardShell>
-      <JobPosting
-        alertsEnabled={settings.alerts.enabled}
-        fields={settings.board.publicDetailFields}
-        job={job}
-        jsonLd={jsonLd}
-        marketing={isMarketingEnabled()}
-        nonce={nonce}
-        now={Date.now()}
-        openRoles={openRoles}
-        postJob={settings.postJob}
-        shareUrl={`${resolveServerUrl()}${buildJobPath(job.slug)}`}
-        similarJobs={similarJobs}
-      />
+      <JobSwipe
+        fallback={[job, ...similarJobs].map(({ slug: entry, title }) => ({
+          slug: entry,
+          title,
+        }))}
+        slug={job.slug}
+      >
+        <JobPosting
+          alertsEnabled={settings.alerts.enabled}
+          fields={settings.board.publicDetailFields}
+          job={job}
+          jsonLd={jsonLd}
+          marketing={isMarketingEnabled()}
+          nonce={nonce}
+          now={Date.now()}
+          openRoles={openRoles}
+          postJob={settings.postJob}
+          shareUrl={`${resolveServerUrl()}${buildJobPath(job.slug)}`}
+          similarJobs={similarJobs}
+        />
+      </JobSwipe>
     </BoardShell>
   );
 }

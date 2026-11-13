@@ -10,6 +10,7 @@ import {
 } from "react";
 
 import { JobPreview } from "@/components/board/job-preview";
+import { saveJobSequence } from "@/components/board/job-sequence";
 import { useJobList } from "@/components/board/saved-jobs";
 import type { JobListItem } from "@/lib/read/types";
 import { cn } from "@/lib/utils";
@@ -194,6 +195,9 @@ export function BoardWorkspace({
   const current = selected ? (bySlug.get(selected) ?? null) : null;
   const isOpen = preview && current !== null;
   const openSlug = isOpen ? selected : null;
+
+  // The job page reads this list to swipe to the next and previous job.
+  useEffect(() => saveJobSequence(jobs), [jobs]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: a different selected job closes the form
   useEffect(() => setApplying(false), [openSlug]);

@@ -1,7 +1,15 @@
 import config from "@payload-config";
 import { getPayload } from "payload";
 
-import { isJobOpen, submitApplication, toApplyJob } from "@/lib/etenesh/apply";
+import { getAccount } from "@/lib/auth/account";
+import {
+  type ApplyProfile,
+  type CvFile,
+  isJobOpen,
+  submitApplication,
+  toApplyJob,
+} from "@/lib/etenesh/apply";
+import { listDocuments, profileCv, values } from "@/lib/etenesh/candidates";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -27,9 +35,33 @@ export async function GET(request: Request): Promise<Response> {
   if (!(job && isJobOpen(job))) {
     return Response.json({ error: "closed" }, { status: 404 });
   }
-  return Response.json(toApplyJob(job), {
-    headers: { "Cache-Control": "no-store" },
-  });
+  // A signed-in candidate gets their profile back to prefill the form.
+  const account = await getAccount().catch(() => null);
+  let me: ApplyProfile | null = null;
+  if (account) {
+    const { candidate } = account;
+    const cv = (await listDocuments(account.payload, candidate.id)).find(
+      (doc) => doc.kind === "cv"
+    );
+    me = {
+      city: candidate.city ?? "",
+      cv: cv ? { name: cv.name, size: cv.size ?? 0 } : null,
+      education: candidate.education ?? "",
+      email: candidate.email,
+      fullName: candidate.fullName ?? "",
+      phone: candidate.phone ?? "",
+      skills: values(candidate.skills),
+      yearsExperience:
+        candidate.yearsExperience === null ||
+        candidate.yearsExperience === undefined
+          ? ""
+          : String(candidate.yearsExperience),
+    };
+  }
+  return Response.json(
+    { ...toApplyJob(job), me },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }
 
 // Candidates post the apply form here as multipart form data.
@@ -53,7 +85,7 @@ export async function POST(request: Request): Promise<Response> {
     return typeof value === "string" ? value : "";
   };
   const file = form.get("cv");
-  const cv =
+  let cv: CvFile | null =
     file instanceof File && file.size > 0
       ? {
           bytes: Buffer.from(await file.arrayBuffer()),
@@ -63,7 +95,14 @@ export async function POST(request: Request): Promise<Response> {
         }
       : null;
 
-  const payload = await getPayload({ config });
+  // Signed-in candidates link the application to their account and may
+  // send the CV saved on their profile instead of a new file.
+  const account = await getAccount().catch(() => null);
+  if (!cv && account && text("useSavedCv") === "1") {
+    cv = await profileCv(account.payload, account.candidate.id);
+  }
+
+  const payload = account?.payload ?? (await getPayload({ config }));
   const result = await submitApplication(
     payload,
     {
@@ -78,7 +117,8 @@ export async function POST(request: Request): Promise<Response> {
       skills: form.getAll("skills").map(String),
       yearsExperience: text("yearsExperience"),
     },
-    cv
+    cv,
+    { candidateId: account?.candidate.id ?? null, source: "form" }
   );
 
   return Response.json(result, {

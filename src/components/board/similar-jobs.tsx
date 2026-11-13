@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { LinkPending } from "@/components/board/link-pending";
+
 import { RelativeTime } from "@/components/board/relative-time";
 import {
   formatLocation,
@@ -59,6 +61,7 @@ function SimilarJob({ job, now }: { job: JobListItem; now: number }) {
               href={buildJobPath(job.slug)}
             >
               {job.title}
+              <LinkPending />
             </Link>
           </h3>
           {subtitle ? (

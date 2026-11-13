@@ -56,7 +56,7 @@ export function BoardSearchForm({
   return (
     <form
       action={BOARD_SEARCH_PATH}
-      className="bg-card ring-line-strong focus-within:ring-ring/40 relative flex h-10 w-full items-center rounded-[10px] ring-1 ring-inset lg:h-8 lg:rounded-[8px]"
+      className="bg-card ring-line-strong focus-within:ring-ring/60 relative flex h-10 w-full items-center rounded-[10px] ring-1 transition-shadow ring-inset focus-within:ring-2 lg:h-8 lg:rounded-[8px]"
       data-testid="board-search"
       method="get"
     >
@@ -73,6 +73,7 @@ export function BoardSearchForm({
       </label>
       <input
         className="text-foreground placeholder:text-subtle peer h-full min-w-0 flex-1 bg-transparent pr-3 text-[15px] outline-none lg:pr-2 lg:text-[14px] lg:placeholder:text-transparent [&::-webkit-search-cancel-button]:hidden"
+        data-no-ring
         data-testid="board-search-input"
         defaultValue={q}
         id={BOARD_SEARCH_INPUT_ID}

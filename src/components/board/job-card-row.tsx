@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { LinkPending } from "@/components/board/link-pending";
 
 import { cn } from "@/lib/utils";
 
@@ -78,6 +79,7 @@ function Title({
             href={href}
           >
             {title}
+            <LinkPending />
           </Link>
         ) : (
           title

@@ -3,11 +3,7 @@ import { expect, test } from "vitest";
 
 import { PAYLOAD_MONACO_CDN } from "@/lib/csp/build-csp";
 
-import {
-  hasMalformedEncoding,
-  MALFORMED_PATH_REWRITE,
-  proxy,
-} from "./proxy";
+import { hasMalformedEncoding, MALFORMED_PATH_REWRITE, proxy } from "./proxy";
 
 const MALFORMED = [
   "/jobs/%E0%A4%A",

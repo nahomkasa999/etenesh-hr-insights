@@ -30,7 +30,9 @@ export default async function AccountLayout({
               {session.name || session.email}
             </p>
           </div>
-          <SignOutButton />
+          <div className="hidden md:block">
+            <SignOutButton />
+          </div>
         </div>
         <AccountNav />
         {children}

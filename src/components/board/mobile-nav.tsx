@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { MenuAccount } from "@/components/account/menu-account";
 import { isActiveItem } from "@/components/board/nav-active";
 import {
   SocialLinks,
@@ -142,6 +143,7 @@ export function MobileNav({
               );
             })}
           </ul>
+          <MenuAccount onDone={close} />
           <SocialLinks className="mt-3 px-2" links={social} showRss={false} />
         </nav>
       </div>

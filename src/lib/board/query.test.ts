@@ -15,6 +15,7 @@ test("parses csv filters and serializes the canonical query string", () => {
   expect(query).toEqual({
     categories: [],
     featured: false,
+    forMe: false,
     languages: [],
     page: 2,
     perPage: 50,
@@ -64,4 +65,18 @@ test("a comma followed by a space stays inside one category", () => {
   expect(
     parseBoardQuery(serializeBoardQuery(query, options), options).categories
   ).toEqual(query.categories);
+});
+
+test("preserves the For me filter and distinguishes relevance from newest", () => {
+  const query = parseBoardQuery(
+    new URLSearchParams("q=engineer&for_me=true&sort=newest&page=2"),
+    options
+  );
+  expect(query).toMatchObject({ forMe: true, page: 2, sort: "newest" });
+  expect(serializeBoardQuery(query, options).toString()).toBe(
+    "q=engineer&for_me=true&sort=newest&page=2"
+  );
+  expect(
+    parseBoardQuery(new URLSearchParams("for_me=true"), options).sort
+  ).toBe("match");
 });

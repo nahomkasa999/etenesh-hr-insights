@@ -7,8 +7,7 @@ import { TaxonomyIndex } from "@/components/board/taxonomy-index";
 import { MARKETING_DESCRIPTION } from "@/components/marketing/site";
 import { isMarketingEnabled } from "@/config/flags";
 import { resolveServerUrl } from "@/config/server-url";
-import { parseBoardQuery } from "@/lib/board/query";
-import { getSiteSettings } from "@/lib/read";
+import type { BoardSearchParams } from "@/lib/board/query";
 import { jobsIndexMetadata } from "@/lib/seo/jobs-index";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,23 +21,14 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default async function JobsPage() {
-  if (isMarketingEnabled()) {
-    const settings = await getSiteSettings();
-    const options = { defaultPerPage: settings.board.jobsPerPage };
-
-    return (
-      <BoardShell
-        fullBleed
-        hideFooter
-        search={{
-          options,
-          query: parseBoardQuery(new URLSearchParams(""), options),
-        }}
-      >
-        <BoardHome />
-      </BoardShell>
-    );
+export default async function JobsPage({
+  searchParams,
+}: {
+  searchParams: Promise<BoardSearchParams>;
+}) {
+  const params = await searchParams;
+  if (isMarketingEnabled() || params.for_me === "true") {
+    return <BoardHome hideFooter searchParams={params} />;
   }
 
   return (

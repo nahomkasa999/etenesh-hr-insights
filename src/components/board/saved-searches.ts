@@ -21,7 +21,12 @@ let cache: readonly SavedSearch[] | null = null;
 // Only same-origin board paths are kept, so a tampered entry cannot become an
 // off-site or script link in the rail.
 export function isBoardHref(href: string): boolean {
-  return href === "/" || href === "/jobs" || href.startsWith("/jobs/");
+  return (
+    href === "/" ||
+    href === "/jobs" ||
+    href.startsWith("/jobs/") ||
+    href.startsWith("/jobs?")
+  );
 }
 
 function parse(raw: string | null): readonly SavedSearch[] {

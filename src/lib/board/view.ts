@@ -25,7 +25,13 @@ export function buildBoardView(
   now = Date.now()
 ): BoardView {
   const filtered = filterBoard(cards, query);
-  const sorted = sortBoard(filtered, query.sort, now);
+  let sorted: JobListItem[];
+  if (query.sort === "match") {
+    const byId = new Map(filtered.map((card) => [card.id, card]));
+    sorted = (query.forMeIds ?? []).flatMap((id) => byId.get(id) ?? []);
+  } else {
+    sorted = sortBoard(filtered, query.sort, now);
+  }
   const page = paginateBoard(sorted, query.perPage, query.page);
 
   return {

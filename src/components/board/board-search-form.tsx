@@ -45,17 +45,19 @@ export function searchPlaceholder(count?: number, long = false): string {
 // button, so Enter and a tap both search. On phones it is a full-width row
 // under the brand bar; from lg up it sits in the bar with the ⌘K hint.
 export function BoardSearchForm({
+  action = BOARD_SEARCH_PATH,
   count,
   hidden = [],
   q = "",
 }: {
+  action?: string;
   count?: number;
   hidden?: SearchField[];
   q?: string;
 }) {
   return (
     <form
-      action={BOARD_SEARCH_PATH}
+      action={action}
       className="bg-card ring-line-strong focus-within:ring-ring/60 relative flex h-10 w-full items-center rounded-[10px] ring-1 transition-shadow ring-inset focus-within:ring-2 lg:h-8 lg:rounded-[8px]"
       data-testid="board-search"
       method="get"

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 const IMAGE = {
-  alt: "Bordful: open-source job board template",
+  alt: "Etenesh HR. Find your next job in Ethiopia.",
   height: 630,
-  url: "/marketing/bordful-job-board-software.png",
+  url: "/etenesh/jobs-share.png",
   width: 1200,
 };
 
@@ -30,6 +30,7 @@ export function jobsIndexMetadata(input: {
     openGraph: {
       description: input.description,
       images: input.marketing ? [IMAGE] : undefined,
+      siteName: input.marketing ? "Etenesh HR" : undefined,
       title: "Jobs",
       url,
     },

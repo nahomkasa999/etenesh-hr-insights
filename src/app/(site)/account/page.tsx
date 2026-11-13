@@ -2,7 +2,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { ApplicationList } from "@/components/account/application-list";
-import { JobMatchList } from "@/components/account/job-match-list";
 import { TelegramCard } from "@/components/account/telegram-card";
 import { getAccount } from "@/lib/auth/account";
 import {
@@ -11,7 +10,6 @@ import {
   missingForApply,
   profileCompleteness,
 } from "@/lib/etenesh/candidates";
-import { appliedJobIds, loadOpenJobs, rankJobs } from "@/lib/etenesh/recommend";
 import { botUsername, linkToken } from "@/lib/etenesh/telegram";
 import type { Application } from "@/payload-types";
 
@@ -40,11 +38,9 @@ export default async function AccountPage() {
     redirect("/signin?next=/account");
   }
   const { candidate, payload } = account;
-  const [documents, applications, jobs, applied, bot] = await Promise.all([
+  const [documents, applications, bot] = await Promise.all([
     listDocuments(payload, candidate.id),
     listCandidateApplications(payload, candidate.id, 20),
-    loadOpenJobs(payload),
-    appliedJobIds(payload, candidate),
     botUsername(),
   ]);
   const connected = Boolean(candidate.telegramChatId);
@@ -57,7 +53,6 @@ export default async function AccountPage() {
   const hasCv = documents.some((doc) => doc.kind === "cv");
   const complete = profileCompleteness(candidate, hasCv);
   const missing = missingForApply(candidate, hasCv);
-  const matches = rankJobs(candidate, jobs, { exclude: applied, limit: 5 });
   const active = applications.filter((item) => ACTIVE.has(item.status)).length;
   const interviews = applications.filter((item) =>
     ["interview", "offer", "hired"].includes(item.status)
@@ -106,22 +101,6 @@ export default async function AccountPage() {
         <Stat label="Interviews and offers" value={interviews} />
         <Stat label="Auto apply" value={candidate.autoApply ? "On" : "Off"} />
       </dl>
-
-      <section className="flex flex-col gap-3">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="text-foreground text-lg font-medium">Jobs for you</h2>
-          <Link
-            className="text-muted-foreground hover:text-foreground text-sm"
-            href="/account/jobs"
-          >
-            See all
-          </Link>
-        </div>
-        <JobMatchList
-          empty="No open jobs right now. Check back soon."
-          matches={matches}
-        />
-      </section>
 
       <section className="flex flex-col gap-3">
         <div className="flex items-center justify-between gap-3">

@@ -248,3 +248,23 @@ test("text search matches location and the ids Postgres matched on summary or sk
   expect(matched("kubernetes")).toEqual([]);
   expect(matched("kubernetes", ["kube"])).toEqual(["kube"]);
 });
+
+test("For me ranks recommendations and combines with other board filters", () => {
+  const query = parseBoardQuery(new URLSearchParams("for_me=true"), options);
+  const forMeIds = ["a-backend", "c-analyst"];
+  const matches = { ...query, forMeIds };
+
+  expect(buildBoardView(cards, matches).docs.map((card) => card.slug)).toEqual(
+    forMeIds
+  );
+  expect(
+    buildBoardView(cards, { ...matches, sort: "newest" }).docs.map(
+      (card) => card.slug
+    )
+  ).toEqual(["c-analyst", "a-backend"]);
+  expect(
+    buildBoardView(cards, { ...matches, q: "analyst" }).docs.map(
+      (card) => card.slug
+    )
+  ).toEqual(["c-analyst"]);
+});

@@ -75,9 +75,9 @@ export function ApplicationList({
         </p>
         <Link
           className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 items-center rounded-lg px-3.5 text-sm font-medium"
-          href="/account/jobs"
+          href="/jobs"
         >
-          See jobs for you
+          Browse jobs
         </Link>
       </div>
     );

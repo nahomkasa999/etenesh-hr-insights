@@ -101,7 +101,14 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   async redirects() {
-    return legacyRedirectsFor().map((redirect) => ({ ...redirect }));
+    return [
+      {
+        destination: "/jobs?for_me=true",
+        permanent: false,
+        source: "/account/jobs",
+      },
+      ...legacyRedirectsFor().map((redirect) => ({ ...redirect })),
+    ];
   },
   // `bun run typecheck` runs in CI and in `bun run check`. Running tsc again
   // inside `next build` added about nine seconds to every Vercel deploy.

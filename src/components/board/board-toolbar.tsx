@@ -6,7 +6,7 @@ import {
 import { MenuDetails } from "@/components/board/menu-details";
 import { SaveSearchButton } from "@/components/board/save-search-button";
 import type { BoardFacets } from "@/lib/board/filter";
-import { boardStateHref } from "@/lib/board/links";
+import { boardStateHref, jobsFilterHref } from "@/lib/board/links";
 import {
   type BoardQuery,
   type BoardQueryOptions,
@@ -24,6 +24,7 @@ const SORTS: { id: BoardSort; label: string }[] = [
   { id: "oldest", label: "Oldest" },
   { id: "salary", label: "Highest salary" },
 ];
+const MATCH_SORT = { id: "match", label: "Best match" } as const;
 
 const FOCUS =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
@@ -129,6 +130,14 @@ export function BoardToolbar({
   updated?: string | null;
 }) {
   const perPage = perPageChoices(options.defaultPerPage);
+  const sorts = query.forMe ? [MATCH_SORT, ...SORTS] : SORTS;
+  const unfilteredSort = query.sort === "match" ? "newest" : query.sort;
+  const toggleForMe: BoardQuery = {
+    ...query,
+    forMe: !query.forMe,
+    page: 1,
+    sort: query.forMe ? unfilteredSort : "match",
+  };
   const groups =
     showControls && facets
       ? buildFilterGroups({ facets, marketing, options, query })
@@ -153,6 +162,12 @@ export function BoardToolbar({
                 marketing
               ),
               total,
+            }}
+            forMe={{
+              active: query.forMe,
+              href: marketing
+                ? jobsFilterHref(toggleForMe, options)
+                : boardStateHref(toggleForMe, options, marketing),
             }}
             groups={groups}
           />
@@ -210,8 +225,8 @@ export function BoardToolbar({
               testId="per-page-menu"
             />
             <LinkMenu
-              label={SORTS.find((sort) => sort.id === query.sort)?.label ?? ""}
-              options={SORTS.map((sort) => ({
+              label={sorts.find((sort) => sort.id === query.sort)?.label ?? ""}
+              options={sorts.map((sort) => ({
                 active: query.sort === sort.id,
                 href: boardStateHref(
                   { ...query, page: 1, sort: sort.id },

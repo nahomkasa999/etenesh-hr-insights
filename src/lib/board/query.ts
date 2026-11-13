@@ -12,12 +12,14 @@ const PER_PAGE_RE = /^\d+$/u;
 
 export const PER_PAGE_OPTIONS = [10, 20, 50, 100] as const;
 
-export type BoardSort = "newest" | "oldest" | "salary";
+export type BoardSort = "match" | "newest" | "oldest" | "salary";
 
 export interface BoardQuery {
   // Lowercased category names; jobs match case-insensitively.
   categories: string[];
   featured: boolean;
+  forMe: boolean;
+  forMeIds?: string[];
   languages: string[];
   page: number;
   perPage: number;
@@ -115,21 +117,23 @@ function parsePerPage(raw: string | null, defaultPerPage: number): number {
   return perPage;
 }
 
-function parseSort(raw: string | null): BoardSort {
+function parseSort(raw: string | null, forMe: boolean): BoardSort {
   if (raw !== null && SORTS.has(raw as BoardSort)) {
     return raw as BoardSort;
   }
 
-  return "newest";
+  return forMe ? "match" : "newest";
 }
 
 export function parseBoardQuery(
   params: URLSearchParams,
   options: BoardQueryOptions
 ): BoardQuery {
+  const forMe = params.get("for_me") === "true";
   return {
     categories: parseLowerList(splitCsv(params.get("categories"))),
     featured: params.get("featured") === "true",
+    forMe,
     languages: parseLowerList(splitCsv(params.get("languages"))),
     page: parsePage(params.get("page")),
     perPage: parsePerPage(params.get("per_page"), options.defaultPerPage),
@@ -137,7 +141,7 @@ export function parseBoardQuery(
     remote: params.get("remote") === "true",
     salary: parseEnum(splitCsv(params.get("salary")), SALARY_BAND_IDS),
     seniority: parseEnum(splitCsv(params.get("roles")), SENIORITIES),
-    sort: parseSort(params.get("sort")),
+    sort: parseSort(params.get("sort"), forMe),
     types: parseEnum(splitCsv(params.get("types")), JOB_EMPLOYMENT_TYPES),
     visa: params.get("visa") === "true",
   };
@@ -158,6 +162,9 @@ export function serializeBoardQuery(
   if (query.featured) {
     params.set("featured", "true");
   }
+  if (query.forMe) {
+    params.set("for_me", "true");
+  }
   if (query.types.length > 0) {
     params.set("types", query.types.join(","));
   }
@@ -176,7 +183,7 @@ export function serializeBoardQuery(
   if (query.languages.length > 0) {
     params.set("languages", query.languages.join(","));
   }
-  if (query.sort !== "newest") {
+  if (query.sort !== (query.forMe ? "match" : "newest")) {
     params.set("sort", query.sort);
   }
   if (query.perPage !== options.defaultPerPage) {
@@ -223,6 +230,7 @@ export function boardQueryHasFilters(query: BoardQuery): boolean {
     query.q.length > 0 ||
     query.categories.length > 0 ||
     query.featured ||
+    query.forMe ||
     query.types.length > 0 ||
     query.seniority.length > 0 ||
     query.remote ||
@@ -236,6 +244,7 @@ export function clearBoardFilters(query: BoardQuery): BoardQuery {
   return {
     categories: [],
     featured: false,
+    forMe: false,
     languages: [],
     page: 1,
     perPage: query.perPage,
@@ -243,7 +252,7 @@ export function clearBoardFilters(query: BoardQuery): BoardQuery {
     remote: false,
     salary: [],
     seniority: [],
-    sort: query.sort,
+    sort: query.sort === "match" ? "newest" : query.sort,
     types: [],
     visa: false,
   };

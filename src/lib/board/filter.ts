@@ -217,7 +217,11 @@ export function filterBoard(
   query: BoardQuery
 ): JobListItem[] {
   const textMatches = query.textMatchIds ? new Set(query.textMatchIds) : null;
-  return cards.filter((card) => matchesCard(card, query, textMatches));
+  const forMe = query.forMe ? new Set(query.forMeIds) : null;
+  return cards.filter(
+    (card) =>
+      (!forMe || forMe.has(card.id)) && matchesCard(card, query, textMatches)
+  );
 }
 
 function publishedMs(iso: string | null, now: number): number {

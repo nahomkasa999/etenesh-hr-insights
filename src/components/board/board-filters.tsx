@@ -651,9 +651,11 @@ function PhoneChip({ group }: { group: FacetGroup }) {
 // The chip row in the toolbar. Groups with nothing to pick are left out.
 export function FilterChips({
   footer,
+  forMe,
   groups,
 }: {
   footer?: ChipMenuFooter;
+  forMe?: { active: boolean; href: string };
   groups: FacetGroup[];
 }) {
   const shown = groups.filter((group) => visibleOptions(group).length > 0);
@@ -687,7 +689,7 @@ export function FilterChips({
       >
         <ListFilter aria-hidden="true" className="size-4" />
       </button>
-      <ForMeChip />
+      {forMe ? <ForMeChip {...forMe} /> : null}
       {phoneOrder.map((group) => (
         <PhoneChip group={group} key={`phone-${group.id}`} />
       ))}

@@ -6,11 +6,23 @@ import {
   serializeBoardQuery,
 } from "./query";
 
+export function jobsFilterHref(
+  query: BoardQuery,
+  options: BoardQueryOptions
+): string {
+  const params = serializeBoardQuery(query, options).toString();
+  return params ? `/jobs?${params}` : "/jobs";
+}
+
 export function boardStateHref(
   query: BoardQuery,
   options: BoardQueryOptions,
   marketing: boolean
 ): string {
+  if (query.forMe) {
+    return jobsFilterHref(query, options);
+  }
+
   if (
     !boardQueryHasFilters(query) &&
     query.sort === "newest" &&

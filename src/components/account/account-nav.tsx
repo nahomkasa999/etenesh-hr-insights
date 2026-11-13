@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 
 const ITEMS = [
   { href: "/account", label: "Overview" },
-  { href: "/account/jobs", label: "Jobs for you" },
   { href: "/account/applications", label: "Applications" },
   { href: "/account/profile", label: "Profile & documents" },
   { href: "/account/auto-apply", label: "Auto apply" },

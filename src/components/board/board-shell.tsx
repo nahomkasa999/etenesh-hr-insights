@@ -64,6 +64,7 @@ export async function BoardShell({
           navItems={nav.header}
           search={
             <BoardSearchForm
+              action={search?.query.forMe ? "/jobs" : undefined}
               count={pool.length}
               hidden={
                 search ? searchHiddenFields(search.query, search.options) : []

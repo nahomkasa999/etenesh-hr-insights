@@ -5,6 +5,7 @@ import { BoardListing } from "@/components/board/board-listing";
 import { BoardShell } from "@/components/board/board-shell";
 import { isMarketingEnabled } from "@/config/flags";
 import { canonicalSearchRedirect } from "@/lib/board/canonical";
+import { jobsFilterHref } from "@/lib/board/links";
 import { loadBoardPool } from "@/lib/board/pool";
 import {
   type BoardSearchParams,
@@ -28,13 +29,17 @@ export default async function SearchPage({
   const settings = await getSiteSettings();
   const options = { defaultPerPage: settings.board.jobsPerPage };
   const params = urlSearchParamsFromRecord(await searchParams);
+  const parsed = parseBoardQuery(params, options);
+  if (parsed.forMe) {
+    redirect(jobsFilterHref(parsed, options));
+  }
   const cards = await loadBoardPool();
   const target = canonicalSearchRedirect(params, options, cards);
   if (target) {
     redirect(target);
   }
 
-  const query = await withTextMatches(parseBoardQuery(params, options));
+  const query = await withTextMatches(parsed);
   if (buildBoardView(cards, query).outOfRange) {
     notFound();
   }

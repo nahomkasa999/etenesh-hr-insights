@@ -425,6 +425,7 @@ export function JobPosting({
 
   return (
     <div className="-mt-6 flex flex-col gap-5 md:-mt-1 lg:-mx-0.5">
+      <div className="hidden md:block">
       <JobBreadcrumb
         actions={
           <JobSaveButton
@@ -433,6 +434,7 @@ export function JobPosting({
             testId="job-top-save"
             variant="icon"
           />
+      </div>
         }
         category={fields.includes("categories") ? categoryCrumb(job) : null}
         companyName={job.companyName}

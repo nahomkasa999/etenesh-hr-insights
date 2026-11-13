@@ -249,7 +249,6 @@ export function JobSwipe({
 
   return (
     <div className="overflow-x-clip">
-      {neighbors && !applying ? <SwipePager neighbors={neighbors} /> : null}
       <div data-leaving={leaving ?? undefined} ref={surface}>
         {children}
       </div>

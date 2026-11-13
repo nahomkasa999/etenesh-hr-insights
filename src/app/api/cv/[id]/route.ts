@@ -4,6 +4,7 @@ import { getPayload } from "payload";
 
 import { hasRole } from "@/access/roles";
 import { CV_TYPES } from "@/lib/etenesh/apply";
+import { readCandidateFile } from "@/storage/candidate-files";
 
 export const runtime = "nodejs";
 
@@ -27,6 +28,7 @@ export async function GET(
       id,
       overrideAccess: true,
       select: { cvData: true, cvName: true, cvType: true },
+      showHiddenFields: true,
     })
     .catch(() => null);
   if (!doc?.cvData) {
@@ -38,7 +40,7 @@ export async function GET(
       ? doc.cvType
       : "application/octet-stream";
   const name = (doc.cvName ?? "cv").replace(/[^\w.\- ]+/gu, "_");
-  return new Response(Buffer.from(doc.cvData, "base64"), {
+  return new Response(await readCandidateFile(doc.cvData), {
     headers: {
       "Cache-Control": "private, no-store",
       "Content-Disposition": `inline; filename="${name}"`,

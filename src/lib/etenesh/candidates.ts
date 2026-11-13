@@ -6,6 +6,11 @@ import {
   JOB_WORKPLACE_TYPES,
 } from "@/lib/domain/job-vocab";
 import type { Candidate, CandidateDocument } from "@/payload-types";
+import {
+  deleteCandidateFile,
+  readCandidateFile,
+  storeCandidateFile,
+} from "@/storage/candidate-files";
 
 import type { CvFile } from "./apply";
 import {
@@ -113,7 +118,7 @@ export async function profileCv(
     return null;
   }
   return {
-    bytes: Buffer.from(doc.data, "base64"),
+    bytes: await readCandidateFile(doc.data),
     name: doc.name,
     size: doc.size ?? 0,
     type: doc.mimeType ?? "application/pdf",
@@ -160,19 +165,29 @@ export async function addDocument(
       ok: false,
     };
   }
-  const created = await payload.create({
-    collection: "candidate-documents",
-    data: {
-      candidate: candidateId,
-      data: file.bytes.toString("base64"),
-      kind,
-      mimeType: file.type,
-      name: file.name.slice(0, 200),
-      size: file.size,
-    },
-    overrideAccess: true,
-  });
-  return { id: created.id, ok: true };
+  const data = await storeCandidateFile("candidate-documents", file);
+  try {
+    const created = await payload.create({
+      collection: "candidate-documents",
+      data: {
+        candidate: candidateId,
+        data,
+        kind,
+        mimeType: file.type,
+        name: file.name.slice(0, 200),
+        size: file.size,
+      },
+      overrideAccess: true,
+    });
+    return { id: created.id, ok: true };
+  } catch (error) {
+    await deleteCandidateFile(data).catch(() => {
+      payload.logger.error(
+        "Could not remove a failed candidate document upload"
+      );
+    });
+    throw error;
+  }
 }
 
 // Only the owner's own files can be read or deleted through the account.

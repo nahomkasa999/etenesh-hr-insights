@@ -1,27 +1,9 @@
 import { getAccount, signedOut } from "@/lib/auth/account";
-import { isDocumentKind } from "@/lib/etenesh/candidate-vocab";
+import { fileType, isDocumentKind } from "@/lib/etenesh/candidate-vocab";
 import { addDocument } from "@/lib/etenesh/candidates";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
-
-const BY_EXTENSION: Record<string, string> = {
-  doc: "application/msword",
-  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  jpeg: "image/jpeg",
-  jpg: "image/jpeg",
-  pdf: "application/pdf",
-  png: "image/png",
-};
-
-// Phones often send an empty or generic type; fall back to the extension.
-function fileType(file: File): string {
-  if (file.type && file.type !== "application/octet-stream") {
-    return file.type;
-  }
-  const extension = file.name.split(".").pop()?.toLowerCase() ?? "";
-  return BY_EXTENSION[extension] ?? file.type;
-}
 
 export async function POST(request: Request): Promise<Response> {
   const account = await getAccount();
@@ -43,7 +25,7 @@ export async function POST(request: Request): Promise<Response> {
       bytes: Buffer.from(await file.arrayBuffer()),
       name: file.name,
       size: file.size,
-      type: file.type,
+      type: fileType(file),
     });
   } catch (error) {
     console.error("document upload failed", error);

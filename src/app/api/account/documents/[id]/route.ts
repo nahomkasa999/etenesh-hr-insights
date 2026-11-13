@@ -1,5 +1,9 @@
 import { getAccount, signedOut } from "@/lib/auth/account";
 import { ownDocument } from "@/lib/etenesh/candidates";
+import {
+  deleteCandidateFile,
+  readCandidateFile,
+} from "@/storage/candidate-files";
 
 export const runtime = "nodejs";
 
@@ -25,7 +29,7 @@ export async function GET(
     return Response.json({ error: "Not found" }, { status: 404 });
   }
   const name = doc.name.replace(SAFE_NAME_RE, "_") || "document";
-  return new Response(Buffer.from(doc.data, "base64"), {
+  return new Response(await readCandidateFile(doc.data), {
     headers: {
       "Cache-Control": "private, no-store",
       "Content-Disposition": `attachment; filename="${name}"`,
@@ -44,7 +48,12 @@ export async function DELETE(
     return signedOut();
   }
   const { id } = await params;
-  const doc = await ownDocument(account.payload, account.candidate.id, id);
+  const doc = await ownDocument(
+    account.payload,
+    account.candidate.id,
+    id,
+    true
+  );
   if (!doc) {
     return Response.json({ error: "Not found", ok: false }, { status: 404 });
   }
@@ -52,6 +61,11 @@ export async function DELETE(
     collection: "candidate-documents",
     id: doc.id,
     overrideAccess: true,
+  });
+  await deleteCandidateFile(doc.data).catch(() => {
+    account.payload.logger.error(
+      "Could not remove the stored candidate document"
+    );
   });
   return Response.json({ ok: true });
 }

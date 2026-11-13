@@ -2,6 +2,10 @@ import type { Payload } from "payload";
 import { z } from "zod";
 
 import type { Job } from "@/payload-types";
+import {
+  deleteCandidateFile,
+  storeCandidateFile,
+} from "@/storage/candidate-files";
 
 import { matchApplicant } from "./match";
 import { EDUCATION_LEVELS } from "./vocab";
@@ -245,6 +249,42 @@ export async function submitApplication(
     };
   }
 
+  const cvData = await storeCandidateFile("applications", cv);
+  try {
+    return await saveApplication({
+      applyJob,
+      cv,
+      cvData,
+      input,
+      options,
+      payload,
+      result,
+    });
+  } catch (error) {
+    await deleteCandidateFile(cvData).catch(() => {
+      payload.logger.error("Could not remove a failed application CV upload");
+    });
+    throw error;
+  }
+}
+
+async function saveApplication({
+  applyJob,
+  cv,
+  cvData,
+  input,
+  options,
+  payload,
+  result,
+}: {
+  applyJob: ApplyJob;
+  cv: CvFile;
+  cvData: string;
+  input: ApplicationInput;
+  options: SubmitOptions;
+  payload: Payload;
+  result: ReturnType<typeof matchApplicant>;
+}): Promise<ApplyResult> {
   const rows = (values: string[]) => values.map((value) => ({ value }));
   // Two people applying in the same moment can draw the same number; the
   // unique index rejects one and it takes the next number.
@@ -263,14 +303,14 @@ export async function submitApplication(
           city: input.city,
           companyName: applyJob.companyName,
           coverNote: input.coverNote,
-          cvData: cv.bytes.toString("base64"),
+          cvData,
           cvName: cv.name.slice(0, 200),
           cvSize: cv.size,
           cvType: cv.type,
           education: input.education,
           email: input.email.toLowerCase(),
           fullName: input.fullName,
-          job: job.id,
+          job: applyJob.id,
           jobTitle: applyJob.title,
           matchMet: rows(result.met),
           matchMissed: rows(result.missed),

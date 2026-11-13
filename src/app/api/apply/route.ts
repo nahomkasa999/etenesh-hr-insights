@@ -9,6 +9,7 @@ import {
   submitApplication,
   toApplyJob,
 } from "@/lib/etenesh/apply";
+import { fileType } from "@/lib/etenesh/candidate-vocab";
 import { listDocuments, profileCv, values } from "@/lib/etenesh/candidates";
 
 export const runtime = "nodejs";
@@ -103,7 +104,7 @@ export async function POST(request: Request): Promise<Response> {
           bytes: Buffer.from(await file.arrayBuffer()),
           name: file.name,
           size: file.size,
-          type: file.type,
+          type: fileType(file),
         }
       : null;
 

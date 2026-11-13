@@ -30,6 +30,19 @@ export const DOCUMENT_TYPES: Record<string, string> = {
   "image/png": ".png",
 };
 
+export function fileType(file: File): string {
+  if (file.type && file.type !== "application/octet-stream") {
+    return file.type;
+  }
+  const extension = file.name.slice(file.name.lastIndexOf(".")).toLowerCase();
+  return (
+    Object.entries(DOCUMENT_TYPES).find(
+      ([type, suffix]) =>
+        suffix === extension || (extension === ".jpeg" && type === "image/jpeg")
+    )?.[0] ?? file.type
+  );
+}
+
 export function isCvType(type: string): boolean {
   return type === "application/pdf" || type.includes("word");
 }

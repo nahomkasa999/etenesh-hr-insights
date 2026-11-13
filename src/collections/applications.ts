@@ -6,6 +6,7 @@ import type {
 } from "payload";
 
 import { isStaff } from "@/access/roles";
+import { CV_MAX_BYTES } from "@/lib/etenesh/apply";
 import { sendTelegram, statusUpdateText } from "@/lib/etenesh/telegram";
 import {
   APPLICATION_STATUSES,
@@ -194,6 +195,7 @@ export const Applications: CollectionConfig = {
     {
       access: { read: noOne, update: noOne },
       admin: { hidden: true },
+      maxLength: Math.ceil(CV_MAX_BYTES / 3) * 4,
       name: "cvData",
       type: "textarea",
     },

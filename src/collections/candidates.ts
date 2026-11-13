@@ -8,6 +8,7 @@ import {
 import {
   DOCUMENT_KIND_LABELS,
   DOCUMENT_KINDS,
+  DOCUMENT_MAX_BYTES,
 } from "@/lib/etenesh/candidate-vocab";
 import { EDUCATION_LEVELS } from "@/lib/etenesh/vocab";
 
@@ -180,6 +181,7 @@ export const CandidateDocuments: CollectionConfig = {
     {
       access: { read: noOne, update: noOne },
       admin: { hidden: true },
+      maxLength: Math.ceil(DOCUMENT_MAX_BYTES / 3) * 4,
       name: "data",
       type: "textarea",
     },

@@ -5,7 +5,7 @@ const nullableNumber = z.number().nullable().optional();
 const nullableBoolean = z.boolean().nullable().optional();
 const stringList = z.array(z.string()).nullable().optional();
 
-export const bordfeedCompanySchema = z.looseObject({
+const bordfeedCompanySchema = z.looseObject({
   domain: nullableString,
   id: nullableString,
   logo_url: nullableString,
@@ -13,7 +13,7 @@ export const bordfeedCompanySchema = z.looseObject({
   slug: nullableString,
 });
 
-export const bordfeedJobSchema = z.looseObject({
+const bordfeedJobSchema = z.looseObject({
   application_requirement_tags: stringList,
   application_requirements: nullableString,
   apply_email: nullableString,

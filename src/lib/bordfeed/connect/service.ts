@@ -194,7 +194,7 @@ async function templateDisplayName(
 
 // Builds POST /api/v1/feeds: Bordfeed's suggested body when verify sent one,
 // named after the site, else the template display name, else the template id.
-export async function buildFeedRequest(input: {
+async function buildFeedRequest(input: {
   client: BordfeedClient;
   payload: Payload;
   suggested: SuggestedFeed | null | undefined;

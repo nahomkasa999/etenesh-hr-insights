@@ -5,7 +5,6 @@ import {
   IconBuilding,
   IconExternalLink,
   IconLayoutDashboard,
-  IconSettings,
   IconUsers,
 } from "@tabler/icons-react";
 import type * as React from "react";
@@ -30,17 +29,12 @@ const NAV_MAIN = [
   {
     icon: IconBuilding,
     title: "Companies",
-    url: "/admin/collections/companies",
+    url: "/dashboard/companies",
   },
 ];
 
 const NAV_SECONDARY = [
   { icon: IconExternalLink, title: "View job board", url: "/jobs" },
-  {
-    icon: IconSettings,
-    title: "Site settings",
-    url: "/admin/globals/site-settings",
-  },
 ];
 
 export function AppSidebar({

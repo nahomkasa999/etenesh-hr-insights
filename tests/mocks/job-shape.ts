@@ -125,7 +125,7 @@ const COMPANIES = [
 const COUNTRIES = ["US", "DE", "GB", "FR", "CA"] as const;
 const WORKPLACES = ["Remote", "Hybrid", "On-site"] as const;
 
-export function uuid(group: number, index: number): string {
+function uuid(group: number, index: number): string {
   const head = group.toString(16).padStart(8, "0");
   const tail = index.toString(16).padStart(12, "0");
   return `${head}-0000-4000-8000-${tail}`;

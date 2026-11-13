@@ -6,7 +6,7 @@ import type { Job } from "@/payload-types";
 import { matchApplicant } from "./match";
 import { EDUCATION_LEVELS } from "./vocab";
 
-export const CV_MAX_BYTES = 4 * 1024 * 1024;
+const CV_MAX_BYTES = 4 * 1024 * 1024;
 export const CV_TYPES: Record<string, string> = {
   "application/msword": ".doc",
   "application/pdf": ".pdf",
@@ -53,7 +53,7 @@ export function isJobOpen(
   return !job.validThrough || new Date(job.validThrough) > now;
 }
 
-export const applicationInputSchema = z.object({
+const applicationInputSchema = z.object({
   answers: z.array(z.string().trim().max(2000)).default([]),
   city: z.string().trim().max(120).default(""),
   coverNote: z.string().trim().max(3000).default(""),
@@ -72,6 +72,7 @@ export const applicationInputSchema = z.object({
       message: "Enter a phone number, like 0911 234 567.",
     }),
   skills: z.array(z.string().trim().max(120)).default([]),
+  telegramContact: z.string().trim().min(3).max(64),
   yearsExperience: z.coerce
     .number({ message: "Enter your years of experience." })
     .int()
@@ -94,7 +95,7 @@ export type ApplyResult =
   | { ok: false; reason: "closed" }
   | { ok: false; reason: "not_eligible"; missed: string[] };
 
-export function validateCv(file: CvFile | null): string | null {
+function validateCv(file: CvFile | null): string | null {
   if (!file || file.size === 0) {
     return "Upload your CV.";
   }
@@ -258,6 +259,7 @@ export async function submitApplication(
           reference,
           skills: rows(input.skills.filter(Boolean)),
           status: "submitted",
+          telegramContact: input.telegramContact,
           yearsExperience: input.yearsExperience,
         } as never,
         overrideAccess: true,

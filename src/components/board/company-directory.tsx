@@ -61,7 +61,7 @@ export function filterCompanies(
 }
 
 /** The All / Hiring this week / Remote-first control, shown beside the page title. */
-export function CompanyFilterTabs({
+function CompanyFilterTabs({
   filter,
   filters,
   onChange,

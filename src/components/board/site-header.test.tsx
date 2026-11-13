@@ -14,8 +14,10 @@ import type { NavItem } from "@/config/nav";
 import { SiteHeader } from "./site-header";
 
 let pathname = "/";
+let search = "";
 vi.mock("next/navigation", () => ({
   usePathname: () => pathname,
+  useSearchParams: () => new URLSearchParams(search),
 }));
 
 const NAV: NavItem[] = [
@@ -166,7 +168,7 @@ test("view pills show the board counts and ⌘K focuses the search", () => {
         allCount: 143,
         allHref: "/",
         remoteCount: 38,
-        remoteHref: "/jobs/location/remote",
+        remoteHref: "/jobs?remote=true",
       }}
     />
   );
@@ -181,7 +183,7 @@ test("view pills show the board counts and ⌘K focuses the search", () => {
     within(views)
       .getByRole("link", { hidden: true, name: "Remote 38" })
       .getAttribute("href")
-  ).toBe("/jobs/location/remote");
+  ).toBe("/jobs?remote=true");
   expect(
     within(views)
       .getByRole("link", { hidden: true, name: "Saved" })
@@ -206,7 +208,7 @@ test("keeps the All view selected on the board search", () => {
         allCount: 20,
         allHref: "/",
         remoteCount: 5,
-        remoteHref: "/jobs/location/remote",
+        remoteHref: "/jobs?remote=true",
       }}
     />
   );
@@ -250,7 +252,7 @@ test.each([
         allCount: 20,
         allHref: "/jobs",
         remoteCount: 5,
-        remoteHref: "/jobs/location/remote",
+        remoteHref: "/jobs?remote=true",
       }}
     />
   );
@@ -261,4 +263,33 @@ test.each([
       .getByRole("link", { hidden: true, name: "All 20" })
       .getAttribute("aria-current")
   ).toBe(current);
+});
+
+test("Remote is selected on the board when the remote filter is on", () => {
+  pathname = "/jobs";
+  search = "remote=true";
+  render(
+    <SiteHeader
+      cta={CTA}
+      homeHref="/jobs"
+      logoUrl={null}
+      name="Bordful"
+      navItems={NAV}
+      social={SOCIAL}
+      views={{
+        allCount: 20,
+        allHref: "/jobs",
+        remoteCount: 5,
+        remoteHref: "/jobs?remote=true",
+      }}
+    />
+  );
+  search = "";
+
+  const views = screen.getByRole("navigation", { hidden: true, name: "Views" });
+  expect(
+    within(views)
+      .getByRole("link", { hidden: true, name: "Remote 5" })
+      .getAttribute("aria-current")
+  ).toBe("page");
 });

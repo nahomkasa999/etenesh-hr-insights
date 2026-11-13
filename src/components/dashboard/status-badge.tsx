@@ -1,18 +1,24 @@
-import { Badge } from "@/components/ui/badge";
 import { type ApplicationStatus, STATUS_LABELS } from "@/lib/etenesh/vocab";
 import { cn } from "@/lib/utils";
 
-const TONE: Record<ApplicationStatus, string> = {
-  hired: "bg-secondary/15 text-secondary dark:text-secondary",
-  interview: "bg-primary/10 text-primary",
-  offer: "bg-primary/10 text-primary",
-  on_hold: "bg-amber-500/15 text-amber-700 dark:text-amber-400",
-  rejected: "bg-destructive/10 text-destructive",
-  shortlisted: "bg-secondary/15 text-green-700 dark:text-secondary",
-  submitted: "bg-primary text-primary-foreground",
-  under_review: "bg-tag text-foreground",
+const TONE: Record<ApplicationStatus, { dot: string; text: string }> = {
+  hired: {
+    dot: "bg-emerald-500",
+    text: "text-emerald-700 dark:text-emerald-400",
+  },
+  interview: { dot: "bg-sky-500", text: "text-sky-700 dark:text-sky-400" },
+  offer: { dot: "bg-violet-500", text: "text-violet-700 dark:text-violet-400" },
+  on_hold: { dot: "bg-amber-500", text: "text-amber-700 dark:text-amber-400" },
+  rejected: { dot: "bg-rose-500", text: "text-rose-700 dark:text-rose-400" },
+  shortlisted: {
+    dot: "bg-green-500",
+    text: "text-green-700 dark:text-green-400",
+  },
+  submitted: { dot: "bg-blue-500", text: "text-blue-700 dark:text-blue-400" },
+  under_review: { dot: "bg-slate-400", text: "text-foreground" },
 };
 
+// A quiet dot and label. Colour carries the step, not a filled box.
 export function StatusBadge({
   className,
   status,
@@ -20,26 +26,50 @@ export function StatusBadge({
   className?: string;
   status: ApplicationStatus;
 }) {
+  const tone = TONE[status];
   return (
-    <Badge className={cn("h-7 px-2.5 text-sm", TONE[status], className)}>
+    <span
+      className={cn(
+        "inline-flex items-center gap-2 text-sm font-medium whitespace-nowrap",
+        tone.text,
+        className
+      )}
+    >
+      <span aria-hidden className={cn("size-2 rounded-full", tone.dot)} />
       {STATUS_LABELS[status]}
-    </Badge>
+    </span>
   );
 }
 
-export function MatchBadge({ score }: { score: number }) {
-  const tone =
+// A small bar that fills with the score, with the number beside it.
+export function MatchBadge({
+  className,
+  score,
+}: {
+  className?: string;
+  score: number;
+}) {
+  const bar =
     score >= 80
-      ? "border-green-600/30 text-green-700 dark:text-secondary"
+      ? "bg-emerald-500"
       : score >= 60
-        ? "border-amber-500/40 text-amber-700 dark:text-amber-400"
-        : "border-line-strong text-muted-foreground";
+        ? "bg-amber-500"
+        : "bg-slate-400";
   return (
-    <Badge
-      className={cn("h-7 px-2.5 text-sm tabular-nums", tone)}
-      variant="outline"
+    <span
+      className={cn("inline-flex items-center gap-2 text-sm", className)}
+      title={`${score}% match with the job's criteria`}
     >
-      {score}% match
-    </Badge>
+      <span
+        aria-hidden
+        className="bg-muted h-1.5 w-14 overflow-hidden rounded-full"
+      >
+        <span
+          className={cn("block h-full rounded-full", bar)}
+          style={{ width: `${Math.min(100, Math.max(0, score))}%` }}
+        />
+      </span>
+      <span className="font-medium tabular-nums">{score}%</span>
+    </span>
   );
 }

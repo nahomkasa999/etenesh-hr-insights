@@ -211,7 +211,7 @@ export function urlSearchParamsFromRecord(
   return params;
 }
 
-export function boardQueryFromSearchParams(
+function boardQueryFromSearchParams(
   record: BoardSearchParams,
   options: BoardQueryOptions
 ): BoardQuery {

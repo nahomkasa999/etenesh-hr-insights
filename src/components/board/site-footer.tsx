@@ -33,7 +33,7 @@ function mergeLegal(columns: FooterColumn[]): FooterColumn[] {
 }
 
 // "Jobs by category" links into the board search.
-export function categoryColumn(
+function categoryColumn(
   items: Parameters<typeof buildBoardFacets>[0]
 ): FooterColumn | null {
   const categories = buildBoardFacets(items).categories.slice(0, FACET_LIMIT);

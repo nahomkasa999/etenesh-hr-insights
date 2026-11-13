@@ -1,5 +1,5 @@
 // Frozen comparison rates, not a live feed. Unknown codes stay null.
-export const USD_PER: Record<string, number> = {
+const USD_PER: Record<string, number> = {
   ADA: 0.73,
   ARS: 0.0011,
   AUD: 0.69,

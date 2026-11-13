@@ -5,6 +5,8 @@ import * as migration_20261104_091214_job_search_fields from './20261104_091214_
 import * as migration_20261104_170559_import_blocklist from './20261104_170559_import_blocklist';
 import * as migration_20261106_090008_remove_bounced_status from './20261106_090008_remove_bounced_status';
 import * as migration_20261112_214631_etenesh_applications from './20261112_214631_etenesh_applications';
+import * as migration_20261113_telegram_contact from './20261113_telegram_contact';
+import * as migration_20261113_telegram_contact_optional from './20261113_telegram_contact_optional';
 
 export const migrations = [
   {
@@ -40,6 +42,16 @@ export const migrations = [
   {
     up: migration_20261112_214631_etenesh_applications.up,
     down: migration_20261112_214631_etenesh_applications.down,
-    name: '20261112_214631_etenesh_applications'
+    name: '20261112_214631_etenesh_applications',
+  },
+  {
+    up: migration_20261113_telegram_contact.up,
+    down: migration_20261113_telegram_contact.down,
+    name: '20261113_telegram_contact',
+  },
+  {
+    up: migration_20261113_telegram_contact_optional.up,
+    down: migration_20261113_telegram_contact_optional.down,
+    name: '20261113_telegram_contact_optional',
   },
 ];

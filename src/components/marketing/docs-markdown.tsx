@@ -26,7 +26,7 @@ type Block =
   | { header: string[]; rows: string[][]; type: "table" }
   | { text: string; type: "paragraph" };
 
-export function slugifyHeading(text: string): string {
+function slugifyHeading(text: string): string {
   return text
     .toLowerCase()
     .replace(/`/gu, "")
@@ -50,7 +50,7 @@ const ORDERED = /^\d+\.\s+(.*)$/u;
 const UNORDERED = /^[-*]\s+(.*)$/u;
 const TABLE_RULE = /^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?\s*$/u;
 
-export function parseMarkdown(source: string): Block[] {
+function parseMarkdown(source: string): Block[] {
   const lines = source.replace(/\r\n/gu, "\n").split("\n");
   const blocks: Block[] = [];
   let index = 0;
@@ -252,7 +252,7 @@ function ledeIndex(blocks: Block[]): number {
   return -1;
 }
 
-export function hasDocsLede(source: string): boolean {
+function hasDocsLede(source: string): boolean {
   return ledeIndex(parseMarkdown(source)) !== -1;
 }
 

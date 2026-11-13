@@ -63,7 +63,7 @@ export interface FeedPage {
   nextOffset: number | null;
 }
 
-export const FEED_PAGE_MAX = 100;
+const FEED_PAGE_MAX = 100;
 
 // GET /api/v1/jobs/{id}: 404 for a job that is no longer active, answered
 // before any charge. An active job the workspace already received is free;

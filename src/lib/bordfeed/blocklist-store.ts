@@ -42,7 +42,7 @@ export function blockableFromMapped(job: MappedJob): BlockableJob {
   };
 }
 
-export function blockableFromJob(job: Job): BlockableJob {
+function blockableFromJob(job: Job): BlockableJob {
   return {
     applyUrl: job.applyUrl ?? null,
     companyDomain: job.companyDomain ?? null,

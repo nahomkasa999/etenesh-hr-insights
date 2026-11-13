@@ -7,7 +7,7 @@ const WWW_WORD = /\bwww\b/u;
 const GAP = /[\s()[\]{}]/u;
 const BRACKET = /[()[\]{}]/u;
 const LETTER = /\p{L}/u;
-export const BOARD_NAME_MAX = 80;
+const BOARD_NAME_MAX = 80;
 
 function hasControlChar(value: string): boolean {
   for (let index = 0; index < value.length; index += 1) {

@@ -1,6 +1,6 @@
 import type { JobListItem } from "@/lib/read/types";
 
-export const SIMILAR_JOBS_LIMIT = 5;
+const SIMILAR_JOBS_LIMIT = 5;
 
 export type SimilarSource = Pick<
   JobListItem,

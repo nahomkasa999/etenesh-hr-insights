@@ -55,7 +55,7 @@ export function compactRelative(iso: string, now: number): string {
   });
 }
 
-export function isClosingSoon(validThrough: string | null, now: number) {
+function isClosingSoon(validThrough: string | null, now: number) {
   if (validThrough === null) {
     return false;
   }

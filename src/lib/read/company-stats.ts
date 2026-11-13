@@ -3,7 +3,7 @@ import { formatLocation } from "@/lib/board/format";
 import type { JobListItem } from "./types";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-export const HIRING_WINDOW_MS = 7 * DAY_MS;
+const HIRING_WINDOW_MS = 7 * DAY_MS;
 
 /** What a company's live jobs say about it. Every value comes from real job rows. */
 export interface CompanyStats {

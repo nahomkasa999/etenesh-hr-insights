@@ -201,15 +201,15 @@ export function parseSyncState(
   };
 }
 
-export function utcDay(now: Date): string {
+function utcDay(now: Date): string {
   return now.toISOString().slice(0, 10);
 }
 
-export function usedToday(state: SyncState, now: Date): number {
+function usedToday(state: SyncState, now: Date): number {
   return state.day === utcDay(now) ? state.jobsToday : 0;
 }
 
-export function remainingToday(
+function remainingToday(
   state: SyncState,
   limits: SyncLimits,
   now: Date
@@ -217,7 +217,7 @@ export function remainingToday(
   return Math.max(0, limits.jobsPerDay - usedToday(state, now));
 }
 
-export function watermark(startedAt: Date): string {
+function watermark(startedAt: Date): string {
   return new Date(startedAt.getTime() - WATERMARK_OVERLAP_MS).toISOString();
 }
 
@@ -324,7 +324,7 @@ export async function readSyncBudget(
   };
 }
 
-export class SyncLeaseLostError extends Error {
+class SyncLeaseLostError extends Error {
   constructor() {
     super("Another Bordfeed sync took over this one.");
     this.name = "SyncLeaseLostError";
@@ -332,7 +332,7 @@ export class SyncLeaseLostError extends Error {
 }
 
 // Max sync time (route maxDuration is 300 s) plus a margin.
-export const SYNC_LEASE_MS = 6 * 60 * 1000;
+const SYNC_LEASE_MS = 6 * 60 * 1000;
 
 // One feed sync at a time, so two runs never spend the same budget. The
 // upsert is atomic: only one caller takes a free or expired lease. Returns

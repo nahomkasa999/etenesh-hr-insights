@@ -34,7 +34,7 @@ export function NavMain({
               className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground h-10 min-w-8 duration-200 ease-linear"
               tooltip="Post a job"
             >
-              <a href="/admin/collections/jobs/create">
+              <a href="/dashboard/jobs/new">
                 <IconCirclePlusFilled />
                 <span>Post a job</span>
               </a>

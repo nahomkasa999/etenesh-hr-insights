@@ -460,6 +460,7 @@ export interface Application {
   fullName: string;
   email: string;
   phone: string;
+  telegramContact?: string | null;
   city?: string | null;
   yearsExperience?: number | null;
   education?:
@@ -867,6 +868,7 @@ export interface ApplicationsSelect<T extends boolean = true> {
   fullName?: T;
   email?: T;
   phone?: T;
+  telegramContact?: T;
   city?: T;
   yearsExperience?: T;
   education?: T;

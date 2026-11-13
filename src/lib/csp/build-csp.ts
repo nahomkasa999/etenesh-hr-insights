@@ -17,6 +17,7 @@ export function buildCsp({
   nonce,
   isDev,
   admin = false,
+  frames = "none",
   extraScriptOrigins = [],
   extraConnectOrigins = [],
 }: {
@@ -24,6 +25,9 @@ export function buildCsp({
   isDev: boolean;
   // Payload admin pages, which also allow the code editor's stylesheet.
   admin?: boolean;
+  // "parent" lets this page be embedded by our own pages (the CV preview).
+  // "children" lets this page embed our own pages.
+  frames?: "none" | "parent" | "children";
   extraScriptOrigins?: string[];
   extraConnectOrigins?: string[];
 }): string {
@@ -63,8 +67,8 @@ export function buildCsp({
     "img-src 'self' blob: data: https://*.public.blob.vercel-storage.com https://bordfeed.com https://*.bordfeed.com",
     "font-src 'self' data:",
     `connect-src ${connectSrc}`,
-    "frame-src 'none'",
-    "frame-ancestors 'none'",
+    frames === "children" ? "frame-src 'self'" : "frame-src 'none'",
+    frames === "parent" ? "frame-ancestors 'self'" : "frame-ancestors 'none'",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self' https://buy.stripe.com https://checkout.stripe.com",

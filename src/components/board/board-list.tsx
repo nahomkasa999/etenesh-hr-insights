@@ -32,6 +32,6 @@ export function BoardList({
   );
 }
 
-export function jobCountLabel(count: number): string {
+function jobCountLabel(count: number): string {
   return count === 1 ? "1 job" : `${count} jobs`;
 }

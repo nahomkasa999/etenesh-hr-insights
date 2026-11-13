@@ -4,7 +4,7 @@ import { MarketingImage } from "./marketing-image";
 
 // Screenshots of the running app, captured at 2x. The sizes are fixed so the
 // layout holds before the files load.
-export const SHOTS = {
+const SHOTS = {
   boardDark: {
     height: 1800,
     src: "/marketing/shots/board-dark.png",

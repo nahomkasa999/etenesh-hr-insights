@@ -22,7 +22,7 @@ export class BordfeedApiError extends Error {
   }
 }
 
-export const EMPTY_FEED_MESSAGE =
+const EMPTY_FEED_MESSAGE =
   "The Bordfeed feed came back empty, so the board kept its current jobs.";
 
 export const MASS_REMOVAL_MESSAGE =

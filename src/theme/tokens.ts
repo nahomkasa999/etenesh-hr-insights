@@ -1,7 +1,7 @@
 export const FONT_IDS = ["system", "sans", "serif", "mono"] as const;
 export type FontId = (typeof FONT_IDS)[number];
 
-export const FONT_STACKS: Record<FontId, string> = {
+const FONT_STACKS: Record<FontId, string> = {
   mono: "var(--font-geist-mono), ui-monospace, Menlo, monospace",
   sans: "var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif",
   serif: "var(--font-ibm-plex-serif), Georgia, serif",

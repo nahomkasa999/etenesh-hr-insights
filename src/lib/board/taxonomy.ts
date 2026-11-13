@@ -60,7 +60,7 @@ export interface TaxonomyValues {
   type: JobEmploymentType | null;
 }
 
-export function countryLabel(code: string): string {
+function countryLabel(code: string): string {
   const upper = code.trim().toUpperCase();
   try {
     return regionNames.of(upper) || upper;

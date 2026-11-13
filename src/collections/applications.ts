@@ -1,15 +1,18 @@
 import type {
+  CollectionAfterChangeHook,
   CollectionBeforeChangeHook,
   CollectionConfig,
   FieldAccess,
 } from "payload";
 
 import { isStaff } from "@/access/roles";
+import { notifyStatus } from "@/lib/etenesh/telegram";
 import {
   APPLICATION_STATUSES,
   EDUCATION_LEVELS,
   STATUS_LABELS,
 } from "@/lib/etenesh/vocab";
+import type { Application } from "@/payload-types";
 
 const options = <T extends string>(
   values: readonly T[],
@@ -45,6 +48,22 @@ const recordStatusChange: CollectionBeforeChangeHook = ({
     ];
   }
   return data;
+};
+
+const notifyApplicant: CollectionAfterChangeHook = async ({
+  context,
+  doc,
+  operation,
+  previousDoc,
+}) => {
+  if (
+    !context.skipTelegram &&
+    operation === "update" &&
+    doc.status !== previousDoc?.status
+  ) {
+    await notifyStatus(doc as Application).catch(() => undefined);
+  }
+  return doc;
 };
 
 export const Applications: CollectionConfig = {
@@ -95,6 +114,11 @@ export const Applications: CollectionConfig = {
     { name: "fullName", required: true, type: "text" },
     { name: "email", required: true, type: "email" },
     { name: "phone", required: true, type: "text" },
+    {
+      label: "Telegram contact",
+      name: "telegramContact",
+      type: "text",
+    },
     { name: "city", type: "text" },
     { min: 0, name: "yearsExperience", type: "number" },
     { name: "education", options: options(EDUCATION_LEVELS), type: "select" },
@@ -188,7 +212,7 @@ export const Applications: CollectionConfig = {
       type: "text",
     },
   ],
-  hooks: { beforeChange: [recordStatusChange] },
+  hooks: { afterChange: [notifyApplicant], beforeChange: [recordStatusChange] },
   slug: "applications",
   versions: false,
 };

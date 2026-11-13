@@ -15,7 +15,7 @@ export const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
 });
 
-export const ibmPlexSerif = IBM_Plex_Serif({
+const ibmPlexSerif = IBM_Plex_Serif({
   preload: false,
   subsets: ["latin"],
   variable: "--font-ibm-plex-serif",

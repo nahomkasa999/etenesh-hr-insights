@@ -11,6 +11,6 @@ export function oneClickUnsubscribeUrl(siteUrl: string, token: string): string {
   return `${siteUrl}/alerts/unsubscribe/one-click?token=${encoded}`;
 }
 
-export function jobUrl(siteUrl: string, slug: string): string {
+function jobUrl(siteUrl: string, slug: string): string {
   return `${siteUrl}/jobs/${encodeURIComponent(slug)}`;
 }

@@ -131,7 +131,7 @@ export interface PreviewFact {
   value: string;
 }
 
-export function previewFacts(job: JobListItem, now: number): PreviewFact[] {
+function previewFacts(job: JobListItem, now: number): PreviewFact[] {
   const facts: PreviewFact[] = [];
   const salary = formatSalary(job);
   if (salary) {
@@ -450,14 +450,16 @@ export function JobPreview({
       <div className="flex min-h-0 grow overflow-hidden">
         {applying ? (
           <div
-            className="min-h-0 w-full overflow-y-auto overscroll-contain px-9 py-7"
+            className="grid min-h-0 w-full [scrollbar-width:none] place-items-center overflow-y-auto overscroll-contain px-9 py-7 [&::-webkit-scrollbar]:hidden"
             data-testid="job-preview-form-pane"
           >
-            <PreviewApplySection job={job} />
+            <div className="w-full max-w-xl">
+              <PreviewApplySection job={job} />
+            </div>
           </div>
         ) : (
           <div
-            className="flex min-h-0 w-full flex-col gap-6 overflow-y-auto overscroll-contain px-9 py-7"
+            className="flex min-h-0 w-full [scrollbar-width:none] flex-col gap-6 overflow-y-auto overscroll-contain px-9 py-7 [&::-webkit-scrollbar]:hidden"
             data-testid="job-preview-details"
             ref={detailsRef}
           >

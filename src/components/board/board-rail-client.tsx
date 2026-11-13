@@ -17,8 +17,8 @@ import {
 } from "@/components/board/saved-searches";
 import { cn } from "@/lib/utils";
 
-export const SAVED_JOBS_PATH = "/saved";
-export const APPLIED_JOBS_PATH = "/saved?list=applied";
+const SAVED_JOBS_PATH = "/saved";
+const APPLIED_JOBS_PATH = "/saved?list=applied";
 
 // Saved and Applied rows. The counts come from localStorage, so they appear
 // after hydration; the links work either way.

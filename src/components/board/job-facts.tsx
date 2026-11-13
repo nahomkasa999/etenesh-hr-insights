@@ -26,7 +26,7 @@ const FACT_ORDER: readonly PublicDetailField[] = [
   "validThrough",
 ];
 
-export function formatClosingDate(validThrough: string | null): string {
+function formatClosingDate(validThrough: string | null): string {
   if (!validThrough) {
     return "";
   }

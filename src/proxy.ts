@@ -23,6 +23,15 @@ function isAdminPath(pathname: string): boolean {
   return pathname === "/admin" || pathname.startsWith("/admin/");
 }
 
+// The HR dashboard previews CVs in a frame. Only the CV file may be framed,
+// and only by our own pages.
+function framesFor(pathname: string): "none" | "parent" | "children" {
+  if (pathname.startsWith("/api/cv/")) {
+    return "parent";
+  }
+  return pathname.startsWith("/dashboard") ? "children" : "none";
+}
+
 const CANONICAL_ORIGIN = "https://bordful.com";
 
 // Hostname only. Host headers may include a port (`bordful.com:443`).
@@ -96,7 +105,12 @@ export function proxy(request: NextRequest) {
 
   const nonce = createNonce();
   const isDev = process.env.NODE_ENV !== "production";
-  const csp = buildCsp({ admin: isAdminPath(pathname), isDev, nonce });
+  const csp = buildCsp({
+    admin: isAdminPath(pathname),
+    frames: framesFor(pathname),
+    isDev,
+    nonce,
+  });
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);

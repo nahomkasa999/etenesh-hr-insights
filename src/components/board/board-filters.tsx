@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 
 // The rail doubles as the phone filter sheet. The toolbar's filter buttons
 // open it with the native popover API, so it needs no client JS.
-export const FILTERS_SHEET_ID = "board-filters";
+const FILTERS_SHEET_ID = "board-filters";
 
 // Longer groups show this many options, the rest sit behind "Show more".
 const GROUP_PREVIEW = 5;
@@ -78,7 +78,7 @@ function categoryFacets(facets: BoardFacets, query: BoardQuery) {
 
 // Options with no results are dropped, but an active one stays so the user
 // can always clear it.
-export function visibleOptions(group: FacetGroup): FacetOption[] {
+function visibleOptions(group: FacetGroup): FacetOption[] {
   return group.options.filter((option) => option.active || option.count > 0);
 }
 
@@ -700,7 +700,7 @@ export function FilterChips({
   );
 }
 
-export function SortLinks({
+function SortLinks({
   marketing,
   options,
   query,

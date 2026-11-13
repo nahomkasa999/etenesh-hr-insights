@@ -67,7 +67,7 @@ function list(title: string, items: string[]): string {
   return `<h3>${title}</h3><ul>${lis}</ul>`;
 }
 
-export function jobDescriptionHtml(job: ImportedJob): string {
+function jobDescriptionHtml(job: ImportedJob): string {
   const parts = [`<p>${escapeHtml(job.summary)}</p>`];
   if (job.about) {
     parts.push(`<h3>About the company</h3><p>${escapeHtml(job.about)}</p>`);

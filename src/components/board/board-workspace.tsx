@@ -296,11 +296,11 @@ export function BoardWorkspace({
   }, [goTo, next]);
 
   return (
-    <div className={cn(className, isOpen && openClassName)}>
+    <div className={cn("min-h-0", className, isOpen && openClassName)}>
       {rail}
       <div
         className={cn(
-          "min-w-0",
+          "min-h-0 min-w-0 [scrollbar-width:none] overflow-y-auto overscroll-contain [&::-webkit-scrollbar]:hidden",
           // With a job open, the other rows step back.
           isOpen &&
             "xl:[&_[data-testid=job-row]:not([data-selected=true])]:opacity-[0.62]"
@@ -311,8 +311,8 @@ export function BoardWorkspace({
       </div>
       {aside ? <div className={cn(isOpen && "xl:hidden")}>{aside}</div> : null}
       {isOpen && current ? (
-        <div className="hidden py-2 pr-2 xl:block">
-          <div className="sticky top-2 flex h-[calc(100dvh-7.5rem)] flex-col">
+        <div className="hidden min-h-0 overflow-hidden py-2 pr-2 xl:block">
+          <div className="flex h-full min-h-0 flex-col">
             <JobPreview
               alertsEnabled={alertsEnabled}
               applying={applying}

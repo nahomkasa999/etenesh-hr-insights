@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import type { TemplateId } from "./types";
 
-export const PREVIEW_WORKPLACE_TYPES = ["Remote", "Hybrid", "On-site"] as const;
+const PREVIEW_WORKPLACE_TYPES = ["Remote", "Hybrid", "On-site"] as const;
 
 export const previewQuerySchema = z.strictObject({
   category: z.array(z.string().trim().min(1).max(100)).max(3).default([]),

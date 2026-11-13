@@ -6,7 +6,7 @@ import type {
 import { revalidateReadTags } from "@/lib/read/revalidate";
 import { companyTag, jobTag } from "@/lib/read/tags";
 
-export function slugOf(doc: unknown): string {
+function slugOf(doc: unknown): string {
   if (doc !== null && typeof doc === "object" && "slug" in doc) {
     return typeof doc.slug === "string" ? doc.slug : "";
   }

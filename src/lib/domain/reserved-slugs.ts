@@ -1,4 +1,4 @@
-export const RESERVED_JOB_SLUGS = [
+const RESERVED_JOB_SLUGS = [
   "page",
   "search",
   "type",

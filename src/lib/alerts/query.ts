@@ -103,7 +103,7 @@ function formFlag(formData: FormData, key: string): boolean {
   return false;
 }
 
-export function buildAlertQuery(input: {
+function buildAlertQuery(input: {
   languages: readonly string[];
   remote: boolean;
   salary: readonly string[];
@@ -180,7 +180,7 @@ export function alertQueryJson(query: JobAlertQuery): Record<string, unknown> {
   };
 }
 
-export function alertQueryHasFilters(query: JobAlertQuery): boolean {
+function alertQueryHasFilters(query: JobAlertQuery): boolean {
   return (
     query.remote ||
     query.visa ||

@@ -73,6 +73,10 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
         source: "/:path*",
       },
+      {
+        headers: [{ key: "X-Frame-Options", value: "SAMEORIGIN" }],
+        source: "/api/cv/:id",
+      },
     ];
   },
   images: {

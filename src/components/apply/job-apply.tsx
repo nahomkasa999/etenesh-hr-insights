@@ -8,8 +8,8 @@ import { useJobList } from "@/components/board/saved-jobs";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const APPLY_OPEN_EVENT = "etenesh:apply-open";
-export const APPLY_SECTION_ID = "apply";
+const APPLY_OPEN_EVENT = "etenesh:apply-open";
+const APPLY_SECTION_ID = "apply";
 
 function openApply() {
   window.dispatchEvent(new Event(APPLY_OPEN_EVENT));

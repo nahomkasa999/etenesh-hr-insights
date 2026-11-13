@@ -6,7 +6,7 @@ import { getPayload } from "payload";
 import { READ_TAGS } from "./tags";
 
 /** Number of live jobs a company has. Sample jobs count only when the board shows samples. */
-export async function queryCompanyJobCount(
+async function queryCompanyJobCount(
   payload: Payload,
   companySlug: string,
   includeSamples: boolean

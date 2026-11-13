@@ -25,7 +25,7 @@ function GroupLabel({ children }: { children: ReactNode }) {
   );
 }
 
-export function DocsSidebar({
+function DocsSidebar({
   active,
   entries,
 }: {
@@ -92,7 +92,7 @@ function MobileChevron() {
 }
 
 // Phones get a compact bar instead of the sidebar and the right-hand list.
-export function DocsMobileNav({
+function DocsMobileNav({
   active,
   entries,
   headings,
@@ -153,7 +153,7 @@ export function DocsMobileNav({
   );
 }
 
-export function DocsToc({ headings }: { headings: DocsHeading[] }) {
+function DocsToc({ headings }: { headings: DocsHeading[] }) {
   const items = headings
     .filter((heading) => heading.level === 2)
     .map((heading) => ({ id: heading.id, label: heading.text }));
@@ -167,7 +167,7 @@ export function DocsToc({ headings }: { headings: DocsHeading[] }) {
 // Paper's docs footer on desktop: a slim bar under the sidebar and content,
 // in place of the full marketing footer (the shell hides that one at md+).
 // Phones keep the full marketing footer.
-export function DocsFooter({ editHref }: { editHref: string }) {
+function DocsFooter({ editHref }: { editHref: string }) {
   const year = new Date().getFullYear();
 
   return (

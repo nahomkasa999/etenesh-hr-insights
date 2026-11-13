@@ -291,9 +291,7 @@ export function applyConnectionEvent(
   }
 }
 
-export function toConnectionUnion(
-  record: ConnectionRecord
-): BordfeedConnection {
+function toConnectionUnion(record: ConnectionRecord): BordfeedConnection {
   if (record.state === "sample") {
     return { state: "sample", templateId: record.templateId };
   }

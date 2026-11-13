@@ -3,7 +3,7 @@ export const MARKETING_DESCRIPTION =
 
 export const GITHUB_URL = "https://github.com/craftled/bordful";
 
-export const BORDFEED_PRICING_URL =
+const BORDFEED_PRICING_URL =
   "https://bordfeed.com/?ref=bordful&utm_source=bordful&utm_medium=marketing&utm_campaign=pricing";
 
 export const BORDFEED_ABOUT_URL =
@@ -12,7 +12,7 @@ export const BORDFEED_ABOUT_URL =
 export const SHOWCASE_ISSUE_URL =
   "https://github.com/craftled/bordful/issues/new?title=Showcase%3A%20";
 
-export const DOCS_URL = "https://github.com/craftled/bordful/tree/main/docs";
+const DOCS_URL = "https://github.com/craftled/bordful/tree/main/docs";
 
 export const SOCIAL_LINKS = [
   {

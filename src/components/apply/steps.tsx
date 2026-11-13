@@ -25,6 +25,8 @@ import { Textarea } from "@/components/ui/textarea";
 import type { ApplyJob } from "@/lib/etenesh/apply";
 import { EDUCATION_LEVELS } from "@/lib/etenesh/vocab";
 
+const YEARS_INPUT = /^\d{1,2}$/u;
+
 export type Errors = Record<string, string>;
 
 export interface FormState {
@@ -37,6 +39,7 @@ export interface FormState {
   fullName: string;
   phone: string;
   skills: string[];
+  telegramContact?: string;
   yearsExperience: string;
 }
 
@@ -48,6 +51,7 @@ export type Update = <K extends keyof FormState>(
 function TextField({
   autoComplete,
   error,
+  hint,
   id,
   inputMode,
   label,
@@ -58,21 +62,37 @@ function TextField({
 }: {
   autoComplete?: string;
   error?: string;
+  hint?: string;
   id: string;
   inputMode?: "email" | "numeric" | "tel";
   label: string;
-  name: "city" | "email" | "fullName" | "phone" | "yearsExperience";
+  name:
+    | "city"
+    | "email"
+    | "fullName"
+    | "phone"
+    | "telegramContact"
+    | "yearsExperience";
   onChange: Update;
   type?: string;
   value: string;
 }) {
   const handle = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) =>
-      onChange(name, event.target.value),
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { value: inputValue } = event.target;
+      if (
+        name === "yearsExperience" &&
+        inputValue !== "" &&
+        !YEARS_INPUT.test(inputValue)
+      ) {
+        return;
+      }
+      onChange(name, inputValue);
+    },
     [name, onChange]
   );
   return (
-    <Field error={error} htmlFor={id} label={label}>
+    <Field error={error} hint={hint} htmlFor={id} label={label}>
       <Input
         aria-invalid={Boolean(error)}
         autoComplete={autoComplete}
@@ -300,6 +320,16 @@ export function StepDetails({
         value={state.phone}
       />
       <TextField
+        autoComplete="username"
+        error={errors.telegramContact}
+        hint="Enter your @username or the phone number linked to Telegram."
+        id="apply-telegram"
+        label="Telegram username or phone"
+        name="telegramContact"
+        onChange={onChange}
+        value={state.telegramContact ?? ""}
+      />
+      <TextField
         autoComplete="address-level2"
         error={errors.city}
         id="apply-city"
@@ -505,6 +535,7 @@ export function StepReview({
         <ReviewRow label="Name" value={state.fullName} />
         <ReviewRow label="Email" value={state.email} />
         <ReviewRow label="Phone" value={state.phone} />
+        <ReviewRow label="Telegram" value={state.telegramContact ?? ""} />
         <ReviewRow label="City" value={state.city} />
         <ReviewRow
           label="CV"

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { type ReactNode, useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { type ReactNode, Suspense, useEffect } from "react";
 
 import { BOARD_SEARCH_INPUT_ID } from "@/components/board/board-search-form";
 import { BrandMark } from "@/components/board/brand-mark";
@@ -17,7 +17,7 @@ import { ThemeToggle } from "@/components/theme/theme-toggle";
 import type { NavItem } from "@/config/nav";
 import { cn } from "@/lib/utils";
 
-export const SAVED_PATH = "/saved";
+const SAVED_PATH = "/saved";
 
 export interface HeaderViews {
   allCount: number;
@@ -35,13 +35,22 @@ function isUnder(pathname: string, root: string): boolean {
 const FOCUS =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
 
-function activeView(pathname: string, views: HeaderViews): ViewId | null {
+const REMOTE_ARCHIVE_PATH = "/jobs/location/remote";
+
+function activeView(
+  pathname: string,
+  views: HeaderViews,
+  remoteFilter = false
+): ViewId | null {
   if (pathname === SAVED_PATH) {
     return "saved";
   }
+  if (remoteFilter && (pathname === "/jobs" || pathname.startsWith("/jobs/page/"))) {
+    return "remote";
+  }
   if (
-    pathname === views.remoteHref ||
-    pathname.startsWith(`${views.remoteHref}/page/`)
+    pathname === REMOTE_ARCHIVE_PATH ||
+    pathname.startsWith(`${REMOTE_ARCHIVE_PATH}/page/`)
   ) {
     return "remote";
   }
@@ -61,9 +70,20 @@ function activeView(pathname: string, views: HeaderViews): ViewId | null {
 // All / Remote / Saved. Saved counts the browser-local list, so it shows
 // after hydration only.
 function ViewPills({ views }: { views: HeaderViews }) {
+  const remoteFilter = useSearchParams().get("remote") === "true";
+  return <ViewPillsView remoteFilter={remoteFilter} views={views} />;
+}
+
+function ViewPillsView({
+  remoteFilter,
+  views,
+}: {
+  remoteFilter: boolean;
+  views: HeaderViews;
+}) {
   const pathname = usePathname();
   const saved = useJobList("saved");
-  const active = activeView(pathname, views);
+  const active = activeView(pathname, views, remoteFilter);
   const pills: {
     count: number | null;
     href: string;
@@ -239,7 +259,11 @@ export function SiteHeader({
             {search}
           </div>
         ) : null}
-        {views ? <ViewPills views={views} /> : null}
+        {views ? (
+          <Suspense fallback={<ViewPillsView remoteFilter={false} views={views} />}>
+            <ViewPills views={views} />
+          </Suspense>
+        ) : null}
         <div
           className="ml-auto flex items-center gap-3 lg:gap-4"
           data-testid="site-nav"

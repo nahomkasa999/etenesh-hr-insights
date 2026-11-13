@@ -14,7 +14,7 @@ function isLexicalState(
   return root !== null && typeof root === "object";
 }
 
-export function collapseWhitespace(value: string): string {
+function collapseWhitespace(value: string): string {
   return value.replace(WHITESPACE, " ").trim();
 }
 

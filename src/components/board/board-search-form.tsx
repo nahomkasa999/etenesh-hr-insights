@@ -31,7 +31,7 @@ export function searchHiddenFields(
 
 // Search matches title, company, location, summary and skills, so the long
 // form can say what Paper says.
-export function searchPlaceholder(count?: number, long = false): string {
+function searchPlaceholder(count?: number, long = false): string {
   const suffix = long ? " by role, company or skill" : "";
   if (count === undefined || count <= 0) {
     return `Search jobs${suffix}`;

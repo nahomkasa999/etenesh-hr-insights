@@ -150,7 +150,7 @@ export function selectDigestJobs(
     .slice(0, DIGEST_LIMIT);
 }
 
-export const matchesAlertQuery = jobMatchesQuery;
+const matchesAlertQuery = jobMatchesQuery;
 
 interface DueSubscriber {
   confirmedAt: string | null;

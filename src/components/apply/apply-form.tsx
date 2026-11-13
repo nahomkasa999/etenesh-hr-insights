@@ -72,6 +72,7 @@ interface ServerReply {
   ok?: boolean;
   reason?: string;
   reference?: string;
+  telegramLink?: string | null;
 }
 
 // Which step each server field lives on.
@@ -126,6 +127,9 @@ function validateDetails(state: FormState): Errors {
   if (state.phone.replace(NON_DIGIT_RE, "").length < MIN_PHONE_DIGITS) {
     errors.phone = "Please type your phone number, for example 0911 223344.";
   }
+  if ((state.telegramContact ?? "").trim().length < 3) {
+    errors.telegramContact = "Please enter your Telegram username or phone.";
+  }
   if (state.city.trim().length === 0) {
     errors.city = "Please type the city where you live.";
   }
@@ -152,6 +156,7 @@ function buildBody(state: FormState, job: ApplyJob): FormData {
   body.set("fullName", state.fullName.trim());
   body.set("email", state.email.trim());
   body.set("phone", state.phone.trim());
+  body.set("telegramContact", (state.telegramContact ?? "").trim());
   body.set("city", state.city.trim());
   body.set("yearsExperience", String(parseYears(state.yearsExperience)));
   body.set("education", state.education);
@@ -178,6 +183,7 @@ const EMPTY_STATE: FormState = {
   fullName: "",
   phone: "",
   skills: [],
+  telegramContact: "",
   yearsExperience: "",
 };
 
@@ -269,7 +275,15 @@ function FormSkeleton() {
   );
 }
 
-function Success({ job, reference }: { job: ApplyJob; reference: string }) {
+function Success({
+  job,
+  reference,
+  telegramLink,
+}: {
+  job: ApplyJob;
+  reference: string;
+  telegramLink: string | null;
+}) {
   return (
     <div className="flex flex-col gap-5" data-testid="apply-success">
       <div className="flex items-center gap-3">
@@ -295,8 +309,19 @@ function Success({ job, reference }: { job: ApplyJob; reference: string }) {
       </p>
       <p className="text-muted-foreground text-sm leading-5">
         We sent your application for {job.title} at {job.companyName} to our
-        team. Updates on Telegram are coming soon.
+        team.
       </p>
+      {telegramLink ? (
+        <Button
+          asChild
+          className="h-12 px-6 text-base"
+          data-testid="apply-telegram"
+        >
+          <a href={telegramLink} rel="noopener" target="_blank">
+            Follow your application on Telegram
+          </a>
+        </Button>
+      ) : null}
     </div>
   );
 }
@@ -360,6 +385,7 @@ function ApplyWizard({
   const [submitting, setSubmitting] = useState(false);
   const [banner, setBanner] = useState<Banner | null>(null);
   const [reference, setReference] = useState<string | null>(null);
+  const [telegramLink, setTelegramLink] = useState<string | null>(null);
   const [state, setState] = useState<FormState>({
     ...EMPTY_STATE,
     answers: job.questions.map(() => ""),
@@ -456,6 +482,7 @@ function ApplyWizard({
     (status: number, data: ServerReply | null) => {
       if (status === 201 && data?.reference) {
         setReference(data.reference);
+        setTelegramLink(data.telegramLink ?? null);
         onDone?.(data.reference);
         scrollTop();
         return;
@@ -537,7 +564,9 @@ function ApplyWizard({
   }, [eligible, goTo, handleReply, job, state]);
 
   if (reference) {
-    return <Success job={job} reference={reference} />;
+    return (
+      <Success job={job} reference={reference} telegramLink={telegramLink} />
+    );
   }
 
   const stepNumber = step + 1;

@@ -1148,7 +1148,7 @@ function looksLikeIncident(run: CheckRun): boolean {
 // most MAX_INCIDENT_REMOVALS_PER_SYNC of the confirmed ids. Other slices
 // keep rotating while a hold is open. Churn below the incident line is
 // unchanged and is not capped here.
-export const REMOVAL_HOLD_MS = 12 * 60 * 60 * 1000;
+const REMOVAL_HOLD_MS = 12 * 60 * 60 * 1000;
 const MASS_REMOVAL_CONFIRMATIONS = 2;
 
 function sortedIds(ids: Iterable<string>): string[] {

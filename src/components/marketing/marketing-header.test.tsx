@@ -44,7 +44,7 @@ test("header has Sign in to the admin and Find a job to the board", () => {
   const signIn = screen.getAllByRole("link", { name: SIGN_IN });
   expect(signIn.length).toBeGreaterThan(0);
   for (const link of signIn) {
-    expect(link.getAttribute("href")).toBe("/admin");
+    expect(link.getAttribute("href")).toBe("/dashboard");
   }
 
   const find = screen.getByRole("link", { name: FIND_JOB });

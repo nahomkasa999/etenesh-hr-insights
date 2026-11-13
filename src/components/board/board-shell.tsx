@@ -11,7 +11,6 @@ import { bordfulConfig } from "@/config";
 import { isMarketingEnabled } from "@/config/flags";
 import { boardHomePath, getNav } from "@/config/nav";
 import { customSlots } from "@/custom";
-import { buildTaxonomyArchivePath } from "@/lib/board/paths";
 import { loadBoardPool } from "@/lib/board/pool";
 import type { BoardQuery, BoardQueryOptions } from "@/lib/board/query";
 import { getSiteSettings } from "@/lib/read";
@@ -77,7 +76,7 @@ export async function BoardShell({
             allCount: pool.length,
             allHref: boardHomePath(marketing),
             remoteCount,
-            remoteHref: buildTaxonomyArchivePath("location", "remote"),
+            remoteHref: `${boardHomePath(marketing)}?remote=true`,
           }}
         />
       )}

@@ -2,8 +2,8 @@ import { z } from "zod";
 
 import { isValidAgentName, isValidBoardName } from "./signup-names";
 
-export const UTM_PATTERN = /^[a-z0-9][a-z0-9._-]{0,63}$/u;
-export const INSTALL_ID_PATTERN = /^[a-f0-9]{16,64}$/u;
+const UTM_PATTERN = /^[a-z0-9][a-z0-9._-]{0,63}$/u;
+const INSTALL_ID_PATTERN = /^[a-f0-9]{16,64}$/u;
 
 const optionalUtm = z.string().regex(UTM_PATTERN).optional();
 const optionalName = z.string().min(1).max(100).optional();

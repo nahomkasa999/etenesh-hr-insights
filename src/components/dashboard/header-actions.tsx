@@ -1,5 +1,6 @@
 import { IconExternalLink, IconPlus } from "@tabler/icons-react";
 
+import { JobImportDialog } from "@/components/dashboard/job-import-dialog";
 import { Button } from "@/components/ui/button";
 
 export function HeaderActions() {
@@ -11,8 +12,9 @@ export function HeaderActions() {
           View job board
         </a>
       </Button>
+      <JobImportDialog />
       <Button asChild className="h-9">
-        <a href="/admin/collections/jobs/create">
+        <a href="/dashboard/jobs/new">
           <IconPlus />
           Post a job
         </a>

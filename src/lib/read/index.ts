@@ -80,7 +80,7 @@ export function getJobBySlug(slug: string) {
   );
 }
 
-export function listCompanies(input: { page: number; limit: number }) {
+function listCompanies(input: { page: number; limit: number }) {
   return cachedRead(
     async () => {
       const payload = await getPayload({ config });

@@ -100,7 +100,7 @@ export function savedEntries(
   }));
 }
 
-export function snapshotOf(card: JobListItem): JobSnapshot {
+function snapshotOf(card: JobListItem): JobSnapshot {
   return {
     companyName: card.companyName,
     location: formatLocation(card),

@@ -12,7 +12,7 @@ import {
 import { Container } from "./container";
 import { Section } from "./section";
 
-export const FEATURES_PAGE_ITEMS = [
+const FEATURES_PAGE_ITEMS = [
   {
     description:
       "A job list with search, sorting by newest, oldest or salary, pagination, company pages, and a detail page for every job. Visitors can save and mark jobs as applied, kept in their own browser.",

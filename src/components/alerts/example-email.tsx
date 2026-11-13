@@ -7,7 +7,7 @@ import { formatLocation, formatSalary } from "@/lib/board/format";
 import type { JobListItem } from "@/lib/read/types";
 
 // How many current jobs the preview shows.
-export const EXAMPLE_EMAIL_JOBS = 2;
+const EXAMPLE_EMAIL_JOBS = 2;
 
 // The digest's own subject line (emails/digest.ts).
 function digestSubject(count: number, siteName: string): string {

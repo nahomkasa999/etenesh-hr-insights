@@ -30,7 +30,7 @@ const cronSchema = z.string().refine(isFiveFieldCron, {
     "Enter a 5-field cron expression. Step values must use */N or a-b/N.",
 });
 
-export const bordfulConfigSchema = z.strictObject({
+const bordfulConfigSchema = z.strictObject({
   alerts: z
     .strictObject({
       provider: z.literal("resend").prefault("resend"),

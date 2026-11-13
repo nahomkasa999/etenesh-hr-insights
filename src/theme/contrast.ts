@@ -49,7 +49,7 @@ function linearChannel(value: number): number {
   return ((unit + SRGB_OFFSET) / SRGB_SCALE) ** SRGB_GAMMA;
 }
 
-export function relativeLuminance(hex: string): number | null {
+function relativeLuminance(hex: string): number | null {
   const channels = hexChannels(hex);
   if (channels === null) {
     return null;

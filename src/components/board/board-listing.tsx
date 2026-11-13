@@ -123,7 +123,7 @@ const SHORTCUTS: { keys: string; label: string }[] = [
 ];
 
 // Shown in the right column until a row is opened in the preview.
-export function PickRoleCard() {
+function PickRoleCard() {
   return (
     <section
       aria-labelledby="board-pick-title"
@@ -412,7 +412,10 @@ export function BoardListing({
 
   return (
     <div
-      className={cn("flex flex-col", app && "min-h-[calc(100dvh-3.25rem)]")}
+      className={cn(
+        "flex flex-col",
+        app && "h-[calc(100dvh-6.25rem)] min-h-0 overflow-hidden"
+      )}
       data-board-layout={layout}
     >
       <BoardToolbar
@@ -448,7 +451,7 @@ export function BoardListing({
           ) : undefined
         }
         className={cn(
-          "flex-1 lg:grid",
+          "min-h-0 flex-1 lg:grid lg:grid-rows-[minmax(0,1fr)]",
           showFilters
             ? "lg:grid-cols-[216px_minmax(0,1fr)]"
             : "lg:grid-cols-[minmax(0,1fr)]",

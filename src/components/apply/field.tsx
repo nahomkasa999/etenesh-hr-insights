@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 
 // Every size here is text-sm (14px) or larger on purpose.
 export const INPUT_CLASS = "h-11 text-base md:text-sm";
-export const LABEL_CLASS = "text-sm leading-5";
+const LABEL_CLASS = "text-sm leading-5";
 export const BUTTON_CLASS = "h-11 text-sm px-5";
 
 export function Field({

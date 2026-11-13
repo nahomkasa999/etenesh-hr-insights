@@ -5,7 +5,7 @@ export interface GithubRelease {
   tag_name: string;
 }
 
-export const DEFAULT_RELEASES: GithubRelease[] = [
+const DEFAULT_RELEASES: GithubRelease[] = [
   {
     draft: false,
     html_url: "https://github.com/craftled/bordful/releases/tag/v1.0.1",

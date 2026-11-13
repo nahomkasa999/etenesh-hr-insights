@@ -2,6 +2,7 @@ import config from "@payload-config";
 import { getPayload } from "payload";
 
 import { isJobOpen, submitApplication, toApplyJob } from "@/lib/etenesh/apply";
+import { trackingLink } from "@/lib/etenesh/telegram";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -76,12 +77,14 @@ export async function POST(request: Request): Promise<Response> {
       jobId: text("jobId"),
       phone: text("phone"),
       skills: form.getAll("skills").map(String),
+      telegramContact: text("telegramContact"),
       yearsExperience: text("yearsExperience"),
     },
     cv
   );
 
-  return Response.json(result, {
+  const telegramLink = result.ok ? await trackingLink(result.reference) : null;
+  return Response.json(result.ok ? { ...result, telegramLink } : result, {
     status: result.ok ? 201 : STATUS[result.reason],
   });
 }

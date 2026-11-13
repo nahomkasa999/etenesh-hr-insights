@@ -3,8 +3,6 @@
 import {
   IconDotsVertical,
   IconLogout,
-  IconSettings,
-  IconUserCircle,
 } from "@tabler/icons-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -70,24 +68,14 @@ export function NavUser({ email }: { email: string }) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <a href="/admin/account">
-                <IconUserCircle />
-                My account
-              </a>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <a href="/admin">
-                <IconSettings />
-                Advanced admin
-              </a>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <a href="/admin/logout">
-                <IconLogout />
-                Sign out
-              </a>
+            <DropdownMenuItem
+              onSelect={async () => {
+                await fetch("/api/users/logout", { method: "POST" });
+                window.location.assign("/login");
+              }}
+            >
+              <IconLogout />
+              Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -21,7 +21,7 @@ export async function requireStaff(next = "/dashboard"): Promise<StaffSession> {
   const payload = await getPayload({ config });
   const { user } = await payload.auth({ headers: await headers() });
   if (!(hasRole(user, "admin") || hasRole(user, "editor"))) {
-    redirect(`/admin/login?redirect=${encodeURIComponent(next)}`);
+    redirect(`/login?next=${encodeURIComponent(next)}`);
   }
   return { email: (user as { email?: string }).email ?? "", payload };
 }
@@ -90,7 +90,7 @@ export async function listApplications(
   return result.docs.map((doc) => toRow(doc as Partial<Application>));
 }
 
-export function statusCounts(rows: ApplicationRow[]) {
+function statusCounts(rows: ApplicationRow[]) {
   const counts = Object.fromEntries(
     APPLICATION_STATUSES.map((status) => [status, 0])
   ) as Record<ApplicationStatus, number>;
@@ -256,18 +256,63 @@ export async function getApplication(
   payload: Payload,
   id: string
 ): Promise<ApplicationDetail | null> {
-  const doc = await payload
-    .findByID({
-      collection: "applications",
-      depth: 0,
-      disableErrors: true,
-      id,
-      overrideAccess: true,
-    })
-    .catch(() => null);
+  const found = await payload.find({
+    collection: "applications",
+    depth: 0,
+    limit: 1,
+    overrideAccess: true,
+    pagination: false,
+    where: { id: { equals: id } },
+  });
+  const doc = found.docs[0] as Application | undefined;
   if (!doc) {
     return null;
   }
-  const { cvData: _omit, ...rest } = doc as Application;
+  const { cvData: _omit, ...rest } = doc;
   return rest;
+}
+
+export interface CompanyRow {
+  id: number;
+  industry: string;
+  jobs: number;
+  location: string;
+  name: string;
+  website: string;
+}
+
+export async function listCompanies(payload: Payload): Promise<CompanyRow[]> {
+  const [companies, jobs] = await Promise.all([
+    payload.find({
+      collection: "companies",
+      depth: 0,
+      limit: 500,
+      overrideAccess: true,
+      select: { industry: true, location: true, name: true, website: true },
+      sort: "name",
+    }),
+    payload.find({
+      collection: "jobs",
+      depth: 0,
+      draft: true,
+      limit: 1000,
+      overrideAccess: true,
+      select: { company: true },
+    }),
+  ]);
+  const counts = new Map<number, number>();
+  for (const job of jobs.docs) {
+    const id = typeof job.company === "object" ? job.company?.id : job.company;
+    if (id != null) {
+      counts.set(Number(id), (counts.get(Number(id)) ?? 0) + 1);
+    }
+  }
+  return companies.docs.map((company) => ({
+    id: Number(company.id),
+    industry: company.industry ?? "",
+    jobs: counts.get(Number(company.id)) ?? 0,
+    location: company.location ?? "",
+    name: company.name ?? "",
+    website: company.website ?? "",
+  }));
 }

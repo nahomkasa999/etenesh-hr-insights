@@ -14,7 +14,7 @@ const ROOT = process.cwd();
 // Route files for every in-app target. A link to a page that is not here 404s.
 const ROUTE_FILES: Record<string, string> = {
   "/about": "src/app/(marketing)/about/page.tsx",
-  "/admin": "src/app/(payload)/admin/[[...segments]]/page.tsx",
+  "/dashboard": "src/app/(dashboard)/dashboard/page.tsx",
   "/changelog": "src/app/(marketing)/changelog/page.tsx",
   "/companies": "src/app/(site)/companies/page.tsx",
   "/docs": "src/app/(marketing)/docs/page.tsx",
@@ -81,7 +81,7 @@ test("home anchors (/#id) match a section id on the home page", () => {
 
 test("header and footer link to the board, saved jobs and sign-in", () => {
   const hrefs = allLinks().map((link) => link.href);
-  for (const href of ["/jobs", "/companies", "/saved", "/admin"]) {
+  for (const href of ["/jobs", "/companies", "/saved", "/dashboard"]) {
     expect(hrefs).toContain(href);
   }
   expect(MARKETING_HEADER_LINKS.map((link) => link.href)).toEqual([

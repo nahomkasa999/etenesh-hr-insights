@@ -133,7 +133,7 @@ function pickerFor(kind: TaxonomyKind): "level" | "type" {
   return kind === "type" || kind === "language" ? "level" : "type";
 }
 
-export function parseArchiveRefine(
+function parseArchiveRefine(
   kind: TaxonomyKind,
   slug: string,
   params: URLSearchParams,
@@ -159,7 +159,7 @@ function refineHref(
   return search ? `${path}?${search}` : path;
 }
 
-export function archiveRefineSearch(
+function archiveRefineSearch(
   refine: ArchiveRefine,
   options: BoardQueryOptions
 ): string {

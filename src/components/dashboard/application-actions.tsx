@@ -47,7 +47,17 @@ export function StatusActions({
     startTransition(async () => {
       const result = await updateApplicationStatus(id, to);
       if (result.ok) {
-        toast.success(`${name} moved to ${STATUS_LABELS[to]}`);
+        const note =
+          result.telegram === "sent"
+            ? "Telegram message sent."
+            : result.telegram === "failed"
+              ? "Could not reach Telegram."
+              : result.telegram === "not_connected"
+                ? "Not on Telegram yet, so nobody was messaged."
+                : undefined;
+        toast.success(`${name} moved to ${STATUS_LABELS[to]}`, {
+          description: note,
+        });
         router.refresh();
       } else {
         toast.error(result.error ?? "Could not save the change.");

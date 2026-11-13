@@ -39,7 +39,7 @@ export const MARKETING_FOOTER_COLUMNS: MarketingLinkColumn[] = [
       { href: "/about", label: "About" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
-      { href: "/admin", label: "Sign in" },
+      { href: "/dashboard", label: "Sign in" },
     ],
     title: "Company",
   },

@@ -249,6 +249,21 @@ export function JobSwipe({
 
   return (
     <div className="overflow-x-clip">
+      {/* Full prefetch of the next and previous jobs so a swipe opens instantly. */}
+      {[neighbors?.next, neighbors?.prev].map((entry) =>
+        entry ? (
+          <Link
+            aria-hidden="true"
+            className="hidden"
+            href={buildJobPath(entry.slug)}
+            key={entry.slug}
+            prefetch
+            tabIndex={-1}
+          >
+            {entry.title}
+          </Link>
+        ) : null
+      )}
       <div data-leaving={leaving ?? undefined} ref={surface}>
         {children}
       </div>

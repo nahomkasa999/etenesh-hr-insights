@@ -7,6 +7,6 @@ export const BRAND = {
   jobsUrl: "/jobs",
   logo: "/etenesh/logo.webp",
   name: "Etenesh HR",
-  signInUrl: "/admin",
+  signInUrl: "/signin",
   tiktokUrl: "https://www.tiktok.com/@etenesh.asres",
 } as const;

@@ -34,8 +34,11 @@ export interface CandidateSession {
 // The signed-in candidate, or null. Never throws: a broken session reads as
 // signed out.
 export async function getCandidateSession(): Promise<CandidateSession | null> {
+  // Read headers outside the try: Next signals dynamic rendering by throwing
+  // here, and that must not be swallowed.
+  const requestHeaders = await headers();
   try {
-    const session = await auth.api.getSession({ headers: await headers() });
+    const session = await auth.api.getSession({ headers: requestHeaders });
     if (!session) {
       return null;
     }

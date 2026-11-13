@@ -66,6 +66,18 @@ export async function GET(request: Request): Promise<Response> {
 
 // Candidates post the apply form here as multipart form data.
 export async function POST(request: Request): Promise<Response> {
+  // Applying needs a candidate account, so every application is trackable.
+  const account = await getAccount().catch(() => null);
+  if (!account) {
+    return Response.json(
+      {
+        errors: { form: "Please sign in to apply." },
+        ok: false,
+        reason: "invalid",
+      },
+      { status: 401 }
+    );
+  }
   let form: FormData;
   try {
     form = await request.formData();
@@ -97,12 +109,11 @@ export async function POST(request: Request): Promise<Response> {
 
   // Signed-in candidates link the application to their account and may
   // send the CV saved on their profile instead of a new file.
-  const account = await getAccount().catch(() => null);
-  if (!cv && account && text("useSavedCv") === "1") {
+  if (!cv && text("useSavedCv") === "1") {
     cv = await profileCv(account.payload, account.candidate.id);
   }
 
-  const payload = account?.payload ?? (await getPayload({ config }));
+  const { payload } = account;
   const result = await submitApplication(
     payload,
     {
@@ -118,7 +129,7 @@ export async function POST(request: Request): Promise<Response> {
       yearsExperience: text("yearsExperience"),
     },
     cv,
-    { candidateId: account?.candidate.id ?? null, source: "form" }
+    { candidateId: account.candidate.id, source: "form" }
   );
 
   return Response.json(result, {

@@ -372,6 +372,40 @@ function SubmitButton({
   );
 }
 
+// Anyone can read jobs; applying needs an account so it can be tracked.
+function SignInToApply({ slug }: { slug: string }) {
+  const next = encodeURIComponent(`/jobs/${slug}#apply`);
+  return (
+    <div
+      className="bg-surface-sub flex flex-col gap-3 rounded-xl p-5"
+      data-testid="apply-sign-in"
+    >
+      <h3 className="text-foreground text-lg leading-6 font-medium">
+        Sign in to apply
+      </h3>
+      <p className="text-muted-foreground text-sm leading-5">
+        Create a free account or sign in. Your details and CV are saved, so the
+        next application takes one tap, and you can track every application here
+        and on Telegram.
+      </p>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <a
+          className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-11 items-center justify-center rounded-lg px-5 text-sm font-medium"
+          href={`/signup?next=${next}`}
+        >
+          Create account
+        </a>
+        <a
+          className="ring-line-strong text-foreground hover:bg-card inline-flex h-11 items-center justify-center rounded-lg px-5 text-sm font-medium ring-1 ring-inset"
+          href={`/signin?next=${next}`}
+        >
+          Sign in
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export function ApplyForm({
   jobId,
   onDone,
@@ -385,6 +419,9 @@ export function ApplyForm({
   }
   if (load.kind !== "ready") {
     return <LoadProblem kind={load.kind} onRetry={retry} />;
+  }
+  if (!load.job.me) {
+    return <SignInToApply slug={load.job.slug} />;
   }
   return <ApplyWizard job={load.job} onDone={onDone} />;
 }
@@ -599,25 +636,12 @@ function ApplyWizard({
         />
       </div>
 
-      {job.me ? (
-        <p
-          className="bg-surface-sub text-muted-foreground rounded-lg px-3 py-2 text-sm leading-5"
-          data-testid="apply-signed-in"
-        >
-          Filled in from your profile. Check it and continue.
-        </p>
-      ) : (
-        <p className="text-muted-foreground text-sm leading-5">
-          Have an account?{" "}
-          <a
-            className="text-foreground font-medium underline underline-offset-2"
-            href={`/signin?next=${encodeURIComponent(`/jobs/${job.slug}#apply`)}`}
-          >
-            Sign in
-          </a>{" "}
-          to fill this in from your profile and track your application.
-        </p>
-      )}
+      <p
+        className="bg-surface-sub text-muted-foreground rounded-lg px-3 py-2 text-sm leading-5"
+        data-testid="apply-signed-in"
+      >
+        Filled in from your profile. Check it and continue.
+      </p>
 
       {banner ? (
         <Alert variant="destructive">

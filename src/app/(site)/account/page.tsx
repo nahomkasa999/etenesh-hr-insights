@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { ApplicationList } from "@/components/account/application-list";
 import { JobMatchList } from "@/components/account/job-match-list";
+import { TelegramCard } from "@/components/account/telegram-card";
 import { getAccount } from "@/lib/auth/account";
 import {
   listCandidateApplications,
@@ -11,6 +12,7 @@ import {
   profileCompleteness,
 } from "@/lib/etenesh/candidates";
 import { appliedJobIds, loadOpenJobs, rankJobs } from "@/lib/etenesh/recommend";
+import { botUsername, linkToken } from "@/lib/etenesh/telegram";
 import type { Application } from "@/payload-types";
 
 const ACTIVE = new Set([
@@ -38,12 +40,20 @@ export default async function AccountPage() {
     redirect("/signin?next=/account");
   }
   const { candidate, payload } = account;
-  const [documents, applications, jobs, applied] = await Promise.all([
+  const [documents, applications, jobs, applied, bot] = await Promise.all([
     listDocuments(payload, candidate.id),
     listCandidateApplications(payload, candidate.id, 20),
     loadOpenJobs(payload),
     appliedJobIds(payload, candidate),
+    botUsername(),
   ]);
+  const connected = Boolean(candidate.telegramChatId);
+  let telegramLink: string | null = null;
+  if (bot) {
+    telegramLink = connected
+      ? `https://t.me/${bot}`
+      : `https://t.me/${bot}?start=${linkToken(candidate.id)}`;
+  }
   const hasCv = documents.some((doc) => doc.kind === "cv");
   const complete = profileCompleteness(candidate, hasCv);
   const missing = missingForApply(candidate, hasCv);
@@ -87,6 +97,8 @@ export default async function AccountPage() {
           </Link>
         </section>
       ) : null}
+
+      <TelegramCard connected={connected} link={telegramLink} />
 
       <dl className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Stat label="Applications" value={applications.length} />

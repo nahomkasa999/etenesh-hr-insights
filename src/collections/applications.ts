@@ -1,10 +1,12 @@
 import type {
+  CollectionAfterChangeHook,
   CollectionBeforeChangeHook,
   CollectionConfig,
   FieldAccess,
 } from "payload";
 
 import { isStaff } from "@/access/roles";
+import { sendTelegram, statusUpdateText } from "@/lib/etenesh/telegram";
 import {
   APPLICATION_STATUSES,
   EDUCATION_LEVELS,
@@ -45,6 +47,41 @@ const recordStatusChange: CollectionBeforeChangeHook = ({
     ];
   }
   return data;
+};
+
+// Tells the candidate on Telegram when an application is received or its
+// status changes. Never blocks or fails the save.
+const notifyTelegram: CollectionAfterChangeHook = async ({
+  doc,
+  operation,
+  previousDoc,
+  req,
+}) => {
+  if (operation === "update" && previousDoc?.status === doc.status) {
+    return doc;
+  }
+  try {
+    const candidateId =
+      typeof doc.candidate === "object" ? doc.candidate?.id : doc.candidate;
+    let chatId: string | null = doc.telegramChatId ?? null;
+    if (!chatId && candidateId) {
+      const candidate = await req.payload.findByID({
+        collection: "candidates",
+        depth: 0,
+        disableErrors: true,
+        id: candidateId,
+        overrideAccess: true,
+        select: { telegramChatId: true },
+      });
+      chatId = candidate?.telegramChatId ?? null;
+    }
+    if (chatId) {
+      await sendTelegram(chatId, statusUpdateText(doc));
+    }
+  } catch (error) {
+    req.payload.logger.error({ err: error }, "telegram notify failed");
+  }
+  return doc;
 };
 
 export const Applications: CollectionConfig = {
@@ -209,7 +246,10 @@ export const Applications: CollectionConfig = {
       type: "text",
     },
   ],
-  hooks: { beforeChange: [recordStatusChange] },
+  hooks: {
+    afterChange: [notifyTelegram],
+    beforeChange: [recordStatusChange],
+  },
   slug: "applications",
   versions: false,
 };

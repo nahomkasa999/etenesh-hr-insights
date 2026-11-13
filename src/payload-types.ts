@@ -574,6 +574,10 @@ export interface Candidate {
     ('contract' | 'full-time' | 'internship' | 'other' | 'part-time' | 'per-diem' | 'temporary' | 'volunteer')[] | null;
   preferredWorkplaces?: ('hybrid' | 'onsite' | 'remote')[] | null;
   /**
+   * Set when the candidate connects the Telegram bot.
+   */
+  telegramChatId?: string | null;
+  /**
    * When on, Etenesh applies for matching jobs on the candidate's behalf.
    */
   autoApply?: boolean | null;
@@ -1067,6 +1071,7 @@ export interface CandidatesSelect<T extends boolean = true> {
       };
   preferredTypes?: T;
   preferredWorkplaces?: T;
+  telegramChatId?: T;
   autoApply?: T;
   autoApplyMinScore?: T;
   autoApplyDailyLimit?: T;

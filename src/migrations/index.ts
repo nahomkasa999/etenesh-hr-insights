@@ -6,6 +6,7 @@ import * as migration_20261104_170559_import_blocklist from './20261104_170559_i
 import * as migration_20261106_090008_remove_bounced_status from './20261106_090008_remove_bounced_status';
 import * as migration_20261112_214631_etenesh_applications from './20261112_214631_etenesh_applications';
 import * as migration_20261113_003126_candidate_accounts from './20261113_003126_candidate_accounts';
+import * as migration_20261113_004841_candidate_telegram from './20261113_004841_candidate_telegram';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20261113_003126_candidate_accounts.up,
     down: migration_20261113_003126_candidate_accounts.down,
-    name: '20261113_003126_candidate_accounts'
+    name: '20261113_003126_candidate_accounts',
+  },
+  {
+    up: migration_20261113_004841_candidate_telegram.up,
+    down: migration_20261113_004841_candidate_telegram.down,
+    name: '20261113_004841_candidate_telegram'
   },
 ];

@@ -77,7 +77,8 @@ async function applyOne(
   const jobTitle = match.job.title;
   if (match.hasQuestions) {
     return {
-      detail: "The employer asks questions only you can answer. See Waiting for your answers.",
+      detail:
+        "The employer asks questions only you can answer. See Waiting for your answers.",
       jobTitle,
       outcome: "skipped",
     };

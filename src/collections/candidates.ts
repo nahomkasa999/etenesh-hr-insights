@@ -80,6 +80,15 @@ export const Candidates: CollectionConfig = {
     },
     {
       admin: {
+        description: "Set when the candidate connects the Telegram bot.",
+        readOnly: true,
+      },
+      index: true,
+      name: "telegramChatId",
+      type: "text",
+    },
+    {
+      admin: {
         description:
           "When on, Etenesh applies for matching jobs on the candidate's behalf.",
       },

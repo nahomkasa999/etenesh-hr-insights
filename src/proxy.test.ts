@@ -5,10 +5,8 @@ import { PAYLOAD_MONACO_CDN } from "@/lib/csp/build-csp";
 
 import {
   hasMalformedEncoding,
-  hostnameFromHostHeader,
   MALFORMED_PATH_REWRITE,
   proxy,
-  shouldRedirectVercelAppHost,
 } from "./proxy";
 
 const MALFORMED = [
@@ -100,71 +98,23 @@ test("bordful.com rewrites /favicon.ico to the Etenesh mark", () => {
   });
 });
 
-test("redirects vercel.app hosts to bordful.com when marketing is on", () => {
-  withMarketing("true", () => {
-    for (const host of [
-      "bordful.vercel.app",
-      "bordful-v1.vercel.app",
-      "bordful-git-fix-abc123.vercel.app",
-      "bordful.vercel.app:443",
-    ]) {
-      const response = run("/jobs/example-role?q=design", host);
-      expect(response.status).toBe(301);
-      expect(response.headers.get("location")).toBe(
-        "https://bordful.com/jobs/example-role?q=design"
-      );
-    }
-  });
-});
-
-test("a fork on vercel.app is not redirected to bordful.com", () => {
-  withMarketing("false", () => {
-    const response = run("/jobs/example-role?q=design", "myboard.vercel.app");
-    expect(response.status).not.toBe(301);
-    expect(response.headers.get("x-middleware-next")).toBe("1");
-    expect(response.headers.get("location")).toBeNull();
-  });
-});
-
-test("api paths on vercel.app are not redirected when marketing is on", () => {
-  withMarketing("true", () => {
-    for (const path of ["/api", "/api/cron/bordfeed", "/api/jobs?page=2"]) {
-      const response = run(path, "bordful.vercel.app");
-      expect(response.status).not.toBe(301);
-      expect(response.headers.get("location")).toBeNull();
-    }
-    // Paths that only look like /api still redirect.
-    const response = run("/apiary", "bordful.vercel.app");
-    expect(response.status).toBe(301);
-    expect(response.headers.get("location")).toBe("https://bordful.com/apiary");
-  });
-});
-
-test("does not redirect canonical, local, or demo hosts", () => {
-  expect(hostnameFromHostHeader(null)).toBeNull();
-  expect(hostnameFromHostHeader("")).toBeNull();
-  expect(shouldRedirectVercelAppHost(null)).toBe(false);
-  expect(shouldRedirectVercelAppHost("")).toBe(false);
-
-  withMarketing("true", () => {
-    for (const host of [
-      "bordful.com",
-      "www.bordful.com",
-      "bordful.com:443",
-      "localhost",
-      "localhost:3100",
-      "127.0.0.1",
-      "127.0.0.1:3100",
-      "[::1]:3100",
-      "demo.bordful.com",
-    ]) {
-      expect(shouldRedirectVercelAppHost(host)).toBe(false);
-      const response = run("/jobs?page=2", host);
-      expect(response.status).not.toBe(301);
-      expect(response.headers.get("x-middleware-next")).toBe("1");
-      expect(response.headers.get("location")).toBeNull();
-    }
-  });
+test("vercel.app hosts are served, never redirected", () => {
+  for (const marketing of ["true", "false"] as const) {
+    withMarketing(marketing, () => {
+      for (const host of [
+        "etenesh-hr-insights-r6y3.vercel.app",
+        "bordful-git-fix-abc123.vercel.app",
+        "myboard.vercel.app:443",
+      ]) {
+        for (const path of ["/", "/jobs/example-role?q=design", "/api/jobs"]) {
+          const response = run(path, host);
+          expect(response.status).not.toBe(301);
+          expect(response.headers.get("location")).toBeNull();
+          expect(response.headers.get("x-middleware-next")).toBe("1");
+        }
+      }
+    });
+  }
 });
 
 test("a fork leaves /favicon.ico alone", () => {

@@ -1,5 +1,6 @@
 import { ListFilter, X } from "lucide-react";
 import Link from "next/link";
+import { ForMeChip } from "@/components/account/for-me-chip";
 import { MenuDetails } from "@/components/board/menu-details";
 import type { BoardFacets } from "@/lib/board/filter";
 import { SENIORITY_LABELS } from "@/lib/board/format";
@@ -686,6 +687,7 @@ export function FilterChips({
       >
         <ListFilter aria-hidden="true" className="size-4" />
       </button>
+      <ForMeChip />
       {phoneOrder.map((group) => (
         <PhoneChip group={group} key={`phone-${group.id}`} />
       ))}

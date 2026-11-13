@@ -21,7 +21,7 @@ export function AccountNav() {
   return (
     <nav
       aria-label="Account"
-      className="border-line -mx-4 [scrollbar-width:none] overflow-x-auto border-b px-4"
+      className="-mx-4 [scrollbar-width:none] overflow-x-auto px-4 py-1"
       data-no-swipe
     >
       <ul className="flex min-w-max gap-1">
@@ -35,10 +35,10 @@ export function AccountNav() {
               <Link
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "-mb-px flex h-11 items-center border-b-2 px-3 text-[14px] font-medium whitespace-nowrap",
+                  "flex h-9 items-center rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap",
                   active
-                    ? "border-primary text-foreground"
-                    : "text-muted-foreground hover:text-foreground border-transparent"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
                 href={item.href}
               >

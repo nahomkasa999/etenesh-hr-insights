@@ -426,22 +426,22 @@ export function JobPosting({
   return (
     <div className="-mt-6 flex flex-col gap-5 md:-mt-1 lg:-mx-0.5">
       <div className="hidden md:block">
-      <JobBreadcrumb
-        actions={
-          <JobSaveButton
-            className="md:hidden"
-            slug={job.slug}
-            testId="job-top-save"
-            variant="icon"
-          />
+        <JobBreadcrumb
+          actions={
+            <JobSaveButton
+              className="md:hidden"
+              slug={job.slug}
+              testId="job-top-save"
+              variant="icon"
+            />
+          }
+          category={fields.includes("categories") ? categoryCrumb(job) : null}
+          companyName={job.companyName}
+          location={fields.includes("location") ? locationCrumb(job) : null}
+          marketing={marketing}
+          title={job.title}
+        />
       </div>
-        }
-        category={fields.includes("categories") ? categoryCrumb(job) : null}
-        companyName={job.companyName}
-        location={fields.includes("location") ? locationCrumb(job) : null}
-        marketing={marketing}
-        title={job.title}
-      />
       <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
         <article className="md:bg-card md:ring-line min-w-0 md:overflow-clip md:rounded-2xl md:shadow-[0_1px_2px_rgb(0_0_0/0.04),0_28px_56px_-20px_rgb(0_0_0/0.16)] md:ring-1 md:dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.04),0_32px_64px_-16px_rgb(0_0_0/0.75)]">
           {appliesHere(job) ? (

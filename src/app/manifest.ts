@@ -19,20 +19,28 @@ export default function manifest(): MetadataRoute.Manifest {
     icons: [
       {
         purpose: "any",
-        sizes: "692x577",
-        src: "/etenesh/logo.webp",
-        type: "image/webp",
+        sizes: "192x192",
+        src: "/etenesh/icon-192.png",
+        type: "image/png",
       },
       {
         purpose: "any",
-        sizes: "692x577",
-        src: "/etenesh/logo.webp",
-        type: "image/webp",
+        sizes: "512x512",
+        src: "/etenesh/icon-512.png",
+        type: "image/png",
+      },
+      {
+        purpose: "maskable",
+        sizes: "512x512",
+        src: "/etenesh/icon-512.png",
+        type: "image/png",
       },
     ],
+    id: "/",
     name: "Etenesh HR Insights",
+    scope: "/",
     short_name: "Etenesh HR",
-    start_url: "/",
+    start_url: "/jobs",
     theme_color: "#0077e6",
   };
 }

@@ -66,18 +66,6 @@ export function JobMatchList({
               <p className="text-muted-foreground truncate text-[13px]">
                 {meta.join(" · ")}
               </p>
-              {match.reasons.length > 0 ? (
-                <ul className="mt-1 flex flex-wrap gap-1.5">
-                  {match.reasons.slice(0, 3).map((reason) => (
-                    <li
-                      className="bg-tag text-muted-foreground rounded-[5px] px-1.5 py-0.5 text-[12px] leading-4"
-                      key={reason}
-                    >
-                      {reason}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
             </div>
             {match.appliesHere ? (
               <span className="text-primary bg-primary/10 hidden shrink-0 rounded-md px-2 py-1 text-[12px] font-medium sm:inline">
